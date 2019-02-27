@@ -1,0 +1,1 @@
+http://itmyhome.com/markdown/article/extension/strikethrougn.html

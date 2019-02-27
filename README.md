@@ -1,39 +1,55 @@
-# LearningNotesV2
-
-#### 介绍
-{**以下是码云平台说明，您可以替换此简介**
-码云是开源中国推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用码云实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
-
-#### 软件架构
-软件架构说明
+# LearningNotes
 
 
-#### 安装教程
+个人学习笔记。涵盖 软件编程、硬件维护、多媒体、文学、历史等诸多方面，总之，看到啥，学到啥都会记录笔记总结
 
-1. xxxx
-2. xxxx
-3. xxxx
+20190125 之前，内容一直放置在wiki中，但是，当单个wiki文件比较大的时候，会出现编辑之后无法保存的情况，所以，从20190125开始，弃用wiki，改用文件编辑。
 
-#### 使用说明
+## 一、个人其他连链
+### 1、我的
 
-1. xxxx
-2. xxxx
-3. xxxx
+[我的简书（持续更新）:https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
 
-#### 参与贡献
+[我的CSDN（停更）：http://blog.csdn.net/north1989](http://blog.csdn.net/north1989)
 
-1. Fork 本仓库
-2. 新建 Feat_xxx 分支
-3. 提交代码
-4. 新建 Pull Request
+我的微信公众号：CnPeng
 
 
-#### 码云特技
+## 二、详细目录
 
-1. 使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2. 码云官方博客 [blog.gitee.com](https://blog.gitee.com)
-3. 你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解码云上的优秀开源项目
-4. [GVP](https://gitee.com/gvp) 全称是码云最有价值开源项目，是码云综合评定出的优秀开源项目
-5. 码云官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6. 码云封面人物是一档用来展示码云会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+> 2019 年以前的内容暂时不补充目录，时间空闲了再补。
+
+
+### 1、Android
+
+
+### 3、kotlin
+
+标题|类别|更新时间|状态
+---|---|---|---
+[查看kotlin编译后的Java字节码](03_Kotlin/02_环境搭建/02、查看kotlin编译后的Java字节码.md)|知识点总结|20190213|完结
+
+### 4、Python
+
+标题|类别|更新时间|状态
+---|---|---|---
+[02、教孩子学编程_python](04_Python/02、教孩子学编程_python.md) | 读书笔记|20190213|完结
+
+### 5、Go
+
+标题|类别|更新时间|状态
+---|---|---|---
+[20小时入门学会go语言(黑马)](05_Go/01_书籍和教程/01_%2020小时入门学会go语言(黑马).md)| 视频笔记 | 20190221 | 未完结
+
+### 8、IOS
+
+标题|类别|更新时间|状态
+---|---|---|---
+[Swift权威编程指南_第二版](08_IOS/01_Swift/Swift权威编程指南-笔记.md)|读书笔记|20190131|完结
+[精通IOS开发_第八版](08_IOS/02_IOS/精通IOS开发V8.md)|读书笔记|20190213|未完结
+
+
+
+
+ 
+

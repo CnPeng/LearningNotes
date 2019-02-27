@@ -1,0 +1,13 @@
+![](https://gitee.com/uploads/images/2018/0329/205224_8527b9b6_930142.png "屏幕截图.png")
+
+解决方案参考：
+https://stackoverflow.com/questions/47062650/unable-to-find-attribute-androidfont-for-v7-support
+
+参考链接中的具体解决点：
+![](https://gitee.com/uploads/images/2018/0329/205357_e205533a_930142.png "屏幕截图.png")
+
+## 原因是：
+本地SDK版本低了，不存在指定的SDK版本
+## 解决方案：
+修改 gradle 文件中的  targetSdkVersion 
+修改 dependencies节点 中的 com.android.support:appcompat 为最新

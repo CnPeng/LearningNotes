@@ -1,0 +1,5 @@
+https://blog.csdn.net/pyfysf/article/details/79320016
+
+问题原因：
+
+点9图绘制的有问题。左上、右下，各自成对出现即可
