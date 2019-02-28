@@ -4,7 +4,7 @@
 
 ![](https://images.gitee.com/uploads/images/2019/0111/090049_8387477f_930142.png "屏幕截图.png")
 
-Getstartedwithaplayground 是快速开发和运行Swift的。
+Get started with a playground 是快速开发和运行 Swift 的。
 
 书中1-14章内容都是基于 playground 实现的。
 
@@ -46,6 +46,7 @@ Swift中的字符串插值（String interpolation）就是指利用字符串模�
 字符串模板的格式为 `\(“被引用的内容”)`
 
 如：
+
 ```
 import Cocoa
 
