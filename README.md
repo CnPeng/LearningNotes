@@ -1,18 +1,22 @@
 # LearningNotes
 
+>最近更新日期：2019-02-28
 
-个人学习笔记。涵盖 软件编程、硬件维护、多媒体、文学、历史等诸多方面，总之，看到啥，学到啥都会记录笔记总结
 
-20190125 之前，内容一直放置在 [LearningNotes 的 wiki](https://gitee.com/CnPeng_1/LearningNotes) 中，但是，当单个 wiki 文件比较大的时候，会出现编辑之后无法保存的情况，所以，从20190125开始，弃用wiki，改用文件编辑。
+LearningNotes 是个人综合性学习笔记。
+
+涵盖 软件编程、硬件维护、多媒体、文学、历史等诸多方面。总之，看到啥，学到啥都会记录笔记总结。
+
+
+
 
 ## 一、个人其他连链
-### 1、我的
+
+我的微信公众号：CnPeng
 
 [我的简书（持续更新）:https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
 
 [我的CSDN（停更）：http://blog.csdn.net/north1989](http://blog.csdn.net/north1989)
-
-我的微信公众号：CnPeng
 
 
 ## 二、详细目录
@@ -49,7 +53,12 @@
 [精通IOS开发_第八版](08_IOS/02_IOS/精通IOS开发V8.md)|读书笔记|20190213|未完结
 
 
+## 三、其他
 
+如果你觉得这个仓库中的某个内容对你有用，不妨打赏一下。
 
+**一块两块不嫌少，千儿八百有点多。** 谢谢O(∩_∩)O哈！
+
+![k7CSBV.png](https://s2.ax1x.com/2019/02/28/k7CSBV.png) ![k79X1s.png](https://s2.ax1x.com/2019/02/28/k79X1s.png)
  
 
