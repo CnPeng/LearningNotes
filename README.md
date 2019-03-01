@@ -31,6 +31,7 @@ LearningNotes 是个人综合性学习笔记。
 
 标题|类别|更新时间|状态
 ---|---|---|---
+[传智Kotlin基础-张泽华](03_Kotlin/01_书籍/01_Kotlin/2、传智Kotlin基础-张泽华.md)|视频笔记|20190228|完结
 [查看kotlin编译后的Java字节码](03_Kotlin/02_环境搭建/02、查看kotlin编译后的Java字节码.md)|知识点总结|20190213|完结
 
 ### 4、Python
