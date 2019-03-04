@@ -17,36 +17,43 @@
 
 ### 1、配置本地Gradle
 
-* 先从网络下载gradle，地址为：https://services.gradle.org/distributions/
+* 先从网络下载gradle，地址为：[https://services.gradle.org/distributions/](https://services.gradle.org/distributions/)
 * 下载完成后解压到自定义目录
 * 然后按照下图操作：
  `Gradle Home 指向上一步中的自定义目录。`
+ 
 ![](https://images.gitee.com/uploads/images/2018/1129/214440_8c733db9_930142.png "屏幕截图.png")
 
 
 ### 2、手动升级Kotlin插件
 
-虽然AndroidStudio集成了Kotlin，但可能不是最新，所以需要手动升级
+虽然 AndroidStudio 集成了 Kotlin ，但可能不是最新，所以需要手动升级
 
  **方法1** 
+ 
 ![](https://images.gitee.com/uploads/images/2018/1129/215104_2797e07b_930142.png "屏幕截图.png")
 
  **方法2**
+ 
 ![](https://images.gitee.com/uploads/images/2018/1129/215320_d86b7099_930142.png "屏幕截图.png") 
 
 
-### 3、查看/修改Kotlin的编译版本
+### 3、查看/修改 Kotlin 的编译版本
+ 
  * **在设置中查看** 
+ 
 ![](https://images.gitee.com/uploads/images/2018/1129/215519_d36ec771_930142.png "屏幕截图.png")
 
--  **在.gradle文件中查看**
+* **在 `.gradle` 文件中查看**
+
 ![](https://images.gitee.com/uploads/images/2018/1129/215834_4e884a86_930142.png "屏幕截图.png") 
 
 
-### 4、引用Anko库
-[**点击查看更多Anko库相关内容 https://github.com/Kotlin/anko**](https://github.com/Kotlin/anko)
+### 4、引用 Anko 库
 
-*  **步骤1：修改Project的.gradle文件** 
+[**点击查看更多 Anko 库相关内容 https://github.com/Kotlin/anko**](https://github.com/Kotlin/anko)
+
+*  **步骤1：修改 Project 的 .gradle 文件** 
 
 如下图：新增`ext.anko_version="0.10.7"`
 
@@ -75,16 +82,17 @@ toInt()、toLong()、toFloat()、toDouble()、toBoolean()、toChar()、toString(
 ### 2、数组
 
 #### (1)、数组的声明
+
 * 基本数据类型数组的声明：
 
 intArrayOf(...)、longArrayOf(...)、floatArrayOf(...)、booleanArrayOf(...)、charArrayOf(...)
 
 
-* String类型数组的声明
+* String 类型数组的声明
 
-String是一个特殊的基本数据类型，使用 `arrayOf(...）`方法初始化数组。
+String 是一个特殊的基本数据类型，使用 `arrayOf(...）`方法初始化数组。
 
-```
+```kotlin
 val strArray : Array<String> = arrayOf("中国","山东","济南")
 ```
 
@@ -111,35 +119,35 @@ val strArray : Array<String> = arrayOf("中国","山东","济南")
 * 分割——split()
 
  **注意：** 
-Java中 split()返回的是一个String[], 而 **kotlin中返回的是一个 List<String>** 
+Java 中 split() 返回的是一个 String[], 而 **kotlin中返回的是一个 List<String>** 
 
 #### (2)、字符串模板和拼接
 
-* 占位符 ${...}
+* 占位符 `${...}`
 
-```
-val str="用户的昵称是${user.name}"
+```kotlin
+val str = "用户的昵称是${user.name}"
 
-val str2="str的值是$str"
+val str2 = "str的值是$str"
 ```
 
 #### (3)、如何显示货币符号$
 
-* 方式1：${‘＄’} 
+* 方式1：`${‘＄’}` 
 
-${} 还是字符串占位格式，其中包含的＇＄＇表示 ＄ 符号
-
-```
-val str="人民币转换后的美元金额为${'$'}$rmbNum"
-```
-
-* 方式2：＼$
-
-\表示转义，＼＄转义后得到 ＄
+${} 还是字符串占位格式，其中包含的`＇＄＇`表示 ＄ 符号
 
 ```
+val str = "人民币转换后的美元金额为${'$'}$rmbNum"
+```
+
+* 方式2：`＼$`
+
+\表示转义，`＼＄` 转义后得到 ＄
+
+```kotlin
 //\S 表示转义获取$符号，$rmbNum 为字符串占位符
-val str="人民币转换后的美元金额为\$ $rmbNum"
+val str = "人民币转换后的美元金额为\$ $rmbNum"
 ```
 
 
@@ -156,6 +164,7 @@ val str="人民币转换后的美元金额为\$ $rmbNum"
 
 
 ##### B: 通用方法
+
 * isEmpty —— 是否为空
 * isNotEmpty —— 是否非空
 * clear —— 清空容器
@@ -168,6 +177,7 @@ val str="人民币转换后的美元金额为\$ $rmbNum"
 kotlin中的容器可以在定义的时候就执行初始化赋值操作。
 
 容器初始化的函数如下：
+
 * listOf()、mutableListOf()
 * setOf()、mutableSetOf()
 * mapOf()、mutableMapOf()
@@ -176,19 +186,21 @@ kotlin中的容器可以在定义的时候就执行初始化赋值操作。
 #### (2)、Set/MutableSet
 
 ##### A: 特点
+
 * 内部元素无序
 * 内部元素唯一（通过哈希值判断是否唯一，重复则覆盖）
 * set不可变，MutableSet可变（所以，后面的几个特点是针对MutableSet的）
-* MutableSet中的 add 方法仅添加元素，但不知道添加到了哪个位置
-* MutableSet没有修改元素值的方法，元素被添加之后不可被修改
-* MutableSet的 remove 方法仅接收元素作为参数，不能接收索引——因为Set无序没有索引
+* MutableSet 中的 add 方法仅添加元素，但不知道添加到了哪个位置
+* MutableSet 没有修改元素值的方法，元素被添加之后不可被修改
+* MutableSet 的 remove 方法仅接收元素作为参数，不能接收索引——因为Set无序没有索引
 
 ##### B: 遍历
+
 有三种遍历方式：for-in 、 迭代器、 forEach
 
 * for-in
 
-```
+```kotlin
 for(user in userSet){
     ...
 }

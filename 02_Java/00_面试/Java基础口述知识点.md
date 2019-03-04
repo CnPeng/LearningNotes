@@ -1,4 +1,4 @@
-##Java基础知识点概述
+##Java 基础知识点概述
 
 ### 1、什么是注释?注释分为几种?注释有什么作用?
 
@@ -941,12 +941,18 @@ Java针对这种情况，就提供了同步技术：
 ### 78、String 和 int 之间的转换(☆☆☆☆☆)	
 * String --> int
 
-		Integer.parseInt(str);
-* int --> String 
+```java
+Integer.parseInt(str);
+```
+
 		
-		Integer.toString(a);
-		String.valueOf(a);
-		a+"";
+* int --> String 
+	
+```java		
+Integer.toString(a);
+String.valueOf(a);
+a+"";
+```
 
 ### 79、Integer面试题(☆☆)：
 
@@ -954,6 +960,7 @@ Java针对这种情况，就提供了同步技术：
 
 如果超过了byte取值范围就会再新创建对象
 
+```java
 		Integer i1 = new Integer(97);
 		Integer i2 = new Integer(97);
 		System.out.println(i1 == i2);		 //false
@@ -970,7 +977,7 @@ Java针对这种情况，就提供了同步技术：
 		System.out.println(i5 == i6);		//true
 		System.out.println(i5.equals(i6));//true
 		System.out.println("-----------");
-
+```
 
 
 ### 80、IO流中复制文件的方式:
@@ -979,7 +986,7 @@ Java针对这种情况，就提供了同步技术：
 
 一次一个字节数据（效率太低了）(这是基本格式,要记住)
 
-```
+```java
 FileInputStream fis = new FileInputStream("双元.jpg");
 FileOutputStream fos = new FileOutputStream("copy.jpg");
 //用来接收读取到的字节数据
@@ -997,7 +1004,7 @@ fos.close();
 
 普通字节流复制文件 一次性拷贝一整个文件（效率高，但是可能会有内存溢出的危险）
 
-```
+```java
 FileInputStream fis = new FileInputStream("致青春.mp3");
 FileOutputStream fos = new FileOutputStream("copy.mp3");
 

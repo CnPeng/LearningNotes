@@ -641,3 +641,65 @@ import bar.Bar as bBar  // bBar 代表“bar.Bar”
 #### (6)、
 
 ---
+
+## 十二、协程
+
+### 1、协程基础
+
+在开始编码前，先新建 Gradle 项目，然后引用 kotlinx.coroutines 包。
+
+![](https://images.gitee.com/uploads/images/2019/0304/103537_373787f0_930142.png "屏幕截图.png")
+
+![](https://images.gitee.com/uploads/images/2019/0304/103615_abe391fe_930142.png "屏幕截图.png")
+
+![](https://images.gitee.com/uploads/images/2019/0304/103706_68c306b1_930142.png "屏幕截图.png")
+
+![](https://images.gitee.com/uploads/images/2019/0304/103811_b3be5865_930142.png "屏幕截图.png")
+
+![](https://images.gitee.com/uploads/images/2019/0304/104047_7d4e0e8a_930142.png "屏幕截图.png")
+
+[点击查看官方关于 引入 kotlinx.coroutines 包的参考](https://github.com/hltj/kotlinx.coroutines-cn/blob/master/README.md#using-in-your-projects)
+
+#### (1)、第一个协程程序
+
+#### (2)、桥接阻塞与非阻塞
+#### (3)、等待作业
+#### (4)、结构化并发
+#### (5)、作用域构建器
+#### (6)、协程是轻量的
+#### (7)、全局协程与守护线程
+
+### 2、取消与超时
+#### (1)、
+#### (2)、
+#### (3)、
+#### (4)、
+#### (5)、
+#### (6)、
+
+### 3、通道(实验性)
+#### (1)、
+#### (2)、
+#### (3)、
+#### (4)、
+#### (5)、
+#### (6)、
+
+### 4、组合挂起函数
+#### (1)、
+#### (2)、
+#### (3)、
+#### (4)、
+#### (5)、
+#### (6)、
+
+### 5、携程上下文与调度
+
+
+### 6、异常处理
+
+### 7、监督
+
+### 8、select 表达式(实验性的)
+
+### 9、共享的可变状态与并发
