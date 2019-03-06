@@ -1,11 +1,11 @@
-内容发布在简书，具体地址如下：
-
-简书地址：https://www.jianshu.com/p/da18c2fd033a
+内容发布在简书，地址为：
+[简书地址](https://www.jianshu.com/p/da18c2fd033a)
 
 
 文中内容基于：[黑马/传智播客的《Web前端入门教程》](http://yun.itheima.com/course/267.html)中的前两节。
 
 相关网站：
+
 * [w3schools英文网站]( https://www.w3schools.com/html/default.asp)
 * [w3school 中文网站](http://w3school.com.cn/)
 
@@ -31,11 +31,13 @@ Web标准是由W3C及其他标准化资质制定的标准集合。包括：结�
 ## 三、HTML开发工具
 
 * Dreamweaver、Sublime、WebStorm、HBuilder、Visual Studio Code
+
+
 ![](https://images.gitee.com/uploads/images/2019/0201/085018_d136e116_930142.png)
 
 ## 四、html基本骨架
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,11 +49,12 @@ Web标准是由W3C及其他标准化资质制定的标准集合。包括：结�
 </body>
 </html>
 ```
+
 ### 1、<!DOCTYPE> 
 
-<!DOCTYPE>位于文档的最前面，用于向浏览器说明当前.html文件使用的是哪种HTML或者XHTML标准规范。浏览器会按照此处指定的规范对html文件进行解析。
+`<!DOCTYPE>` 位于文档的最前面，用于向浏览器说明当前 .html 文件使用的是哪种 HTML 或者 XHTML 标准规范。浏览器会按照此处指定的规范对html文件进行解析。
 
-HTML5可以向下兼容，所以，现在直接指定为`<!DOCTYPE html>`即可。
+HTML5 可以向下兼容，所以，现在直接指定为`<!DOCTYPE html>`即可。
 
 ### 2、charset（字符编码集）
 
@@ -62,7 +65,7 @@ HTML5可以向下兼容，所以，现在直接指定为`<!DOCTYPE html>`即可�
 
 ## 五、HTML标签
 
->HTML大量使用语义化标签，所谓语义化就是见名知意，
+> HTML大量使用语义化标签，所谓语义化就是见名知意，
 
 ### 1、排版标签
 
@@ -71,7 +74,7 @@ HTML5可以向下兼容，所以，现在直接指定为`<!DOCTYPE html>`即可�
 * h 即 head 的简写
 * 有 `<h1>、<h2>、<h3>、<h4>、<h5>、<h6>` 6种，从左到右字号依次变小。
 * 基本格式`<h1></h1>`
-* 像<h7>这种错误的标签在展示时不起作用
+* 像 `<h7>` 这种错误的标签在展示时不起作用
 
 #### （2）、段落标签
 
@@ -80,6 +83,7 @@ HTML5可以向下兼容，所以，现在直接指定为`<!DOCTYPE html>`即可�
 * 段落中的文本内容超出浏览器宽度之后会执行自动换行
 
 #### （3）、水平线标签
+
 * hr 即 horizontal  的缩写
 * 其作用是在页面中插入一条水平线
 * 基本格式:`<hr />`
@@ -90,8 +94,9 @@ HTML5可以向下兼容，所以，现在直接指定为`<!DOCTYPE html>`即可�
 * div 即 division 的缩写，分割、区分的意思
 * span 即 span ，跨度、范围的意思
 * 这俩本质上是一个容器，类似于 Android 中的ViewGroup
-* 基本格式`<div>这是div标签中的内容</div>
-<span>这是span标签中的内容</span>`
+* 基本格式
+	* `<div>这是div标签中的内容</div>`
+	* `<span>这是span标签中的内容</span>`
 
 ### 2、文本格式化标签
 
@@ -103,6 +108,7 @@ HTML5可以向下兼容，所以，现在直接指定为`<!DOCTYPE html>`即可�
 `<u></u>、<ins></ins>`|下划线，XHTML推荐使用<ins>
 
 > 关于 HTML 和 XHTML的区别，可以参考
+> 
 > * [http://www.w3school.com.cn/xhtml/xhtml_html.asp](http://www.w3school.com.cn/xhtml/xhtml_html.asp)、
 > * [https://www.zhihu.com/question/19783105](https://www.zhihu.com/question/19783105)
 
@@ -141,12 +147,12 @@ border|数字|设置图像边框的宽度
     * target , 指定目标窗口的打开方式。取值为 self / blank , self 为默认值，blank 表示新窗口打开
 
 >注意：
-> * 外链需要添加 http:// 或 https:// 前缀
+> * 外链需要添加 `http://` 或 `https://` 前缀
 > * 内部链接 直接链接内部页面名称即可，如 `<a href="index.html">首页</a>` 
 > * 如果当时没有确定链接目标时，可以为 href 赋值 为 “#” ,即 `href="#"`,表示一个空连接
 > * 各种网页元素，如 文本、图像、表格、音频、视频等都可以作为超链接的载体
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,7 +178,7 @@ border|数字|设置图像边框的宽度
      * 为目标内容（即锚点）创建id 并赋值
      * 将超链接文本与锚点的id 关联，`<a href="#id名称"> 超链接文本 </a>`
 
-```
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
