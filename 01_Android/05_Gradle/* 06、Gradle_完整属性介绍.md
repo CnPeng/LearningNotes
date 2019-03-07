@@ -1,1 +1,0 @@
-http://google.github.io/android-gradle-dsl/current/index.html
