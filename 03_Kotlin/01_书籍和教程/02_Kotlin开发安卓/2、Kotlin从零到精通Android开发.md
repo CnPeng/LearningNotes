@@ -137,7 +137,7 @@ val str2 = "str的值是$str"
 
 ${} 还是字符串占位格式，其中包含的`＇＄＇`表示 ＄ 符号
 
-```
+```kotlin
 val str = "人民币转换后的美元金额为${'$'}$rmbNum"
 ```
 
@@ -208,7 +208,7 @@ for(user in userSet){
 
 * 迭代器
 
-```
+```kotlin
 val iterator=userSet.iterator()
 while(iterator.hasNext()){
     val user=iterator.next()
@@ -222,13 +222,14 @@ while(iterator.hasNext()){
 
 使用默认的  **it** 代表内部元素。 
 
-```
+```kotlin
 userSet.forEache{"用户的姓名为${it.name}"}
 ```
 
 #### (3)、List/MutableList
 
 ##### A: 特点
+
 * 有序有索引
 * 能够通过set修改元素值，能够通过get获取元素值
 * 通过add方法添加元素
@@ -238,7 +239,7 @@ userSet.forEache{"用户的姓名为${it.name}"}
 
 除了 for-in 、迭代器、forEach, 还有一种根据索引遍历的方式：
 
-```
+```kotlin
 // indices 表示userList的索引数组。这种方式本质上也是采用了for-in, 但遍历的是索引
 for(i in userList.indices){
     val user=userList[i]
@@ -249,10 +250,11 @@ for(i in userList.indices){
 ##### C: 排序
 
 MutableList 可以执行排序的操作：
+
 * sortBy 按照规则升序排列
 * sortByDescending 按规则降序排列
 
-```
+```kotlin
 userNameList.sortBy{it.length}
 ```
 
@@ -261,15 +263,17 @@ userNameList.sortBy{it.length}
 #### (4)、Map/MutableMap
 
 ##### A: 特点
+
 * 以键值对的形式存储元素，键唯一
 
 ##### B: 初始化
 
 调用 mapOf / mutableMapOf 执行初始化，在组织键值对元素时都有如下两种方式：
+
 * 键 to 值
 * Pair(键,值)
 
-```
+```kotlin
 val userMap:Map<String,String>=mapOf("姓名" to “张三” , “性别” to "女")
 
 val userMAp2:MutableMap<String,String>=mutableOf(Pair("姓名",“张三”), Pair("性别",“女"))
@@ -279,6 +283,7 @@ to 模式底层也是使用 Pair()对象构建的。
 
 
 ##### C: 常用方法
+
 * containsKey 是否包含某个键
 * containsValue 是否包含某个值
 * put 方法用来修改或添加元素
@@ -291,7 +296,7 @@ to 模式底层也是使用 Pair()对象构建的。
 
 由于元素是一个键值对，所以，在遍历获取到元素之后可以视需要根据元素取出对应的key 和 value
 
-```
+```kotlin
 for(item in userMap){
    val str="用户的${item.key} 为 ${item.value}"
 }
@@ -308,7 +313,7 @@ for(item in userMap){
 
 kotlin 中 if...else 语句具有返回值，类似于Java中的三目运算
 
-```
+```kotlin
 //传入两个值 a 和 b , 将大值显示在TextView控件中
 nameTextView.text=if(a>b) a else b
 ```
@@ -317,6 +322,7 @@ nameTextView.text=if(a>b) a else b
 
 ##### A: 特点
 kotlin 中没有 switch/case ，
+
 * **使用 when/else 替代** 
 * when/else 也有返回值
 * 执行完一个节点之后就会终止循环
@@ -325,7 +331,7 @@ kotlin 中没有 switch/case ，
 
 ##### B: 基本使用
 
-```
+```kotlin
 var count:Int = 0
 btn_when_simple.setOnClickListener {
   tv_answer.text = when (count) {
@@ -341,11 +347,12 @@ btn_when_simple.setOnClickListener {
 ##### C: 穿透
 
 java 中 switch/case 需要穿透时需要列出每一个常量条件，但 kotlin中可以简化——
+
 * 多个条件直接写在一行，使用 ”,“ 间隔
 * 如果条件连续数值，可以通过  `in 起始值..结束值`  指定区间范围
 * 如果条件是连续数值，并且需要判断不在区间范围内，则使用 `!in 起始值..结束值`
 
-```
+```kotlin
 btn_when_region.setOnClickListener {
     tv_answer.text = when (count) {
         1,3,5,7,9 -> "取值为13579中的一个" 
@@ -361,7 +368,7 @@ btn_when_region.setOnClickListener {
 
 kotlin 中 通过  **is**  关键字用来判断 A 是否为 B 的实例——`A is B `，等同于 Java中的 `A instance B` .
 
-```
+```kotlin
 var countType:Number;
 btn_when_instance.setOnClickListener {
     count = (count+1) % 3
@@ -392,9 +399,10 @@ btn_when_instance.setOnClickListener {
 
 
 ##### A: 使用关键字
+
 为此，新增了多个关键字：until、setp、downTo
 
-```
+```kotlin
 // 遍历11到66之间的数值，until 声明了一个左闭右开的区间——不包含66，包含11 
 for (i in 11 until 66) { 
     ...
@@ -412,9 +420,10 @@ for (i in 50 downTo 7) {
 ```
 
 ##### B: 使用while、do/while
+
 由于关键字有限，能实现的效果有限，所以，更复杂的逻辑可以使用 while 或 do/while实现
 
-```
+```kotlin
 btn_repeat_begin.setOnClickListener {
     var poem:String=""
     var i:Int = 0
@@ -431,7 +440,7 @@ btn_repeat_begin.setOnClickListener {
 }
 ```
 
-```
+```kotlin
 btn_repeat_end.setOnClickListener {
     var poem:String=""
     var i:Int = 0
@@ -456,7 +465,7 @@ btn_repeat_end.setOnClickListener {
 
 另外，当嵌套循环时，还可以通过 `@循环标签名` 指定要中断的循环。
 
-```
+```kotlin
 btn_repeat_break.setOnClickListener {
     var i:Int = 0
     var is_found = false 
@@ -491,7 +500,7 @@ btn_repeat_break.setOnClickListener {
 #### (2)、声明可空变量
 kotlin中默认变量非空，如果需要声明一个可空的变量，则在类型后面追加一个问号？
 
-```
+```kotlin
 var strCanNull:String?
 ```
 
@@ -501,7 +510,7 @@ var strCanNull:String?
 * ?: 表示一旦为空返回冒号后面的值，否则返回正常的值
 * !! 表示断言非空(放弃非空判断)。但是，如果做了这个断言，但依旧为null，那么会报空指针。
 
-```
+```kotlin
 var length_null:Int?
 btn_question_dot.setOnClickListener {
     //strB后面跟了一个”?“表示可null，如果为null则直接返回null, 此时 length_null的值为null
@@ -510,7 +519,7 @@ btn_question_dot.setOnClickListener {
 }
 ```
 
-```
+```kotlin
 btn_question_colon.setOnClickListener { 
     //如果strB非null，返回正常的 strB.length; 如果strB为null，则返回-1
     length = strB?.length ?: -1
@@ -519,7 +528,7 @@ btn_question_colon.setOnClickListener {
 
 ```
 
-```
+```kotlin
 btn_exclamation_two.setOnClickListener { 
     strB = "ABCDE"
     //只有百分百确定非null时，才使用!!,否则依旧会报空指针
@@ -561,6 +570,7 @@ Kotlin中设计师的初衷是把函数作为一个特殊的变量
 
 ### 2、输入参数的变化
 
+
 * 默认参数
 * 具名参数
 * 可变参数—— 关键字**vararg** 
@@ -570,12 +580,13 @@ Kotlin中设计师的初衷是把函数作为一个特殊的变量
 ### 3、特殊函数
 
 #### (1)、泛型函数
+
 * kotlin中使用 T 表示泛型。
 * 在定义泛型函数时需要在 fun 后面加入 <T> , 然后指明某个参数的类型为 T 
 
 泛型函数的定义：
 
-```
+```kotlin
 //Kotlin中允许定义全局函数，将函数定义在kt文件中，然后全局可调用
 fun <T> appendString(tag:String, vararg otherInfo: T?):String {
     var str:String = "$tag:" 
@@ -589,7 +600,7 @@ fun <T> appendString(tag:String, vararg otherInfo: T?):String {
 
 泛型函数的调用：
 
-```
+```kotlin
 var count = 0
 btn_vararg_generic.setOnClickListener {
     tv_function_result.text = when (count%3) {
@@ -630,7 +641,7 @@ lambda 表达式会被正常地编译成匿名类。这表示每调用一次 lam
 
 下面的函数用于确保一个共享资源不会并发地被多个线程访问。函数锁住一个 Lock 对象，执行代码块，然后释放锁。
 
-```
+```kotlin
 //kotlin库中已经提供了一个synchronized(),此处定义的函数只做演示用
 inline fun <T> synchronized(lock: Lock, action: () -> T): T {
     lock.lock()
@@ -654,7 +665,8 @@ fun main(args: Array<String>) {
 因为 synchronized 函数是内联的，编译时不会构建匿名对象，所以，
 
 上述main函数编译之后的字节码等同于：
-```
+
+```kotlin
 fun main(args: Array<String>) {
     println("执行 synchronized 之前")
     val lock: Lock = TestLock()
@@ -675,7 +687,8 @@ fun main(args: Array<String>) {
 
 ##### B: 具体化参数类型的内联函数
 假设我们定义了下面一个方法：
-```
+
+```kotlin
 fun setArrayNumber(array:Array<Number>) {
     var str:String = "数组元素依次排列" 
     for (item in array) {
@@ -690,7 +703,8 @@ Kotlin中Int、Long、Double都继承自Number,但是，如果我们在调用上
 对于上面的函数，如果我们想既可以接收 Array<In>, 也可以接收Array<Double>, 那么就可以定义一个具体化类型参数的内联函数. **只有内联函数才可以具体化类型参数（限定参数类型）** 
 
 函数定义：
-```
+
+```kotlin
 //fun前面加了inline表示内联函数, <reified param:Number> 表示param需要是 Number的子类
 inline fun<reified param:Number> setArrayNumber2(array:Array<param>) {
     var str:String = "数组元素依次排列"
@@ -703,7 +717,8 @@ inline fun<reified param:Number> setArrayNumber2(array:Array<param>) {
 ```
 
 函数调用
-```
+
+```kotlin
 var int_array:Array<Int> = arrayOf(1, 2, 3)
 var float_array:Array<Float> = arrayOf(1.0f, 2.0f, 3.0f)
 var double_array:Array<Double> = arrayOf(11.11, 22.22, 33.33)
@@ -726,7 +741,7 @@ btn_generic_number.setOnClickListener {
 
 数学上存在求阶乘的函数，比如5的阶乘为：5! =5*4*3*2*1，在kotlin中使用函数表示为：
 
-```
+```kotlin
 fun factorial(n:Int):Int {
     if (n <= 1) n
     else n*factorial(n-1)
@@ -734,7 +749,7 @@ fun factorial(n:Int):Int {
 ```
 由于kotlin中把函数也作为一种特殊的变量，所以允许给函数这个变量进行赋值，上述代码可以改写为:
 
-```
+```kotlin
 fun factorial(n:Int):Int = if (n <= 1) n else n * factorial(n-1)
 ```
 
@@ -747,7 +762,8 @@ fun factorial(n:Int):Int = if (n <= 1) n else n * factorial(n-1)
 
 
 示例：求余弦不动点
-```
+
+```kotlin
 tailrec fun findFixPoint(x: Double = 1.0): Double
             = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
 ```
@@ -760,7 +776,8 @@ tailrec fun findFixPoint(x: Double = 1.0): Double
 把A函数作为B函数的输入参数，此时，B函数就被称为高阶函数，A 函数则被称为函数类型的变量。
 
 示例：求数组中的最大值
-```
+
+```kotlin
 //greater函数接收两个参数，返回Boolean；
 fun <T> maxCustom(array: Array<T>, greater: (T, T) -> Boolean): T? {
     var max: T? = null
@@ -772,7 +789,8 @@ fun <T> maxCustom(array: Array<T>, greater: (T, T) -> Boolean): T? {
 ```
 
 示例：求数组最大值的调用
-```
+
+```kotlin
 //I’m 后面有一个空格
 var string_array:Array<String> = arrayOf("How", "do", "you", "do", "I'm ", "Fine")
 btn_function_higher.setOnClickListener {
@@ -799,7 +817,7 @@ btn_function_higher.setOnClickListener {
 
 第二个参数的完整写法应该为：
 
-```
+```kotlin
 fun anonymous(a:String, b:String):Boolean {
     var result:Boolean = a.length > b.length
     return result
@@ -807,7 +825,8 @@ fun anonymous(a:String, b:String):Boolean {
 ```
 
 高阶函数示例2：（摘自《Kotlin实战》）
-```
+
+```kotlin
 //函数声明——过滤字符串中的内容，如果predicate函数在调用时返回true则追加
 fun String . filter (predicate: (Char) -> Boolean): String {
     val sb = StringBuilder ()
@@ -824,9 +843,10 @@ println(”ab1c" filter { it in ’a’··’z’})
 ```
 
 高阶函数示例3：（摘自《Kotlin实战》）
-```
+
+```kotlin
 //声明函数——该函数为 函数类型的参数 transform 赋予了默认值(默认函数体)——it.toString()
-fun <T> Collection<T>. joinT oString ( 
+fun <T> Collection<T>. joinToString ( 
     separator: String =”,
     prefix: String =””,
     postfix: String =””,
@@ -840,27 +860,28 @@ fun <T> Collection<T>. joinT oString (
 
     result append(postfix) 
     return result. toString ()
-
+}
 //函数调用和输出
 val letters = listOf ("Alpha”,”Beta”)
 
->> println (letters. j oinToString () )
-输出：Alpha , Beta
+//输出：Alpha , Beta
+println (letters.joinToString () )
 
->>println(letters.joinToString{it.toLowerCase()}) 
-输出：alpha, beta
+//输出：alpha, beta
+println(letters.joinToString{it.toLowerCase()}) 
 
->> println(letters.joinToString(
+//输出：ALPHA! BETA! 
+println(letters.joinToString(
         separator =“! ”, 
         postfix =”! ”, 
         transform={it.toUpperCase()}
        )
     )
-输出：ALPHA! BETA! 
 ```
 
 高阶函数示例4：callback?.invoke ()——（摘自《Kotlin实战》）
-```
+
+```kotlin
 /**
  * 此处定义 函数类型的参数 transform 可空，并且默认为null。
  * 所以，在函数体内调用 transfrom 时需要判断非空：if(null!=transform)...
@@ -891,7 +912,7 @@ fun <T> Collection<T>.joinToString(
 
 ##### A: 基本使用
 
-```
+```kotlin
 //要扩展哪个类中的方法，被扩展的类名就是哪个
 fun 被扩展的类名.扩展函数名(..参数..){
     函数体
@@ -899,7 +920,8 @@ fun 被扩展的类名.扩展函数名(..参数..){
 ```
 
 示例：在Array<Int>中扩展一个元素交换的方法
-```
+
+```kotlin
 fun Array<Int>.swap(pos1: Int, pos2: Int) {
     //this表示当前数组本身
     val tmp = this[pos1] 
@@ -914,7 +936,7 @@ fun Array<Int>.swap(pos1: Int, pos2: Int) {
 
 对于上面的扩展方法，只适用于Array<Int> ,如果想适用于 Double、Float等类型就需要配合泛型定义扩展函数：
 
-```
+```kotlin
 fun <T> Array<T>.swap(pos1: Int, pos2: Int) {
     val tmp = this[pos1]
     this[pos1] = this[pos2]
@@ -927,7 +949,7 @@ fun <T> Array<T>.swap(pos1: Int, pos2: Int) {
 
 前面在介绍高阶函数时定义了一个求数组元素中最大值的方法，如果我们将该扩束扩展到Array<T> 类中，就可以省略第一个参数，写法如下：
 
-```
+```kotlin
 fun <T> Array<T>.maxCustomize(greater: (T, T) -> Boolean): T? {
     var max: T? = null
     //this表示 Array<T>本身
@@ -942,7 +964,8 @@ fun <T> Array<T>.maxCustomize(greater: (T, T) -> Boolean): T? {
 #### (3)、日期时间函数函数
 
 示例：Java中获取日期的工具类
-```
+
+```kotlin
 public class DateUtil {
      //获取当前完整的日期和时间
     public static String getNowDateTime() {
@@ -966,6 +989,7 @@ public class DateUtil {
 ```
 
 关于格式化中的字符介绍：
+
 * yyyy —— 表示4位年份
 * MM   —— 两位数字的月份，如01，12
 * dd   —— 两位日期数字，如08，15
@@ -979,7 +1003,7 @@ public class DateUtil {
 
 使用kotlin中的函数Date函数：
 
-```
+```kotlin
 //返回完整的年月日时分秒2017-10-01 10:00:00
 fun Date.getNowDateTime(): String {
     val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
@@ -1014,7 +1038,8 @@ fun Date.getFormatTime(format: String=""): String {
 ```
 
 调用上述扩展函数：
-```
+
+```kotlin
 btn_extend_date.setOnClickListener {
     tv_function_result.text = "扩展函数" + when (count++%5) {
          //调用Date扩展函数时，需用对象调用
@@ -1031,7 +1056,8 @@ btn_extend_date.setOnClickListener {
 * 使用 object 修饰类，替代 class . 类似于Java中的 static class ,外部可以不需要构建对象就可以直接调用其中的属性和函数
 
 示例：将日期工具类改为单例
-```
+
+```kotlin
 object DateUtil {
     //定义日期时间属性，外部调用DateUtil.nowDateTime时会主动调用nowDateTime附属的get()方法
     val nowDateTime: String 
@@ -1069,7 +1095,7 @@ object DateUtil {
 
 外部调用单例DateUtil示例：
 
-```
+```kotlin
 btn_object_date.setOnClickListener { 
     tv_function_result.text = "单例工具类" + when (count++%5) {
         0 -> "当前日期时间为：${DateUtil.nowDateTime}"
@@ -1089,11 +1115,12 @@ btn_object_date.setOnClickListener {
 #### (1)、类的定义
 
 与Java定义类相比，kotlin有如下修改：
+
 * 省略public 修饰符，默认public
 * 继承时使用  **:** 替代 Java中的extends
 * 继承时，被继承方需要构造——也就是说继承的是父类对象 
 
-```
+```kotlin
 class Animal { 
     //类的初始化函数。CnPeng:init代码块类似于构造，但不完全相同，顶多可以理解为构造的一部分
     init { 
@@ -1108,6 +1135,7 @@ class Animal {
 kotlin把函数看做特殊的变量，那么，类也可以被看做一个特殊的函数。
 
 构造部分可以参考：[Kotlin语言中文站](https://www.kotlincn.net/docs/reference/classes.html)
+
 * Kotlin 中的类可以有一个主构造函数和一个或多个次构造函数。
 * 主构造函数是类头的一部分:它跟在类名(和可选的类型参数)后。次构造函数定义在类中。
 * 一个类中既可以没有主构造，也可以没有次构造，或者都没有
@@ -1115,22 +1143,26 @@ kotlin把函数看做特殊的变量，那么，类也可以被看做一个特�
 
 ##### A: 主构造函数
 主构造函数示例：
-```
+
+```kotlin
  class Person constructor(firstName: String) { }
 ```
 
 如果主构造函数没有任何注解或者可⻅性修饰符，可以省略 constructor 关键字。 
-```
+
+```kotlin
  class Person2(firstName: String) { }
 ```
 
 如果主构造函数有注解或可⻅性修饰符，这个 constructor 关键字是必需的，并且这些修饰符在它前面:
-```
+
+```kotlin
 class Customer public @Inject constructor(name: String) { ...... }
 ```
 
 主构造函数中不能包含任何代码，相关初始化代码可以放在init关键字修饰的代码块中：
-```
+
+```kotlin
 class Customer(name: String) { 
     init {
         logger.info("Customer initialized with value ${name}") 
@@ -1139,14 +1171,16 @@ class Customer(name: String) {
 ``` 
 
 在上面的例子中，主构造中的参数可以在init代码块中调用，也可以被类的属性调用：
-```
+
+```kotlin
 class Customer(name: String) {
     val customerKey = name.toUpperCase()
 }
 ```
 
 事实上，声明属性以及从主构造函数初始化属性，Kotlin 有简洁的语法:
-```
+
+```kotlin
 //与普通属性一样，主构造函数中声明的属性可以是可变的(var)或只读的(val)。
 class Person(val firstName: String, val lastName: String, var age: Int) { 
     // ......
@@ -1161,7 +1195,8 @@ class Person(val firstName: String, val lastName: String, var age: Int) {
 
 
 仅包含次构造的类：
-```
+
+```kotlin
 class Person { 
     constructor(parent: Person) {
         parent.children.add(this) 
@@ -1171,7 +1206,7 @@ class Person {
 
 如果类有主构造函数，那么次构造函数需要委托给主构造函数，可以直接委托或者通过别的次构造函数间接委托。委托到同一个类的另一个构造函数时用 this 关键字:
 
-```
+```kotlin
 class Person(val name: String) {
     constructor(name: String, parent: Person) : this(name) {
         parent.children.add(this) 
@@ -1180,7 +1215,8 @@ class Person(val name: String) {
 
 ```
 构造函数的可⻅性是 public。如果你不希望你的类有一个 公有构造函数，可以为主构造配置可见属性：
-```
+
+```kotlin
  class DontCreateMe private constructor () { }
 ```
 
@@ -1189,7 +1225,8 @@ class Person(val name: String) {
 可以为构造中的参数配置默认值：
 
 默认参数构造的声明：
-```
+
+```kotlin
 class AnimalDefault (context: Context, name:String, sex:Int = 0) {
     init {
         var sexName:String = if(sex==0) "公" else "母"
@@ -1199,7 +1236,8 @@ class AnimalDefault (context: Context, name:String, sex:Int = 0) {
 ```
 
 调用：
-```
+
+```kotlin
 btn_class_default.setOnClickListener {
      setAnimalInfo()
      when (count%2) {
@@ -1217,7 +1255,8 @@ btn_class_default.setOnClickListener {
 
 
 示例：
-```
+
+```kotlin
 class AnimalDefault @JvmOverloads constructor(context: Context, name:String, sex:Int = 0) {
      init {
         var sexName:String = if(sex==0) "公" else "母" 
@@ -1227,7 +1266,8 @@ class AnimalDefault @JvmOverloads constructor(context: Context, name:String, sex
 ```
 
 java中调用示例：
-```
+
+```kotlin
 @Override
 public void onClick(View v) {
     if (v.getId() == R.id.btn_class_seperate) {
@@ -1248,14 +1288,15 @@ public void onClick(View v) {
 * 非空的成员属性必须在声明时赋值，或者在构造中赋值
 
 如果属性名和构造函数的参数名一致，可以按如下方式声明：
-```
+
+```kotlin
 //该构造中的name、sex既是构造函数参数，也是该类的属性——前面加了可变属性var、val
 class WildAnimal (var name:String, val sex:Int = 0) { }
 ```
 
 如果属性名和构造函数的参数名不一致，可以按如下方式声明：
 
-```
+```kotlin
 //该类有三个属性：name,sex,sexName。
 class WildAnimalMember (var name:String, val sex:Int = 0) {
     var sexName:String
@@ -1275,7 +1316,7 @@ class WildAnimalMember (var name:String, val sex:Int = 0) {
 * 伴生对象类似Java中的静态内部类。
 * 伴生对象需要在类名前面添加 companion object
 
-```
+```kotlin
 class MyClass {
     companion object Factory {
         fun create(): MyClass = MyClass() 
@@ -1284,16 +1325,19 @@ class MyClass {
 ```
 
 调用伴生对象中的成员时，可以这么写：
-```
+
+```kotlin
 MyClass.Factory.create()
 ```
 但上面的调用方式，会提示：`Redundant Companion reference`,推荐的方式为：
-```
+
+```kotlin
 MyClass.create()
 ```
 
 伴生对象可以省略名称，此时，默认名称为  **Companion** ,外部调用的方式不变
-```
+
+```kotlin
 class MyClass {
     companion object {
         fun create(): MyClass = MyClass() 
@@ -1317,7 +1361,7 @@ class MyClass {
 * Kotlin中 open 关键字修饰类时表示类可以被继承，修饰成员(含变量和方法)时表示可以被重写
 * Kotlin中的 **类默认是不能被继承的** 
 
-```
+```kotlin
 //open修饰的类才可以被继承
 open class Base { 
     //open修饰的方法才可以被重写
@@ -1338,25 +1382,29 @@ open class AnotherDerived() : Base() {
 ```
 
 ##### B: 公开性修饰符
+
 Kotlin中用来修饰成员的公开性修饰符有：
+
 * public   —— 类、函数、变量默认就是public的
 * internal —— 只对本模块内部开放。对于APP开发来说，本模块指本APP
 * procted  —— 对自己和子类开放
 * private  —— 私有
 
  **注意：** 
+ 
 * **Kotlin中外部类不能访问内部类的private成员** 
 * open 和公开性修饰符是平级关系
 * open和private不能同时修饰一个成员，否则报错：Modifier 'open' is incompatible with 'private'
 
 
 #### (2)、普通类继承
+
 * 对比Java，继承时使用  **:** 替代 extends, 并且冒号后面跟的是 父类的构造 
 * 默认情况下，重写的成员具有与父类中对应成员的相同可见属性。
 * 重写的成员可以将可见属性升级，但不能降级
 
 
-```
+```kotlin
 //open修饰的类才可以被继承
 open class Base { 
     //open修饰的方法才可以被重写
@@ -1369,7 +1417,6 @@ class Derived() : Base() {
     //在子类中，可见属性可以升级为public,但不能降级为 private。如果不想被再次重写就定义为final
     public override fun v() {}
 }
-
 ```
 
 
@@ -1392,7 +1439,7 @@ class Derived() : Base() {
 
 关于接口类，可以参考 [传智Kotlin基础--张泽华](https://gitee.com/CnPeng_1/LearningNotes/wikis/2%E3%80%81%E4%BC%A0%E6%99%BAKotlin%E5%9F%BA%E7%A1%80--%E5%BC%A0%E6%B3%BD%E5%8D%8E?sort_id=364269) 中的内容
 
-```
+```kotlin
 //可以被继承的类
 open class Human(var name: String) {
     open fun printName() {
@@ -1457,6 +1504,7 @@ fun main(args:Array<String>) {
 ```
 
 #### (5)、接口代理
+
 * 把自己不想做的事情交给别人做称为委托，做别人委托的事件称为代理
 * 只有接口才能被代理
 * 代理关键字 by
@@ -1473,8 +1521,10 @@ fun main(args:Array<String>) {
 ```
 
 ##### B、代码实现——完全委托
+
 * 定义洗碗的接口
-```
+
+```kotlin
 interface IWashBow {    
     //定义一个洗碗接口，包含一个洗碗方法
     fun washBow()
@@ -1482,7 +1532,8 @@ interface IWashBow {
 ```
 
 * 大头儿子实现接口
-```
+
+```kotlin
 //被实现的接口后面不需要加（）
 class BigHeadSon:IWashBow {    
     override fun washBow() {
@@ -1492,7 +1543,8 @@ class BigHeadSon:IWashBow {
 ```
 
 * 小头爸爸实现接口并委托事件给小头儿子
-```
+
+```kotlin
 class SmallHeadFather:IWashBow by BigHeadSon(){     
     //委托关键字 by;被委托方(即代理方)如果不是单例类，则后面需要跟()
 }
@@ -1504,7 +1556,8 @@ class SmallHeadFather2(bigHeadSon:BigHeadSon):IWashBow by bigHeadSon{
 ```
 
 * 程序调用及输出结果
-```
+
+```kotlin
 fun main(args: Array<String>) {
     var father=SmallHeadFather()
     //小头爸爸已经将洗碗的操作委托为小头儿子了，所以，此处本质是调用的小头儿子的洗碗操作
@@ -1526,13 +1579,15 @@ fun main(args: Array<String>) {
 
 
 #### (2)、内部类
+
 * A类中包含B类，并且B类用  **inner** 修饰， 则B类就是A的嵌套类
 * 内部类可以直接访问外部类的成员
 * 外部类访问内部类时，需要先构造内部类
 
 
 嵌套类+内部类的示例代码：
-```
+
+```kotlin
 package MyTempDemo
 
 class UserA() {
@@ -1588,7 +1643,7 @@ fun main(args:Array<String>){
 * 枚举类不能被继承，也不能被实现。
 * 更多内容可以参考 [官方文档](https://www.kotlincn.net/docs/reference/enum-classes.html)
 
-```
+```kotlin
 package MyTempDemo
 
 enum class Season {
@@ -1661,7 +1716,7 @@ CnPeng: 比如，按性别区分人的时候，只有两种可能：男人、女
 * 密封类的所有构造都必须是私有的。
 * 密封类的孙子类，可以放置在任意位置，并非必须在同一个kt文件中。
 
-```
+```kotlin
 sealed class Expr
 data class Const(val number: Double) : Expr()
 data class Sum(val e1: Expr, val e2: Expr) : Expr()
@@ -1676,7 +1731,7 @@ object NotANumber : Expr()
 
 * 枚举+when时，when语句无法获知是否已经覆盖了枚举内的全部情况。
 
-```
+```kotlin
 fun eval(expr: Expr): Double = when(expr) {
     is Const -> expr.number
     is Sum -> eval(expr.e1) + eval(expr.e2)
@@ -1686,7 +1741,8 @@ fun eval(expr: Expr): Double = when(expr) {
 ```
 
 CnPeng的示例代码：
-```
+
+```kotlin
 package kotlininaction
 
 //密封类可以被继承，但不能实例化，其子类可以实例化。密封类默认open
@@ -1737,6 +1793,7 @@ fun main(args: Array<String>) {
 所谓数据类就是编码过程中的各种实体类, 数据类关键字 data
 
 Kotlin中数据类的优点包括：
+
 * 自动声明与构造函数入参同名的属性字段
 * 自动实现每个属性的set/get方法
 * 自动提供equals 方法，用来判断两个数据对象(的属性值)是否相等
@@ -1747,7 +1804,8 @@ Kotlin中数据类的优点包括：
  **注意：** 没有在主构造中声明的属性，不会加入到 equals 、hashCode的判断中去 
 
 声明数据类：
-```
+
+```kotlin
 /**
  * 数据类必须有主构造函数，并且至少传入一个参数
  * 并且要声明与入参同名的属性——简单一点就直接给入参加上var/val
@@ -1761,7 +1819,8 @@ data class Plant(var name:String, var stem:String,
 ```
 
 调用数据类：
-```
+
+```kotlin
 var lotus = Plant("莲", "莲藕", "莲叶", "莲花", "莲蓬", "莲子") 
     //数据类的copy方法不带参数时表示复制一个属性值一致的对象
     var lotus2 = lotus.copy()
@@ -1790,7 +1849,8 @@ var lotus = Plant("莲", "莲藕", "莲叶", "莲花", "莲蓬", "莲子")
 * 一旦声明之后，就可以在类的主体内像其他类型一样使用类型参数
 
 List泛型接口的声明：
-```
+
+```kotlin
 //List接口定义了类型参数T
 interface List<T> {
     //在接口或类的内部， T 可以当作普通类型使用
@@ -1801,7 +1861,7 @@ interface List<T> {
 
 * 如果你的类继承了泛型类(或者实现了泛型接口)，你就得为基础类型的泛型形参提供一个类型实参——它可以是具体类型或者另一个类型形参 
 
-```
+```kotlin
 class StringList: List<String> { 
     //这个类实现了 List，提供了具体类型实参: String
     override fun get (index: Int) : String = . . 
@@ -1821,7 +1881,7 @@ class ArrayList<T> : List<T> {
 #### (1)、Button
 实现点击事件的三种形式：
 
-```
+```kotlin
 //匿名函数
 btn_click_anonymos.setOnClickListener { v ->
     //as 为类型强转标记
@@ -1858,12 +1918,14 @@ addRule 中前者表示布局规则，后者表示相对目标View的id
 * 在为LayoutParams配置margin时，尽量使用marginStart、marginEnd,如果使用 leftMargin、rightnMargin,可能会出现不生效的情况
 
 ##### A: ConstraintSet 
+
 是代码控制view之间约束条件的辅助类，ConstraintLayout.LayoutParams的高级版本。
 * connect() 可以一次性指定存在约束关系的两个控件以及他们的间距
 * setMargin() 可以指定单一方向上的margin值
 
 使用constraintSet控制视图位置：
-```
+
+```kotlin
 private fun moveView() {
     val margin = dip((if (isMoved) 200 else 20).toFloat())
     //低版本的constraint-layout库中不包含ConstraintSet
@@ -1909,7 +1971,7 @@ set.connect(tv_first.id, ConstraintSet.START, cl_content.id, Constr aintSet.STAR
 ##### B: TransitionManager
 当布局参数发生变化时提供重新布局的切换动画。
 
-```
+```kotlin
 btn_move_soft.setOnClickListener { 
     //当视图的布局规则发生变化时，启用默认切换动画，TransitionManager是API19加入的类
     TransitionManager.beginDelayedTransition(cl_content)
@@ -1922,7 +1984,7 @@ btn_move_soft.setOnClickListener {
 #### (1)、TextView
 * Kotlin中使用 or 替代Java中的 | ,如： 
 
-```
+```kotlin
 //Kotlin写法
 tv_adMob.gravity=Gravity.START or Gravity.CENTER
 
@@ -1931,6 +1993,7 @@ tv_adMob.gravity=Gravity.START | Gravity.CENTER
 ```
 
 kotlin中都有对应的关键字替代Java中的位运算，对应关系如下：
+
 * or —— |  ——或运算
 * and —— & —— 与运算
 * xor —— ^ —— 异或运算
@@ -1943,10 +2006,10 @@ kotlin中都有对应的关键字替代Java中的位运算，对应关系如下�
 #### (3)、EditText
 intputType的类型：
 
-- TYPE_CLASS_TEXT —— 普通文本
-- TYPE_TEXT_VARIATION_NORMAL —— 正常显示
-- TYPE_TEXT_VARIATION_PASSWORD —— 密文显示
-- TYPE_TEXT_VARIATION_VISIBLE_PASSWORD —— 明文显示
+- `TYPE_CLASS_TEXT` —— 普通文本
+- `TYPE_TEXT_VARIATION_NORMAL` —— 正常显示
+- `TYPE_TEXT_VARIATION_PASSWORD` —— 密文显示
+- `TYPE_TEXT_VARIATION_VISIBLE_PASSWORD` —— 明文显示
 
 更多类型可查看 InputType 类中的定义
 
@@ -1955,23 +2018,26 @@ intputType的类型：
 #### (1)、传送配对字段数据
 
 * Kotlin中跳转Activity的普通写法：
-```
+
+```kotlin
 //注意字节码的获取。传递数据时依旧使用putExtra的方式
 val intent = Intent(this@MainActivity, LinearLayoutActivity::class.java )
 startActivity(intent)
 ```
 
 * Anko库中提供的Activity跳转方法
-```
+
+```kotlin
 //<> 中包裹要跳转的目标页面，() 中传递的是键值对Pair组成的可变数组 vararg 
 startActivity<ChipActivity>()
 ```
 * 目标页面获取被传递数据的方式不变
 
 #### (2)、传送序列化数据
+
 Kotlin中如果需要序列化，则为数据类添加一个@Parcelize注解，并实现该接口即可。比Java中的序列化简单了太多太多。。。
 
-```
+```kotlin
 //@Parcelize注解表示自动实现Parcelable接口的相关方法
 @Parcelize
 data class MessageInfo(val content: String, val send_time: String) : Parcelable {
@@ -1980,7 +2046,8 @@ data class MessageInfo(val content: String, val send_time: String) : Parcelable 
 ```
 
 此外，为了让该注解生效，必须修改Module 的 build.gradle文件 —— 在 android 节点增加 androidExtensions：
-```
+
+```kotlin
 android {
     ...
     androidExtensions {
@@ -1990,12 +2057,16 @@ android {
 ```
 传递和接收的示例如下：
 * 跳转时传递序列化数据
-```
+
+
+```kotlin
 val request = MessageInfo(et_request.text.toString(), DateUtil.nowTime)
 startActivity<ParcelableSecondActivity>("message" to request)
 ```
 * 接收序列化数据
-```
+
+
+```kotlin
 class ParcelableSecondActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) { 
         super.onCreate(savedInstanceState) 
@@ -2012,7 +2083,7 @@ class ParcelableSecondActivity : AppCompatActivity() {
 ##### A: Anko中的 intentFor()
 从其他页面跳转到Activity界面时，可能还会通过Intent对象设置Action、Flag等内容，Anko提供了构建Intent对象的 intentFor()函数。
 
-```
+```kotlin
 //构建intent对象的时候，指定跳转的Activity并携带数据
 val intent = intentFor<ActSecondActivity>(
            "request_time" to DateUtil.nowTime,
@@ -2029,9 +2100,8 @@ startActivity(intent)
 >2、在Activity界面中调用 this.toString() 可以获取Activity的唯一标识，通过判断标识是否一致得知是否创建了新的实例。
 
 
-```
-<activity android:name=".ActSecondActivity" android:launchMode= "standa
-rd" />
+```kotlin
+<activity android:name=".ActSecondActivity" android:launchMode= "standard" />
 ```
 
 从清单文件中配置的Activity启动模式有：
@@ -2069,32 +2139,32 @@ rd" />
 
 Flag的部分取值为：
 
-*  **Intent.FLAG_ACTIVITY_NEW_TASK** 
+*  **`Intent.FLAG_ACTIVITY_NEW_TASK`** 
 
 等价于 launchMode="standard"
 
 
-*  **Intent.FLAG_ACTIVITY_SINGLE_TOP** 
+*  **`Intent.FLAG_ACTIVITY_SINGLE_TOP`** 
 
 等价于 launchMode="singleTop"
 
 
-*  **Intent.FLAG_ACTIVITY_CLEAR_TOP** 
+*  **`Intent.FLAG_ACTIVITY_CLEAR_TOP`** 
 
 栈内存在实例时，如果在栈顶，直接复用； **不在栈顶则清除原实例上方的全部，然后销毁该实例，接着再创建一个新的实例** 。
 
 复用逻辑与 launchMode="singleTask" 类似。但 singleTask 使用 onNewIntent 启用原实例；CLEAR_TOP 会先销毁原有实例然后重新创建。
 
 
-*  **Intent.FLAG_ACTIVITY_NO_HISTORY** 
+*  **`Intent.FLAG_ACTIVITY_NO_HISTORY`** 
 
 每次打开会新建实例，使用完毕(跳到其他页面)就会销毁，栈内不保存实例。——类似于阅后即焚的逻辑。
 
-*  **Intent.FLAG_ACTIVITY_CLEAR_TASK** 
+*  **`Intent.FLAG_ACTIVITY_CLEAR_TASK`** 
 
 会清空栈中现有的全部实例，然后新建该实例。需要配合 FLAG_ACTIVITY_NEW_TASK一起使用。示例如下：
 
-```
+```kotlin
 //如果不加后面的 or Intent.FLAG_ACTIVITY_NEW_TASK, 则 CELAR_TASK不生效
 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
 ```
@@ -2105,24 +2175,27 @@ Anko中为我们定义了代码设置Flag的更加便捷的方式——预置配
 这样，我们就不用再调用 intent.flag=xxx ,而直接在startActivity()函数中传参即可。
 
 示例如下：
-```
+
+```kotlin
 //使用Anko中提供的跳转函数。跳转时携带数据，并制定目标页面的启动模式
 val ankoIntent = intentFor<MyDemoActivity>(Pair("KeyName", "keyValue"))
 startActivity(ankoIntent.newTask())
 ```
 上述代码中，ankoIntent.newTask() 本质是Anko为Intent扩展的函数，内部帮我们配置了FLAG，其具体实现为：
-```
+
+```kotlin
 inline fun Intent.newTask(): Intent = apply { 
     addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) 
 }
 ```
 
 Flag和Anko中扩展函数的对应关系为：
-* Intent.FLAG_ACTIVITY_NEW_TASK —— newTask(）
-* Intent.FLAG_ACTIVITY_SINGLE_TOP —— singleTop()
-* Intent.FLAG_ACTIVITY_CLEAR_TOP —— clearTop()
-* Intent.FLAG_ACTIVITY_NO_HISTORY —— noHistory()
-* Intent.FLAG_ACTIVITY_CLEAR_TASK —— clearTask()
+
+* `Intent.FLAG_ACTIVITY_NEW_TASK` —— newTask(）
+* `Intent.FLAG_ACTIVITY_SINGLE_TOP` —— singleTop()
+* `Intent.FLAG_ACTIVITY_CLEAR_TOP` —— clearTop()
+* `Intent.FLAG_ACTIVITY_NO_HISTORY` —— noHistory()
+* `Intent.FLAG_ACTIVITY_CLEAR_TASK` —— clearTask()
 
 这些函数都定义在Anko库的 Intents.kt 文件中。
 
@@ -2130,7 +2203,8 @@ Flag和Anko中扩展函数的对应关系为：
 #### (4)、处理返回数据——startActivityForResult
 
 Anko中也扩展了startActivityResult方法，示例如下：
-```
+
+```kotlin
 val info = MessageInfo(et_request.text.toString(), DateUtil.nowTime) 
 //打开ActResponseActivity时携带请求码0，并携带数据。ActResponseActivity关闭时需返回数据
 startActivityForResult<ActResponseActivity>(0, "message" to info)
@@ -2148,7 +2222,8 @@ Anko库中为Context封装了一个alert函数，通过该函数可以极大的�
 `alert(消息内容, 消息标题){ ...按钮以及事件... }”`
 
 示例：
-```
+
+```kotlin
 alert("你确定要卸载么？", "亲爱的用户") {
     positiveButton("残忍卸载") { ... }
     negativeButton("我再想想") { ...} 
@@ -2189,6 +2264,7 @@ android:spinnerMode|Spinner的展示模式，有两种取值，dialog，dropdown
 
 
  **注意** 
+ 
 * android:entries 属性并不是Spinner 定义的，而是在AbsSpinner中定义的，因此同样继承自AbsSpinner 的Gallery也支持该属性
 
 * dropDownHorizontalOffset / dropDownVerticalOffset 两个属性必须手动的写完，AS不会自动补全
@@ -2200,6 +2276,7 @@ android:spinnerMode|Spinner的展示模式，有两种取值，dialog，dropdown
 
 展示Spinner的使用使用SpinnerAdapter。
 SpinnerAdapter的继承关系可以参考下图:
+
 ![](https://images.gitee.com/uploads/images/2018/1228/145642_372f60b6_930142.png "屏幕截图.png")
 
 这里单独说ArrayAdapter , 因为他里面有一个  setDropDownViewResource( resID ) , 参数是布局文件的id。
@@ -2234,7 +2311,7 @@ android 目前已经不再推荐使用Gallery，而是推荐用HorizontalScrollV
 
 如果需要在运行时动态的决定下拉列表的内容，或者需要对Spinner 的列表项进行定制，则可以使用Adapter为Spinner提供列表项。
 
-```
+```kotlin
 public class SpinnerActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -2280,7 +2357,8 @@ public class SpinnerActivity extends AppCompatActivity {
 ```
 
 activity_spinner.xml
-```
+
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -2325,7 +2403,8 @@ activity_spinner.xml
 ```
 
 定义在res目录下 values文件夹中 的arrays.xml
-```
+
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <string-array name="listViewEntries">
@@ -2351,14 +2430,16 @@ Dialog 模式的Spinner可以使用一个 TextView + 列表Dialog实现。
 
 
 Anko中提供了selector()函数，该函数可以用来创建一个带有列表项，并且具有条目事件的dialog。格式如下：
-```
+
+```kotlin
 selector(对话框标题, 备选列表项) {
      i -> 第i条目被选中时的事件处理 
 }
 ```
 
 示例代码：
-```
+
+```kotlin
 val satellites = listOf("金星", "木星", "水星", "火星", "土星", "地球") 
 tv_spinner.text = satellites[0]
 tv_spinner.setOnClickListener { 
@@ -2370,7 +2451,8 @@ tv_spinner.setOnClickListener {
 ```
 
 CnPeng:selector()源码：
-```
+
+```kotlin
 fun Context.selector(
         title: CharSequence? = null,
         items: List<CharSequence>,
@@ -2386,7 +2468,8 @@ fun Context.selector(
 }
 ```
 CnPeng:items()源码：
-```
+
+```kotlin
 override fun items(
     items: List<CharSequence>, 
     onItemSelected: (dialog: DialogInterface, index: Int) -> Unit
@@ -2419,7 +2502,8 @@ lateinit表示延迟初始化，放在var/val前面，表示属性不需要在�
 但是在适配器中 inflate 视图之后，通过填充起来的视图获取子View的时候，Anko库并没有主动实现findViewById操作。所以，我们就需要手动启用 LayoutContainer, 启用之后，获取填充视图中的子View时就可以直接调用子View的id了。
 
 启用方式 同 启用 @Parcelize 序列化注解，在 module的gradle文件的anroid节点进行配置：
-```
+
+```kotlin
 android{
     androidExtensions {
         experimental = true
@@ -2430,7 +2514,9 @@ android{
 ##### B：Kotlin下Rv的基本使用
 
 * ExtractRvAdapterActivity.kt
-```
+
+
+```kotlin
 //该界面的布局文件中仅有一个RV
 class ExtractRvAdapterActivity : AppCompatActivity() {
 
@@ -2456,7 +2542,9 @@ class ExtractRvAdapterActivity : AppCompatActivity() {
 ```
 
 * ExtractRvAdapter.kt
-```
+
+
+```kotlin
 /**
  * 作者：CnPeng
  * 时间：2018/12/28
@@ -2498,7 +2586,9 @@ class ExtractRvAdapter(private var itemList: MutableList<String>) : RecyclerView
 运用了模板类、高阶函数等内容。
 
 * CommonRvAdapter.kt
-```
+
+
+```kotlin
 /**
  * 作者：CnPeng
  * 时间：2018/12/28
@@ -2554,7 +2644,9 @@ class CommonRvAdapter<T>(var itemLayoutId: Int,
 ```
 
 * ExtractRvAdapterActivity.kt
-```
+
+
+```kotlin
 class ExtractRvAdapterActivity : AppCompatActivity() {
     lateinit var commonRvAdapter: CommonRvAdapter<String>
 
@@ -2620,7 +2712,9 @@ class ExtractRvAdapterActivity : AppCompatActivity() {
 ```
 
 * activity_extract_rv_adapter.xml
-```
+
+
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -2676,7 +2770,8 @@ CoordinatorLayout继承自ViewGroup, 其效果类似于相对布局, 控制子�
 
 
 activity_coordinator_layout_test.xml
-```
+
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -2707,7 +2802,8 @@ activity_coordinator_layout_test.xml
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 ```
 CoordinatorLayoutTestActivity.kt
-```
+
+```kotlin
 class CoordinatorLayoutTestActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -2744,7 +2840,8 @@ class CoordinatorLayoutTestActivity : AppCompatActivity() {
 * 使用ToolBar时，需要调用 setSupportActionBar(toolBar) 函数，让toolBar对象替代actionBar
 
 布局文件中的部分内容：
-```
+
+```kotlin
  <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
@@ -2760,8 +2857,9 @@ class CoordinatorLayoutTestActivity : AppCompatActivity() {
         app:titleTextColor="@color/white" />
 ```
  
-绑定及导航按钮的点击事件：       
-```
+绑定及导航按钮的点击事件：  
+     
+```kotlin
 class ToolBarDemoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -2789,22 +2887,24 @@ class ToolBarDemoActivity : AppCompatActivity() {
 
 
 #### (3)、AppBarLayout
+
 * AppBarLayout继承自LinearLayout
 * AppBarLayout可以实现协调滚动
-* AppBarLayout的LayoutParams提供了app:layout_scrollFlags 属性，用来控制子View的滚动行为
+* AppBarLayout 的 LayoutParams 提供了 `app:layout_scrollFlags` 属性，用来控制子View的滚动行为
 
-AppBarLayout+ToolBar+CoordinaterLayout+Rv 实现滚动传递(ToolBar随着RV的滚动可以滚入或滚出)时，有如下要点：
+AppBarLayout + ToolBar + CoordinaterLayout + Rv 实现滚动传递(ToolBar随着RV的滚动可以滚入或滚出)时，有如下要点：
+
 * AppBarLayout 中包裹 ToolBar
-* 被滚动方 ToolBar 定义 app:layout_scrollFlags 属性
-* 滚动事件触发者 RV 定义 app:layout_behavior="@string/appbar_scrolling_view_behavior,
+* 被滚动方 ToolBar 定义 `app:layout_scrollFlags` 属性
+* 滚动事件触发者 RV 定义 `app:layout_behavior="@string/appbar_scrolling_view_behavior`,
 
-app:layout_behavior的作用是将RV的滚动事件传递给 AppBarLayout
+`app:layout_behavior` 的作用是将RV的滚动事件传递给 AppBarLayout
 
 
- **A: APP：layout_scrollFlags取值说明**
+ **A: `APP：layout_scrollFlags`取值说明**
 
 取值|含义
---|--
+---|---
 scroll| 头部与主体一起滚动
 enterAlways|头部先与主体一起滚动，头部滚动完毕后，主体继续向上或向下滚动，需要与scroll同时声明
 enterAlwaysCollapsed|该标记与enterAlways的区别在于有折叠操作，而enterAlways没有，需要与srcoll/enterAlways同时声明
@@ -2814,8 +2914,9 @@ snap|用户手指松开时，系统自行判断接下来时
 
 示例如下：
 
-activity_app_bar_layout.xml
-```
+`activity_app_bar_layout.xml`
+
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -2849,7 +2950,8 @@ activity_app_bar_layout.xml
 ```
 
 AppBarLayoutActivity.kt 中初始化RV
-```
+
+```kotlin
 class AppBarLayoutActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -2875,7 +2977,10 @@ class AppBarLayoutActivity : AppCompatActivity() {
 可折叠工具栏，可以实现视察特效——展开和收起工具栏
 
 >该部分内容主要参考 [ **官方文档--CollapsingToolbarLayout** ](https://developer.android.com/reference/android/support/design/widget/CollapsingToolbarLayout)
+
+
 ##### A: 实现要点：
+
 * 根布局为 CoordinaterLayout
 * AppBarLayout中包裹 CollapsingToolBarLayout, CollapsingToolBarLayout中包裹 ToolBar
 * CollapsingToolBarLayout 定义scrollFlags
@@ -2935,7 +3040,7 @@ APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效
 在下面的示例代码中，为ToolBar设置一个红色背景之后，就能够清晰的得出上述结论！
 
 
-```
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -3002,8 +3107,10 @@ APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效
 
 完整示例代码在：[com.cnpeng.android2.a_book1.chapter7](https://github.com/CnPeng/CnPengAndroid2) 中
 
-* activity_scroll_alipay.xml
-```
+* `activity_scroll_alipay.xml`
+
+
+```kotlin
 <androidx.coordinatorlayout.widget.CoordinatorLayout 
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -3071,7 +3178,9 @@ APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效
 ```
 
 * life_pay.xml
-```
+
+
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="160dp"
@@ -3174,7 +3283,9 @@ APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效
 ```
 
 * toolbar_collapse.xml
-```
+
+
+```kotlin
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_height"
@@ -3227,7 +3338,8 @@ APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效
 </RelativeLayout>
 ```
 * toolbar_expand.xml
-```
+
+```kotlin
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/toolbar_height"
@@ -3292,7 +3404,9 @@ APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效
 ```
 
 * MainAlipayActivity.kt
-```
+
+
+```kotlin
 /**
  * CnPeng 2019/1/2 2:51 PM
  * 功用：仿支付宝首页顶部的滚动和折叠
@@ -3350,8 +3464,10 @@ class MainAlipayActivity : AppCompatActivity(), AppBarLayout.OnOffsetChangedList
 }
 
 ```
+
 * LifeItem.kt
-```
+
+```kotlin
 data class LifeItem(var pic_id: Int, var title: String) {
     companion object {
         val default: MutableList<LifeItem>
@@ -3371,7 +3487,8 @@ data class LifeItem(var pic_id: Int, var title: String) {
 PageTabStrip也是ViewPager指示器。使用时必须在xml中嵌套在ViewPager内部
 
 activity_view_pager.xml
-```
+
+```kotlin
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -3396,8 +3513,8 @@ activity_view_pager.xml
 ```
 
 ViewPagerActivity.kt
-```
 
+```kotlin
 class ViewPagerActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -3432,7 +3549,8 @@ class ViewPagerActivity : AppCompatActivity() {
 ```
 
 VpAdapter.kt
-```
+
+```kotlin
 class VpActAdapter(private var funcList: MutableList<AlipayBaseFuncItem>, val context: Context) : PagerAdapter() {
     private val itemViews = mutableListOf<View>()
 
@@ -3474,7 +3592,7 @@ class VpActAdapter(private var funcList: MutableList<AlipayBaseFuncItem>, val co
 ##### A: 基本使用
 重点参考下面代码中 获取Framgent实例的实现方法
 
-```
+```kotlin
 class VpChildFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
@@ -3515,7 +3633,8 @@ ViewPager+Fragment时，默认选中0索引Fragment，此时，该Fragment的声
 
 
 界面可见时，发送改变界面背景的广播：
-```
+
+```kotlin
 override fun setUserVisibleHint(isVisibleToUser: Boolean) {
     super.setUserVisibleHint(isVisibleToUser) 
     //ViewPager+Fragment中，默认选中的Fragment的声明周期中setUserVisibleHint先于onCreateView执行
@@ -3547,7 +3666,8 @@ override fun setUserVisibleHint(isVisibleToUser: Boolean) {
 * 适用于 开机启动、用户解锁、定时闹钟等APP未启动也可以接收的广播
 
 在清单文件中增加 <receiver> 节点：
-```
+
+```kotlin
  <receiver android:name=".receiver.BootCompletedReceiver" >
         <intent-filter>
             <action android:name="android.intent.action.BOOT_COMPLETED" />
@@ -3561,7 +3681,7 @@ override fun setUserVisibleHint(isVisibleToUser: Boolean) {
 
 * 适用于 分钟变化、网络切换、电量变化等APP启动之后才可以接收的广播
 
-```
+```kotlin
 timeReceiver = TimeReceiver() 
 //分钟变化的广播
 val filter = IntentFilter(Intent.ACTION_TIME_TICK)
@@ -3591,7 +3711,7 @@ setProgressViewOffset|第一个参数表示进度圈是否缩放，第二个参�
 
 * SwipeRefreshLayout只能有一个子View，并且其子View必须是：ScrollView、ListView、GridView、RecyclerView、 NestedScrollView等可以滚动的View
 
-```
+```kotlin
 refreshLayout.setColorSchemeResources(R.color.red, R.color.orange, R.color.green, R.color.blue)
 ```
 
@@ -3601,9 +3721,9 @@ refreshLayout.setColorSchemeResources(R.color.red, R.color.orange, R.color.green
 
 ### 1、SharedPreference
 
-
 #### (1)、SP读写工具类
-```
+
+```kotlin
 class Preference<T>(val context: Context, val name: String, val default: T) : ReadWriteProperty<Any?, T> {
 
     //通过属性代理初始化共享参数对象
@@ -3647,7 +3767,8 @@ class Preference<T>(val context: Context, val name: String, val default: T) : Re
 ```
 
 ReadWriteProperty.kt
-```
+
+```kotlin
 public interface ReadWriteProperty<in R, T> {
 
     public operator fun getValue(thisRef: R, property: KProperty<*>): T
@@ -3657,7 +3778,8 @@ public interface ReadWriteProperty<in R, T> {
 ```
 
 调用方：
-```
+
+```kotlin
 //以属性委托的形式存取变量值——此处为取。
 private var name: String by Preference(ctx, "name", "")
 private var age: Int by Preference(ctx, "age", 0)
@@ -3683,6 +3805,7 @@ name="zhangsan"
 
 
 ##### C: lazy
+
 被lazy修饰的内容表示， **只在第一次使用时执行初始化。** 
 
 
@@ -3700,7 +3823,6 @@ Kotlin中初始化的几种情况：
 * 函数体：位于大括号内，要等函数头执行完毕之后才执行，同时函数体只在函数头返回对象的命名空间中运行。也就是说，函数体语句可以直接调用该对象的方法，而无须指定头部对象的实例名称。
 
 
-
 #### (3)、记住密码功能
 略
 
@@ -3714,7 +3836,8 @@ Kotlin中初始化的几种情况：
 SQLiteDatabase是SQLite的数据库管理类，开发者可以在任意能获取到Context对象的地方获取数据库的实例。
 
 Java示例：
-```
+
+```kotlin
 //创建或者打开数据路
 SQLiteDatabase db = getApplicationContext().openOrCreateDatabase ("test
 .db", Context.MODE_PRIVATE, null);
@@ -3763,6 +3886,7 @@ getType|获取指定字段的字段类型。
 
 
 ##### B: SQLiteOpenHelper
+
 SQLiteDatabase只是提供了数据库的DDL(数据库定义)和DML(数据库管理)的操作，并未提供完整的业务处理流程。
 
 当需要处理业务流程时就需要使用SQLiteOpenHelper，它是数据库操作的辅助工具类。存取数据时，SQLiteOpenHelper的使用步骤如下：
@@ -3782,13 +3906,14 @@ ManagedSQLiteOpenHelper是Anko提供的数据库帮助类。 **主动封装了�
 
 
 Anko中数据库相关的内容在 anko-sqlite 包中，而 anko-common中并不包含，所以，还需要在gradle中导入：
-```
+
+```kotlin
 implemation "org.jetbrains.anko:anko-sqlite:$anko_version"
 ```
 
 ManagedSQLiteOpenHelper与SQLiteOpenHelper的用法基本一致，其区别在于：数据表的增删改查操作需要放在use代码块中。格式如下：
 
-```
+```kotlin
 use {
     //insert(...)
     //update(...)
@@ -3798,8 +3923,8 @@ use {
 ```
 
 UserDBHelper.kt
-```
 
+```kotlin
 class UserDBHelper(var context: Context, private var DB_VERSION: Int = CURRENT_VERSION) :
         ManagedSQLiteOpenHelper(context, DB_NAME, null, DB_VERSION) {
 
@@ -3977,7 +4102,8 @@ class UserDBHelper(var context: Context, private var DB_VERSION: Int = CURRENT_V
 ```
 
 UserInfo.kt
-```
+
+```kotlin
 data class UserInfo(var rowid: Long=0, var xuhao: Int=0, var name: String="", 
     var age: Int=0,var height: Long=0, var weight: Float=0f, 
     var married: Boolean=false,var update_time: String="", 
@@ -3986,7 +4112,8 @@ data class UserInfo(var rowid: Long=0, var xuhao: Int=0, var name: String="",
 ```
 
 调用帮助类存储的示例:
-```
+
+```kotlin
 var helper: UserDBHelper = UserDBHelper.getInstance(this) 
 //存储信息
 btn_save.setOnClickListener {
@@ -4039,7 +4166,7 @@ private fun readSQLite() {
 * 获取公共存储空间：Environment.getExternalStoragePublicDirectory
 * 获取当前APP的私有存储空间：getExternalFilesDir
 
-```
+```kotlin
 class FilePathActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) { 
         super.onCreate(savedInstanceState) 
@@ -4056,7 +4183,8 @@ class FilePathActivity : AppCompatActivity() {
 #### (2)、读写文本
 
 ##### A:Java版文本读写工具类
-```
+
+```kotlin
 public class FileUtil {
     //存
     public static void saveText(String path, String txt) {
@@ -4098,7 +4226,9 @@ readText|读取文本形式的文件
 readLines|按行读取文件内容，返回字符串List，文件有多少行，List中就有多少个元素
 
 ##### C:完整示例
-```
+
+
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -4161,7 +4291,7 @@ readLines|按行读取文件内容，返回字符串List，文件有多少行，
 
 ```
 
-```
+```kotlin
 package com.example.storage
 
 import java.io.File
@@ -4242,7 +4372,9 @@ class TextReadActivity : AppCompatActivity() {
 由于图像存储比较特殊，牵涉压缩格式和压缩质量，所以，依旧需要使用输出流进行处理。
 
 * 图片保存示例：
-```
+
+
+```kotlin
 fun saveImage(path: String, bitmap: Bitmap) {
     try {
         val file = File(path) 
@@ -4258,7 +4390,9 @@ fun saveImage(path: String, bitmap: Bitmap) {
 ```
 
 * 读取图片文件到内存——字节数组的形式实现
-```
+
+
+```kotlin
 //readBytes的形式读取文件内容
 val bytes = File(file_path).readBytes()
 //根据字节数组构建Bitmap对象
@@ -4266,20 +4400,22 @@ val bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
 ```
 
 * 读取图片文件到内存——输入流的形式实现
-```
+
+```kotlin
 val fis = File(file_path).inputStream() 
 val bitmap = BitmapFactory.decodeStream(fis)
 fis.close()
 ```
 
 * 读取图片文件到内存——直接传入路径的形式实现
-```
+
+```kotlin
 val bitmap = BitmapFactory.decodeFile(file_path)
 ```
 
 * 保存截屏的完整示例：
 
-```
+```kotlin
 //任意View都可以获取drawingCache对象
 val bitmap = ll_info.drawingCache
 val file_path = "$mPath${DateUtil.getFormatTime()}.png"
@@ -4294,7 +4430,7 @@ toast("图片已存入临时目录")
 
 Kotlin中提供了 **FileTreeWalk** 用来遍历文件目录。通过File(path).walk()可以获取该对象。
 
-```
+```kotlin
 var fileNames: MutableList<String> = mutableListOf()
 //在该目录下走一圈，得到文件目录树结构
 val fileTree: FileTreeWalk = File(mPath).walk()
@@ -4305,7 +4441,8 @@ fileTree.maxDepth(1) //需遍历的目录层级为1，即无需检查子目录
 ```
 
 如果需要过滤多种扩展名的文件类型，可以参考下列代码：
-```
+
+```kotlin
 var fileNames: MutableList<String> = mutableListOf() 
 val fileTree: FileTreeWalk = File(mPath).walk() 
 fileTree.maxDepth(1) 
@@ -4320,7 +4457,8 @@ fileTree.maxDepth(1)
 #### (1)、Application单例化
 
 ##### A:Java示例
-```
+
+```kotlin
 public class MainApplication extends Application {
     private static MainApplication mApp;
     
@@ -4336,7 +4474,8 @@ public class MainApplication extends Application {
 ```
 
 ##### B: 手动声明单例
-```
+
+```kotlin
 class MainApplication : Application() {
    override fun onCreate() {
        super.onCreate()
@@ -4359,7 +4498,7 @@ class MainApplication : Application() {
 
 Delegates提供了 notNull 的非空校验方法，使用它之后，开发者不需要手动校验非空。
 
-```
+```kotlin
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
@@ -4379,7 +4518,7 @@ class MainApplication : Application() {
 
 通过下面的自定义代理行为，可以校验重复赋值的行为。并接管委托属性的读写行为。
 
-```
+```kotlin
 class MainApplication : Application() {
 
     override fun onCreate() {
@@ -4424,7 +4563,8 @@ private class NotNullSingleValueVar<T>() : ReadWriteProperty<Any?, T> {
 #### (2)、选项菜单——OptionsMenu
 
 res/menu/menu_option.xml
-```
+
+```kotlin
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
@@ -4445,9 +4585,9 @@ res/menu/menu_option.xml
 ```
 
 
-activity_option_menu.xml
+`activity_option_menu.xml`
 
-```
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -4488,7 +4628,8 @@ activity_option_menu.xml
 ```
 
 MenuOptionActivity.kt
-```
+
+```kotlin
 class MenuOptionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -4541,7 +4682,8 @@ class MenuOptionActivity : AppCompatActivity() {
 ##### A: 页面跳转
 
 商品列表和购物车之间来回跳转时使用clearTop模式，防止多次向栈中添加内容。
-```
+
+```kotlin
 btn_shopping_channel.setOnClickListener {
      startActivity(intentFor<ShoppingChannelActivity>().clearTop())
 }
@@ -4558,7 +4700,7 @@ iv_cart.setOnClickListener {
 
 在 ShoppingCartActivity.kt 中
 
-```
+```kotlin
 companion object {
         private val TAG = "ShoppingCartActivity"
 
@@ -4620,7 +4762,7 @@ companion object {
 
 自定义CustomPagerTab，继承自 PagerTabStrip。实现通过属性改变字体颜色和大小的需求。
 
-```
+```kotlin
 //自定义视图务必要在类名后面增加“@JvmOverloads constructor”，因为布局文件中的自定义视图必须兼容Java
 class CustomPagerTab @JvmOverloads constructor(context: Context, attrs: AttributeSet?=null) : PagerTabStrip(context, attrs) {
     private var txtColor = Color.BLACK
@@ -4645,14 +4787,16 @@ class CustomPagerTab @JvmOverloads constructor(context: Context, attrs: Attribut
 
 
 #### (2)、测量尺寸
+
 完整的自定义视图步骤有三：
+
 * 定义构造函数，读取自定义属性并初始化
 * 重写测量函数 onMesure
 * 重写绘制函数：onDraw 或 dispatchDraw
 
 Java版自定义NoScrollListView
 
-```
+```kotlin
 public class NoScrollListView extends ListView {
     public NoScrollListView(Context context) {
          super(context);
@@ -4677,7 +4821,7 @@ public class NoScrollListView extends ListView {
 
 Kotlin版自定义NoScrollListView
 
-```
+```kotlin
 //自定义控件必须添加@JvmOverloads注解，因为有注解，所以constructor关键字也要显示出来
 class NoScrollListView @JvmOverloads constructor(context: Context, attr s: AttributeSet? =null, defStyle: Int=0) : ListView(context, attrs, defStyle) {
     
@@ -4703,7 +4847,7 @@ class NoScrollListView @JvmOverloads constructor(context: Context, attr s: Attri
 
 自定义圆角TextView:
 
-```
+```kotlin
 class RoundTextView @JvmOverloads constructor(context: Context, attrs: AttributeSet?=null, defStyle: Int=0) : TextView(context, attrs, defStyle) {
 
     override fun onDraw(canvas: Canvas) {
@@ -4720,7 +4864,8 @@ class RoundTextView @JvmOverloads constructor(context: Context, attrs: Attribute
 ```
 
 自定义圆角LinearLayout:
-```
+
+```kotlin
 class RoundLayout @JvmOverloads constructor(context: Context, attrs: AttributeSet?=null, defStyle: Int=0) : LinearLayout(context, attrs, defStyle) {
 
     override fun dispatchDraw(canvas: Canvas) {
@@ -4744,7 +4889,8 @@ Kotlin中声明Runnable对象有四种方式：内部类、匿名内部类、简
 ##### A: 内部类
 
 示例：点击之后每隔1秒计数一次
-```
+
+```kotlin
 private val handler = Handler()
 private var count = 0
 
@@ -4762,7 +4908,7 @@ handler.post(Counter())
 
 ##### B: 匿名内部类形式
 
-```
+```kotlin
 //使用关键字object占位，表示这是一个匿名内部类。
 private val counter = object : Runnable {
         override fun run() {
@@ -4780,7 +4926,7 @@ handler.post(counter)
 
 ##### C:简化类实例
 
-```
+```kotlin
 //简化类继承和方法重写的内容，
 private val counter = Runnable {
     count++
@@ -4795,7 +4941,7 @@ handler.post(counter)
 
 ##### D:匿名实例
 
-```
+```kotlin
 //写法1：
 handler.post(Runnable {
         count++
@@ -4826,7 +4972,8 @@ handler.postDelayed({
 
 
 示例：
-```
+
+```kotlin
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@android:id/background">
         <shape>
@@ -4841,7 +4988,7 @@ handler.postDelayed({
 </layer-list>
 ```
 
-```
+```kotlin
 class ProgressBarActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -4866,7 +5013,7 @@ class ProgressBarActivity : AppCompatActivity() {
 
 图形变化的同时显示对应的文字提示：
 
-```
+```kotlin
 class TextProgressBar @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,defStyle: Int = 0) : ProgressBar(context, attrs, defStyle) {
     var progressText = ""
     private var paint: Paint
@@ -4896,7 +5043,7 @@ class TextProgressBar @JvmOverloads constructor(context: Context, attrs: Attribu
 
 ##### 补充：通过TextView背景变更的形式，实现上述效果——Java版
     
-```
+```kotlin
  /**
      * 作者：CnPeng
      * 时间：2018/7/19 下午9:04
@@ -4933,7 +5080,7 @@ class TextProgressBar @JvmOverloads constructor(context: Context, attrs: Attribu
 ```
 #### (4)、实现进度条动画
 
-```
+```kotlin
 class ProgressAnimationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -5001,7 +5148,7 @@ build|构建通知对象。
 
 setSmallIcon必须调用，否则不显示通知
 
-```
+```kotlin
 class NotifySimpleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -5052,7 +5199,7 @@ class NotifySimpleActivity : AppCompatActivity() {
 * setWhen和setUsesChronometer不能同时调用,
 * setNumber和setContentInfo不能同时调用
 
-```
+```kotlin
 class NotifySimpleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -5151,7 +5298,7 @@ setSummaryText|设置大视图通知的摘要文本，位于底部按钮的上�
 
 ![大文字风格](https://images.gitee.com/uploads/images/2019/0103/210047_498dcdf1_930142.png "屏幕截图.png")
 
-```
+```kotlin
 class NotifyLargeActivity : AppCompatActivity() {
     private val styles = listOf("大文字风格", "大图片风格", "收件箱风格")
     private var type = 0
@@ -5256,6 +5403,7 @@ class NotifyLargeActivity : AppCompatActivity() {
 * 实现核心是Notification.Builder的setFullScreenIntent
 
 CnPeng 实测并不怎么好使...具体测试情况为：
+
 * AS自带模拟器——Android9系统中都不生效！！！一直以普通通知的形式显示
 * OppoR15 8.1系统中开启各种通知权限之后可以实现悬浮。
 * 小米6x 8.1（MiUI 10.2） 可以正常使用
@@ -5264,6 +5412,7 @@ CnPeng 实测并不怎么好使...具体测试情况为：
 
 
 ##### C: 锁屏通知
+
 * 锁屏界面依旧显示的通知消息。
 * 适用于5.0及以上版本
 * 核心是Notification.Builder的setVisibility
@@ -5279,8 +5428,7 @@ Notification.VISIBILITY_SECRET|不显示任何内容，包括图标
 
 ##### D:以上三种特殊通知的完整示例代码
  
-```
-
+```kotlin
 class NotifySpecialActivity : AppCompatActivity() {
     private val handler = Handler()
     private var count = 0
@@ -5481,6 +5629,7 @@ setOnClickPendingIntent|控件的点击事件
 实现这种通知布局时也是需要借助 RemoteViews。
 
 只是在修改默认大视图模式的视图时使用的是：
+
 * Notification的bigContentView属性，API16时加入
 * Notification.Builder中的setCustomBigContentView——适用于API24之后
 
@@ -5488,7 +5637,8 @@ setOnClickPendingIntent|控件的点击事件
 示例代码如下：
 
 notify_music.xml:
-```
+
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -5558,7 +5708,8 @@ notify_music.xml:
 ```
 
 notify_expand.xml:
-```
+
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -5642,7 +5793,7 @@ notify_expand.xml:
 
 NotifyCustomActivity.kt:
 
-```
+```kotlin
 class NotifyCustomActivity : AppCompatActivity() {
     lateinit var mLocaBraodCastManager: LocalBroadcastManager
 
@@ -5772,19 +5923,22 @@ class NotifyCustomActivity : AppCompatActivity() {
 #### (1)、普通方式启动服务
 
 基本写法：
-```
+
+```kotlin
 val intent = Intent(ctx, NormalService::class.java)
 startService(intent)
 ```
 
 不需要关闭的Service
-```
+
+```kotlin
 //使用了anko中的扩展函数
 startService<NormalService>("request_content" to et_request.text.toString())
 ```
 
 需要关闭的service
-```
+
+```kotlin
 //使用了anko的扩展函数——关闭service时也需要开启时的intent
 val intent = intentFor<NormalService> (Pair("request_content", et_request.text.toString()))
 startService(intent)
@@ -5800,7 +5954,8 @@ btn_stop.setOnClickListener {
 ```
 
 完整示例：
-```
+
+```kotlin
 class ServiceNormalActivity : AppCompatActivity() {
     var intentNormal: Intent? = null
 
@@ -5847,7 +6002,7 @@ class ServiceNormalActivity : AppCompatActivity() {
 }
 ```
 
-```
+```kotlin
 class NormalService : Service() {
 
     override fun onCreate() {
@@ -5876,7 +6031,7 @@ class NormalService : Service() {
 * bindService() ——绑定的方式开启服务
 * unbindService() ——绑定的形式关闭服务
 
-```
+```kotlin
 class ServiceBindActivity : AppCompatActivity() {
 
     private var mBindService: BindService? = null
@@ -5932,7 +6087,7 @@ class ServiceBindActivity : AppCompatActivity() {
 ```
 
 
-```
+```kotlin
 class BindService : Service() {
     private val mBinder = LocalBinder()
 
@@ -5961,12 +6116,15 @@ class BindService : Service() {
 ```
 
 #### (3)、两种开启方式的比较_CnPeng
+
 start方式开启的服务特点
+
 * 服务一旦开启，长期后台运行，服务和开启者(Activity)没有任何的关系，开启者退出了，服务还是继续在后台长期运行
 * 开启者(Activity)不可以调用服务里面的方法
 * 在系统设置界面里面可以观察到
 
  bind的方式开启服务
+
 * 如果开启者(Activity)退出了，服务也会跟着挂掉
 * 开启者(Activity)可以间接的利用中间人调用服务里面的方法
 * 在系统设置界面看不到的.
@@ -5975,10 +6133,10 @@ start方式开启的服务特点
 绑定方式开启的服务的生命周期 :
 
 * onCreate  onBind  onUnBind  onDestroy  ,都只是一次的操作
-
 * 绑定方式开启的服务中虽然也有onStart  和 onStartCommond ,但因为不是start方式开启,所以不会调用
 
-Start方式开启的服务的声明周期:
+Start方式开启的服务的生命周期:
+
 * OnCreate  onStart/onStartCommond  onDestroy  ,onstart/onStartCommond可以复用
 
 
@@ -6008,9 +6166,9 @@ stopForeground|停止前台运行。true时清除通知，false则不清除
 
 示例如下：
 
-activity_notify_service.xml
+`activity_notify_service.xml`
 
-```
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6041,7 +6199,7 @@ activity_notify_service.xml
 
 NotifyServiceActivity.kt
 
-```
+```kotlin
 class NotifyServiceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -6066,8 +6224,10 @@ class NotifyServiceActivity : AppCompatActivity() {
     }
 }
 ```
+
 MusicService.kt
-```
+
+```kotlin
 class MusicService : Service() {
 
     private val mBinder = LocalBinder()
@@ -6200,18 +6360,21 @@ class MusicService : Service() {
 #### (2)、振动器--vibrate
 
 使用震动器时首先需要在清单文件中声明权限：
-```
+
+```kotlin
 <uses-permission android:name="android.permission.VIBRATE" />
 ```
 
 触发震动的基本写法
-```
+
+```kotlin
 val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
 vibrator.vibrate(3000)
 ```
 
 为了方便调用可以给Context扩展函数：
-```
+
+```kotlin
 //扩展该函数之后，外部只需要通过context对象调用getVibrator即可
 fun Context.getVibrator() : Vibrator {
    return getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -6222,7 +6385,8 @@ context.getVibrator().vibrate(3000)
 ```
 
 还可以为Context扩展属性：
-```
+
+```kotlin
 //为Context扩展属性，同时为该属性扩展默认的get方法，外部调用该属性时本质是调用了get()
 val Context.vibrator : Vibrator
             get() = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -6233,7 +6397,7 @@ context.vibrator.vibrate(3000)
 
 其他扩展示例：
 
-```
+```kotlin
 val Context.notifier: NotificationManager
     get() = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
@@ -6281,7 +6445,7 @@ val Context.audio: AudioManager
 
 自定义线程类示例：
 
-```
+```kotlin
 private inner class PlayThread : Thread() {
     override fun run() {
      //...
@@ -6290,7 +6454,8 @@ private inner class PlayThread : Thread() {
 ```
    
 简化版线程
-```
+
+```kotlin
 Thread {
     //􏳨􏳩􏳪􏳫􏳬􏳭􏳮􏳯􏳰􏳱􏳲􏳳􏳴 
 }.start()
@@ -6298,7 +6463,8 @@ Thread {
 
 
 随书示例代码：
-```
+
+```kotlin
 class MessageActivity : AppCompatActivity() {
     private var bPlay = false
     private val BEGIN = 0 //开始播放新闻
@@ -6396,7 +6562,8 @@ class MessageActivity : AppCompatActivity() {
 ##### A: 水平ProgressDialog
 
 Java版：
-```
+
+```kotlin
 ProgressDialog dialog = new ProgressDialog(this); 
 dialog.setTitle("请稍候");
 dialog.setMessage("正在努力加载。。。"); dialog.setMax(100);
@@ -6405,7 +6572,8 @@ dialog.show();
 ```
 
 Kotlin版——Anko
-```
+
+```kotlin
 dialog = indeterminateProgressDialog("正在努力加载页面", "请稍候")
 dialog!!.show()
 ```
@@ -6415,7 +6583,8 @@ dialog!!.show()
 ##### B: 圆圈类型的进度
 
 Java版本
-```
+
+```java
 ProgressDialog dialog = new ProgressDialog(this);
 dialog.setTitle("请稍候"); 
 dialog.setMessage("正在努力加载");
@@ -6424,7 +6593,8 @@ dialog.show();
 ```
 
 Kotlin版本——Anko
-```
+
+```kotlin
 dialog = progressDialog("正在努力加载页面", "请稍候")
 dialog!!.show()
 ```
@@ -6432,17 +6602,20 @@ dialog!!.show()
 #### （3）、异步任务doAsync 和 doAsyncResult
 
 ##### A: doAsync
+
 * doAsync 用来标识牵涉界面交互的子线程
 * uiThread 用来标识将子线程中的数据传递给主线程
 
 ##### B: doAsyncResult
 有些时候，App需要启动多个线程，然后在代码中对这些线程对象进行调度，从而动态的控制每个线程的状态。此时需要使用 doAsyncResult。
+
 * 有返回值，返回的就是异步线程对象。通过调用该线程对象的相应方法可以人为干预线程的运行功能。
 
 ##### C : 完整示例代码
 
 注意：doAsyncResult 那一块示例好像有问题。点击《红楼梦》 之后dialog会一直卡在那里，直到延时任务跑完。
-```
+
+```kotlin
 class AsyncTaskActivity : AppCompatActivity() {
     private lateinit var dialog: ProgressDialog
     private val books = listOf("三国演义", "西游记", "红楼梦")
@@ -6530,7 +6703,9 @@ class AsyncTaskActivity : AppCompatActivity() {
 #### (1)、移动数据JSON格式
 
 Android自带Json格式的处理工具包，主要提供了 JsonObject 和 JsonArray
+
 ##### A: JsonObject
+
 常用函数解析
 
 函数|含义
@@ -6558,7 +6733,8 @@ put|向JsonArray中添加一个JsonObject对象
 ##### C: Json串构造和解析示例
 
 使用JsonObject / JsonArray 手动构造和解析 
-```
+
+```kotlin
 class JsonParseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -6619,7 +6795,8 @@ class JsonParseActivity : AppCompatActivity() {
 谷歌提供了GSON用来实现JSON串的自动解析。
 
 使用Gson时首先需要在 module的build.gradle文件中新增依赖
-```
+
+```kotlin
     implementation "com.google.code.gson:gson:2.8.2"
 ```
 
@@ -6632,7 +6809,8 @@ fromJson| 把Json串转换为数据对象。
  fromJson的调用格式|fromJson(json串, 数据类名::class.java)
 
 ##### B: 转换示例
-```
+
+```kotlin
 class JsonConvertActivity : AppCompatActivity() {
     private val user = UserInfo(name="阿四", age=25, height=160L, weight=45.0f, married=false)
     //把数据类的对象直接转换成json格式
@@ -6656,12 +6834,14 @@ class JsonConvertActivity : AppCompatActivity() {
 }
 ```
 UserInfo.kt 数据类
-```
+
+```kotlin
 data class UserInfo(var name: String="", var age: Int=0, var height: Long=0L, var weight: Float=0F, var married: Boolean=false)
 ```
 #### (3)、HTTP接口调用
 
 如果直接使用HttpURLConnection 调用Http接口，需要考虑如下因素：
+
 * HTTP的请求方式是什么？Post、Put、Get、Delete
 * HTTP的连接超时时间是多少？响应超时时间是多少？
 * HTTP的头部语言和浏览器信息该怎么设置？
@@ -6685,8 +6865,8 @@ readBytes|获取二进制形式的应答数据。如图片、音频等大文件
 网络访问是一个耗时操作，所以需要放到单独的线程中，这样就需要借助 doAsync 和 uiThread
 
 ##### B: 示例: 根据经纬度获取详细地址——核心代码
-```
 
+```kotlin
     private val mapsUrl = "http://maps.google.cn/maps/api/geocode/json?latlng={0},{1}&sensor=true&language=zh-CN"
 
     //在主线程中把定位信息连同地址信息都打印到界面上
@@ -6725,7 +6905,8 @@ readBytes|获取二进制形式的应答数据。如图片、音频等大文件
 ##### C: 完整示例代码
 
 **注意:** 下列示例代码中如果运行在6.0以上系统，需要先添加手动申请定位、网络权限的代码
-```
+
+```kotlin
 class HttpRequestActivity : AppCompatActivity() {
     private var mLocation = ""
     private val handler = Handler()
@@ -6823,7 +7004,8 @@ class HttpRequestActivity : AppCompatActivity() {
 ```
 
 System.kt 工具类
-```
+
+```kotlin
 //获取定位管理器
 val Context.locator: LocationManager
     get() = getSystemService(Context.LOCATION_SERVICE) as LocationManager
@@ -6842,7 +7024,8 @@ val Context.criteria: Criteria
 ```
 
 清单文件中添加权限
-```
+
+```kotlin
  <!-- 互联网 -->
     <uses-permission android:name="android.permission.INTERNET" />
 <!-- 定位 -->
@@ -6852,13 +7035,15 @@ val Context.criteria: Criteria
 #### (4)、HTTP图片获取
 
 ##### A: 实现思路:
+
 * 通过URL类构建地址对象
 * 然后在 doAsync中调用 readBytes 得到图片的字节数组
 * 利用 BitmapFactory的decodeByteArray将图片字节数组转换为位图对象
 * 利用File对象的writeBytes 可以根据图片的字节数组保存为本地图片
 
 ##### B: 示例——动态获取图片验证码
-```
+
+```kotlin
 class HttpImageActivity : AppCompatActivity() {
     private val imageUrl = "http://222.77.181.14/ValidateCode.aspx?r="
 
@@ -6903,6 +7088,7 @@ class HttpImageActivity : AppCompatActivity() {
 #### (1)、下载管理器 DownloadManager
 
 URL 对象的 readBytes 可以方便的获取小图片(如验证码图片)，但是有诸多限制，如:
+
 * 无法断点续传
 * 只能转码为图片，难以转为其他文件
 * 不是真正意义上的下载，无法设置下载参数
@@ -6912,6 +7098,7 @@ Android从2.3(API 9) 开始提供专门的下载工具——DownLoadManager，�
 使用 DownLoadManager 时可以分为三个步骤：构建下载请求，执行下载操作，查询下载进度。
 
 ##### A： 构建下载请求——Request
+
 要想使用下载功能，首先需要构建一个下载请求。请求中指明从哪里下载、下载参数是什么、下载的文件保存到哪里等信息。这个下载请求就时DownLoadManager内部的Request。该类的常用函数如下：
 
 * Request常用函数
@@ -6940,12 +7127,13 @@ NETWORK_BLUETOOTH |蓝牙
 
 取值|含义
 ---|---
-VISIBILITY_HIDEEN|隐藏
-VISIBILITY_VISIBLE|下载时可见，下载完成后消失
-VISIBILITY_VISIBLE_NOTIFY_COMPLETED|下载进行时和完成后都可见
-VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION|只有下载完成后可见
+`VISIBILITY_HIDEEN`|隐藏
+`VISIBILITY_VISIBLE`|下载时可见，下载完成后消失
+`VISIBILITY_VISIBLE_NOTIFY_COMPLETED`|下载进行时和完成后都可见
+`VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION`|只有下载完成后可见
 
 ##### B: 进行下载操作
+
 构建完下载请求之后才能进行DownloadManager的下载操作。主要函数包括：
 
 函数|含义
@@ -6958,6 +7146,7 @@ getMimeTypeForDownloadedFile|获取已下载文件的媒体类型
 query|根据查询请求获取符合条件的结果游标集
 
 ##### C: 查询下载进度——Query
+
 虽然下载进度可以在通知栏中查看，但APP本身也想监测进度时，可以通过DownloadManager 的 query() 函数实现。该函数接收一个 Query 对象，返回结果集的游标 Cursor ，该游标集对象中包含完整的下载任务信息。
 
 * Query类的常用函数
@@ -6981,19 +7170,21 @@ STATUS_FAILED|失败
 
 DownlaodManager的下载字段|含义
 ---|---
-COLUMN_LOCAL_FILENAME|下载文件的本地存储路径（已废弃）
-COLUMN_LOCAL_URI|下载文件的本地存储路径(正常使用，未废弃)
-COLUMN_MEDIA_TYPE|下载文件的媒体类型
-COLUMN_TOTAL_SIZE_BYTES|下载文件的总大小
-COLUMN_BYTES_DOWNLOADED_SO_FAR|已下载文件的大小
-COLUMN_STATUS| 下载状态，取值为前一个表中的内容
+`COLUMN_LOCAL_FILENAME`|下载文件的本地存储路径（已废弃）
+`COLUMN_LOCAL_URI`|下载文件的本地存储路径(正常使用，未废弃)
+`COLUMN_MEDIA_TYPE`|下载文件的媒体类型
+`COLUMN_TOTAL_SIZE_BYTES`|下载文件的总大小
+`COLUMN_BYTES_DOWNLOADED_SO_FAR`|已下载文件的大小
+`COLUMN_STATUS`| 下载状态，取值为前一个表中的内容
 
-Android7.0之后增强了文件访问权限，DownloadManager.COLUMN_LOCAL_FILENAME 被废弃。所以，在7.0以上的手机中访问该字段会触发 java.lang.SecurityException 异常。此时，如果需要获取下载文件的路径，需要使用 DownloadManager.COLUMN_LOCAL_URI
+Android7.0之后增强了文件访问权限，`DownloadManager.COLUMN_LOCAL_FILENAME` 被废弃。所以，在7.0以上的手机中访问该字段会触发 java.lang.SecurityException 异常。此时，如果需要获取下载文件的路径，需要使用 `DownloadManager.COLUMN_LOCAL_URI`
 
 #### (2)、下载相关的三个广播
+
 此外，系统的下载服务还提供了三种下载事件，开发者可以通过监听对应的广播消息从而进行相应的处理。这三种下载事件的处理过程说明如下：
 
 ##### A: 下载完成
+
 下载完成时系统会发出：`DownloadManager.ACTION_DOWNLOAD_COMPLETE `广播，该广播对应的具体值为：`"android.intent.action.DOWNLOAD_COMPLETE"`。
 
 所以，可以注册一个该广播的接收器，判断当前下载任务是否已经完成。
@@ -7011,7 +7202,9 @@ Android7.0之后增强了文件访问权限，DownloadManager.COLUMN_LOCAL_FILEN
 
 ###  (3): 下载示例： 
 * activity_download_apk.xml
-```
+
+
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7064,8 +7257,11 @@ Android7.0之后增强了文件访问权限，DownloadManager.COLUMN_LOCAL_FILEN
 ```
 
 * DownloadApkActivity.kt
+
+
 **注意：**个别手机不显示通知栏的下载进度。实测 小米6X 可以显示。oppoR15 不显示，模拟器 Android9 不显示。
-```
+
+```kotlin
 class DownloadApkActivity : AppCompatActivity() {
     private val apkNames = listOf(
             "支付宝", "微信", "手机QQ")
@@ -7156,7 +7352,9 @@ class DownloadApkActivity : AppCompatActivity() {
 }
 ```
 * 清单文件中注册两个广播
-```
+
+
+```kotlin
   <!-- 注册下载完成事件的广播接收器 -->
         <receiver android:name=".DownloadApkActivity$DownloadCompleteReceiver">
             <intent-filter>
@@ -7173,7 +7371,7 @@ class DownloadApkActivity : AppCompatActivity() {
 
 #### (4)、自定义文本进度圈
 
-```
+```kotlin
 //自定义视图务必要在类名后面增加“@JvmOverloads constructor”，因为布局文件中的自定义视图必须兼容Java
 class TextProgressCircle @JvmOverloads constructor(private val mContext: Context, attr: AttributeSet? = null) : View(mContext, attr) {
 
@@ -7266,7 +7464,7 @@ class TextProgressCircle @JvmOverloads constructor(private val mContext: Context
 ```
 #### (5)、页面上动态显示下载进度
 
-```
+```kotlin
 class DownloadImageActivity : AppCompatActivity() {
     private var imagePath: String = ""
     private var downloadId: Long = 0
@@ -7387,7 +7585,8 @@ class DownloadImageActivity : AppCompatActivity() {
 ```
 
 **注意**：在调用  down.setNotificationVisibility(Request.VISIBILITY_HIDDEN)  隐藏通知栏的下载进度时，需要申请权限：
-```
+
+```kotlin
  <!-- 下载时不提示通知栏 -->
 <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
 ```
@@ -7416,7 +7615,9 @@ ContentProvider作为中间的接口，并不直接操作数据，而是通过SQ
 
 ##### B: 示例代码
 * 数据库帮助类——UserDBHelper.kt
-```
+
+
+```kotlin
 class UserDBHelper(var context: Context, private var DB_VERSION: Int = CURRENT_VERSION) : ManagedSQLiteOpenHelper(
         context, DB_NAME, null, DB_VERSION) {
     companion object {
@@ -7506,7 +7707,9 @@ class UserDBHelper(var context: Context, private var DB_VERSION: Int = CURRENT_V
 ```
 
 * 用户信息定义类——UserInfoContent.kt
-```
+
+
+```kotlin
 class UserInfoContent : BaseColumns {
     companion object {
         // 这里的名称必须与AndroidManifest.xml里的android:authorities保持一致
@@ -7532,7 +7735,7 @@ class UserInfoContent : BaseColumns {
 
 * 内容提供者——UserInfoProvider.kt
 
-```
+```kotlin
 class UserInfoProvider : ContentProvider() {
     lateinit var userDB: UserDBHelper
 
@@ -7606,7 +7809,7 @@ class UserInfoProvider : ContentProvider() {
 ```
 * 清单文件中进行注册
 
-```
+```kotlin
 <!-- 注册用户信息的内容提供器 -->
         <provider
             android:name=".provider.UserInfoProvider"
@@ -7633,9 +7836,10 @@ selectionArgs|字符串数组，指定查询条件中的参数值列表
 sortOrder|字符串类型，指定查询结果的排序条件
 
 ##### B: 示例
+
 * activity_content_provider.xml
 
-```
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7712,7 +7916,7 @@ sortOrder|字符串类型，指定查询结果的排序条件
 
 * ContentProviderActivity.kt
 
-```
+```kotlin
 class ContentProviderActivity : AppCompatActivity() {
     private var userCount = ""
     private var userResult = ""
@@ -7795,7 +7999,7 @@ class ContentProviderActivity : AppCompatActivity() {
 
 * ViewUtils.kt
 
-```
+```kotlin
 object ViewUtil {
 
     fun getMaxLength(et: EditText): Int {
@@ -7843,7 +8047,7 @@ object ViewUtil {
 
 * CommunicationUtil.kt
 
-```
+```kotlin
 object CommunicationUtil {
     private val TAG = "CommunicationUtil"
     private val mContactUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -8032,8 +8236,9 @@ object CommunicationUtil {
     }
 }
 ```
-* activity_content_resolver.xml
-```
+* `activity_content_resolver.xml`
+
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8097,7 +8302,8 @@ object CommunicationUtil {
 ```
 
 * ContentResolverActivity.kt
-```
+
+```kotlin
 class ContentResolverActivity : AppCompatActivity() {
     private var contactCount = ""
     private var contactResult = ""
@@ -8190,7 +8396,7 @@ notifyChange|通知内容观察者数据发生变化
 
 * activity_content_observer.xml
 
-```
+```kotlin
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8218,7 +8424,7 @@ notifyChange|通知内容观察者数据发生变化
 
 * ContentObserverActivity.kt 
 
-```
+```kotlin
 class ContentObserverActivity : AppCompatActivity() {
     private var mObserver: SmsGetObserver? = null
 
@@ -8347,7 +8553,7 @@ Anko库中封装了 `buildSpanned` 函数，在该函数内部调用格式为 `a
 
 * 基本写法：
  
-```
+```kotlin
 val str: Spanned = buildSpanned {
       //粗体
       append("为", StyleSpan(Typeface.BOLD)) 
@@ -8364,7 +8570,7 @@ val str: Spanned = buildSpanned {
 
 * 简化写法
 
-```
+```kotlin
 val str: Spanned = buildSpanned { 
       append("为", Bold)
       append("人民", RelativeSizeSpan(1.5f)) 
@@ -8390,7 +8596,7 @@ IamgeSpan|无|文本替换为图片
 
 * 完整示例代码
 
-```
+```kotlin
 class SpannableActivity : AppCompatActivity() {
     private val spannables = listOf("增大字号", "加粗字体", "前景红色", "背景绿色", "下划线", "表情图片", "Anko自定义")
     private val text = "为人民服务"
@@ -8444,7 +8650,7 @@ class SpannableActivity : AppCompatActivity() {
 
 #####  A: 从服务端请求版本信息
 
-```
+```kotlin
  btn_need_request.setOnClickListener {
             val pi = packageManager.getPackageInfo(packageName, 0)
             //开启分线程执行后端接口调用
@@ -8460,7 +8666,7 @@ class SpannableActivity : AppCompatActivity() {
 
 ##### B:  扩展SpannableString工具类
 
-```
+```kotlin
 //字符串中的关键语句用指定样式高亮显示
 fun String.highlight(key: String, style: CharacterStyle): SpannableString {
     val spanText = SpannableString(this)
@@ -8474,7 +8680,7 @@ fun String.highlight(key: String, style: CharacterStyle): SpannableString {
 ##### C: alert中显示SpannableString
 Anko中扩展的alert 函数中 title 和 message 只能接受string，而SpannableString和String时两个类型，所以，可以再扩展一个接受 charsequence 的alert
 
-```
+```kotlin
 //Anko自带的alert只支持String类型的文本，不支持富文本的CharSequence类型，
 //故此处重写alert方法，使之支持可变字符串SpannableString
 fun Context.alert(
@@ -8491,7 +8697,7 @@ fun Context.alert(
 ##### D: 如何获取手机中的APK及其信息
 通过PackageManager的`getPackageArchiveInfo() `函数可以获取相关信息，包括包名、版本号等
 
-```
+```kotlin
 //检测本地是否已经有同版本的apk
     private fun getLocalPath(vc: VersionCheck): String {
         var local_path = ""
@@ -8516,7 +8722,7 @@ fun Context.alert(
 ```
 上面代码中VersionCheck类的定义如下：
 
-```
+```kotlin
 
 data class VersionCheck(var app_name: String="", var package_name: String="",
                         var version_code: Int=0, var version_name: String="",
@@ -8528,7 +8734,7 @@ data class VersionCheck(var app_name: String="", var package_name: String="",
 ##### E: APK下载的操作过程
 如果本地已有安装包，则直接进行操作；如果不存在，则从网络下载安装包。
 
-```
+```kotlin
   //开始执行升级处理。如果本地已有安装包，则直接进行操作；如果不存在，则从网络下载安装包。
     private fun startInstallApp(vc: VersionCheck) {
         appVc = vc
@@ -8558,7 +8764,7 @@ data class VersionCheck(var app_name: String="", var package_name: String="",
 
 ##### F :完整示例代码
 
-```
+```kotlin
 class AutoUpdateActivity : AppCompatActivity() {
     private val checkUrl = "http://192.168.0.212:8080/HttpTest/checkUpdate";
     //private val checkUrl = "http://192.168.1.5:8080/HttpTest/checkUpdate"
