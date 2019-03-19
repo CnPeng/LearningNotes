@@ -1,65 +1,171 @@
-# LearningNotes
-
->最近更新日期：2019-02-28
-
-
-LearningNotes 是个人综合性学习笔记。
-
-涵盖 软件编程、硬件维护、多媒体、文学、历史等诸多方面。总之，看到啥，学到啥都会记录笔记总结。
+# DataBinding手册
 
 
 
+基于 [Data Binding Library 官方指南](https://developer.android.com/topic/libraries/data-binding) 翻译整理。
 
-## 一、个人其他连链
+目录结构：
 
-我的微信公众号：CnPeng
+| 章节 | 官方文档 |
+| :--- | :--- |
+| 一、概览 | [data-binding](https://developer.android.com/topic/libraries/data-binding) |
+| 二、入门 | [data-binding/start](https://developer.android.com/topic/libraries/data-binding/start) |
+| 三、布局和绑定表达式 | [data-binding/expressions](https://developer.android.com/topic/libraries/data-binding/expressions) |
+| 四、可观察的数据对象 | [data-binding/observability](https://developer.android.com/topic/libraries/data-binding/observability) |
+| 五、生成的绑定类 | [data-binding/generated-binding](https://developer.android.com/topic/libraries/data-binding/generated-binding) |
+| 六、绑定适配器 | [data-binding/binding-adapters](https://developer.android.com/topic/libraries/data-binding/binding-adapters) |
+| 七、将布局视图绑定到架构组件 | [data-binding/architecture](https://developer.android.com/topic/libraries/data-binding/architecture) |
+| 八、双向绑定 | [data-binding/two-way](https://developer.android.com/topic/libraries/data-binding/two-way) |
 
-[我的简书（持续更新）:https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
+### 一、概览 <a id="1"></a>
 
-[我的CSDN（停更）：http://blog.csdn.net/north1989](http://blog.csdn.net/north1989)
+#### 1、DataBinding 基本介绍
 
+DataBinding 库可以让我们以非编码的形式将布局和数据进行绑定。
 
-## 二、详细目录
+通常情况下， 我们把数据绑定到布局文件时，需要借助 UI 框架层的一些函数。比如，下面的代码通过 `findViewById()` 获取 TextView 控件，然后把 viewModel 对象中的 userName 设置给该控件。
 
-> 2019 年以前的内容暂时不补充目录，时间空闲了再补。
+* kotlin版代码
 
+```kotlin
+findViewById<TextView>(R.id.sample_text).apply {
+    text = viewModel.userName
+}
+```
 
-### 1、Android
+* java版代码
 
+```java
+TextView textView = findViewById(R.id.sample_text);
+textView.setText(viewModel.getUserName());
+```
 
-### 3、kotlin
+下面的示例代码，则展示了如何使用 DataBinding 将数据直接在布局文件中绑定给对应的控件。通过下面的这种方式，我们省略了上面示例中的 java/Kotlin 代码。注意 `@{ }` 是 DataBinding 的固定格式，花括号内部是具体需要绑定的数据内容。
 
-标题|类别|更新时间|状态
----|---|---|---
-[传智Kotlin基础-张泽华](03_Kotlin/01_书籍/01_Kotlin/2、传智Kotlin基础-张泽华.md)|视频笔记|20190228|完结
-[查看kotlin编译后的Java字节码](03_Kotlin/02_环境搭建/02、查看kotlin编译后的Java字节码.md)|知识点总结|20190213|完结
+```kotlin
+<TextView
+    android:text="@{viewmodel.userName}" />
+```
 
-### 4、Python
+#### 2、如何使用 DataBinding 库
 
-标题|类别|更新时间|状态
----|---|---|---
-[02、教孩子学编程_python](04_Python/02、教孩子学编程_python.md) | 读书笔记|20190213|完结
+下面介绍一下我们将要学习的 DataBidning 的内容。
 
-### 5、Go
+**\(1\)、入门**
 
-标题|类别|更新时间|状态
----|---|---|---
-[20小时入门学会go语言(黑马)](05_Go/01_书籍和教程/01_%2020小时入门学会go语言(黑马).md)| 视频笔记 | 20190221 | 完结(不包含Day7聊天服务器内容)
+主要介绍如何基于 AndroidStudio 搭建 DataBinding 的开发环境。
 
-### 8、IOS
+**\(2\)、布局和绑定表达式**
 
-标题|类别|更新时间|状态
----|---|---|---
-[Swift权威编程指南_第二版](08_IOS/01_Swift/Swift权威编程指南-笔记.md)|读书笔记|20190131|完结
-[精通IOS开发_第八版](08_IOS/02_IOS/精通IOS开发V8.md)|读书笔记|20190213|未完结
+绑定表达式能够让我们将 数据变量 和 view 直接进行关联。然后 DataBinding 库会自动生成关联二者时所需的类（classes）。
 
+DataBinding 库提供了可以让我们在布局文件中使用的 `import`、`variable`、`include` 属性, 这些属性用来声明绑定到 View 的数据及其类型。 这些属性的父节点为 `data`, 而 `data` 的父节点为 `layout`, `layout` 的另一个子节点就是 View 的根节点。示例如下:
 
-## 三、其他
+```kotlin
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.myapp.data.ViewModel" />
+    </data>
 
-如果你觉得这个仓库中的某个内容对你有用，不妨打赏一下。
+    <ConstraintLayout... >
+         <!-- View/ViewGroup 的根节点 -->
+    </ConstraintLayout... >
+</layout>
+```
 
-**一块两块不嫌少，千儿八百有点多。** 谢谢O(∩_∩)O哈！
+**\(3\)、可观察的数据对象**
 
-![k7CSBV.png](https://s2.ax1x.com/2019/02/28/k7CSBV.png) ![k79X1s.png](https://s2.ax1x.com/2019/02/28/k79X1s.png)
- 
+所谓可观察的数据对象，就是当数据发生变化时，能够自动通知布局文件进行刷新。这就类似于回调或监听器的作用。
+
+DataBinding 库提供了一些类和函数，这些类和函数能够实现对数据变化的监听，进而由该库自动实现布局文件的刷新。DataBinding 库可以实现对 对象（object）、字段（field）、集合（collection）的监听。
+
+**\(4\)、生成的绑定类**
+
+DataBinding 库会自动生成绑定 数据变量 和 View 时所需要的绑定类（binding classes）。我们也可以自定义这个绑定类。
+
+**\(5\)、绑定适配器**
+
+布局文件中使用的每一个绑定表达式都有一个对应的绑定适配器（bingding adapter）。该绑定适配器内部实现了属性或者监听器与视图的绑定。比如，绑定适配器内部会调用 `setText()` 为 TextView 设置 `android:text` 的属性值，或者调用 `setOnClickListener()` 设置点击监听。
+
+[`android.databinding.adapters`](https://android.googlesource.com/platform/frameworks/data-binding/+/studio-master-dev/extensions/baseAdapters/src/main/java/androidx/databinding/adapters) 包中定义了常用的一些绑定适配器。当然了，我们也可以根据需要自定义一些绑定适配器。示例如下：
+
+* kotlin 版示例
+
+```kotlin
+@BindingAdapter("app:goneUnless")
+fun goneUnless(view: View, visible: Boolean) {
+    view.visibility = if (visible) View.VISIBLE else View.GONE
+}
+```
+
+* java 版示例
+
+```java
+@BindingAdapter("app:goneUnless")
+public static void goneUnless(View view, Boolean visible) {
+    view.visibility = visible ? View.VISIBLE : View.GONE;
+}
+```
+
+**\(6\)、将布局视图绑定到架构组件**
+
+Android Support 库中包含的 [`Architecture Components`](https://developer.android.com/topic/libraries/architecture/index.html) 可以帮助我们构建出更加健壮\(robust\)、易于测试\(testable\)、方便维护\(maintainable\) 的 app。
+
+`Architecture Components` 和 DataBinding 的组合使用，可以进一步简化 UI
+
+**\(7\)、双向数据绑定**
+
+DataBinding 库支持双向数据绑定。也就是说，当 View 的属性发生变化时可以通知对应的绑定数据进行更新，同理，当绑定数据发生变化时也可以通知 View 去更新对应的属性值。
+
+比如，我们使用双向绑定为 RadioButton 绑定一个文本。当 RadioButton 选中时会显示 “选中”，取消选中时显示 “未选中”；同理，当我们变更文本时，双向绑定就会自动更新 RadioButton 的选中状态。
+
+### 二、入门 <a id="2"></a>
+
+DataBinding 库是以 support 库的形式提供的，具有良好的兼容性，适用于 Andorid 4.0\(API 14\) 及以上版本。
+
+使用 DataBinding 时最好保持 Gradle 插件为最新版本。\(从 1.5.0 版本的 Gradle 插件开始，都可以支持 DataBinding \)。[点击此处可以查看如何升级 Gradle 插件](https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin)
+
+#### 1、启用数据绑定
+
+在 module 的 `build.gradle` 文件的 android 节点中增加 dataBinding 节点即可启用数据绑定。具体如下：
+
+```kotlin
+android {
+    ...
+    dataBinding {
+        enabled = true
+    }
+}
+```
+
+注意： ==**如果当前 module 所依赖的 libraries 中使用了数据绑定，那么，不论 该module 是否使用了数据绑定，都必须在当前 module 的 gradle 文件中启用数据绑定。**==
+
+#### 2、Android Studio 中对数据绑定的支持
+
+#### 1、
+
+#### 1、
+
+#### 1、
+
+### 三、布局和绑定表达式 <a id="3"></a>
+
+### 四、使用可观察的数据对象 <a id="4"></a>
+
+### 五、生成的绑定类 <a id="5"></a>
+
+### 六、绑定适配器 <a id="6"></a>
+
+### 七、将布局视图绑定到架构组件 <a id="7"></a>
+
+### 八、双向数据绑定 <a id="8"></a>
+
+### 九、相关资料 <a id="9"></a>
+
+* [官方数据绑定示例](https://github.com/googlesamples/android-databinding)
+* [Android Data Binding codelab](https://codelabs.developers.google.com/codelabs/android-databinding/#0)
+* [Data Binding — Lessons Learnt](https://medium.com/androiddevelopers/data-binding-lessons-learnt-4fd16576b719)
 
