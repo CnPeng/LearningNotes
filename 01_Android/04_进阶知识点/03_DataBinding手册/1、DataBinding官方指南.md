@@ -1189,6 +1189,181 @@ public class Fields {
 
 ### 3、Observable objects
 
+Observable objects 表示实现了 Observable 接口的类。
+
+Observable 接口中有 增加 和 删除监听的方法， 类实现 Observable 接口时，还需要注册一个监听器，当该类中的属性发生改变之后，会触发监听器，但何时通知调用者，是由程序员自己决定的。
+
+为了让实现更简单， DataBinding 库提供了 BaseObservable 类，BaseObservable 内部实现了监听器的注册。
+
+#### (1)、实现 BaseObservable 接口
+
+我们为 BaseObservable 实现类中属性的 getter 添加 Bindable 注解，并在 setter 中调用 `notifyPropertyChanged()`, 这样，当该属性值发生变化时，就会触发 `notifyPropertyChanged()` 去通知调用者进行更新
+
+示例如下：
+
+kotlin 写法：
+
+```kotlin
+class TempActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding: ActivityTempBinding = DataBindingUtil.setContentView(this, R.layout.activity_temp)
+
+        val user = User()
+        user.firstName = "张"
+        user.lastName = "三"
+
+        binding.user = user
+
+        var clickCount = 0
+        binding.bt.setOnClickListener {
+            clickCount++
+            user.firstName = "张 $clickCount"
+            user.lastName = "三 $clickCount"
+        }
+    }
+}
+
+
+class User : BaseObservable() {
+    @get:Bindable
+    var firstName: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.firstName)
+        }
+
+    @get:Bindable
+    var lastName: String = ""
+        set(value) {
+            field = value
+            notifyPropertyChanged(BR.lastName)
+        }
+}
+```
+
+`activity_temp.xml`
+
+```kotlin
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.databinding.ui.User" />
+
+        <variable
+            name="user"
+            type="User" />
+
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <!-- When i use  android:text="@{user[0]}" ，it's ok -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user.firstName}"
+            tools:text="NAME" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@{user.lastName}"
+            tools:text="SEX" />
+
+        <Button
+            android:id="@+id/bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Click Here" />
+    </LinearLayout>
+
+</layout>
+```
+
+
+java 写法
+
+```java
+private static class User extends BaseObservable {
+    private String firstName;
+    private String lastName;
+
+    @Bindable
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    @Bindable
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+        notifyPropertyChanged(BR.firstName);
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+        notifyPropertyChanged(BR.lastName);
+    }
+}
+```
+
+DataBdinding 库会在当前 module 的包中会生成一个 BR 类文件，其中包含了所有数据绑定所需要用到的各种资源的 id。就像为使用数据绑定时自动生成的 R 类文件一样。
+
+在编译时，BataBinding 库会检测所有 Bindable 注解，如果某个属性有这个注解，就会在 BR 文件中生成一个对应的 id。该 id 以当前属性为名称，调用时直接使用 `BR.属性名` 即可，就像上面示例中的 `notifyPropertyChanged(BR.lastName);`
+
+
+#### (2)、实现 Observable
+
+通常是让 基类 实现 Observable 接口，然后注册一个 PropertyChangeRegistry 监听器。
+
+示例如下：
+
+```kotlin
+open class ObservableViewModel : ViewModel(), Observable {
+
+    private val callbacks: PropertyChangeRegistry = PropertyChangeRegistry()
+
+    override fun addOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
+        callbacks.add(callback)
+    }
+
+    override fun removeOnPropertyChangedCallback(callback: Observable.OnPropertyChangedCallback) {
+        callbacks.remove(callback)
+    }
+
+    /**
+     * Notifies listeners that all properties of this instance have changed.
+     */
+    fun notifyChange() {
+        callbacks.notifyCallbacks(this, 0, null)
+    }
+
+    /**
+     * Notifies listeners that a specific property has changed. The getter for the property
+     * that changes should be marked with [Bindable] to generate a field in
+     * `BR` to be used as `fieldId`.
+     *
+     * @param fieldId The generated BR id for the Bindable field.
+     */
+    fun notifyPropertyChanged(fieldId: Int) {
+        callbacks.notifyCallbacks(this, fieldId, null)
+    }
+}
+```
+
+此处实现略为复杂，完整内容可以参考 [官方 DEMO](https://github.com/googlesamples/android-databinding) 中的 `ObservableViewModel `。 
 
 
 
