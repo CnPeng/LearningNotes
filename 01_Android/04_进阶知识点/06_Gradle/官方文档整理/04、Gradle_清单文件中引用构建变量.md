@@ -2,6 +2,7 @@
 
 
 ### 1、定义和引用占位符
+
 当我们需要再 AndroidManifest.xml 引用定义在 build.gradle(module)的变量时，就需要使用 **manifestPlaceholders** 属性。
 
 示例：
@@ -46,6 +47,7 @@ android {
 当我们需要为 intent Action 定义一个唯一的标识时，该占位符是非常有用的。
 
 示例：
+
 *  **build.gradle** 
 
 假设我们的gradle中有如下配置

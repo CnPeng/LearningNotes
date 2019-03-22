@@ -20,7 +20,8 @@ http://google.github.io/android-gradle-dsl/current/com.android.build.gradle.inte
 我们可以根据实际需求对该类型进行新增或修改。
 
 示例：
-```
+
+```kotlin
 android {
     ...
     defaultConfig {...}
