@@ -1173,19 +1173,37 @@ class TempActivity : AppCompatActivity() {
 </layout>
 ```
 
-Fields.java
+Fields.kt
 
-```java
-public class Fields {
-    public static final int NAME=0;
-    public static final int SEX=1;
-    public static final int AGE=2;
+```kotlin
+// It's ok
+//object Fields {
+//    @JvmField
+//    val NAME: Int = 0
+//    @JvmField
+//    val SEX: Int = 1
+//    @JvmField
+//    val AGE: Int = 2
+//}
+
+// It's Ok
+class Fields {
+    companion object {
+        @JvmField
+        val NAME: Int = 0
+        @JvmField
+        val SEX: Int = 1
+        @JvmField
+        val AGE: Int = 2
+    }
 }
 ```
 
 注意：
 
-上述代码中，Fields 并没有定义成 .kt 文件，是因为不知道该用啥来表示，尝试过 object (单例类)、尝试过 带有 companion object 的 class , 但是，编译时都会报错。 
+上述代码中，.kt 中的字段需要被 .java 调用时，必须加上 @JvmField 注解。
+
+刚开始的时候没弄明白此处该咋写，还在 stackoverflow 中提了一个问题：[what's the content of “com.example.my.app.Fields” in DataBinding example?](https://stackoverflow.com/questions/55283784/whats-the-content-of-com-example-my-app-fields-in-databinding-example/55338983#55338983) , 最终还是自己解决了！
 
 ### 3、Observable objects
 
@@ -1369,11 +1387,1500 @@ open class ObservableViewModel : ViewModel(), Observable {
 
 <h2 id="5">五、生成的绑定类</h2>
 
+DataBinding 库会为每一个使用了数据绑定的布局文件生成一个对应的绑定类。
+
+该绑定类继承自 ViewDataBinding。
+
+该绑定类持有在 layout 布局文件中声明的变量和 view 控件 及其 绑定关系，并对外暴露 变量 和 View 的访问接口（即 setter/getter)
+
+这个绑定类的名字以及包名都是可以自定义的。
+
+默认情况下，自动生成的绑定类的名字取决于布局文件的名字。在根据布局文件名字生成绑定类名时，会去除下划线连接符，第一个单词首字母大写，其余遵循驼峰规则, 末尾追加 Binding。比如 `activity_main.xml` 生成的绑定类名称为：`ActivityMainBinding` . 
+
+
+### 1、创建一个绑定对象
+
+在将布局文件填充之后应该立即创建绑定对象，以确保布局文件中的绑定表达式与 view 绑定之前 view 视图树不会被修改。
+
+获取与布局文件绑定的对象的常用做法是：调用绑定类中的静态方法
+
+我们可以填充视图树并调用对应绑定类中的 `inflate()` ，从而获取绑定对象。示例如下：
+
+kotlin 版
+
+```kotlin
+override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+
+    val binding: MyLayoutBinding = MyLayoutBinding.inflate(layoutInflater)
+    setContentView(binding.root)
+}
+```
+
+java 版
+
+```java
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    MyLayoutBinding binding = MyLayoutBinding.inflate(getLayoutInflater());
+    setContentView(binding.getRoot())
+}
+```
+
+还可以使用 `inflate()` 方法的另一个重载版本：传递一个 ViewGroup 对象给 LayoutInflater，示例如下：
+
+kotlin 版
+
+```kotlin
+val binding: MyLayoutBinding = MyLayoutBinding.inflate(getLayoutInflater(), viewGroup, false)
+setContentView(binding.root)
+```
+
+JAVA 版
+
+```java
+MyLayoutBinding binding = MyLayoutBinding.inflate(getLayoutInflater(), viewGroup, false);
+setContentView(binding.getRoot())
+```
+
+
+如果是在 Fragment 、ListView、RecyclerView 的适配器条目中使用数据绑定，我们可以直接使用 DataBindingUtil 的 inflate() 方法，示例如下：
+
+kotlin 版
+
+```kotlin
+val listItemBinding = ListItemBinding.inflate(layoutInflater, viewGroup, false)
+// or
+val listItemBinding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item, viewGroup, false)
+
+```
+
+Java 版
+
+```java
+ListItemBinding binding = ListItemBinding.inflate(layoutInflater, viewGroup, false);
+// or
+ListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item, viewGroup, false);
+
+```
+
+
+---
+
+CnPeng: 后面这两个知识点的内容没想到使用场景。尤其是第一个，没找到示例，自己尝试也一直失败。
+
+
+
+如果 布局文件使用其他机制被填充了，则使用另外一种单独绑定的模式：
+
+kotlin 版
+
+```kotlin
+val binding: MyLayoutBinding = MyLayoutBinding.bind(viewRoot)
+
+```
+
+Java 版
+
+```java
+MyLayoutBinding binding = MyLayoutBinding.bind(viewRoot);
+
+```
+
+有些时候，绑定类型无法提前获知。比如：使用 DataBindingUtil 类创建绑定对象, 示例如下：
+
+kotlin 版
+
+```kotlin
+val viewRoot = LayoutInflater.from(this).inflate(layoutId, parent, attachToParent)
+val binding: ViewDataBinding? = DataBindingUtil.bind(viewRoot)
+
+```
+
+Java 版
+
+```java
+View viewRoot = LayoutInflater.from(this).inflate(layoutId, parent, attachToParent);
+ViewDataBinding binding = DataBindingUtil.bind(viewRoot);
+
+```
+
+---
+
+### 2、view 和 id
+
+DataBinding 库在 绑定类 中为布局文件内拥有 ID 的所有 View 都创建了一个不可修改的字段。
+
+比如：下面的示例代码中，在对应的绑定类中会生成类型为 TextView 的 firstName  和 lastName 变量字段——分别对应下列布局文件中的两个 TextView 的 id。
+
+```xml
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+   <data>
+       <variable name="user" type="com.example.User"/>
+   </data>
+   <LinearLayout
+       android:orientation="vertical"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       
+       <TextView android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@{user.firstName}"
+   			 android:id="@+id/firstName"/>
+       
+       <TextView android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@{user.lastName}"
+  			 android:id="@+id/lastName"/>
+   </LinearLayout>
+</layout>
+```
+
+DataBinding 库会直接从视图树中提取拥有 ID 的 view ，这种方式比 `findViewById()` 快多了
+
+
+### 3、变量
+
+DataBinding 库为在布局文件中通过 <variable> 声明的变量在绑定类中生成了访问方法。比如，下面的示例代码中，在生成的 绑定类中会包含 user、image、note 变量，以及他们的 setter/getter 方法
+
+```xml
+<data>
+   <import type="android.graphics.drawable.Drawable"/>
+   <variable name="user" type="com.example.User"/>
+   <variable name="image" type="Drawable"/>
+   <variable name="note" type="String"/>
+</data>
+```
+
+
+### 4、ViewStubs
+
+与普通 View 不同，ViewStub 默认状态下是不可见的。当 ViewStub 被置为 可见（Visible）或者被 填充（infalte）后，就会被指定的填充布局替换掉。（关于 ViewStub 可参考我之前的整理 [ViewStub--使用介绍](https://www.jianshu.com/p/175096cd89ac)）
+
+由于 ViewStub 默认在视图树中是不可见的，所以在生成的绑定类中的并不会存在 ViewStub 对象。又由于 ViewStub 是 final 的（只能一次赋值），所以在生成的绑定类中会使用 ViewStubProxy 替代 ViewStub，当我们需要显示或者填充 ViewStub 的时候，需要先通过 ViewStubProxy 获取 ViewStub 变量。
+
+ViewStubProxy 会监听 ViewStub 的 OnInflateListener ，当 ViewStub 的 layout 属性指定的布局文件被填充之后，就在 ViewStubProxy 中创建针对于这个新布局的绑定关系。
+
+由于同一时刻只能有一个监听器，所以，ViewStubProxy 允许我们手动设定一个 OnInflateListener, 当 ViewStub 中的布局被填充并且建立了绑定关系之后，就会调用该监听。
+
+完整示例如下：
+
+`TempActivity.kt`
+
+```kotlin
+class TempActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Binding Method 1:
+        // val binding: ActivityTempBinding = DataBindingUtil.setContentView(this, R.layout.activity_temp)
+
+        // Binding Method 2:
+        val binding: ActivityTempBinding = ActivityTempBinding.inflate(layoutInflater)
+        // this is  the inflate(layoutInflater) overload method.
+        // val binding: ActivityTempBinding = ActivityTempBinding.inflate(layoutInflater,null,false)
+        setContentView(binding.root)
+
+        val user = ObservableArrayList<Any>().apply {
+            add("NAME: CnPeng")
+            add("SEX：Man")
+            add(17)
+        }
+
+        binding.user = user
+
+        var clickCount = 0
+
+        binding.bt.setOnClickListener {
+            clickCount++
+
+            if (clickCount == 5) {
+                binding.viewStubProxy.viewStub?.visibility = View.VISIBLE
+            }
+            if (clickCount > 5) {
+                // binding.viewStubProxy.viewStub?.visibility = View.GONE
+                binding.viewStubProxy.root.ll_viewStub.visibility = View.GONE
+            }
+
+            binding.viewStubProxy.setOnInflateListener { _, _ ->
+                Toast.makeText(this, "ViewStub Inflated", Toast.LENGTH_SHORT).show()
+            }
+
+            user[Fields.NAME] = "NAME: CnPeng, ClickNum:$clickCount"
+            user[Fields.SEX] = "SEX：Man, ClickNum:$clickCount"
+            user[Fields.AGE] = clickCount
+        }
+    }
+}
+
+//CnPeng 2019/3/26 2:49 PM It's Wonderful ! `const val` instead of `@JvmField val Name:Int=0`
+object Fields {
+    const val NAME: Int = 0
+    const val SEX: Int = 1
+    const val AGE: Int = 2
+}
+```
+
+`activity_temp.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="user"
+            type="androidx.databinding.ObservableArrayList&lt;Object>" />
+
+        <import type="com.databinding.ui.Fields" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <!-- When i use  android:text="@{user[0]}" ，it's ok -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{user[Fields.NAME]}"
+            tools:text="NAME" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="@{user[1]}"
+            tools:text="SEX" />
+
+        <Button
+            android:id="@+id/bt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="Click Here" />
+
+        <ViewStub
+            android:id="@+id/viewStubProxy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout="@layout/inflate_view_stub" />
+    </LinearLayout>
+
+</layout>
+```
+
+`inflate_view_stub.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--Notice: Must start with <layout> -->
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ll_viewStub"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_ViewStub"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
+</layout>
+```
+
+
+### 5、即刻绑定（Immediate Binding）
+
+默认情况下，当变量（variable）或者可观察对象（observable object）发生变化时，界面只有在下一次刷新时才会更新。但实际应用时，我们期望数据发生变化时能及时更新界面，此时我们就可以调用 `executePendingBindings()` 强制刷新。
+
+### 6、高级绑定——动态变量
+
+有时候，我们不需要明确的获知 Binding 类，也可以将数据设置给View .
+
+比如，RecyclerView.Adapter 就可以在没有明确获取绑定类时对条目布局进行操作——在调用 `onBindViewHolder()` 的时候，只需要有一个 ViewDataBinding 对象即可。
+
+在下面的示例中，在 RecyclerView 的条目布局文件中有名为 itemDesc 的变量。BindingHolder 中包含一个 getBinding() 方法，该方法会返回一个 ViewDataBinding 类:
+
+`TempActivity.kt`
+
+```kotlin
+class TempActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val binding: ActivityTempBinding = ActivityTempBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val itemDescList = mutableListOf<String>()
+        for (i in 0..15) {
+            itemDescList.add("第 $i 个条目")
+        }
+        binding.recyclerView.adapter = TempRvAdapter(itemDescList)
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+    }
+}
+
+
+class TempRvAdapter(private val descList: MutableList<String>) : RecyclerView.Adapter<TempRvAdapter.BindingHolder>() {
+
+    override fun getItemCount(): Int {
+        return descList.size
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BindingHolder {
+
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = ItemTempRvBinding.inflate(inflater, parent, false)
+
+        return BindingHolder(binding.root, binding)
+    }
+
+    override fun onBindViewHolder(holder: BindingHolder, position: Int) {
+        val desc = descList[position]
+        holder.binding.setVariable(BR.itemDesc, desc)
+        holder.binding.executePendingBindings()
+    }
+
+    class BindingHolder(itemView: View, val binding: ViewDataBinding) : RecyclerView.ViewHolder(itemView)
+
+}
+```
+
+`activity_temp.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</layout>
+```
+
+`item_temp_rv.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="itemDesc"
+            type="String" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ll_viewStub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{itemDesc}"
+            tools:text="条目描述" />
+
+        <ImageView
+            android:id="@+id/iv_ViewStub"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@mipmap/ic_launcher" />
+    </LinearLayout>
+
+</layout>
+```
+
+注意：BR 是 DataBinding 库自动生成的。内部包含了在使用了数据绑定的布局文件中声明的 变量 和 View 
+
+
+### 7、后台线程
+
+我们可以在线程中更改数 DataBinding 中被绑定的数据，但前提是该数据不能是集合。
+
+之所以可以这样，是因为 DataBinding 在处理数据时会对 变量/字段 进行值拷贝，这样就避免了并发问题。
+
+>TODO: CnPeng 尝试使用 协程+ObservalbeXX 写一个DEMO。
+
+### 8、自定义绑定类的名称
+
+默认情况下，在根据布局文件生成绑定类名时，首字母大写，去除下划线，后续内容遵从驼峰规则，末尾后缀 Binding。
+
+比如，布局文件 `contact_item.xml` 将会生成 `ContactItemBinding` 类. 如果当前 module 的包名为 ` com.example.my.app`, 这个自动生成的类就会放在 `com.example.my.app.databinding` 包中.
+
+我们可以通过 `<data>` 节点的 `class` 属性手动指定 绑定类的名字 或 绑定类的包路径。示例如下：
+
+假设我们当前 module 的包名为 `com.example.my.app`，
+
+* 下面的布局文件会在 `com.example.my.app.databinding` 包中生成名称为 ContactItem 的绑定类。
+
+```xml
+<data class="ContactItem">
+    …
+</data>
+```
+
+* 我们也可以在 `class` 属性中指定的类名前面添加英文句号，这样，就会直接在当前 moudle 的包中生成绑定类——下面这个写法会直接在 `com.example.my.app` 中生成 ContactItem 类
+
+```xml
+<data class=".ContactItem">
+    …
+</data>
+```
+
+* 我们还可以直接指定生成类的全路径名，下面的代码中，就明确指出了要在 `com.example` 包中生成名称为 ContactItem 的类
+
+```xml
+<data class="com.example.ContactItem">
+    …
+</data>
+```
+
+
 <h2 id="6">六、绑定适配器</h2>
+
+绑定适配器 是把数据绑定给指定 View 的一种方式。类似于我们通过 setText() 给 TextView 设置文本。
+
+DataBinding 库允许我们通过 绑定适配器 调用 特定的方法 给 View 设置属性值。在这个特定的方法中，我们可以编辑自己的绑定逻辑、也可以指定返回类型。
+
+### 1、设置属性值
+
+当某个 View 绑定的值被改变时，自动生成的绑定类必定会调用该值的 setter 方法，并触发绑定在该 View 上的绑定表达式。我们可以让 DataBinding 库自动匹配将要被触发的 setter 方法，也可以指定一个具有自定义逻辑的自定义方法
+
+#### (1)、自动匹配方法
+
+假设在布局文件中，我们为某个 view 指定了一个属性，其名称为 `example`, 那么 DataBinding 库会自动去寻找参数类型与 `example` 的值相类型匹配的 `setExample(arg)` 方法。在寻找这个 setter 方法时，DataBinding 库不关心其命名空间是啥，只会去匹配属性名称及其值的类型。
+
+举个例子，我们有这么一个绑定表达式：`android:text="@{user.name}"`, 那么 DataBinding 库就会去寻找名称为 `setText(arg)` 的方法， 并且该方法接收的参数类型必须与 `user.name` 的类型一致。假设 `user.getName()` 的返回值类型为 String，那么 DataBinding 库就会去匹配 参数为 String 类型的 setText()。当然了，如果我们已经知道 setter 方法的参数类型，但是 `user.name` 的返回值类型与参数类型不匹配，那么，我们就可以为 `user.name` 使用类型强转。
+
+即便我们指定的这个属性不存在，DataBinding 也能正常运行——我们可以通过数据绑定为任意的 setter 方法创建对应的属性. 
+
+比如，DrawerLayout 没有任何属性，但是却有大量的 setter。在下面的布局文件中 DataBinding 库就会自动为 `app:scrimColor` 和 `app:drawerListener` 匹配 `setScrimColor(int)` 和 `setDrawerListener(DrawerListener)` 方法：
+
+
+```xml
+<androidx.drawerlayout.widget.DrawerLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:scrimColor="@{@color/scrim}"
+    app:drawerListener="@{fragment.drawerListener}">
+```
+
+
+#### (2)、指定方法
+
+有一些属性的 setter 与属性名字并不能完全匹配。在这种情况下，通过 `BindingMethods` 注解可以将属性及其 setter 进行关联。 
+
+`BindingMethods` 注解可以定义在 app 中的任意一个类文件中，其内部可以包含多个 `BindingMethod` 注解, 每一个 `BindingMethod` 都会指定一对属性和方法。
+
+下面的示例中，实现了 `android:tint` 属性与 `setImageTintList(ColorStateList)` 方法的关联, 而不是和 `setTint()` 方法关联。
+
+KOTLIN
+
+```kotlin
+@BindingMethods(value = [
+    BindingMethod(
+        type = android.widget.ImageView::class,
+        attribute = "android:tint",
+        method = "setImageTintList")])
+```
+
+java
+
+```java
+@BindingMethods({
+       @BindingMethod(type = "android.widget.ImageView",
+                      attribute = "android:tint",
+                      method = "setImageTintList")
+})
+```
+
+通常情况下，我们不需要为 Android 提供的　View 控件指定 BindingMethod。因为 Android 已经通过名称转换自动的匹配好所需的方法了。
+
+#### (3)、提供自定义逻辑
+
+#### A: 基本格式和用法 
+
+一些属性需要自定义逻辑。比如 `android:marginLeft` 属性，就没有对应的 setter, 而必须先获取控件的 LayoutParams , 然后通过 LayoutParams 的 `setMargins(left, top, right, bottom)` 去设置。
+
+通过 `@BindingAdapter` 注解静态方法，然后就可以在这个静态方法中自定义属性被调用时的处理逻辑。 
+
+Android Framework 层中大部分类的相关属性已经通过 `@BindingAdapter` 注解绑定过了。比如，下面的示例中就展示了如何绑定 `paddingLeft` 属性（ 默认情况下，paddingLeft 并没有对应的 setter , 而是通过 `setPadding(left,top,right,bottom)`）。
+
+kotlin 版：
+
+```kotlin
+@BindingAdapter("android:paddingLeft")
+fun setPaddingLeft(view: View, padding: Int) {
+    view.setPadding(padding,
+                view.getPaddingTop(),
+                view.getPaddingRight(),
+                view.getPaddingBottom())
+}
+```
+
+java 版：
+
+```java
+@BindingAdapter("android:paddingLeft")
+public static void setPaddingLeft(View view, int padding) {
+  view.setPadding(padding,
+                  view.getPaddingTop(),
+                  view.getPaddingRight(),
+                  view.getPaddingBottom());
+}
+```
+
+下面的示例代码中演示了如何给 `android:marginLeft` 绑定 setter
+
+TempActivity.kt
+
+```kotlin
+class TempActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val binding: TempBinding = TempBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.tv.setOnClickListener {
+            binding.showMargin = true
+        }
+    }
+}
+
+
+object TestBindingAdapter {
+
+    @BindingAdapter("android:marginLeft")
+    @JvmStatic
+    fun setCusMarginLeft(view: View, marginLeft: Int) {
+
+        val lp = view.layoutParams
+
+        if (lp is ViewGroup.MarginLayoutParams) {
+            lp.setMargins(marginLeft, 0, 0, 0)
+            view.layoutParams = lp
+        }
+    }
+}
+```
+
+`activity_temp.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data class=".TempBinding">
+
+        <variable
+            name="showMargin"
+            type="boolean" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--android:background="@color/colorAccent">-->
+
+        <TextView
+            android:id="@+id/tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:marginLeft="@{showMargin?50:0}"
+            android:padding="15dp"
+            android:text="李四" />
+    </LinearLayout>
+
+</layout>
+```
+
+被绑定方法的参数类型很重要。第一个参数决定了 `@BindingAdapter` 注解后面的属性要关联到哪个类型的 View 。而第二个参数决定了属性能够接收什么类型的值。
+
+绑定适配器对其他类型的自定义代码逻辑也非常有用，比如，我们可以通过绑定适配器自定义一个工作在线程中的 Image 图片加载方法。
+
+我们自定义的绑定适配器与 Android 库中已经实现的绑定适配器冲突时，自定义的会覆盖 Android 库中已有的。
+
+#### B: 绑定多个参数
+
+我们可以为绑定适配器定义多个参数，示例如下：
+
+kotlin 版
+
+```kotlin
+@BindingAdapter("imageUrl", "error")
+@JvmStatic
+fun loadImage(view: ImageView, url: String, error: Drawable) {
+    Picasso.get().load(url).error(error).into(view)
+}
+```
+
+JAVA 版 
+
+```java
+@BindingAdapter({"imageUrl", "error"})
+public static void loadImage(ImageView view, String url, Drawable error) {
+  Picasso.get().load(url).error(error).into(view);
+}
+```
+
+然后，我们就可以在布局文件中直接使用 `imageUrl` 和 `error` 属性了
+
+```xml
+<ImageView 
+	app:imageUrl="@{venue.imageUrl}" 
+	app:error="@{@drawable/venueError}" />
+```
+
+上面示例代码中，`app:error` 的 属性值是本地的一个图片资源。
+
+> 注意：在进行匹配时，DataBinding 库不关心命名空间
+
+当 `imageUrl` 和 `error` 同时被 ImageView 调用，并且 `imageUrl` 的类型为 String ，`error` 的类型为 `Drawable` 时，就会触发我们上面通过 `@BindingAdapter` 绑定的 `loadImage(,,)` 方法。
+
+#### C: `requireAll` 标记
+
+如果我们希望在部分属性被调用时就触发 `loadImage(,,)` , 我们可以给在 `@BindingAdapter` 中增加 `requireAll` 标记，并将其值设置为 `false`, 示例如下：
+
+```kotlin
+@BindingAdapter(value = ["imageUrl", "placeholder"], requireAll = false)
+@JvmStatic
+fun setImageUrl(imageView: ImageView, url: String, placeHolder: Drawable) {
+    if (url == null) {
+        imageView.setImageDrawable(placeholder);
+    } else {
+        MyImageLoader.loadInto(imageView, url, placeholder);
+    }
+}
+```  
+
+```java
+@BindingAdapter(value={"imageUrl", "placeholder"}, requireAll=false)
+public static void setImageUrl(ImageView imageView, String url, Drawable placeHolder) {
+  if (url == null) {
+    imageView.setImageDrawable(placeholder);
+  } else {
+    MyImageLoader.loadInto(imageView, url, placeholder);
+  }
+}
+```
+
+#### D: 绑定适配器中的旧值
+
+在 `@BindingAdapter` 注解的方法中，我们可以根据需要决定是否使用属性的旧值。如果这个注解方法中同时声明旧值和新值，那么，需要先声明旧值，然后再声明新值，示例如下：
+
+TempActvitiy.kt
+
+```kotlin
+class TempActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val binding: ActivityTempBinding = DataBindingUtil.setContentView(this, R.layout.activity_temp)
+
+        binding.bt.setOnClickListener {
+            binding.showLeftMargin = true
+        }
+    }
+}
+
+object BindingAdaptersUtil {
+    
+    @BindingAdapter(value = ["android:layout_marginLeft"])
+    @JvmStatic
+    fun setMarginLeft(view: View, oldMargin: Float, newMargin: Float) {
+        //CnPeng 2019/3/27 9:24 PM Note: the newMarin is px
+        val lp = view.layoutParams
+        if (lp is ViewGroup.MarginLayoutParams) {
+            view.context.toast("oldMargin: $oldMargin , newMargin $newMargin | ${view.context.dip(15)}")
+            if (oldMargin != newMargin) {
+                lp.setMargins(newMargin.toInt(), lp.topMargin, lp.rightMargin, lp.bottomMargin)
+                view.layoutParams = lp
+            }
+        }
+    }
+}
+```
+
+`activity_temp.xml`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="showLeftMargin"
+            type="boolean" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt"
+            android:layout_width="200dp"
+            android:layout_height="100dp"
+            android:layout_marginLeft="@{showLeftMargin?@dimen/dp15:@dimen/dp0}"
+            android:layout_marginTop="@dimen/dp15"
+            android:text="Click Here" />
+    </LinearLayout>
+
+</layout>
+```
+
+#### E: 绑定监听器
+
+`@BindingAdapter` 也可以绑定一些接口或者抽象类形式的监听器，监听器中可以做一些事件处理，示例如下：
+
+```kotlin
+@BindingAdapter("android:onLayoutChange")
+fun setOnLayoutChangeListener(
+        view: View,
+        oldValue: View.OnLayoutChangeListener?,
+        newValue: View.OnLayoutChangeListener?
+) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+        if (oldValue != null) {
+            view.removeOnLayoutChangeListener(oldValue)
+        }
+        if (newValue != null) {
+            view.addOnLayoutChangeListener(newValue)
+        }
+    }
+}
+```
+
+java版
+
+```java
+@BindingAdapter("android:onLayoutChange")
+public static void setOnLayoutChangeListener(View view, View.OnLayoutChangeListener oldValue,
+       View.OnLayoutChangeListener newValue) {
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+    if (oldValue != null) {
+      view.removeOnLayoutChangeListener(oldValue);
+    }
+    if (newValue != null) {
+      view.addOnLayoutChangeListener(newValue);
+    }
+  }
+}
+```
+
+在布局文件中我们可以按照如下方式使用：
+
+```xml
+<View android:onLayoutChange="@{() -> handler.layoutChanged()}"/>
+```
+
+#### F: 被绑定的监听器中有多个方法
+
+如果被绑定的监听器中有多个方法需要实现，我们必须将他们拆解到不同的监听器中。
+
+比如，`View.OnAttachStateChangeListener` 中有两个需要实现的方法：`onViewAttachedToWindow(View)` 和 `onViewDetachedFromWindow(View)`. DataBinding 库下的 dataBinding-adapters 包中提供了两个接口对它们进行区分并处理相关逻辑。
+
+```kotlin
+// Translation from provided interfaces in Java:
+@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
+interface OnViewDetachedFromWindow {
+    fun onViewDetachedFromWindow(v: View)
+}
+
+@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR1)
+interface OnViewAttachedToWindow {
+    fun onViewAttachedToWindow(v: View)
+}
+```
+
+java 版：
+
+```java
+@TargetApi(VERSION_CODES.HONEYCOMB_MR1)
+public interface OnViewDetachedFromWindow {
+  void onViewDetachedFromWindow(View v);
+}
+
+@TargetApi(VERSION_CODES.HONEYCOMB_MR1)
+public interface OnViewAttachedToWindow {
+  void onViewAttachedToWindow(View v);
+}
+```
+
+如果改变了上面监听器中的一个，那么另一个也会受到影响，所以，我们需要一个绑定适配器，该适配器能处理一个或者全部监听器中的事件。
+
+我们可以在 `@BindingAdapter` 注解中设置 `requireAll=false` 指明被绑定方法中并非所有的属性都必须有值。
+
+示例如下：
+
+kotlin 版
+
+```kotlin
+@BindingAdapter(
+        "android:onViewDetachedFromWindow",
+        "android:onViewAttachedToWindow",
+        requireAll = false
+)
+fun setListener(view: View, detach: OnViewDetachedFromWindow?, attach: OnViewAttachedToWindow?) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+        val newListener: View.OnAttachStateChangeListener?
+        newListener = if (detach == null && attach == null) {
+            null
+        } else {
+            object : View.OnAttachStateChangeListener {
+                override fun onViewAttachedToWindow(v: View) {
+                    attach?.onViewAttachedToWindow(v)
+                }
+
+                override fun onViewDetachedFromWindow(v: View) {
+                    detach?.onViewDetachedFromWindow(v)
+                }
+            }
+        }
+
+		 // CnPeng: ListenerUtil 是 dataBinding-adapters 包中提供的类
+        val oldListener: View.OnAttachStateChangeListener? =
+                ListenerUtil.trackListener(view, newListener, R.id.onAttachStateChangeListener)
+        if (oldListener != null) {
+            view.removeOnAttachStateChangeListener(oldListener)
+        }
+        if (newListener != null) {
+            view.addOnAttachStateChangeListener(newListener)
+        }
+    }
+}
+```
+
+java 版
+
+```java
+@BindingAdapter({"android:onViewDetachedFromWindow", "android:onViewAttachedToWindow"}, requireAll=false)
+public static void setListener(View view, OnViewDetachedFromWindow detach, OnViewAttachedToWindow attach) {
+    if (VERSION.SDK_INT >= VERSION_CODES.HONEYCOMB_MR1) {
+        OnAttachStateChangeListener newListener;
+        if (detach == null && attach == null) {
+            newListener = null;
+        } else {
+            newListener = new OnAttachStateChangeListener() {
+                @Override
+                public void onViewAttachedToWindow(View v) {
+                    if (attach != null) {
+                        attach.onViewAttachedToWindow(v);
+                    }
+                }
+                @Override
+                public void onViewDetachedFromWindow(View v) {
+                    if (detach != null) {
+                        detach.onViewDetachedFromWindow(v);
+                    }
+                }
+            };
+        }
+
+        OnAttachStateChangeListener oldListener = ListenerUtil.trackListener(view, newListener,
+                R.id.onAttachStateChangeListener);
+        if (oldListener != null) {
+            view.removeOnAttachStateChangeListener(oldListener);
+        }
+        if (newListener != null) {
+            view.addOnAttachStateChangeListener(newListener);
+        }
+    }
+}
+```
+
+上面的示例略微有些复杂，因为 View 类在设置 `OnAttachStateChangeListener` 时，使用 `addOnAttachStateChangeListener()` 和 `removeOnAttachStateChangeListener()` 方法替代了 setter.
+
+`android.databinding.adapters.ListenerUtil` 类可以追踪之前已经存在的 监听器，然后我们就可以把旧的监听器移除并添加新的监听器.
+
+给 `OnViewDetachedFromWindow` 和 `OnViewAttachedToWindow` 添加 `@TargetApi(VERSION_CODES.HONEYCOMB_MR1)` 注解后，DataBinding 的代码生成器就会知道，只有当设备运行在 Android 3.1 (API level 12) 或更高版本时才去生成这两个监听器——只有 3.1 及以上版本才支持 `addOnAttachStateChangeListener()`
+
+
+
+### 2、对象转换（Object conversions）
+
+#### (1)、自动的对象转换
+
+如果绑定表达式返回了一个 Object，那么 DataBinding 库会自动去找寻属性的 setter , 然后把这个 Object 自动转换为 setter 能接收的数据类型，并把它设置给该属性。(CnPeng，注意，强转时也可能会出错！！所以，必要的时候需要我们手动强转)
+
+基于上述特点，如果我们在 APP 中使用 `ObservableMap` 存储数据，然后在绑定表达式中取获取该 Map 中的数据时就会变得很方便，示例如下：
+
+```xml
+<TextView
+   android:text='@{userMap["lastName"]}'
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content" />
+```
+
+注意：对于 Map，我们在绑定表达式中通过键取值时，也可以使用 `object.key` 的形式，就是说，上面示例中的`@{userMap["lastName"]}` 也可以改成 `@{userMap.lastName}`.
+
+上述示例代码中，我们通过绑定表达式 `@{userMap["lastName"]}` 获取到了一个返回值，该值会被自动转换为 `android:text` 属性对应的 `setText(CharSequence)` 所能接收的类型。如果返回值的类型与 setter 方法接收的参数类型不一致，我们就必须在绑定表达式中手动强转，否则就会报错从而导致程序崩溃。（CnPeng 更多关于 ObservableMap 的示例可以参考前面的 <a href="#4">可观察的数据对象</a> ）
+
+#### (2)、自定义转换——`@BindingConversion`
+
+某些情况下，我们必须使用自定义的的转换。
+
+比如，`android:background` 属性对应的 setter 实际上接收的是 Drawable 对象，但我们在布局文件中使用的时候也可以传递一个 color 值：
+
+```xml
+<View
+   android:background="@{isError ? @color/red : @color/white}"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"/>
+```
+
+此时，这个 int 类型的 color 值需要被转换成一个 ColorDrawable. 该转换可以通过一个有 `@ BindingConversion` 注解的静态方法来实现：
+
+kotlin 版
+
+```kotlin
+@BindingConversion
+fun convertColorToDrawable(color: Int) = ColorDrawable(color)
+```
+
+java 版
+
+```java
+@BindingConversion
+public static ColorDrawable convertColorToDrawable(int color) {
+    return new ColorDrawable(color);
+}
+
+```
+
+我们在绑定表达式中提供的值的类型必须是一致的，==下面的示例就是一个错误的代码：== ,因为三目表达式中我们提供了一个 Drawable 和 color。正确的做法是，要么全是 Drawable , 要么全是 color
+
+```xml
+<View
+   android:background="@{isError ? @drawable/error : @color/white}"
+   android:layout_width="wrap_content"
+   android:layout_height="wrap_content"/>
+```
+
 
 <h2 id="7">七、将布局视图绑定到架构组件</h2>
 
+在 AndroidX 中包含了 架构组件（ [Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) ）, 通过这些架构组件我们能构建出强健、易于测试、方便维护的 APP。
+
+DataBinding + Architecture Components 的组合能够更进一步的简化 UI 的开发。布局文件可以 与 架构组件中的数据进行绑定，这些数据可以帮我们管理 UI 控制器（controllers）的生命周期，而且当数据发生变化时也会主动通知 UI 去更新。
+
+该章节主要介绍如何在我们的 APP 中使用 架构组件，从而进一步提升 DataBinding 的优点（benefits）。
+
+### 1、使用 LiveData 通知界面更新
+
+我们可以使用 `LiveData` 对象作为数据绑定的数据源，这样，当数据发生变化时机就会主动的通知 UI 界面去更新。关于 LiveData 的更多内容可以查看 [LiveData 概览](https://developer.android.com/topic/libraries/architecture/livedata)
+
+与实现了 Observable 的对象（如 ：ObservableField ）不同, LiveData 对象能够获取数据观察者的生命周期。这一特点带来了许多益处，这些益处在 [LiveData 概览](https://developer.android.com/topic/libraries/architecture/livedata) 有说明。
+
+从 Android Studio version 3.1 开始，我们在数据绑定的代码中使用 LiveData 替代 Observable 对象。
+
+在绑定类中使用 LiewData 对象时，需要指定由谁来持有该绑定类的生命周期，从而限定 LiveData 对象的作用域——只在持有者内部有效。（这个持有者就是 LiveData 的数据观察者）
+
+下面的示例代码中，在初始化 绑定了之后，指定了 activity 作为 绑定类生命周期的持有者——也就是 LiveData 的数据观察者：
+
+kotlin 版
+
+```kotlin
+class ViewModelActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // Inflate view and obtain an instance of the binding class.
+        val binding: UserBinding = DataBindingUtil.setContentView(this, R.layout.user)
+
+        // Specify the current activity as the lifecycle owner.
+        binding.setLifecycleOwner(this)
+    }
+}
+```
+
+java 版
+
+```java
+class ViewModelActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // Inflate view and obtain an instance of the binding class.
+        UserBinding binding = DataBindingUtil.setContentView(this, R.layout.user);
+
+        // Specify the current activity as the lifecycle owner.
+        binding.setLifecycleOwner(this);
+    }
+}
+```
+
+我们可以使用 `ViewModel` 组件把数据绑定到 布局文件。详细内容会在在下一节 《使用 ViewModel 管理关联到 UI 界面的数据》中介绍。
+
+在 `ViewModel` 组件中，我们可以使用 LiveData 对象转换数据或者合并多个数据源。下面的示例展示了如何转换 ViewModel 中的数据：
+
+kotlin 版
+
+```kotlin
+class ScheduleViewModel : ViewModel() {
+    val userName: LiveData
+
+    init {
+        val result = Repository.userName
+        userName = Transformations.map(result) { result -> result.value }
+    }
+}
+```
+
+java 版
+
+```java
+class ScheduleViewModel extends ViewModel {
+    LiveData username;
+
+    public ScheduleViewModel() {
+        String result = Repository.userName;
+        userName = Transformations.map(result, result -> result.value);
+    }
+}
+```
+
+### 2、使用 ViewModel 管理关联到 UI 界面的数据
+
+DataBinding 库能够与 [ViewModel](https://developer.android.com/reference/android/arch/lifecycle/ViewModel) 组件完美协作
+
+ViewModel 组件 + DataBinding 库的组合能够让我们把 UI 逻辑从 布局文件 转移到 ViewModel 中，这样我们就能够更容易的进行测试。
+
+DataBinding 会根据场景需要把 view 与 数据源绑定或者解绑，这样，我们只需要关注是否提供了合适的数据即可。
+
+关于架构组件（ Architecture Component）的更多内容，可以查看 [ViewModel Overview](https://developer.android.com/topic/libraries/architecture/viewmodel.html).
+
+
+将 ViewModel 组件与 DataBinding 库配合使用时，我们必须先获取一个继承自 ViewModel 的实例、获取绑定类的实例，然后将 ViewModel 组件的实例指定给绑定类中的一个属性变量 (该变量需要先从布局文件中通过 variable 声明)。示例如下：
+
+kotlin 版
+
+```kotlin
+class ViewModelActivity : AppCompatActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        // Obtain the ViewModel component.
+        UserModel userModel = ViewModelProviders.of(getActivity())
+                                                  .get(UserModel::class.java)
+
+        // Inflate view and obtain an instance of the binding class.
+        val binding: UserBinding = DataBindingUtil.setContentView(this, R.layout.user)
+
+        // Assign the component to a property in the binding class.
+        binding.viewmodel = userModel
+    }
+}
+```
+
+java 版
+
+```java
+class ViewModelActivity extends AppCompatActivity {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        // Obtain the ViewModel component.
+        UserModel userModel = ViewModelProviders.of(getActivity())
+                                                  .get(UserModel.class);
+
+        // Inflate view and obtain an instance of the binding class.
+        UserBinding binding = DataBindingUtil.setContentView(this, R.layout.user);
+
+        // Assign the component to a property in the binding class.
+        binding.viewmodel = userModel;
+    }
+}
+```
+
+然后，我们就可以在布局文件的绑定表达式中使用这个 ViewModel 的属性和方法了：
+
+```xml
+<CheckBox
+    android:id="@+id/rememberMeCheckBox"
+    android:checked="@{viewmodel.rememberMe}"
+    android:onCheckedChanged="@{() -> viewmodel.rememberMeChanged()}" />
+```
+
+
+
+### 3、使用 可观察的 ViewModel 获取绑定适配器的更多控制权限
+
+（本节详细示例代码可参考 [官方数据绑定示例](https://github.com/googlesamples/android-databinding)）
+
+使用 可观察的 ViewModel 能够获取比绑定适配器更多的控制权限
+
+我们可以使用实现了 Observable 的 ViewModel 组件去通知 APP 中的其他组件，告知他们 ViewModel 中的数据发生了变化，这和使用 LiveData 对象的方式类似。
+
+有些场景我们更应该使用实现了 Observable 的 ViewModel 实例，而不是使用 LiveData 对象，即便这样做会失去对声明周期的管理。
+
+使用实现了 Observable 的 ViewModel 时，我们能够获取对 BindingAdapter 更多的控制。比如：这种模式能够让我们在数据发生变化时获取更多的控制，而不仅仅是将变化通知给别的控件，它可以让我们通过自定义的方法实现值和 View 属性的双向绑定。
+
+实现可观察的 ViewModel 时，我们首先要有一个继承自 ViewModel 的类，然后让该类实现 Observable 接口。
+
+当观察者通过 `addOnPropertyChangedCallback()` 和 `removeOnPropertyChangedCallback()` 对数据变化的通知进行订阅或者取消订阅时，我们可以提供自定义逻辑。或者，当属性发生变化时，我们也可以在 `notifyPropertyChanged()` 中提供自定义的逻辑。
+
+
+下面的示例代码中展示了如何实现可观察的 ViewModel :
+
+kotlin 版
+
+```kotlin
+/**
+ * A ViewModel that is also an Observable,
+ * to be used with the Data Binding Library.
+ */
+open class ObservableViewModel : ViewModel(), Observable {
+    private val callbacks: PropertyChangeRegistry = PropertyChangeRegistry()
+
+    override fun addOnPropertyChangedCallback(
+            callback: Observable.OnPropertyChangedCallback) {
+        callbacks.add(callback)
+    }
+
+    override fun removeOnPropertyChangedCallback(
+            callback: Observable.OnPropertyChangedCallback) {
+        callbacks.remove(callback)
+    }
+
+    /**
+     * Notifies observers that all properties of this instance have changed.
+     */
+    fun notifyChange() {
+        callbacks.notifyCallbacks(this, 0, null)
+    }
+
+    /**
+     * Notifies observers that a specific property has changed. The getter for the
+     * property that changes should be marked with the @Bindable annotation to
+     * generate a field in the BR class to be used as the fieldId parameter.
+     *
+     * @param fieldId The generated BR id for the Bindable field.
+     */
+    fun notifyPropertyChanged(fieldId: Int) {
+        callbacks.notifyCallbacks(this, fieldId, null)
+    }
+}
+```
+
+java 版
+
+```java
+/**
+ * A ViewModel that is also an Observable,
+ * to be used with the Data Binding Library.
+ */
+class ObservableViewModel extends ViewModel implements Observable {
+    private PropertyChangeRegistry callbacks = new PropertyChangeRegistry();
+
+    @Override
+    protected void addOnPropertyChangedCallback(
+            Observable.OnPropertyChangedCallback callback) {
+        callbacks.add(callback);
+    }
+
+    @Override
+    protected void removeOnPropertyChangedCallback(
+            Observable.OnPropertyChangedCallback callback) {
+        callbacks.remove(callback);
+    }
+
+    /**
+     * Notifies observers that all properties of this instance have changed.
+     */
+    void notifyChange() {
+        callbacks.notifyCallbacks(this, 0, null);
+    }
+
+    /**
+     * Notifies observers that a specific property has changed. The getter for the
+     * property that changes should be marked with the @Bindable annotation to
+     * generate a field in the BR class to be used as the fieldId parameter.
+     *
+     * @param fieldId The generated BR id for the Bindable field.
+     */
+    void notifyPropertyChanged(int fieldId) {
+        callbacks.notifyCallbacks(this, fieldId, null);
+    }
+}
+```
+
+
 <h2 id="8">八、双向数据绑定</h2>
+
+
+使用单向的数据绑定时，我们给 View 绑定一个属性值，如果我们想在监听到某个动作后去更改这个被绑定的属性值，还必须要绑定一个监听器，示例如下：
+
+
+```xml
+<CheckBox
+    android:id="@+id/rememberMeCheckBox"
+    android:checked="@{viewmodel.rememberMe}"
+    android:onCheckedChanged="@{viewmodel.rememberMeChanged}"
+/>
+```
+
+但双向绑定提供了一个快捷的实现方式：
+
+```xml
+<CheckBox
+    android:id="@+id/rememberMeCheckBox"
+    android:checked="@={viewmodel.rememberMe}"
+/>
+```
+
+双向绑定时使用 `@={}`，其中的 `=` 非常重要。在上面的示例中当控件 `checked` 属性值被改变之后，它会通知 ViewModel 修改 `rememberMe` 的值，而当代码逻辑中改变了该 `rememberMe` 的值之后，它也会去通知 `checked` 改变属性值并更新 UI。它实际上起到了一个双向监听的作用
+
+当然了，实现双向绑定的一个前提是，布局文件中使用的 ViewModel 必须实现 Observable —— 实际使用时通常是直接实现 BaseObservable, 并且给 getter 方法添加 `@Bindable` 注解，而在 setter 中当属性值改变时需要调用 `notifyPropertyChanged(BR.xx) ` (其中的 xx 表示 setter 和 getter 对应的属性值)，示例如下：
+
+KOTLIN
+
+```kotlin
+class LoginViewModel : BaseObservable {
+    // val data = ...
+
+    @Bindable
+    fun getRememberMe(): Boolean {
+        return data.rememberMe
+    }
+
+    fun setRememberMe(value: Boolean) {
+        // Avoids infinite loops.
+        if (data.rememberMe != value) {
+            data.rememberMe = value
+
+            // React to the change.
+            saveData()
+
+            // Notify observers of a new value.
+            notifyPropertyChanged(BR.remember_me)
+        }
+    }
+}
+```
+
+JAVA
+
+```java
+class LoginViewModel : BaseObservable {
+    // val data = ...
+
+    @Bindable
+    fun getRememberMe(): Boolean {
+        return data.rememberMe
+    }
+
+    fun setRememberMe(value: Boolean) {
+        // Avoids infinite loops.
+        if (data.rememberMe != value) {
+            data.rememberMe = value
+
+            // React to the change.
+            saveData()
+
+            // Notify observers of a new value.
+            notifyPropertyChanged(BR.remember_me)
+        }
+    }
+}
+```
+
+在上面的示例代码中，由于被绑定的属性对应的 getter 为 `getRememberMe()`, 那么，该属性对应的 setter 就应该是 `setRememberMe()`, 也就是说，双向绑定时会通过这两个方法去获取和改变 `rememberMe` 的值。
+
+
+
+### 1、让自定义属性实现双向绑定
+
+#### (1)、实现自定义属性的双向绑定
+
+DataBinding 库已经实现了很多属性和监听器的双向绑定逻辑，我们直接调用即可。
+
+如果我们想给通过 `@BindableAdapter` 声明的自定义的属性添加双向绑定，那么我们就需要使用 `@InverseBindingAdapter` 和 `@InverseBindingMethod`
+
+比如，我们有一个名称为 `MyView` 的自定义 View，并通过 `@BindableAdapter` 给它绑定了一个 `time` 属性。如果我们想要给该属性实现双向绑定，就需要遵从如下步骤：
+
+**A：使用 `@BindableAdapter` 注解该属性的 setter 方法**
+
+KOTLIN
+
+```kotlin
+@BindingAdapter("time")
+@JvmStatic fun setTime(view: MyView, newValue: Time) {
+    // 做这个判断是为了避免无限循环——双向绑定是 视图 和 Model 互相通知的模式 
+    if (view.time != newValue) {
+        view.time = newValue
+    }
+}
+```
+
+JAVA
+
+```java
+@BindingAdapter("time")
+@JvmStatic fun setTime(view: MyView, newValue: Time) {
+    // Important to break potential infinite loops.
+    if (view.time != newValue) {
+        view.time = newValue
+    }
+}
+```
+
+**B: 给该属性对应的 getter 添加 `@InverseBindingAdapter` 注解**
+
+KOTLIN
+
+```kotlin
+@InverseBindingAdapter("time")
+@JvmStatic fun getTime(view: MyView) : Time {
+    return view.getTime()
+}
+```
+
+JAVA
+
+```java
+@InverseBindingAdapter("time")
+@JvmStatic fun getTime(view: MyView) : Time {
+    return view.getTime()
+}
+```
+
+这样，DataBinding 库就知道当数据发生改变时取调用被 `@BindableAdapter` 注解的方法，而当属性值发生改变时就会去调用被 `@InverseBindingListener` 注解的方法。
+
+#### (2)、为自定义属性添加监听
+
+虽然在前一节中我们已经实现了自定义属性的双向绑定，但是，DataBinding 库并不知道属性值什么时候被改变，也不知道是怎么被改变的。
+
+所以，此时我们就需要给 View 设置一个属性变化的监听器。这个监听器可以是与 View 关联的自定义的监听，也可以是系统已经实现的通用监听，比如 焦点变化的监听、文本内容改变的监听等。
+
+在实现自定义监听时，我们给设置监听器的 setter 方法添加 `@BindingAdapter` 注解，注解中指定属性名称即可。（CnPeng 本质就是通过 `@BindableAdapter` 注解生成自定义属性，只不过对应的属性值是 `InverseBindingListener` 的子类），示例如下：
+
+
+KOTLIN
+
+```kotlin
+@BindingAdapter("app:timeAttrChanged")
+@JvmStatic fun setListeners(
+        view: MyView,
+        attrChange: InverseBindingListener
+) {
+    // Set a listener for click, focus, touch, etc.
+}
+```
+
+JAVA
+
+```java
+@BindingAdapter("app:timeAttrChanged")
+public static void setListeners(
+        MyView view, final InverseBindingListener attrChange) {
+    // Set a listener for click, focus, touch, etc.
+}
+```
+
+上述示例代码中, 监听器的类型需要是 `InverseBindingListener`, 该监听器的作用是通知 DataBinding 库属性值被改变了，然后 DataBinding 库就会去触发被 `@ InverseBindingAdapter` 注解的方法。
+
+注意：
+
+每一个双向绑定的属性都需要有一个对应的事件属性，事件属性的名称通常是 被绑定属性的名称 + 后缀 `AttrChanged `.
+而 DataBinding 库会使用这个事件属性去创建一个使用 `@BindableAdapter` 注解的事件监听方法. 实际应用中，这个监听器方法中会包含一些重要的逻辑，这些逻辑中也包含单向绑定的监听逻辑。具体示例可以参考  [TextViewBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/TextViewBindingAdapter.java#344) 中 `text` 属性的变化监听——`setTextWatcher()`
+
+### 2、转换器 
+
+如果绑定到 View 对象的变量需要在显示前进行格式化等操作，那么，我们就可以使用转换器（Converter）去执行这些操作：
+
+比如，在下面的示例中，我们通过自定义的 Converter 及其中的 `dateToString()` 将 Long 类型的 `viewmodel.birthDate` 时间转转成了 CharSequence 实例
+
+```xml
+<EditText
+    android:id="@+id/birth_date"
+    android:text="@={Converter.dateToString(viewmodel.birthDate)}"
+/>
+```
+
+由于使用了双向绑定，所以，我们也需要一个将 CharSequence 转成 Long 的反向转换方法，我们给这个反向转换方法添加一个 `@ InverseMethod ` 注解即可，但注解后面的括号中需要指明对应的正向转换的方法名称。具体示例如下：
+
+```kotlin
+object Converter {
+
+    @InverseMethod("stringToDate")
+    fun dateToString(
+        view: EditText, oldValue: Long,
+        value: Long
+    ): String {
+        // Converts long to String.
+    }
+
+    fun stringToDate(
+        view: EditText, oldValue: String,
+        value: String
+    ): Long {
+        // Converts String to long.
+    }
+}
+```
+
+```java
+public class Converter {
+    @InverseMethod("stringToDate")
+    public static String dateToString(EditText view, long oldValue,
+            long value) {
+        // Converts long to String.
+    }
+
+    public static long stringToDate(EditText view, String oldValue,
+            String value) {
+        // Converts String to long.
+    }
+}
+```
+
+### 3、无限循环的双向绑定
+
+双向绑定的逻辑是，当被绑定的数据发生改变时会触发 `@BindingAdapter` 注解的方法去改变属性值，当属性值发生改变时也会触发 `InverseBindingListener` 然后触发 `@InverseBindingAdapter` 注解的方法去改变被绑定的数据。
+
+这样，就形成了一个循环。
+
+为了避免让这个过程形成了一个无限的死循环，我们就需要在 `@BindingAdapter` 中判断新的值是否与旧的中一致，一致则终止循环；不一致，才去更新值并执行其他逻辑。
+
+
+### 4、双向绑定的属性
+
+DataBinding 库已经为我们实现了许多属性的双向绑定逻辑，具体如下表，我们可以点击超链接查看对应 xxBindingAdapter 内部的实现逻辑：
+
+Class |	Attribute(s)	| Binding adapter
+---|---|---
+AdapterView |	android:selectedItemPosition <br> android:selection | [AdapterViewBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/AdapterViewBindingAdapter.java)
+CalendarView | android:date |	[CalendarViewBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/CalendarViewBindingAdapter.java)
+CompoundButton |	android:checked	| [CompoundButtonBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/CompoundButtonBindingAdapter.java)
+DatePicker |	android:year <br> android:month <br> android:day | [DatePickerBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/DatePickerBindingAdapter.java)
+NumberPicker | android:value | [NumberPickerBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/NumberPickerBindingAdapter.java)
+RadioButton |	android:checkedButton |	[RadioGroupBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/RadioGroupBindingAdapter.java)
+RatingBar	| android:rating	 | [RatingBarBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/RatingBarBindingAdapter.java)
+SeekBar	| android:progress |	[SeekBarBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/SeekBarBindingAdapter.java)
+TabHost	| android:currentTab |	[TabHostBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/TabHostBindingAdapter.java)
+TextView	| android:text |	[TextViewBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/TextViewBindingAdapter.java)
+TimePicker |	android:hour <br> android:minute | [TimePickerBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/TimePickerBindingAdapter.java)
+
+
+
 
 <h2 id="9">九、相关资料</h2>
 
