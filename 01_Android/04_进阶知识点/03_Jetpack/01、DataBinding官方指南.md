@@ -176,7 +176,7 @@ Android Studio 对 DataBinding 的代码提供了诸多支持，如：
 ### 3、新的数据绑定编译器
 
 #### (1)、启用新的绑定编译器
-从 Android Gradle 插件的 3.1.0-alpha06 版本开始，在生成 绑定类时 使用了新的数据绑定编译器。新的编译器使用增量编译的方式来创建绑定类，极大的提高了程序的构建速度。关于绑定类的更多内容可以查看 <a href="5">生成的绑定类</a> 一节
+从 Android Gradle 插件的 3.1.0-alpha06 版本开始，在生成 绑定类时 使用了新的数据绑定编译器。新的编译器使用增量编译的方式来创建绑定类，极大的提高了程序的构建速度。关于绑定类的更多内容可以查看 <a href="#5">生成的绑定类</a> 一节
 
 在老版本的绑定编译器中，生成绑定类的操作 是与 编译你自己的代码 同步的。所以，在之前的版本中，如果我们自己写的代码出了错误，也会导致生成绑定类的操作终止，然后我们就会在 Android Studio 的 Logcat 面板中看见无数个 `找不到绑定类 ( the binding calsses aren't found )` 的错误提示。而在 **新的绑定编译器中，会先处理绑定类的生成操作，然后再去编译我们自己编写的其他代码**。
 
@@ -245,7 +245,7 @@ DataBinding 的布局文件与普通的布局文件差异很小，DataBinding �
 
 在上面的示例代码中，我们分别把 `user.firstName` 和 `user.lastName` 作为 TextView 的 `android:text` 属性值。
 
-**注意：绑定表达式要尽量简洁。**  借助 <a href="6">绑定适配器</a> 可以简化绑定表达式。
+**注意：绑定表达式要尽量简洁。**  借助 <a href="#6">绑定适配器</a> 可以简化绑定表达式。
 
 
 ### 1、数据对象
@@ -1468,7 +1468,7 @@ ListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_
 
 ---
 
-CnPeng: 后面这两个知识点的内容没想到使用场景。尤其是第一个，没找到示例，自己尝试也一直失败。
+CnPeng: 下面这两个知识点的内容没想到使用场景。尤其是第一个，没找到示例，自己尝试也一直失败。
 
 
 
@@ -1505,6 +1505,8 @@ View viewRoot = LayoutInflater.from(this).inflate(layoutId, parent, attachToPare
 ViewDataBinding binding = DataBindingUtil.bind(viewRoot);
 
 ```
+
+>CnPeng : 在创建绑定对象时，比较常用的方法是直接使用 `DataBindingUitl.setContentView` 和 `DataBindingUitl.inflate()`—— 至少我以前一直是这么用的。。。😁
 
 ---
 
@@ -1599,7 +1601,6 @@ class TempActivity : AppCompatActivity() {
                 binding.viewStubProxy.viewStub?.visibility = View.VISIBLE
             }
             if (clickCount > 5) {
-                // binding.viewStubProxy.viewStub?.visibility = View.GONE
                 binding.viewStubProxy.root.ll_viewStub.visibility = View.GONE
             }
 
@@ -1747,7 +1748,9 @@ class TempRvAdapter(private val descList: MutableList<String>) : RecyclerView.Ad
 
     override fun onBindViewHolder(holder: BindingHolder, position: Int) {
         val desc = descList[position]
+        // 此处应用了动态变量，我们不需要知道 binding 的具体类型，而是直接将 BR.itemDesc 与 desc 绑定
         holder.binding.setVariable(BR.itemDesc, desc)
+        // 这一句的作用是，即可刷新
         holder.binding.executePendingBindings()
     }
 
@@ -1868,7 +1871,7 @@ DataBinding 库允许我们通过 绑定适配器 调用 特定的方法 给 Vie
 
 #### (1)、自动匹配方法
 
-假设在布局文件中，我们为某个 view 指定了一个属性，其名称为 `example`, 那么 DataBinding 库会自动去寻找参数类型与 `example` 的值相类型匹配的 `setExample(arg)` 方法。在寻找这个 setter 方法时，DataBinding 库不关心其命名空间是啥，只会去匹配属性名称及其值的类型。
+假设在布局文件中，我们为某个 view 指定了一个属性，其名称为 `example`, 那么 DataBinding 库会自动去寻找参数类型与 `example` 的值类型相匹配的 `setExample(arg)` 方法。在寻找这个 setter 方法时，DataBinding 库不关心其命名空间是啥，只会去匹配属性名称及其值的类型。
 
 举个例子，我们有这么一个绑定表达式：`android:text="@{user.name}"`, 那么 DataBinding 库就会去寻找名称为 `setText(arg)` 的方法， 并且该方法接收的参数类型必须与 `user.name` 的类型一致。假设 `user.getName()` 的返回值类型为 String，那么 DataBinding 库就会去匹配 参数为 String 类型的 setText()。当然了，如果我们已经知道 setter 方法的参数类型，但是 `user.name` 的返回值类型与参数类型不匹配，那么，我们就可以为 `user.name` 使用类型强转。
 
@@ -1930,6 +1933,7 @@ kotlin 版：
 
 ```kotlin
 @BindingAdapter("android:paddingLeft")
+@JvmStatic
 fun setPaddingLeft(view: View, padding: Int) {
     view.setPadding(padding,
                 view.getPaddingTop(),
@@ -1974,7 +1978,7 @@ object TestBindingAdapter {
     @BindingAdapter("android:marginLeft")
     @JvmStatic
     fun setCusMarginLeft(view: View, marginLeft: Int) {
-
+		 // 我们在布局文件中可以直接使用 @dimen/xxx 的形式赋值，传递过来时，marginLeft 就是转换过之后的 px 值了
         val lp = view.layoutParams
 
         if (lp is ViewGroup.MarginLayoutParams) {
@@ -2358,6 +2362,7 @@ kotlin 版
 
 ```kotlin
 @BindingConversion
+@JvmStatic
 fun convertColorToDrawable(color: Int) = ColorDrawable(color)
 ```
 
@@ -2392,7 +2397,7 @@ DataBinding + Architecture Components 的组合能够更进一步的简化 UI �
 
 ### 1、使用 LiveData 通知界面更新
 
-我们可以使用 `LiveData` 对象作为数据绑定的数据源，这样，当数据发生变化时机就会主动的通知 UI 界面去更新。关于 LiveData 的更多内容可以查看 [LiveData 概览](https://developer.android.com/topic/libraries/architecture/livedata)
+我们可以使用 `LiveData` 对象作为数据绑定的数据源，这样，当数据发生变化时就会主动的通知 UI 界面去更新。关于 LiveData 的更多内容可以查看 [LiveData 概览](https://developer.android.com/topic/libraries/architecture/livedata)
 
 与实现了 Observable 的对象（如 ：ObservableField ）不同, LiveData 对象能够获取数据观察者的生命周期。这一特点带来了许多益处，这些益处在 [LiveData 概览](https://developer.android.com/topic/libraries/architecture/livedata) 有说明。
 
@@ -2400,7 +2405,7 @@ DataBinding + Architecture Components 的组合能够更进一步的简化 UI �
 
 在绑定类中使用 LiewData 对象时，需要指定由谁来持有该绑定类的生命周期，从而限定 LiveData 对象的作用域——只在持有者内部有效。（这个持有者就是 LiveData 的数据观察者）
 
-下面的示例代码中，在初始化 绑定了之后，指定了 activity 作为 绑定类生命周期的持有者——也就是 LiveData 的数据观察者：
+下面的示例代码中，在初始化 绑定类 之后，指定了 activity 作为 绑定类生命周期的持有者——也就是 LiveData 的数据观察者：
 
 kotlin 版
 
