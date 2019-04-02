@@ -141,7 +141,7 @@ android {
 ```
 
 注意：
-==**如果当前 module 所依赖的 libraries 中使用了数据绑定，那么，不论 该module 是否使用了数据绑定，都必须在当前 module 的 gradle 文件中启用数据绑定。**==
+**如果当前 module 所依赖的 libraries 中使用了数据绑定，那么，不论 该 module 是否使用了数据绑定，都必须在当前 module 的 gradle 文件中启用数据绑定。**
 
 ### 2、Android Studio 中对数据绑定的支持
 
@@ -164,7 +164,7 @@ Android Studio 对 DataBinding 的代码提供了诸多支持，如：
 
 如果我们只是单纯的想在布局编辑器的预览界面中查看布局效果，完全可以使用 `tools` 命名空间来实现。`tools` 命名空间实现的内容只在预览时生效，程序部署运行后无效。
 
-==注意：部分资料中只说了 default 属性值可以在预览界面显示，但没有说明数据绑定表达式取不到值时会使用 default 属性值的情况，此处我之前栽过跟头😭==
+**注意：部分资料中只说了 default 属性值可以在预览界面显示，但没有说明数据绑定表达式取不到值时会使用 default 属性值的情况，此处我之前栽过跟头😭**
 
 关于 tools 命名空间的使用，可以参考如下文章：
 
@@ -345,7 +345,7 @@ protected void onCreate(Bundle savedInstanceState) {
 
 #### (2)、Fragment、ListView、RecyclerView
 
-在 Fragment、ListView、RecyclerView 中填充视图中，我们使用的是 `DataBindingUtil.inflate()`
+在 Fragment、ListView、RecyclerView 中填充视图时，我们使用的是 `DataBindingUtil.inflate()`
 
 kotlin 版
 
@@ -372,7 +372,7 @@ ListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_
 * 位运算(Binary)： `&  |  ^`
 * 一元运算（Unary）：`+ - ! ~`
 * 位移运算（shift）: `>>  >>>  <<`
-* 比较表达式：`== > < >= <=` ==注意：`<` 需要使用转义字符 `&lt;` 替代==
+* 比较表达式：`== > < >= <=` **注意：`<` 需要使用转义字符 `&lt;` 替代**
 * `instanceof` 关键字
 * 分组符号（Grouping）：`( )`
 * 字面值：字符、字符串、数字、null
@@ -435,7 +435,7 @@ android:text="@{user.lastName}"
 也就是说，如果被引用的对象为空，那么会使用对象字段的默认值。
 
 
-#### (6)、表达式中的集合（==重点==）
+#### (6)、表达式中的集合（**重点**）
 
 在数据绑定的表达式中，可以通过 `[ ]` 访问 arrays, lists, sparse lists, maps 的元素。
 
@@ -608,7 +608,7 @@ class MainActivity : AppCompatActivity() {
 
 最后，我们在 Activity 中构建 MyHandlers 对象，然后调用 setter 方法将该对象设置到 绑定类中。
 
-注意：==被绑定的方法必须是 public 的==
+注意：**被绑定的方法必须是 public 的**
 
 #### (2)、绑定监听器
 
@@ -679,7 +679,7 @@ android:onClick="@{(view)-> handler.onClickButton(args,context)}"
 ```
 上面的这行代码中，我们在 lambda 表达式的括号中定义了一个名为 view 的参数，这是 OnClickListener 中的 onClick 所需要的参数。
 
-对于监听器回调方法的参数，有两种处理方式：直接省略或者==全==都声明出来。声明出来之后，我们就可以在绑定表达式中使用它。
+对于监听器回调方法的参数，有两种处理方式：直接省略或者**全**都声明出来。声明出来之后，我们就可以在绑定表达式中使用它。
 
 示例2：
 
@@ -851,7 +851,7 @@ import 的类中如果有静态属性和方法，我么也可以直接在绑定�
 
 定义的每一个变量都将是自动生成的 Binding 类的属性，而且会在 Binding 类中生成对应的 setter 和 getter。在 setter 被调用之前，这些变量都会持有一个默认值——引用类型默认为null，int 类型默认为 0 等等。
 
-==`context` 是一个特殊的变量名，默认情况下，它的值是当前布局文件根节点的 `getContext()` 的值。如果我们显示的声明了一个同名的变量，该变量的类型和值就会覆盖默认的类型和值。==
+**`context` 是一个特殊的变量名，默认情况下，它的值是当前布局文件根节点的 `getContext()` 的值。如果我们显示的声明了一个同名的变量，该变量的类型和值就会覆盖默认的类型和值。**
 
 
 #### (3)、include 
@@ -2371,9 +2371,10 @@ public static ColorDrawable convertColorToDrawable(int color) {
 
 ```
 
-我们在绑定表达式中提供的值的类型必须是一致的，==下面的示例就是一个错误的代码：== ,因为三目表达式中我们提供了一个 Drawable 和 color。正确的做法是，要么全是 Drawable , 要么全是 color
+我们在绑定表达式中提供的值的类型必须是一致的，**下面的示例就是一个错误的代码：** ,因为三目表达式中我们提供了一个 Drawable 和 color。正确的做法是，要么全是 Drawable , 要么全是 color
 
 ```xml
+<-- 这是错误的示例代码 这是错误的示例代码 这是错误的示例代码 !-->
 <View
    android:background="@{isError ? @drawable/error : @color/white}"
    android:layout_width="wrap_content"
