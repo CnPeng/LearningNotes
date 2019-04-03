@@ -12,13 +12,12 @@
 12. 单例的简化--object
 13. 类的构造
 14. 属性的声明
-
-
-1. 代理/委托
-2. 协程
-3. 函数类型--高阶函数
-4. 枚举类/印章类
-5. 
+15. 即便不适用 DataBinding 也不需要 findViewByID
+16. 代理/委托
+17. 协程
+18. 函数类型 和 高阶函数
+19. 枚举类/印章类
+20. 简化写法：let with run apply also
 
 
 [正面示例 https://kaixue.io/kotlin-overview/](https://kaixue.io/kotlin-overview/)

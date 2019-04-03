@@ -6,3 +6,5 @@
 
 * [Android RoundedBitmapDrawable：Android官方的圆角图形图象实现方案](https://blog.csdn.net/zhangphil/article/details/51829650)
 
+
+[使用 RoundedBitmapDrawable 创建圆角头像详解](https://juejin.im/post/5ca3eaf8518825440a4b9ee1?utm_source=gold_browser_extension)
