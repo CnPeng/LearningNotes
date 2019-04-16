@@ -2042,9 +2042,334 @@ func (sh serverHandler) ServeHTTP(rw ResponseWriter, req *Request) {
 
 ### 4、Go 的 Http 详解
 
+Go 的 http 有两个核心功能：Conn、ServeMux
+
 #### (1)、Conn 的 goroutine
+
+Go 为了实现高并发和高性能, 使用了 goroutines 来处理 Conn 的读写事件, 这样每个请求都能保持独立，相互不会阻塞，可以高效的响应网络事件。
+
+Go 在等待客户端请求里面是这样写的：
+
+```go
+// srv.Serve()：遍历接收到的请求，并在协程中处理这些请求
+func (srv *Server) Serve(l net.Listener) error {
+	for {
+		rw, e := l.Accept()
+		//... 其他内容省略
+	
+		c, err := srv.newConn(rw)
+		if err != nil {
+			continue
+		}
+		go c.serve()
+	}
+}
+```
+上述代码中，服务器会为客户端的每次请求单独创建一个 Conn ，这个 Conn 内保存了该次请求的信息，然后再传递到对应的 handler，该 handler 中便可以读取到相应的 header 信息，这样保证了每个请求的独立性。
+
 #### (2)、ServeMux 的自定义
+
+前面我们已经知道当 `http.ListenAndServe(":9090",nil)` 中第二个参数为 nil 时，底层的 `conn.server` 最终会调用 http 包默认的路由——DefaultServeMux，通过该路由把本次请求的信息传递给后端的处理函数。
+
+
+##### A: serverHandler 中的 ServeHTTP()
+
+在 `conn.server` 中会调用 `serverHandler{c.server}.ServeHTTP(w, w.req)`, 其内部最终调用的是 Handler 的 `ServeHTTP()`。代码如下：
+
+```go
+func (sh serverHandler) ServeHTTP(rw ResponseWriter, req *Request) {
+	handler := sh.srv.Handler
+	if handler == nil {
+		handler = DefaultServeMux
+	}
+	if req.RequestURI == "*" && req.Method == "OPTIONS" {
+		handler = globalOptionsHandler{}
+	}
+	// 最终调用 Handler 中对 ServeHTTP 的实现
+	handler.ServeHTTP(rw, req)
+}
+```
+
+##### B: DefaultServeMux
+
+当 `sh.srv.Handler` 为 nil 时，会触发 DefaultServeMux 中的 `ServeHTTP()`
+
+DefaultServeMux 的实现如下：
+
+```go
+var DefaultServeMux = &defaultServeMux
+
+var defaultServeMux ServeMux
+
+type ServeMux struct {
+	//锁，由于请求涉及到并发处理，因此这里需要一个锁机制
+	mu sync.RWMutex   
+	// 路由规则，一个 string 对应一个 mux 实体，这里的 string 就是注册的路由表达式
+	m  map[string]muxEntry  
+	// 是否在任意的规则中带有 host 信息
+	hosts bool
+}
+
+type muxEntry struct {
+ 	// 是否精确匹配
+	explicit bool 
+	// 这个路由表达式对应哪个handler 
+	h        Handler 
+	// 匹配字符串--正则
+	pattern  string  
+}
+```
+
+根据上述代码可知，DefaultServeMux 是 ServeMux 实例的指针变量。
+
+ServeMux 结构体中有一个 `map[string]muxEntry` 类型的属性 `m`, 它内部存储的就是我们通过 `http.HandleFunc("/",sayHello)` 配置的路由及处理函数。
+
+DefaultServeMux 调用的  `ServeHTTP()` 即 ServeMux 的 `ServeHTTP()`:
+
+```go
+func (mux *ServeMux) ServeHTTP(w ResponseWriter, r *Request) {
+	if r.RequestURI == "*" {
+		if r.ProtoAtLeast(1, 1) {
+			w.Header().Set("Connection", "close")
+		}
+		w.WriteHeader(StatusBadRequest)
+		return
+	}
+	h, _ := mux.Handler(r)
+	h.ServeHTTP(w, r)
+}
+```
+
+上述代码中又通过 `mux.Handler(r)` 获取了最终要执行的 `h`, 内部实现如下: 
+
+```go
+func (mux *ServeMux) Handler(r *Request) (h Handler, pattern string) {
+
+	if r.Method == "CONNECT" {
+	
+		if u, ok := mux.redirectToPathSlash(r.URL.Host, r.URL.Path, r.URL); ok {
+			return RedirectHandler(u.String(), StatusMovedPermanently), u.Path
+		}
+
+		return mux.handler(r.Host, r.URL.Path)
+	}
+
+	host := stripHostPort(r.Host)
+	path := cleanPath(r.URL.Path)
+
+	if u, ok := mux.redirectToPathSlash(host, path, r.URL); ok {
+		return RedirectHandler(u.String(), StatusMovedPermanently), u.Path
+	}
+
+	if path != r.URL.Path {
+		_, pattern = mux.handler(host, path)
+		url := *r.URL
+		url.Path = path
+		return RedirectHandler(url.String(), StatusMovedPermanently), pattern
+	}
+
+	return mux.handler(host, r.URL.Path)
+}
+```
+
+上述代码中，在没有重定向的前提下，又会返回 `mux.handler()`, 其实现如下：
+
+```go
+func (mux *ServeMux) handler(host, path string) (h Handler, pattern string) {
+	mux.mu.RLock()
+	defer mux.mu.RUnlock()
+
+	// Host-specific pattern takes precedence over generic ones
+	if mux.hosts {
+		h, pattern = mux.match(host + path)
+	}
+	if h == nil {
+		h, pattern = mux.match(path)
+	}
+	if h == nil {
+		h, pattern = NotFoundHandler(), ""
+	}
+	return
+}
+```
+
+在上述函数中，会触发 `mux.match()` 去判断是否有匹配的 handler:
+
+```go
+// Find a handler on a handler map given a path string.
+// Most-specific (longest) pattern wins.
+func (mux *ServeMux) match(path string) (h Handler, pattern string) {
+	// Check for exact match first.
+	v, ok := mux.m[path]
+	if ok {
+		return v.h, v.pattern
+	}
+
+	// Check for longest valid match.
+	var n = 0
+	for k, v := range mux.m {
+		if !pathMatch(k, path) {
+			continue
+		}
+		if h == nil || len(k) > n {
+			n = len(k)
+			h = v.h
+			pattern = v.pattern
+		}
+	}
+	return
+}
+```
+
+上述代码中，会读取 mux 中的 m 属性，m 是一个 map, `mux.m[path]` 会返回 path 对应的 handler. 而这个 m 的初始化实际是在 `http.HandleFunc()` 的底层调用的。
+
+##### C: Handler 和 路由注册
+
+接下来，我们看一下 DefaultServeMux 中的 m 是如何初始化的。
+
+先来看一下 `http.HandleFunc(,)` 的具体实现:
+
+```go
+// 1、http.HandleFunc 的具体实现
+func HandleFunc(pattern string, handler func(ResponseWriter, *Request)) {
+	DefaultServeMux.HandleFunc(pattern, handler)
+}
+
+// 2、DefaultServeMux.HandleFunc 的实现
+func (mux *ServeMux) HandleFunc(pattern string, handler func(ResponseWriter, *Request)) {
+	if handler == nil {
+		panic("http: nil handler")
+	}
+	
+	// HandlerFunc(handler) 构建 Hanlder 对象
+	mux.Handle(pattern, HandlerFunc(handler))
+}
+```
+
+`HandlerFunc(handler)` 的实现：
+
+```go
+// 1、HandlerFunc 类型的定义
+type HandlerFunc func(ResponseWriter, *Request)
+
+// 2、HandlerFunc 实现了 Handler 接口, 并在 ServeHTTP calls f(w, r) 内部调用 HandlerFunc 本身
+func (f HandlerFunc) ServeHTTP(w ResponseWriter, r *Request) {
+	f(w, r)
+}
+
+// 3、Handler 接口，其实现类会实现 ServeHTTP 方法
+type Handler interface {
+ 	// 路由实现器
+	ServeHTTP(ResponseWriter, *Request) 
+}
+```
+
+`mux.Handle()` 的内部实现如下：
+
+```go
+func (mux *ServeMux) Handle(pattern string, handler Handler) {
+	mux.mu.Lock()
+	defer mux.mu.Unlock()
+
+	//...省略内容
+
+	if mux.m == nil {
+		// 初始化 mux 中的 m 属性
+		mux.m = make(map[string]muxEntry)
+	}
+	
+	// 为 mux 中的 m 属性添加键值对
+	mux.m[pattern] = muxEntry{h: handler, pattern: pattern}
+
+	if pattern[0] != '/' {
+		mux.hosts = true
+	}
+}
+```
+
+通过上面的代码可知，`http.HandleFunc(,)` 的作用其实就是初始化了 DefaultMux 中的 m —— 即 路由注册。
+
+##### D: 自定义 Handler
+
+通过前面三个小节，我们了解了整个路由过程。
+
+我们在调用 `http.ListenAndServe(,)`，第二个参数也可以传递一个自定义的 Handler 接口实现: 
+
+```go
+package main
+
+import (
+	"fmt"
+	"net/http"
+)
+
+type CusMux struct{}
+
+func (mux CusMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	if r.URL.Path == "/" {
+		// 打印到控制台
+		fmt.Println("hello")
+		// 输入到客户端--浏览器
+		fmt.Fprintf(w, "Hello GO! GO! GO !")
+		return
+	}
+	http.NotFound(w, r)
+	return
+}
+
+func main() {
+	cusMux := CusMux{}
+	http.ListenAndServe(":9090", cusMux)
+}
+```
+
+执行上述代码，然后我们在浏览器中输入： http://localhost:9090 之后，就会在浏览器上显示我们通过 `fmt.Fprintf(w, "Hello GO! GO! GO !")` 输出的内容。
+
 #### (3)、Go 代码的执行流程
+
+根据前面几个小节的梳理，总结 Go 代码的执行流程如下：
+
+- 首先调用 `http.HandleFunc(,)`
+
+	按顺序做了几件事：
+
+	1 调用了 DefaultServeMux 的 HandleFunc
+
+	2 调用了 DefaultServeMux 的 Handle 
+
+	3 往 DefaultServeMux 的 map[string]muxEntry 中增加对应的 handler 和路由规则
+
+- 其次调用 `http.ListenAndServe(":9090", nil)`
+
+	按顺序做了几件事情：
+
+	1 实例化 Server
+
+	2 调用 Server 的 ListenAndServe()
+
+	3 调用 `net.Listen("tcp", addr)` 监听端口
+
+	4 启动一个 for 循环，在循环体中 Accept 请求
+
+	5 对每个请求实例化一个 Conn，并且开启一个 goroutine 为这个请求进行服务 `go c.serve()`
+
+	6 读取每个请求的内容 `w, err := c.readRequest()`
+
+	7 判断 handler 是否为空，如果没有设置 handler（这个例子就没有设置 handler），handler就设置为 DefaultServeMux
+
+	8 调用 handler 的 ServeHttp
+
+	9 在这个例子中，下面就进入到 `DefaultServeMux.ServeHttp`
+
+	10 根据 request 选择 handler ，并且进入到这个 handler 的 ServeHTTP `mux.handler(r).ServeHTTP(w, r)`
+
+	11 选择 handler：
+
+	A 判断是否有路由能满足这个 request（循环遍历 ServerMux 的 muxEntry）
+
+	B 如果有路由满足，调用这个路由 handler 的 ServeHttp
+
+	C 如果没有路由满足，调用 NotFoundHandler 的 ServeHttp
 
 ---
 
