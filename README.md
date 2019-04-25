@@ -28,7 +28,7 @@ LearningNotes 是个人综合性学习笔记。
 标题|类别|更新时间|状态
 ---|---|---|---
 [NoClassDefFoundError的解决](01_Android/02_环境搭建/20、NoClassDefFoundError的解决.md)|工作总结|20190419|完结
-[外部唤起 Android 应用并跳转指定页](01_Android/03_基础知识点/73、Android 外部唤起应用跳转指定页面.md)|工作总结|20190419|完结
+[外部唤起 Android 应用并跳转指定页](01_Android/03_基础知识点/73、Android外部唤起应用跳转指定页面.md)|工作总结|20190419|完结
 [腾讯x5踩坑实录](01_Android/06_库和工具/25、腾讯x5踩坑实录.md)|工作总结|20190418|完结
 [DataBinding官方指南](01_Android/04_进阶知识点/03_Jetpack/01、DataBinding官方指南.md)|官方文档翻译|20190401|完结
 

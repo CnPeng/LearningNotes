@@ -390,6 +390,9 @@ android:visibility="@{age > 13 ? View.GONE : View.VISIBLE}"
 android:transitionName='@{"image_" + id}'
 ```
 
+><b>注意</b>：<br>
+xml 中使用 `&&` 时，需要使用 `&amp;&amp;` 进行转义
+
 #### (2)、不支持的内容
 
 数据绑定的表达式语句中，不支持如下内容：
