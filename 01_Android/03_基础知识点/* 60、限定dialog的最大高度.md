@@ -1,7 +1,8 @@
 
 
 https://stackoverflow.com/questions/52673053/cant-use-androidbackground-with-button-from-the-new-material-components
-```
+
+```java
 WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
 lp.copyFrom(dialog.getWindow().getAttributes());
 int dialogWidth = lp.width;

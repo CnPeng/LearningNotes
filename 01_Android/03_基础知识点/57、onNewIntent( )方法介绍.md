@@ -23,6 +23,7 @@ Android Activity 的生命周期如下（图片来自 Android 官网 https://dev
 
 接下来，我们再来看看官网是如何解释 onNewIntent() 的（https://developer.android.com/reference/android/app/Activity.html#onNewIntent(android.content.Intent)）： 
 引用
+
 ```
 onNewIntent 
 

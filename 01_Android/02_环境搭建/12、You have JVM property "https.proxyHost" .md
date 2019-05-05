@@ -7,5 +7,5 @@
 
 
 
-2，根据stackOverflow 上的回答，打开终端，输入指令:JAVA_OPTS="$JAVA_OPTS -DsocksProxtPort"  ，之后AS File->invalitDate caches/restart  之后就差不多好使了。
+2，根据stackOverflow 上的回答，打开终端，输入指令:`JAVA_OPTS="$JAVA_OPTS -DsocksProxtPort"`  ，之后`AS File->invalitDate caches/restart`  之后就差不多好使了。
 
