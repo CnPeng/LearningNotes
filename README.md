@@ -1,8 +1,16 @@
 # LearningNotes
 
->最近更新日期：2019-04-19
+最近更新日期：<font color="#ff0000">2019-05-09</font>
+
+>**注意：**
+>
+* README 文档更新不一定及时
+* 建议使用 Chrome 浏览器的小伙伴安装 Octotree 插件，这样就可以方便的以树形结构的形式查看仓库完整内容。
+* 鉴于 公众号、简书、CSDN 等对文章的种种限制，不保证在上述媒体中做同步更新
+* <font color="#ff0000">欢迎添加我的 QQ：893612134、微信: P893612134 一起学习、交流 </font>
 
 
+<br>
 LearningNotes 是个人综合性学习笔记。
 
 涵盖 软件编程、硬件维护、多媒体、文学、历史等诸多方面。总之，看到啥，学到啥都会记录笔记总结。
@@ -14,14 +22,15 @@ LearningNotes 是个人综合性学习笔记。
 
 我的微信公众号：CnPeng
 
-[我的简书（持续更新）:https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
+[我的简书（持续更新，但更新不一定及时）:https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
 
 [我的CSDN（停更）：http://blog.csdn.net/north1989](http://blog.csdn.net/north1989)
 
 
 ## 二、详细目录
 
-> 2019 年以前的内容暂时不补充目录，时间空闲了再补。
+> * 2019 年以前的内容暂时不补充目录，时间空闲了再补。
+> * 2019 年的内容对应目录也可能会更新不及时——毕竟手动更新有些麻烦😢
 
 
 ### 1、Android
