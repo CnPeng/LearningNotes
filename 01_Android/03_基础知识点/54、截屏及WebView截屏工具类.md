@@ -1,7 +1,7 @@
 该工具类的新版在 https://gitee.com/CnPeng_1/LearningNotes/wikis/56%E3%80%81%E5%88%B7%E6%96%B0%E5%9B%BE%E5%BA%93?sort_id=721277 中
 
 
-```
+```java
 package com.xxx.xxx;
 
 import android.app.Activity;
