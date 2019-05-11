@@ -5,11 +5,13 @@
 ![](https://gitee.com/uploads/images/2018/0419/140647_ec2ffd7d_930142.png "屏幕截图.png")
 
 解决方案：
+
 * 将所需要的module通过 File--new--import Module 导入（或者直将module直接粘贴到项目根目录下）
 * 打开当前项目的 settings.gradle ,将新导入的module追加到末尾，比如：
 `include  ':opencv', ":tess-two", ':cwac-richedit', ':picture_library', ':ucrop'
 `
 追加时，命名格式为：‘:module名称’
+
 ---
 
 
