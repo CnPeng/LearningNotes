@@ -157,7 +157,9 @@ https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-no
 所以，如果你在 AndroidManifest.xml 的 <manifest> 节点中配置了 `android:targetSandboxVersion`,需要将它的值置为1.
 
 #### A:修改AndroidManifest.xml
+
 降低 android:targetSandboxVersion 的版本
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <manifest android:targetSandboxVersion="1">

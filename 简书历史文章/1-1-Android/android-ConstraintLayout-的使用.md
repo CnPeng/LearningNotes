@@ -325,7 +325,7 @@ properties面板中包含调整尺寸和约束的工具，以及部分常用属�
 **以下模式依次对应上图中的 1、2、3、4**
 
 链条模式|view排列的特点
---|--
+---|---
 **Spread:**| 平均分布view的位置,将空余部分平均分配到view的两侧作为view之间以及view与父布局的间距（**默认模式**）
 **Spread inside:**| 第一个view和最后一个view贴边，空余部分被分配给其他view，作为view之间的间距
 **Weighted:**| 如果链条模式是 spread 或者 spread inside ,我们也可以设置一个或多个view的大小为 0dp，从而让view占满余下的间距部分。默认情况下，如果有一个view的大小设置了0dp,那么该view会填满空余部分；如果多个view设置了0dp, 那么这几个view就会平均分配空余部分（空余部分会被囊括到View中），但是，我们可以通`layout_constraintHorizontal_weight`和 `layout_constraintVertical_weight` 属性调整这几个view的权重（也叫比重），就像在 LinearLayout中使用 layout_weight 一样。设置权重之后，权重大的所占的区域就多，权重小的所占区域就小。
