@@ -1,6 +1,7 @@
 布局文件中使用了EditText后，它会默认获取焦点。
 
 如果需要取消这个默认焦点，当它被点击时才将焦点给它，则需要在EditText的父布局设置如下属性：
+
 ```
  android:focusable="true"  
  android:focusableInTouchMode="true"
