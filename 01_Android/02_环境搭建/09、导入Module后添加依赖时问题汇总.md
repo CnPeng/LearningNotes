@@ -33,7 +33,7 @@ picture_library 的清单文件不为空，并且在 application 节点中定义
 ---
 
 ## 3、Error:Unable to resolve dependency 
-https://www.jianshu.com/p/c4bbd66d842a
+[https://www.jianshu.com/p/c4bbd66d842a](https://www.jianshu.com/p/c4bbd66d842a)
 
 ---
 
