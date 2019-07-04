@@ -81,7 +81,8 @@ https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-no
 
 ### 1、步骤1 
 
-#### A:创建 res/xml/network_security_config.xml
+#### A:创建 `res/xml/network_security_config.xml`
+
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
@@ -95,11 +96,13 @@ https://stackoverflow.com/questions/45940861/android-8-cleartext-http-traffic-no
 上述代码的意思是解除对指定网址的限制。
 
 在解除上述视频缓存库报错信息时，<domain> 节点的具体取值如下：
+
 ```
  <domain includeSubdomains="true"> 127.0.0.1</domain>
 ```
 
 如果需要过滤某个地址，则只写域名即可，不需要写  **http://**,如：想过滤的地址为：http://www.baidu.com/123，则<demain>节点如下：
+
 ```
 <domain includeSubdomains="true"> www.baidu.com</domain>
 ```
