@@ -1,5 +1,15 @@
-原文地址：https://www.jianshu.com/p/2949db9c3df5
+* 比较A日期是否早于B日期
 
+```java
+// 如果 endDate 早于 startDate 会返回 -1 ，两者都是 Date 对象
+-1 == endDate.compareTo(startDate)
+```
+
+
+
+* Java 8 中的日期处理
+
+ [原文地址：](https://www.jianshu.com/p/2949db9c3df5)
 
 在Java 8以前，日期和时间处理一直被广大java程序员抱怨太难用，首先是java.util和java.sql中，都包含Date类，如果要进行时间格式化，还需要java.text.DateFormat类处理。同时java.util.Date中既包含了日期，又包含了时间，所以java8新的日期和时间库，很好的解决了以前日期和时间类的很多弊端。并且也借鉴了第三方日期库joda很多的优点。
 
