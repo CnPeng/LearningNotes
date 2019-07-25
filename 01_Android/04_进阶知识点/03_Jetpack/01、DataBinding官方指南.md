@@ -1918,9 +1918,15 @@ java
                       attribute = "android:tint",
                       method = "setImageTintList")
 })
+
+public class xxx{
+	...
+}
 ```
 
 通常情况下，我们不需要为 Android 提供的　View 控件指定 BindingMethod。因为 Android 已经通过名称转换自动的匹配好所需的方法了。
+
+> 注意，使用 `@BindingMethods` 时，需要将该注解放在文件的 import 语句之后，类定义之前。参考上面示例代码中的 java 代码
 
 #### (3)、提供自定义逻辑
 

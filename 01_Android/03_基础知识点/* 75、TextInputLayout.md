@@ -1,1 +1,0 @@
-在https://android-developers.googleblog.com/2017/02/build-flexible-layouts-with.html 中有出现过这个控件，但是这是干啥的？

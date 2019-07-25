@@ -41,7 +41,7 @@
 在上图中，我们将某个view从 Palette 面板中拖到编辑区域之后，会在该 view 周边生成一个边线，四个角上是白色填充的小方块，四条边线中间是空心圆圈，底部还有两个按钮。各自的作用分别如下：
 
 名称/图标|功能
---|--
+---|---
 小方块|用来调整view的大小
 小圆圈|是用来添加约束的锚点(或者叫 handle 把手，如果是**被连接称锚点**，如果是**发出连接称把手**)，还没有添加约束时光标放上去会变绿，已经有了约束后光标放上去会变红色
 ![](http://upload-images.jianshu.io/upload_images/2551993-ab262919faaaee88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)|删除约束条件
@@ -75,7 +75,7 @@
 通过上图我们可以总结出移除约束的三种方式：
 
 方式|作用
---|--
+---|---
 点击把手(发起连接的小圆圈)|移除该把手创建的约束（光标放上去之后会变红，然后单击即可）
 ![](http://upload-images.jianshu.io/upload_images/2551993-ab262919faaaee88.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)|点击该图标，删除该view的全部删除约束条件
 ![](http://upload-images.jianshu.io/upload_images/2551993-392c2ba5dcfdb1ef.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)|点击工具栏中的该图标，删除当前整个布局中的全部view的全部约束条件（右击view，在右键菜单中也有该图标）
@@ -116,7 +116,12 @@ GuideLine 是编辑布局时的一条辅助线，可以是水平的，也可以�
 上图中，我们创建了一个垂直的guideLine ,然后以它为锚点为两个view添加了约束。 
 
 ######2）：辅助线的摆放模式及摆放模式的更改
-在上一个图中，我们会看到创建完 guideLine后， 顶部出现一个小圆圈包含一个向左的小箭头，表示guideLine 的位置是相对于父布局的左边界多少 dp；点击该小圆点，箭头变成向右的，表示此时guideLine 的位置是相对于父布局右边界多少dp;再次点击小圆圈，箭头换成了 % ，表示 guideLine 的 X 轴坐标占父布局的百分比。这三种情况分别对应 guideLine 的三个属性值，具体如下：
+
+在上一个图中，
+
+* 我们会看到创建完 guideLine后， 顶部出现一个小圆圈包含一个向左的小箭头，表示guideLine 的位置是相对于父布局的左边界多少 dp；
+* 点击该小圆点，箭头变成向右的，表示此时guideLine 的位置是相对于父布局右边界多少dp;
+* 再次点击小圆圈，箭头换成了 % ，表示 guideLine 的 X 轴坐标占父布局的百分比。这三种情况分别对应 guideLine 的三个属性值，具体如下：
 
 > * **layout_constraintGuide_begin**     `相对于起始位置定位，取值 dp`
 指定 guideLine 到父布局的左边界或上边界的具体距离
@@ -133,7 +138,8 @@ GuideLine 是编辑布局时的一条辅助线，可以是水平的，也可以�
 
 其实很简单，我们上面已经知道了三种摆放模式 对应 guideLine 的三个属性，所以，我们直接从 xml 代码中手动修改模式，然后再回到 design 模式中拖拽到期望的位置即可。
 代码如下：
-``` 
+
+```xml 
 <android.support.constraint.Guideline
         android:id="@+id/guideline"
         android:layout_width="wrap_content"
@@ -141,7 +147,8 @@ GuideLine 是编辑布局时的一条辅助线，可以是水平的，也可以�
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.56"/>
 ```
-` 这里切换 guideLine 摆放模式的时候有点坑啊，昨天写到这里的时候，在MAC上死活没有顶部的小圆圈，各种百度谷歌都没找到解决方案，然后查看文档的时候发现有那么三个属性，然后机智如我的手动改代码。今天想着再看看，MAC上还是没有，然后动图也只好在 windows 上去做。but ,我刚做完动图， 就在现在，在此刻，now , MAC 上顶端的小圆圈又有了。。。。 `
+
+` 这里切换 guideLine 摆放模式的时候有点坑啊，昨天写到这里的时候，在 MAC 上死活没有顶部的小圆圈，各种百度谷歌都没找到解决方案，然后查看文档的时候发现有那么三个属性，然后机智如我的手动改代码。今天想着再看看，MAC上还是没有，然后动图也只好在 windows 上去做。but ,我刚做完动图， 就在现在，在此刻，now , MAC 上顶端的小圆圈又有了。。。。 `
 
 ####（6）、链条式约束（chain）
 
@@ -215,7 +222,7 @@ properties面板中包含调整尺寸和约束的工具，以及部分常用属�
 上图中，各个标识对应的功能分别如下：
 
 标号|功能
---|--
+---|---
  1 |宽和高的比率（size ratio）
  2 |删除约束（delete constraint）
  3 |宽高模式（height/width mode）：fixed、wrapcontent、0dp
@@ -225,7 +232,7 @@ properties面板中包含调整尺寸和约束的工具，以及部分常用属�
 图中所示 3 宽高模式共有三种，对应的图标与模式分别如下：
 
 图标|对应的宽高模式
---|--
+---|---
 ![](http://upload-images.jianshu.io/upload_images/2551993-de9903ad5c34dc54.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) |包裹内容（**Wrap Content**）
 ![](http://upload-images.jianshu.io/upload_images/2551993-f1513bbfa72a2496.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) |填充约束区域（**即 0dp、Match Constraints**）填充约束区域的时候会将margin值排除在外。另外，**只有在该模式下才能调整 宽高比率**。
 ![](http://upload-images.jianshu.io/upload_images/2551993-dfd92e04c11756f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) |指定大小（**Fixed**）
@@ -235,10 +242,12 @@ properties面板中包含调整尺寸和约束的工具，以及部分常用属�
 >**注意**:  在设置被 ConstraintLayout 包裹的view 的 width 或者 height 的时候千万不要使用 match_parent , 而必须使用 match constraints (也就是 0dp).
 
 ### 4、方式四：以比率的形式调整尺寸（Set size as a ratio）
+
 某些时候，我们需要控制某个view的宽是高的 百分之多少，或者 高是宽的百分值多少，之前我们可能会使用 LinearLayout 或者 FrameLayout , 然后使用weight 属性去控制，或者直接使用 固定的dp 值，在或者直接在代码中手动的获取并计算宽高，实际上用这三种方式实现的时候一方面可能会增加布局嵌套，另一方面可能会手写较多的代码，而且，对设计稿的还原度也没那么高。but , 如果使用constraintLayout ，我们只需要轻轻的拖拽几下，然后输入比率值，然后回车，搞定。。。具体请看下面的例子
 
 >**注意：**
 **如果我们想使用 ratio 的形式去设置宽高, 那么必须保证 宽高 中 至少有一项使用了 0dp（即  match_constraint）** 
+
 `由于0dp 就表示 match_constraint ,所以之后的内容中不在引用 match_parent字样，统一用 0dp 表示`
 
 ####（1）、宽度是0dp（宽度是 match_constraint）
@@ -386,7 +395,7 @@ Autoconnect 在默认情况下是处于关闭状态的，我们可以通过点�
 在文中之前部分的介绍中已经介绍过上图中的多个功能按钮了，这里再做一次统一的介绍。
 
 编号|功能
---|--
+---|---
 1|非编辑状态下是否展示约束线。默认非编辑状态不展示，只有选中view要编辑该view时才会展示；点击开启之后，无论是否编辑状态都会展示约束线
 2|是否开启 AutoConnect (自动添加约束)，默认关闭
 3|删除所有view的全部约束条件
@@ -405,7 +414,7 @@ Autoconnect 在默认情况下是处于关闭状态的，我们可以通过点�
 类型及特点的对应关系如下：
 
 类型|特点
---|--
+---|---
 Center Horizontally|水平居中；作用于多个被选中的水平排列的view时是创建水平链条
 Center Vertically|垂直居中；作用于多个被选中的垂直排列的view时是创建垂直链条
 Center Horizontally in Parent|相对于父布局水平居中；作用于多个被选中的水平排列的view时会导致view的居中重叠，并且具有RelativeLayout的效果，后添加的会覆盖先添加的。
@@ -416,7 +425,7 @@ Center Vertically in Parent|相对于父布局垂直居中；作用于多个被�
 ![对齐方式的几种类型](http://upload-images.jianshu.io/upload_images/2551993-ea12207c5e1979b4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 类型|特点
---|--
+---|---
 Align Left Edges|左边框对齐
 Align Horizontal Centers|水平居中对齐
 Align Right Edges|有边框对齐
@@ -432,7 +441,7 @@ Align BaseLines| 基线对齐
 ![打包和伸展](http://upload-images.jianshu.io/upload_images/2551993-aa8d9d50b49eba16.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 类型|特点
---|--
+---|---
 Pack Horizontally|水平方向打包（应用之后并没有看到有和变化）
 Pack Vertically|垂直方向打包（应用之后并没有看到有什么变化）
 Expand Horizontally|水平伸展。在伸展的时候，会根据你当前在工具栏中选择的 “Device in Editor ”得到一个绝对的数值并作为该view的宽度

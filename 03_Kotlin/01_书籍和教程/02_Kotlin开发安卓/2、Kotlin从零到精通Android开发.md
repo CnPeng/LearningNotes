@@ -2182,7 +2182,7 @@ Anko中为我们定义了代码设置Flag的更加便捷的方式——预置配
 val ankoIntent = intentFor<MyDemoActivity>(Pair("KeyName", "keyValue"))
 startActivity(ankoIntent.newTask())
 ```
-上述代码中，ankoIntent.newTask() 本质是Anko为Intent扩展的函数，内部帮我们配置了FLAG，其具体实现为：
+上述代码中，ankoIntent.newTask() 本质是 Anko 为 Intent 扩展的函数，内部帮我们配置了FLAG，其具体实现为：
 
 ```kotlin
 inline fun Intent.newTask(): Intent = apply { 
