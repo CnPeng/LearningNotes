@@ -47,7 +47,7 @@ Swift中的字符串插值（String interpolation）就是指利用字符串模�
 
 如：
 
-```
+```swift
 import Cocoa
 
 let numberOfStoplights: Int = 4
