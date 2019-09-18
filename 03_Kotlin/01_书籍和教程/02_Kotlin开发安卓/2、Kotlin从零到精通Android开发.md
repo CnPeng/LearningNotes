@@ -700,7 +700,7 @@ fun setArrayNumber(array:Array<Number>) {
 
 Kotlin中Int、Long、Double都继承自Number,但是，如果我们在调用上面的函数时，传入了Array<Int>，这样是会报错的！！这一点与JAVA不一致。因为kotlin中在调用函数时要求参数类名必须完全一致！！
 
-对于上面的函数，如果我们想既可以接收 Array<In>, 也可以接收Array<Double>, 那么就可以定义一个具体化类型参数的内联函数. **只有内联函数才可以具体化类型参数（限定参数类型）** 
+对于上面的函数，如果我们想既可以接收 `Array<Int>`, 也可以接收 `Array<Double>`, 那么就可以定义一个具体化类型参数的内联函数. **只有内联函数才可以具体化类型参数（限定参数类型）** 
 
 函数定义：
 
