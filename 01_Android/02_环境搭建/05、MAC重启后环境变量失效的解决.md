@@ -13,11 +13,13 @@ open -e .zshrc
 touch .zshrc
 ```
 
-* 添加内容
+* 在 `.zshrc` 文件中添加内容
 
 ```
 source ~/.bash_profile
 ```
+
+在 `.zshrc` 文件中添加完上面这句命令后，保存并关闭该文件。然后在执行下一步操作
 
 * 让修改立即生效
 
