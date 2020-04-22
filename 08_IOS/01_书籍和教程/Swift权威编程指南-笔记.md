@@ -297,13 +297,15 @@ default:
 
 * Swift中表示区间的模式同Kotlin
 
-```
+```swift
 let age=25
 var hintStr:String
 
 switch age {
 case 18...25:
-    hintStr="年龄为\(age),在[18,35]之间"
+    hintStr="年龄为\(age),在[18,25]之间"
+case 26..<35:
+    hintStr="年龄为\(age),在[26,35)之间"
 default:
     break
 }
@@ -319,7 +321,7 @@ default:
 * CnPeng 通常在最后一个case 中使用值绑定，因为它会匹配所有之前case中没有匹配的情况
 * CnPeng 使用值绑定之后，不再需要default分支。因为二者基本等同。
 
-```
+```swift
 let statusCode=500
 var errorStr:String
 
@@ -477,7 +479,7 @@ print("error2中元素值分别为:\(error2.code),\(error2.desc)")
 
 举个例子，想象有一个应用会发出多个Web请求。每次服务器的响应返回时，我们会保存HTTP状态码。然后，你想看是否有请求失败并且状态码是404(就是“请求的资源不存在”的错误)；如果有的话，查看是哪些请求。在switch语句中使用元组就能匹配非常特殊的模式。
 
-```
+```swift
 let firstErrorCode=404
 let secondErrorCode=200
 
@@ -872,7 +874,7 @@ Swift用名为`String.CharacterView.Index`的类型记录索引。CharacterView�
 
 * 获取指定位置的字符
 
-```
+```swift
 let str="Hello,Swift"
 
 let startIndex=str.startIndex
@@ -898,7 +900,7 @@ print(char2)
 
 * 截取字符串
 
-```
+```swift
 let str="Hello,Swift"
 
 let startIndex=str.startIndex
@@ -1422,7 +1424,7 @@ var ageArray=Array(userDict.values)
 
 #### (1)、 声明集合并添加元素 
 
-```
+```swift
 //声明方式1
 var set1 = Set<String>()
 //声明方式2
@@ -1440,7 +1442,7 @@ print(set1)
 
 #### (2)、遍历集合
 
-```
+```swift
 for user in set2{
     print(user)
 }
@@ -1451,7 +1453,7 @@ for user in set2{
 
 * 判断集合中是否包含某个元素 
 
-```
+```swift
 var userSet:Set=["张三","李四","王五"]
 //contains() 判断是否包含某个元素。返回true/false
 userSet.contains("张三")
@@ -1546,7 +1548,7 @@ emailTo(name: "张三")
 * 可变长度参数本质是一个数组。
 * 要声明可变长度数时，在参数类型后面追加三个点即可——如 `names: String...`
 
-```
+```swift
 func emailTo(names userNames : String...){
     
     print("你将要给\(userNames)写邮件")

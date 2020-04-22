@@ -1,3 +1,8 @@
+[Xcode 中的快捷键](https://blog.csdn.net/tyhdxhl/article/details/44748993?locationNum=6&fps=1)
+
+格式化代码的快捷键： 先全选，然后 `Ctr l+ I`
+
+
 * IOS 10 教程 —— 小波说雨燕：
 	* [iOS 10 开发第一季 ①入门篇](http://xiaoboswift.com/course/39)
 	* [iOS 10 开发第一季 ②初级篇](http://xiaoboswift.com/my/course/40)
@@ -255,7 +260,7 @@ class ViewController: UIViewController {
 堆叠视图的使用方法：
 
 * 从组件库拖一个堆叠视图
-* 使用布局跳上的 `Embed in Stack`
+* 使用布局条上的 `Embed in Stack`
 
 ![](pics/34-堆叠视图的使用方式及类型.png)
 
@@ -1533,23 +1538,3 @@ class AreaDetailViewController: UIViewController {
 ![](pics/139-调整图片的平铺模式.png)
 
 ---
-
-# [③中级篇](http://xiaoboswift.com/course/42)
-
-## 一、面向对象编程——OOP
-
-TODO 
-
-## 二、
- 
- ---
- 
-# [④高级篇](http://xiaoboswift.com/course/43)
-	
-## 一、
-
----
-
-# [⑤上架篇](http://xiaoboswift.com/my/course/44)
-
-## 一、

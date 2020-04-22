@@ -1,0 +1,1 @@
+[【Android】ViewPager2简单了解](https://juejin.im/post/5e8147a3518825737067a2f7?utm_source=gold_browser_extension#heading-14)
