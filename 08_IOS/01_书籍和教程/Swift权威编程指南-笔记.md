@@ -174,7 +174,7 @@ Swift提溢出操作符(overflow operator)，它们在值太大(或太小)时的
 
 溢出操作符包括：&+、&-、&*
 
-```
+```swift
 let a:Int8=120
 //&+ 为溢出操作符，因为120+10=130，超过了Int8的最大值127三位，所以，会把超出的部分从最小值开始取——即，-128，-127，-126，最终输出为-126
 var b:Int8 = a&+10
@@ -5092,7 +5092,7 @@ func getNextPosition(){
 * `方法A() throws` 表示 方法A可能会出错
 
 
-```
+```swift
 class Lexer{
     ...
     
@@ -5257,7 +5257,7 @@ evaluate(str: "1+ab")
 * 然后使用 do/catch 对错误进行处理。do 作用域中至少有一个 try
 * Swift中使用常量 error 标记错误实例
 
-```
+```swift
 func evaluate(str:String){
     
     print("输入内容为：\(str)")
@@ -5275,7 +5275,7 @@ evaluate(str: "1+ab")
 
 运行结果：
 
-```
+```swift
 输入内容为：1 + 1 0 +5
 解析得到的数组为：[__lldb_expr_4.Token.number(1), __lldb_expr_4.Token.plus, __lldb_expr_4.Token.number(1), __lldb_expr_4.Token.number(0), __lldb_expr_4.Token.plus, __lldb_expr_4.Token.number(5)]
 输入内容为：1+ab
@@ -5288,7 +5288,7 @@ evaluate(str: "1+ab")
 
 Lexer.LexError.invaliedCharacter(let char) 是我们自定义的一个错误。 **注意括号中的参数，不仅声明了名称为char,而且指定了类型为let——常量**
  
-```
+```swift
 func evaluate(str:String){
     
     print("输入内容为：\(str)")
@@ -7976,13 +7976,13 @@ LocalizedError 表示本地化错误，与国际化相对。
 
 先定义一个全局变量用来存储读取到的文本内容
 
-```
+```swift
  var docContent = ""
 ```
 
 将读取到的文本内容存储到预定义的变量中
 
-```
+```swift
  override func read(from data: Data, ofType typeName: String) throws {
         //从data中获取String，如果失败，抛出异常。
         guard let contents=String(data: data, encoding: .utf8) else {
@@ -7995,7 +7995,7 @@ LocalizedError 表示本地化错误，与国际化相对。
 
 将文本内容显示在视图控制器中：
 
-```java
+```swift
 
  override func makeWindowControllers() {
         ...        
