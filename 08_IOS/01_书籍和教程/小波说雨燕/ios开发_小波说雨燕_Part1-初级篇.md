@@ -1,7 +1,10 @@
-[Xcode 中的快捷键](https://blog.csdn.net/tyhdxhl/article/details/44748993?locationNum=6&fps=1)
+* [Xcode 中的快捷键](https://blog.csdn.net/tyhdxhl/article/details/44748993?locationNum=6&fps=1)
 
-格式化代码的快捷键： 先全选，然后 `Ctr l+ I`
+格式化代码的快捷键： 先全选，然后 `Ctrl+ I`
 
+* [下载历史版本的 Xcode](https://developer.apple.com/download/more/)
+
+---
 
 * IOS 10 教程 —— 小波说雨燕：
 	* [iOS 10 开发第一季 ①入门篇](http://xiaoboswift.com/course/39)
@@ -11,6 +14,11 @@
 	* [iOS 10 开发第一季 ⑤上架篇](http://xiaoboswift.com/my/course/44)
 
 **以下内容基于 XCode 11.0 及更高版本**, 2019-10-09
+
+* [Part1-初级篇-笔记](ios开发_小波说雨燕_Part1-初级篇.md) 
+* [Part2-中级篇-笔记](ios开发_小波说雨燕_Part2-中级篇.md)
+* [Part3-高级篇-笔记](ios开发_小波说雨燕_Part3-高级篇.md)
+* [Part4-上架篇-笔记](ios开发_小波说雨燕_Part4-上架篇.md)
 
 # [①入门篇](http://xiaoboswift.com/course/39)
 ---------------------
@@ -108,7 +116,7 @@ roundCornerBtn.clipsToBounds=true
 >* `ViewController.swift` ： 具体的功能实现
 
 
-* 同时打开 `ViewController.swift` 和 视图界面
+* 同时打开 `ViewController.swift` 和 视图界面（快捷键 `Ctrl + Alt + Command + Return`）
 
 ![](pics/13-同时打开controller界面和代码.png)
 
@@ -257,10 +265,10 @@ class ViewController: UIViewController {
 
 #### （1）、堆叠视图的使用方式：
 
-堆叠视图的使用方法：
+添加堆叠视图的有两种方法：
 
 * 从组件库拖一个堆叠视图
-* 使用布局条上的 `Embed in Stack`
+* 选中多个视图，然后使用布局条上的 `Embed in Stack`
 
 ![](pics/34-堆叠视图的使用方式及类型.png)
 
@@ -353,7 +361,7 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 ![](pics/52-设置StackView与父视图等宽2.png)
 
-为了保证 StackView 缩放之后内部的子视图不变相，还需要做如下控制：
+为了保证 StackView 缩放之后内部的子视图不变形，还需要做如下控制：
 
 ![](pics/53-设置StackView的内容等比率缩放.png)
 
@@ -458,7 +466,7 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 #### (1)、UIKit 和 UiTableView
 
- iOS SDK (Software Develop Kit) 包含一系列开发用的基础框架。一个框架时相似功能类（Class）的集合。
+ iOS SDK (Software Develop Kit) 包含一系列开发用的基础框架。一个框架是相似功能类（Class）的集合。
  
  UIKit 就是 UI 相关的类集合。
  

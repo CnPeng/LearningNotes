@@ -12,21 +12,21 @@
 
 **`Settings-->General-->Language & Region-->iPhone Language -->简体中文; Region -->中国`**
 
-![](pics/1-IOS模拟器输入中文.png)
+![](pics/2-1-IOS模拟器输入中文.png)
 
 
 * 第一步: 来到应用中,找一个可以响应键盘的地方,让他成为第一响应者,也就是输入模式;
 
 `Command + K`,调起软键盘,点击软键盘下面那个小地球仪,切换成中文输入;
 
-![](2-IOS模拟器输入中文.png)
+![](2-2-IOS模拟器输入中文.png)
 
 
 * 第二步: 打开模拟器的Hardware,找到KeyBoard,第二个打上勾就行了;
 
 或者直接 `Command+Shift+K`;
 
-![](pics/3-IOS模拟器输入中文.png)
+![](pics/2-3-IOS模拟器输入中文.png)
 
 
 其实最重要的是第一步,得选中中文输入法,才能用键盘敲出中文.

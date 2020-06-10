@@ -35,7 +35,7 @@ Get started with a playground 是快速开发和运行 Swift 的。
 * 也有类型推断功能。
 * 布尔类型 使用 Bool 表示
 
-```
+```swift
 var numberOfStoplights = "Four"
 let numberOfStoplights: Int = 4
 ```
@@ -89,7 +89,7 @@ let townDescription ="\(townName) has a population of \(population) and \(number
 
 #### (1)、基本介绍
 
-```
+```swift
 import Cocoa
 
 //输出 9223372036854775807, 此处Int为64位
@@ -101,9 +101,10 @@ print(Int.min)
 苹果从iPhone 5S、iPad Air和带Retina屏的iPad mini开始引入64位设备，而更早的设备还是32位架构。所以， **在构建程序时，编译器会根据设备动态决定Int是32位还是64位。** 
 
 #### (2)、显示整数类型
+
 Int32 , 就表示32位的整数类型。
 
-```
+```swift
 import Cocoa
 
 //2147483647
@@ -124,7 +125,7 @@ print(Int32.min)
 * 无符号整数的最大值为对应有符号整数最大值和最小值的绝对值之和。如：UInt的最大值为Int最大值和最小值的绝对值之和。也就是说， **对于Int 和 UInt都有2的64次方个取值，但是Int会留出一半给负数，而UInt则全为正数。** 
 * Swift中常用有符号的Int
 
-```
+```swift
 import Cocoa
 
 //127
@@ -140,7 +141,7 @@ print(UInt8.min)
 
 ### 2、创建整数实例
 
-```
+```swift
 import Cocoa
 
 let num1=16
@@ -159,7 +160,7 @@ var num4:UInt=999
 
 +、- 、* 、/ 、% 、+= 、-= 的操作同Java
 
-```
+```swift
 //输出-3
 print(-11/3)
 //输出-2
@@ -189,7 +190,7 @@ var f:Int8 = -120&-10
 * 不同类型的数据进行算数操作时，Swift不会自动转类型，必须手动强转，否则报错。
 * 强转类型时，尽量由低位向高位转换，因为高位向低位转换时可能会出现存储空间不足的情况。
 
-```
+```swift
 let a:Int16 = 300
 let b:Int8 = 10
 //将Int8的b 强转为 Int16 , 低位向高位转不会b出错
@@ -220,7 +221,7 @@ var c = a+(Int16)(b)
 * 在Swift中， **浮点数的默认推断类型是Double，也可以显式地 声明Float和Double** 
 * 注意：由于浮点数的不精确性，所以 `（1.1+0.1） != 1.2`
 
-```
+```swift
 let d1=1.5
 let d2:Double=1.5
 let f1:Float=1.5
@@ -250,7 +251,7 @@ print((d1+0.1)==1.2)
 * case后面可以跟多个值，多个值之间使用逗号间隔。（类似于Java中的穿透，但并不完全相同）
 
 
-```
+```swift
 import Cocoa
 
 var statusCode=400
@@ -270,7 +271,7 @@ default:
 
 这等价于Java中的穿透。
 
-```
+```swift
 import Cocoa
 var statusCode=400
 var errotStr:String
@@ -286,6 +287,7 @@ default:
 ```
 
 上面的代码执行完之后输出的内容为：
+
 ```
 当前错误码为400
 使用fallthrough穿透时，执行完case400,会接着执行这里
@@ -295,7 +297,7 @@ default:
 
 前面已经知道，case后面可以跟多个值。如果这些值是连续的，那么就可以使用区间表示这些值。
 
-* Swift中表示区间的模式同Kotlin
+> Swift中表示区间的模式近似 Kotlin
 
 ```swift
 let age=25
@@ -349,11 +351,11 @@ print(errorStr)
 
 ### 5、case 中的 值绑定+where判断
 
-* case 后面的 值绑定 也可以跟where判断表达式配合使用.
-* where必须配合值绑定使用，不能单独使用，否则报错。
+* case 后面的 值绑定 也可以跟 where 判断表达式配合使用.
+* where 必须配合值绑定使用，不能单独使用，否则报错。
 
 
-```
+```swift
 let statusCode=500
 var errorStr:String
 
@@ -373,6 +375,7 @@ default:
 ```
 
 上述代码的输出结果：
+
 ```
 此处使用了where, statusCode大于在[450,505]之间，或者大于600
 ```
@@ -381,7 +384,7 @@ default:
 
 下面示例是一个错误示例，因为  **值绑定 定义的常量/变量 只在当前分支有效，即便使用了 fallthrough 也不会在后面的分支中生效！！** 
 
-```
+```swift
 let statusCode=500
 var errorStr:String
 
@@ -403,15 +406,16 @@ default:
 #### (1)、元组 (tuple)
 
 ##### A: 元组的基本定义
+
 元组是开发者认为有逻辑关系的两个或多个值的有限组合。不同的值被组合为单个复合，组合的结果是一个元组的有序列表。
 
-将多个值放到同一个() 中，并用逗号间隔就组成了元组。
+将多个值放到同一个 `()` 中，并用逗号间隔就组成了元组。
 
 * 示例代码：
 
-创建一个元组来组合statusCode和errorString
+创建一个元组来组合 statusCode  和 errorString
 
-```
+```swift
 let statusCode=404
 var errorStr:String
 
@@ -428,9 +432,9 @@ let error=(statusCode,errorStr)
 
 ##### B: 访问元组元素
 
-在上图中，我们定义了一个元组常量error, 右侧区域中显示了元组中的具体元素。元素前面浅灰色的 .0 、.1 表示元素的索引，也就说，我们可以通过 error.0 、error.1 获取元素值。
+在上图中，我们定义了一个元组常量 error, 右侧区域中显示了元组中的具体元素。元素前面浅灰色的 `.0` 、`.1` 表示元素的索引，也就说，我们可以通过 `error.0` 、`error.1` 获取元素值。
 
-```
+```swift
 let statusCode=404
 var errorStr:String
 
@@ -452,11 +456,12 @@ print("error中元素值分别为:\(error.0),\(error.1)")
 error中元素值分别为:404,错误码不是100
 ```
 
-##### C: 具名元组
+##### C: 具名元组 
+
 * 所谓具名元组，就是元组中的元素有名字。格式为：`let 元组名=（元素名：元素,元素名：元素）`,let也可以改为var
 * 具名元组中，我们既可以通过索引访问元素，也可以通过名字访问元素
 
-```
+```swift
 let statusCode=404
 var errorStr:String
 
@@ -503,7 +508,7 @@ default:
  first item not found
 ```
 
-在上述代码中，firstErrorCode和secondErrorCode表示两个不同Web请求的HTTP状态码。errorCodes是组合这些状态码的元组。
+在上述代码中，firstErrorCode 和 secondErrorCode 表示两个不同 Web 请求的 HTTP 状态码。errorCodes是组合这些状态码的元组。
 
 *  **下划线 `_` 表示能匹配任意字符的通配符。** 
 * 上述代码中，第一个分支表示两个web请求都404，第二个分支表示只关注第一个web响应码，第三个分支表示只关注第二个响应码。由于firstErrorCode 为 404，所以会匹配上第二个分支。
@@ -530,7 +535,7 @@ default:
 
 不要忘了条件和变量之间的 = 
 
-```
+```swift
 let age=22
 
 if case 18...25 = age {
@@ -542,7 +547,7 @@ if case 18...25 = age {
 
 多个判断条件之间使用逗号间隔
 
-```
+```swift
 let age=22
 
 if case 18...25=age,age>21 {
@@ -556,13 +561,13 @@ if case 18...25=age,age>21 {
 * 如果重复次数已知或者容易推断，可以用for循环。
 * while循环则适合在满足某些条件时重复执行任务
 
-### 1、for-in 循环
+### 1、`for-in` 循环
 
-基本等同于Kotlin中的for-in 
+基本等同于 Kotlin 中的 `for-in` 
 
 #### (1)、基本示例
 
-```
+```swift
 var tempNum = 5
 for i in 1...5 {
     tempNum += i
@@ -577,7 +582,7 @@ for i in 1...5 {
 
 当我们在循环体中不需要使用 for 和 in 之间的变量时，可以使用通配符 `_` 代替该变量
 
-```
+```swift
 var tempNum=1
 for _ in 1...5 {
     tempNum += 1
@@ -585,13 +590,13 @@ for _ in 1...5 {
 }
 ```
 
-#### (3)、for-in 的条件中嵌套where
+#### (3)、`for-in` 的条件中嵌套 where
 
-在 for-in 格式中， **in 后面的条件可以追加 where 语句** 
+在 `for-in` 格式中， **in 后面的条件可以追加 where 语句** 
 
 注意：where 语句只是 in 后面条件的补充，不能单独存在。
 
-```
+```swift
 for i in 1...10 where i%3 == 0{
     print(i)
 }
@@ -607,22 +612,23 @@ for i in 1...10 where i%3 == 0{
 
 上述代码等价于：
 
-```
+```swift
 for i in 1...100 {
     if i % 3 == 0 {
-    print(i) }
+    	print(i) 
+    }
 }
 ```
 
-很显然，for-in-where 比下面的 for-in-if 简洁。
+很显然，`for-in-where` 比下面的 `for-in-if` 简洁。
 
 ### 2、类型推断
 
-在前面的示例代码中，对于 for-in 之间的变量i，其实就是使用了类型推断，也就是说，不用显示声明其类型，因为 in 后面的条件限定了 i 的取值范围—— Int 类型。
+在前面的示例代码中，对于 `for-in` 之间的变量 i，其实就是使用了类型推断，也就是说，不用显示声明其类型，因为 in 后面的条件限定了 i 的取值范围—— Int 类型。
 
-不适用类型推断时的完整代码为：
+不使用类型推断时的完整代码为：
 
-```
+```swift
 for i : Int in 1...10 where i%3 == 0{
     print(i)
 }
@@ -634,7 +640,7 @@ for i : Int in 1...10 where i%3 == 0{
 ### 3、while 循环
 
 
-```
+```swift
 var i=1
 
 while i<6 {
@@ -644,11 +650,11 @@ while i<6 {
 ```
 
 
-### 4、repeat-while 循环
+### 4、`repeat-while` 循环
 
-repeat-while 等价于其他语言中的 do-while
+`repeat-while` 等价于其他语言中的 `do-while`
 
-* 与 while 相比，repeat-while 至少会执行一次
+* 与 while 相比，`repeat-while` 至少会执行一次
 
 ```java
 var i=1
@@ -669,7 +675,7 @@ repeat{
 *  **千万注意：变量自增的过程 必须 在控制转移语句所在判断条件 之前！！！** 下面示例代码中有详细演示：当 a+=1 在 continue 所在判断条件之后时，continue 的实际效果等同于 break !! Kotlin中也是这样子。
 
 
-```
+```swift
 var a=10
 var b=1
 var c=1
@@ -717,7 +723,7 @@ Swift字符串本身并不是集合，但是其底层内容确实以集合形式
 * 字符串使用 `“”` 包裹
 * Swift中的字符串可以直接通过 + 、+= 进行拼接。
 
-```
+```swift
 var str="Hello,Swift"
 str += "!"
 print(str + "!")
@@ -725,13 +731,13 @@ print(str + "!")
 
 #### (2)、字符串的组成
 
-组成Swift字符串的字符都是Character类型。
+组成 Swift 字符串的字符都是 Character 类型。
 
-Swift的Character类型表示Unicode字符，组合起来形成String实例。
+Swift 的 Character 类型表示 Unicode 字符，组合起来形成 String 实例。
 
 **注意:** 在 Swift 4.2.1 中已经将字符串的 characters 属性废弃，如果我们需要遍历获取组成字符串的 character , 可以直接遍历字符串，不再需要访问 chatacters 属性。具体示例如下： 
 
-```
+```swift
 var str = "Hello,Swift"
 str += "!"
 str = (str+"!")
@@ -749,26 +755,26 @@ for c in str{
 
 ### 2、Unicode
 
-Unicode是字符编码的国际标准，目前是不用考虑平台即可无缝处理和表达字符。
+Unicode 是字符编码的国际标准，目前是不用考虑平台即可无缝处理和表达字符。
 
-Unicode在 计算机上表示人类语言(还有其他形式的通用符号，比如emoji)。
+Unicode 在 计算机上表示人类语言(还有其他形式的通用符号，比如 emoji)。
 
 标准中的每个字符都被赋予了唯一的数。
 
-Swift的String和Character类型构建于Unicode之上。
+Swift 的 String 和 Character 类型构建于 Unicode 之上。
 
 
 #### (1)、Unicode标量
 
-从内部实现说，Swift字符串是由Unicode标量(Unicode scalar)组成的。
+从内部实现说，Swift 字符串是由 Unicode标量(Unicode scalar)组成的。
 
-Unicode标量是21位的数，表示Unicode标准中一个特定字符。比如，U+0061 表示小写拉丁字母 a 。U+1F60E表示戴着墨镜的笑脸emoji。
+Unicode 标量是21位的数，表示 Unicode 标准中一个特定字符。比如，`U+0061` 表示小写拉丁字母 a 。`U+1F60E`表示戴着墨镜的笑脸 emoji。
 
-文本 U+1F60E 是书写Unicode字符的标准方式。1F60E 部分是十六进制数。 
+文本 `U+1F60E` 是书写 Unicode 字符的标准方式。1F60E 部分是十六进制数。 
 
-创建一个常量，来看看在Swift和playground中如何使用特定的Unicode标量：
+创建一个常量，来看看在 Swift 和 playground 中如何使用特定的 Unicode 标量：
 
-```
+```swift
 let oneCoolDude = "\u{1F60E}"
 ```
 
@@ -780,11 +786,11 @@ let oneCoolDude = "\u{1F60E}"
 
 在 Swift 中，每个字符都是一个或多个 Unicode 标量构成。
 
-一个 Unicode 标量对应某种给定语言中的一个基本字符。我们之所以说字符是由“一个或多个” Unicode 标量构成的，是因为还存在 组合标量(combining scalar)。
+一个 Unicode 标量对应某种给定语言中的一个基本字符。我们之所以说字符是由“一个或多个” Unicode 标量构成的，是因为还存在 **组合标量(combining scalar)**。
 
-比如，U+0301表示可组合的重音符号(’)的Unicode标量。这个标量将重音符号放置在它前面标量所对应的字符上面，也就是与前面的字符组合。用这个标量和小写拉丁字母 a 可以创建字符 á 
+比如，`U+0301`表示可组合的重音符号 `’` 的 Unicode标量。这个标量将重音符号放置在它前面标量所对应的字符上面，也就是与前面的字符组合。用这个标量和小写拉丁字母 a 可以创建字符 á 
 
-```
+```swift
 let oneCoolDude = "\u{0061}\u{0301}"
 //输出 á 
 print(oneCoolDude)
@@ -795,13 +801,13 @@ print(oneCoolDude)
 
 Swift 中的每个字符都是 **扩展字形簇** (extended grapheme cluster)。扩展字形簇是人类可读的单个字符，由一个或多个 Unicode 标量组合而成。
 
-刚才我们把字符 á 拆成了两部分 Unicode 标量: 字符和重音。把字符实现为扩展字形簇让Swift具备了处理复杂的文本字符的灵活性。
+刚才我们把字符 `á` 拆成了两部分 Unicode 标量: 字符和重音。把字符实现为扩展字形簇让 Swift 具备了处理复杂的文本字符的灵活性。
 
-Swift还提供了一种机制，能让我们看到字符串中所有的 Unicode 标量。
+Swift 还提供了一种机制，能让我们看到字符串中所有的 Unicode 标量。
 
-比如，你可以利用  **unicodeScalars**  属性看到字符串实例中的所有字符的Unicode标量，该属性持有所有Swift用来构建该字符串的标量。
+比如，你可以利用  **unicodeScalars**  属性看到字符串实例中的所有字符的 Unicode标量，该属性持有所有 Swift 用来构建该字符串的标量。
 
-```
+```swift
 var str="Hello,Swift"
 for scaler in str.unicodeScalars {
     print("scaler的值为：\(scaler),对应的UInt32为Unicode标量值为\(scaler.value)")
@@ -810,18 +816,17 @@ for scaler in str.unicodeScalars {
 
 ![查看字符串中字符的Unicode标量](https://images.gitee.com/uploads/images/2019/0116/094217_ee17cf97_930142.png "屏幕截图.png")
 
-在上面的示例中，scaler 输出的是组成字符串的每个字符，scaler.value 输出的则是字符对应的 UInt32 的 Unicode 标量。第一个72对应的是十六进制的 U+0048, 即大写字母 H 。
+在上面的示例中，scaler 输出的是组成字符串的每个字符，scaler.value 输出的则是字符对应的 UInt32 的 Unicode 标量。第一个72对应的是十六进制的 `U+0048`, 即大写字母 H 。
 
 >注意：怎么将无符号32位数转换为十六进制呢？还不会啊。。。。
 
 
-
 #### (3)、标准等价
 
-组合标量有其存在意义，不过Unicode也为某些常见字符提供了已经组合过的形式。比如，á 有一个专属的标量，实际上不用分为字母和重音符号两部分。这个标量是U+00E1，这种组合过的标量称为： **预组合标量
+组合标量有其存在意义，不过 Unicode 也为某些常见字符提供了已经组合过的形式。比如，`á` 有一个专属的标量，实际上不用分为字母和重音符号两部分。这个标量是 `U+00E1`，这种组合过的标量称为： **预组合标量
 ** 
 
-```
+```swift
 let str1 = "\u{0061}\u{0301}"
 let str2 = "\u{00E1}"
 print(str1,str2)
@@ -834,7 +839,7 @@ print(str1==str2)
 
  **标准等价是指两个 Unicode 标量序列 在语言学层面 是否相等。** 
 
-对于两个字符或者两个字符串，如果它们具备相同的语言学含义和外观，那么无论是否用相同的Unicode标量创建，都认为两者 相等。str1 和 str2 是相等的字符串，因为两者都表示带上重音符号的小写拉丁字母a，而它们由不同的Unicode标量创建的事实并不影响这一点。
+对于两个字符或者两个字符串，如果它们具备相同的语言学含义和外观，那么无论是否用相同的 Unicode 标量创建，都认为两者 相等。str1 和 str2 是相等的字符串，因为两者都表示带上重音符号的小写拉丁字母a，而它们由不同的 Unicode 标量创建的事实并不影响这一点。
 
 
 ### 3、字符串操作
@@ -843,9 +848,9 @@ print(str1==str2)
 
 标准等价对字符串的元素数量计算会有影响——无论是用组合标量还是预组合标量，只要两个字符串符合标准等价，那么他们的元素数量也就一致。
 
-* .count 属性可以直接获取字符串元素个数/字符串长度
+* `.count` 属性可以直接获取字符串元素个数/字符串长度
 
-```
+```swift
 let str1 = "\u{0061}\u{0301}"
 let str2 = "\u{00E1}"
 
@@ -859,16 +864,17 @@ print(flag)
 
 #### (2)、索引和区间
 
-Swift 编译器不允许用下标直接访问字符串中的特定字符。这个限制与Swift字符串和字符的存储方式有关。不能用整数作为索引访问字符串，因为 **Swift无法在不遍历前面每个字符的情况下 知道指定的索引对应于哪个Unicode标量。** 
+Swift 编译器不允许用下标直接访问字符串中的特定字符。这个限制与 Swift 字符串和字符的存储方式有关。不能用整数作为索引访问字符串，因为 **Swift无法在不遍历前面每个字符的情况下 知道指定的索引对应于哪个Unicode标量。** 
 
-Swift用名为`String.CharacterView.Index`的类型记录索引。CharacterView类型负责以有序集合的形式提供字符串内部字符的访问接口。
+Swift 用名为`String.CharacterView.Index`的类型记录索引。CharacterView 类型负责以有序集合的形式提供字符串内部字符的访问接口。
 
 ##### A: 获取指定索引位置字符
 
 获取指定索引位置字符的步骤：
-- 调用 .startIndex 属性构建起始索引对象
-- 通过 .index(startIndex,offset:x) 构建目标索引对象——endIndex 
-- 调用 [endIndex] 获取 endIndex 位置的字符。 
+
+- 调用 `.startIndex` 属性构建起始索引对象
+- 通过 `.index(startIndex,offset:x)` 构建目标索引对象——endIndex 
+- 调用 `[endIndex]` 获取 endIndex 位置的字符。 
 
 示例如下：
 
@@ -888,13 +894,15 @@ let endIndex2=str.index(endIndex, offsetBy: -3)
 var char2=str[endIndex2]
 print(char2)
 ```
+
 ##### B: 利用区间截取字符串
 
 截取字符串的步骤：
-- 调用 .startIndex 属性构建起始索引对象
-- 通过 .index(startIndex,offset:x) 构建结束索引对象——endIndex 
-- 构建 startIndex...endIndex 区间range
-- 调用 [range] 获取 range 区间内的字符串。 
+
+- 调用 `.startIndex` 属性构建起始索引对象
+- 通过 `.index(startIndex,offset:x)` 构建结束索引对象——endIndex 
+- 构建 `startIndex...endIndex` 区间range
+- 调用 `[range]` 获取 range 区间内的字符串。 
 
 示例如下：
 
@@ -911,7 +919,7 @@ var subStr=str[range]
 
 ##### C: 判断字符串是否为空
 
-```
+```swift
 let emptyStr=""
 var flag=emptyStr.isEmpty
 //输出true
@@ -921,9 +929,9 @@ print(flag)
 
 ## 八、可空类型
 
-可空类型(optional)是Swift的独特特性，用来指定某个实例可能没有值。看到可空类型时，你会知道该实例一定:要么有值并且已经可用，要么没有值。 **如果一个实例没有值，就称其为 nil。** 
+可空类型(optional)是 Swift 的独特特性，用来指定某个实例可能没有值。看到可空类型时，你会知道该实例一定:要么有值并且已经可用，要么没有值。 **如果一个实例没有值，就称其为 nil。** 
 
-任何类型都可以用可空类型来说明一个实例可能是nil。
+任何类型都可以用可空类型来说明一个实例可能是 nil。
 
 
 ### 1、可空类型
@@ -934,7 +942,7 @@ print(flag)
 
 * 直接声明未赋值时打印出来的是 nil 
 
-```
+```swift
 var errorStr:String?
 print(errorStr)
 ```
@@ -948,9 +956,9 @@ print(errorStr)
 
 强制展开时，需要在可空变量后面追加叹号——`!`
 
-> CnPeng 等价于Kotlin中的 断言非空——`!!` ，只是kotlin中有两个叹号。
+> CnPeng 等价于 Kotlin 中的 断言非空——`!!` ，只是 kotlin 中有两个叹号。
 
-```
+```swift
 var errorStr:String?
 errorStr="强制展开——断言非空"
 
@@ -974,11 +982,11 @@ Optional("强制展开——断言非空")
 
 #### (1)、基本格式
 
-可空实例绑定(optional binding)是一种固定模式，对于判断可空实例是否有值很有用。如果有值，就将其赋给一个临时常量或变量，并且使这个常量或变量在条件语句的第一个分支代码中可用。
+可空实例绑定 (optional binding) 是一种固定模式，对于判断可空实例是否有值很有用。如果有值，就将其赋给一个临时常量或变量，并且使这个常量或变量在条件语句的第一个分支代码中可用。
 
 下面是基本的语法:
 
-```
+```swift
 if let temporaryConstant = anOptional { 
     // anOptional 有值并将值赋给了 temporaryConstant。此时可以使用后者
 } else {
@@ -988,7 +996,7 @@ if let temporaryConstant = anOptional {
 
 所以，前一节 强制展开 中的代码就可以使用可空实例绑定简化为：
 
-```
+```swift
 var errorStr:String?
 errorStr="可空实例绑定"
 
@@ -999,7 +1007,7 @@ if let noNilStr=errorStr{
 
 #### (2)、嵌套的可空实例绑定
 
-```
+```swift
 var errorStr:String?
 errorStr="404"
 
@@ -1016,20 +1024,21 @@ if let noNilStr=errorStr{
 
 上面的示例代码可以简化为如下模式：
 
-```
+```swift
 var errorStr:String?
 errorStr="404"
 
 if let noNilStr=errorStr,let errorCode=Int(noNilStr){
     print("noNilStr 为 \(noNilStr), errorCode 为 \(errorCode)")
 }
-```
-这一段代码则比前面两个if 的示例更简洁，看着也更舒服。但需要注意的是，中间是使用 逗号 间隔的。
+``` 
+
+这一段代码则比前面两个if 的示例更简洁，看着也更舒服。但需要注意的是，中间是使用 **逗号** 间隔的。
 
 
 #### (3)、可空实例绑定中的附加条件
 
-```
+```swift
 var errorStr:String?
 errorStr="404"
 
@@ -1051,7 +1060,7 @@ if let noNilStr=errorStr,let errorCode=Int(noNilStr),errorCode==404{
 
 也就是说，隐式展开可空类型数据依旧可能为 nil , 只是概率比 可空类型数据 会低。
 
-```
+```swift
 var errorStr:String!
 //如果注掉这一行，打印结果依旧为 nil , 不注掉的话打印：Optional("404")
 errorStr="404"
@@ -1096,27 +1105,29 @@ print(type(of:errorStr4))
 ![](https://images.gitee.com/uploads/images/2019/0116/162744_f972af67_930142.png "屏幕截图.png")
 
 从上图我们可以看到：
+
 * 把 nil 赋值给 String 类型会报错。
-* 如果某个变量置为 nil , 那么它的类型就是 Optional<String>——可空类型，而不区分是 String! 还是 String？。
+* 如果某个变量置为 nil , 那么它的类型就是 `Optional<String>`——可空类型，而不区分是 String! 还是 String？。
 * errorStr3 的值为 nil , 调用 `errorStr3 is String!` 和 `errorStr3 is String?` 时都会返回true
 * errorStr4 的值非空，调用 `errorStr4 is String`,`errorStr4 is String!`、`errorStr4 is String?` 都会返回 true.
 
 补充：
 
 * is 用来判断变量是否为某个类型的实例（同Kotlin）
-* type(of:xxx) 用来获取xxx的类型
+* `type(of:xxx)` 用来获取xxx的类型
 
 ### 4、可空链式调用
 
 与可空实例绑定类似，可空链式调用(optional chaining)提供了一种 **对可空实例进行查询以判断其是否包含值的机制。**
  
 两者的一个重要区别是，可空链式调用允许程序员把多个查询串联为一个可空实例的值。
+
 - 如果链式调用中的每个可空实例都包含值，那么每个调用都会成功，整个查询链会返回期望类型的可空实例
 - 如果 **查询链中的任意可空实例是nil，那么整个链式调用会返回nil** 。
 
 > CnPeng 其实就是在调用变量时后面追加一个`？`，表示判断该变量是否为空。为空直接返回 nil , 不为空则执行相关语句。Kotlin中也有同样的机制。
 
-```
+```swift
 var errorCodeString: String?
 errorCodeString = "404"
 var errorDescription: String?
@@ -1140,7 +1151,7 @@ print(upCaseErrorDescription)
 
 直白一点，就是 **在调用变量时进行空安全调用，如果该变量不为空接着去修改这个变量；如果为空，不做修改** 。
 
-```
+```swift
 var str:String?
 //注掉这一行，则打印 nil , 不注掉则打印：Optional("注意：变量不为空时,原地修改可空变量")
 //str="注意："
@@ -1151,9 +1162,9 @@ print(str)
 > 这种`?.`的形式，与Kotlin中的 `?.` 相同
 
 
-### 6、nil合并运算符——??
+### 6、nil 合并运算符——??
 
-* 如果变量为不为空，执行 ?? 前面的内容；为空，执行后面的内容
+* **如果变量不为空，执行 ?? 前面的内容；为空，执行后面的内容**
 * ?? 左边为可空变量，右边为非空的同类型数据
 * 基本等同于Kotlin中的 `?:`
 
@@ -1173,7 +1184,7 @@ print(length)
 
 ### 1、创建数组
 
-```
+```swift
 //声明数组方式1
 var bucketList:Array<String>
 
@@ -1200,7 +1211,7 @@ array[x]+=y | 为array数组中索引为x的元素追加内容y
 array += array1 | 将array1中的元素追加到array中
 array.insert(yyy , at:x) | 将内容yyy追加到array数组的x索引处
 
-```
+```swift
 var province = ["山东"]
 province.append("北京")
 province.append("河北")
@@ -1231,9 +1242,9 @@ province.insert("山西", at: 8)
 ### 3、数组相等
 
 * 使用 `==` 检查数组是否相等
-* 由于数组中的元素有序，所以，数组相等的条件是：元素相同，并且元素顺序相同
+* 由于数组中的元素有序，所以，数组相等的条件是：**元素相同，并且元素顺序相同**
 
-```
+```swift
 var province = ["北京","河北","山东"]
 var province2 = ["河北","山东","北京"]
 var province3 = ["北京","河北","山东"]
@@ -1249,13 +1260,13 @@ province == province3
 
 元素不能被修改，只要使用 `let` 修饰数组即可。
 
-```
+```swift
 let province=["山东","河北","北京"]
 ```
 
 ### 5、查看 Swift API 文档
 
-点击 Xcode 界面中的 Help--Developer Documentation 即可打开 Swift API 文档界面——第二张图中的界面。然后在第二张图顶部的搜索框中输入搜索内容即可。
+点击 Xcode 界面中的 `Help--Developer Documentation` 即可打开 Swift API 文档界面——第二张图中的界面。然后在第二张图顶部的搜索框中输入搜索内容即可。
 
 ![](https://images.gitee.com/uploads/images/2019/0116/213227_1b1ddbaf_930142.png "屏幕截图.png")
 
@@ -1266,7 +1277,8 @@ let province=["山东","河北","北京"]
 
 ## 十、字典——dictionary
 
-Swift 中的字典对应 Java 中的 Map, 但不完全相同。因为字典有 Index !!!
+Swift 中的字典对应 Java 中的 Map, 但不完全相同。因为字典有 `Index` !!!
+
 * 存储数据时是以键值对的形式存储的。
 * 键必须唯一，字典的值可以是基本数据类型，也可以是数组(API中有示例)等。
 
@@ -1274,7 +1286,7 @@ Swift 中的字典对应 Java 中的 Map, 但不完全相同。因为字典有 I
 
 创建字典时有如下四种形式：
 
-```
+```swift
 //显示声明键和值的类型，等号右侧使用 [:] 形式
 var dict1:Dictionary<String,Double>=[:]
 var dict2:[String:Double]=[:]
@@ -1291,7 +1303,7 @@ var dict4=[String:Double]()
 
 创建有内容的字典对象。多个元素之间使用逗号间隔。
 
-```
+```swift
 //字典中的多个元素之间使用 逗号 间隔
 var userDict=["张三":23,"李四":24,"王五":25]
 ```
@@ -1307,7 +1319,7 @@ dict[key]=newValue|修改key对应的值，或新增键值对
 dict.updateValue(value,forKey:key)|单纯改值。如果key存在,返回旧值；key不存在，返回nil
 
 
-```
+```swift
 //字典中的多个元素之间使用 逗号 间隔
 var userDict=["李四":24,"王五":25]
 userDict.count
@@ -1331,7 +1343,7 @@ userDict.updateValue(22, forKey: "李四")
 
 ### 4、增加和删除值
 
-> CnPeng 到底该怎么理解这里的 Index 索引类呢？字典和Java中的Map在存储结构上又有啥区别呢？
+> CnPeng 到底该怎么理解这里的 Index 索引类呢？字典和 Java 中的 Map 在存储结构上又有啥区别呢？
 
 函数|含义
 ---|---
@@ -1340,7 +1352,7 @@ dict.removeValue(forKey:key)|删除key对应的值。key存在则返回被删除
 dict.remove(at:index)|删除指定index位置的元素。返回被删除的元素对象——Element
 dict[key]=nil|将key的值置为nil,也是一种删除方式，但没有返回值
 
-```
+```swift
 var userDict=["张三":23,"李四":24,"赵大":26,"钱2二":22,"孙三":23]
 
 //新增键值对
@@ -1368,7 +1380,7 @@ userDict.count
 
 ### 5、循环——遍历字典元素
 
-```
+```swift
 var userDict:Dictionary<String,Int>=["张三":23,"李四":24,"王五":25]
 
 //遍历方式1：for-in 之间必须用小括号包裹内容
@@ -1387,11 +1399,11 @@ for elem in userDict {
 
 同声明数组或其他变量一样，使用 `let` 修饰即可
 
-> 这一点比 Kotlin 方便。kotlin中分别使用 mapOf()、mutableMapOf()构建不可变和可变map
+> 这一点比 Kotlin 方便。kotlin 中分别使用 mapOf()、mutableMapOf()构建不可变和可变map
 
 ### 7、把字典转为数组
 
-```
+```swift
 var userDict:Dictionary<String,Int>=["张三":23,"李四":24,"王五":25]
 
 //每一个字典都有keys、values 属性
@@ -1410,7 +1422,7 @@ var ageArray=Array(userDict.values)
 
 集合是一组不同实例的无序组合。
 
-与数组相比，数组中元素有序，并且元素可以重复。而集合中的元素无序，并且元素不能重复
+与数组相比，数组中元素有序，并且元素可以重复。而**集合中的元素无序，并且元素不能重复**
 
 * Swift容器比较（摘自原书）
 
@@ -1461,7 +1473,7 @@ userSet.contains("张三")
 
 #### (1)、并集--union
 
-```
+```swift
 var userSet1:Set=["张三","李四","王五"]
 var userSet2:Set=["张三","赵六"]
 
@@ -1471,7 +1483,7 @@ userSet2.union(userSet1)
 
 #### (2)、交集--intersection
 
-```
+```swift
 var userSet1:Set=["张三","李四","王五"]
 var userSet2:Set=["张三","赵六"]
 
@@ -1481,7 +1493,7 @@ userSet2.intersection(userSet1)
 
 #### (3)、不相交--isDisjoint
 
-```
+```swift
 var userSet1:Set=["张三","李四","王五"]
 var userSet2:Set=["张三","赵六"]
 
@@ -1498,7 +1510,7 @@ userSet2.isDisjoint(with: userSet1)
 
 * 函数的声明和调用
 
-```
+```swift
 func testFunc(){
     print("这是一个简单的函数")
 }
@@ -1508,11 +1520,11 @@ testFunc()
 
 ### 2、函数参数
 
-* 形参时声明函数时的参数，实参是调用函数时传递的数据
+* 形参是声明函数时的参数，实参是调用函数时传递的数据
 * 声明带参数的函数时，参数在前，后面跟冒号，冒号后面是参数的类型（这种声明方式与 Kotlin 相同）
 * 调用函数时需要指明参数名称——类似于Kotlin中的具名调用
 
-```
+```swift
 func printName(name:String){
     print("输入的姓名为\(name)")
 }
@@ -1528,7 +1540,7 @@ printName(name: "张三")
 * 外部参数仅调用方具名使用，函数内部无法调用外部参数。
 
 
-```
+```swift
 //具有外部参数的函数。外部参数仅供调用方使用，内部参数仅供函数内部使用
 func emailTo(name userName:String){
     
@@ -1571,7 +1583,7 @@ emailTo(names: "张三","李四","王五")
 * 默认值参数需要作为最后一个参数。
 * 调用具有默认值参数的函数时，可以不传递该参数，此时，使用默认值
 
-```
+```swift
 func printUserInfo(name uName:String , age:Int,sex:String="男"){
     print("\(uName)的年龄为\(age),性别为\(sex)")
 }
@@ -1582,13 +1594,14 @@ printUserInfo(name: "李四", age: 24 ,sex: "女")
 ![](https://images.gitee.com/uploads/images/2019/0117/180951_fb2bdf20_930142.png "屏幕截图.png")
 
 #### (4)、in-out参数
+
 * in-out 参数(in-out parameter)能让函数影响函数体以外的变量
 * in-out 参数不能有默认值
 * in-out 参数不能是 可变长度参数
 * 调用方传递的 in-out 参数必须是 var 类型
 * 调用方传递 in-out 参数时，必须在其前添加 & 前缀
 
-```
+```swift
 //必须为var 可变类型。
 var uAge=23
 
@@ -1605,14 +1618,14 @@ print(uAge)
 
 ![](https://images.gitee.com/uploads/images/2019/0117/183537_2f8d35f4_930142.png "屏幕截图.png")
 
-* 上面函数中，第一个参数在声明外部参数时，使用了下划线_ , 表示调用方在传递该参数时不需要具名
+* 上面函数中，第一个参数在声明外部参数时，使用了下划线 `_` , 表示调用方在传递该参数时不需要具名
 
 ### 3、函数返回值
 
 * 函数后面追加 `->类型`
 * 没有返回值的函数本质上是省略了 `->Void`, Void 也是一种类型
 
-```
+```swift
 func getMax(num1:Int , num2:Int)->Int{
     return num1>num2 ? num1:num2
 }
@@ -1627,7 +1640,7 @@ print(maxNum)
 * 函数A 内包含 函数B ，函数B 则被称为 `嵌套函数`
 * 嵌套函数B 仅在 函数A 内有效——作用域的限定
 
-```java
+```swift
 func getTriangleArea(base:Double, height:Double)-> Double{
     let numerator=base*height
     
@@ -1648,9 +1661,9 @@ print(area)
 
 ### 5、多个返回值
 
-Swift 中的函数可以有多个返回值，此时，多个返回值使用 元组 包裹。
+Swift 中的函数可以有多个返回值，此时，多个返回值使用 `元组` 包裹。
 
-```
+```swift
 //返回包含三个元素的 具名元组——元组中的每个元素都有名称
 func groupNum(numbers:Int...)->(below10:[Int],below20:[Int],other:[Int]){
     //构建三个空数组
@@ -1686,7 +1699,7 @@ print(numTupple.2)
 
 * 返回值类型后面追加 `？`
 
-```
+```swift
 func printPenName(_ yourNames:(schoolName:String ,penName:String?))->String?{
     return yourNames.penName
 }
@@ -1711,16 +1724,16 @@ guard语句。
 
 格式为：
 
-```
+```swift
 guard condition else {
     <#statements#>
 }
 ```
 
-* 跟if/else 语句一样，guard语句会根据某个表达式返回的布尔值结果来执行代码;
+* 跟if/else 语句一样，guard 语句会根据某个表达式返回的布尔值结果来执行代码;
 * 但不同之处是，如果某些条件没有满足，才会执行 else 中的语句，从这里可以直接退出程序；满足条件则继续执行语句外面的内容
 
-```
+```swift
 func helloTo(names:(schoolName:String,nickName:String?)){
     
     guard let nick=names.nickName else {
@@ -1740,12 +1753,12 @@ helloTo(names: (schoolName: "李四", nickName: "小四"))
 
 ### 8、函数类型
 
-* 所有函数都有函数类型 function type
+* 所有函数都有函数类型（function type)
 * 函数类型由 参数类型和返回值类型组合而成，格式：`(参数1类型,参数2类型) -> (返回值类型)`
 * 如果某个函数没有参数，也没有返回值，那么它的函数类型为：` ()->() `
 
 
-```
+```swift
 func printPenName(_ yourNames:(schoolName:String ,penName:String?))->String?{
     return yourNames.penName
 }
@@ -1765,7 +1778,7 @@ if let name2=penName2{
 
 * 定义 函数类型 的常量
 
-```
+```swift
 func groupNum2(nums:Int...)->([Int],[Int]){
     //偶数数组
     var evenArr=[Int]()
@@ -1793,9 +1806,8 @@ print(result)
 上面的示例代码中，定义了函数类型的常量 numArr , 其值为 groupNum2 。
 
 
-**注意:exclamation:注意:exclamation:注意:exclamation:：**
+**注意:在定义函数类型的常量/变量时,**
 
-**在定义函数类型的常量/变量时,**
 * **如果函数有参数，那么，常量/变量的值后面不需要加 `()`**
 * **如果函数没有参数，那么，常量/变量值后面必须加 `()`**
 
@@ -1814,7 +1826,7 @@ closure  ['kləʊʒə] 关闭、终止、结束
 
 ### 1、闭包语法
 
-```
+```swift
 //不同地区上报的志愿者数量的数组
 let volunteerCounts = [1,3,40,32,2,53,77,13]
 
@@ -1835,7 +1847,7 @@ let volunteersSorted2 = volunteerCounts.sorted(by: sortDescending)
 
 在解析上面示例前先看一下数组中 sorted()函数的API ：
 
-```
+```swift
 /// - Parameter areInIncreasingOrder: A predicate that returns `true` if its first argument should be ordered before its second argument; otherwise, `false`.
 /// - Returns: A sorted array of the sequence's elements.
 public func sorted(by areInIncreasingOrder: (Element, Element) throws -> Bool) rethrows -> [Element]
@@ -1843,18 +1855,16 @@ public func sorted(by areInIncreasingOrder: (Element, Element) throws -> Bool) r
 
 这段API描述说：
 
-* 参数  **areInIncreasingOrder**  是一个函数类型的参数，具体类型为：`(Element, Element) throws -> Bool`。如果这个函数类型 **参数的值为true，那么前一个元素就需要左边，第二个参数排右边。否则，第二个排左边，第一个排右边。** 
+* 参数  **areInIncreasingOrder**  是一个函数类型的参数，具体类型为：`(Element, Element) throws -> Bool`。如果这个函数类型 **参数的值为true，那么前一个元素就排左边，第二个参数排右边。否则，第二个排左边，第一个排右边。** 
 * sorted() 函数最终会返回一个排序后的数组。
 * sorted() 指定了外部参数——by, 对应的内部参数就是——areInIncreasingOrder
 
 明白了上述API之后，我们再看一开始的示例代码。
+
 * 我们定义的 sortAscending 、 sortDescending 两个函数，分别触发了 sorted() 函数的升序和降序操作
-* 当把sortAscending(）作为参数传递给 sorted（）时中，如果 i<j ，那么，i 排左边，j 排右边，也就是说，小值放左边。所以，最终就得到了一个升序排列的数组。
-* 当把sortDescending(）作为参数传递给 sorted（）时中，如果 i>j ，那么，i 排左边，j 排右边，也就是说，大值放左边。所以，最终就得到了一个降序排列的数组。
+* 当把 sortAscending(）作为参数传递给 sorted（）时中，如果 i<j ，那么，i 排左边，j 排右边，也就是说，小值放左边。所以，最终就得到了一个升序排列的数组。
+* 当把 sortDescending(）作为参数传递给 sorted（）时中，如果 i>j ，那么，i 排左边，j 排右边，也就是说，大值放左边。所以，最终就得到了一个降序排列的数组。
 * 由于函数也是一种特殊的闭包——具名闭包，所以，上面的这个示例本质是：把闭包作为参数进行传递。
-
-
-
 
 
 ### 2、闭包表达式
@@ -1863,18 +1873,20 @@ public func sorted(by areInIncreasingOrder: (Element, Element) throws -> Bool) r
 
 由于闭包可以省略函数命名和函数声明，所以，闭包的简化格式为：
 
-```
+```swfit
 {(parameters) -> return type in 
     // 代码内容
 }
 ```
+
 在上述格式中：
+
 * 闭包表达式使用大括号进行包裹
 * in 用来间隔返回值类型 和 代码内容
 
 所以，根据上面的这个闭包表达式格式，可以简化第一小节中的排序代码：
 
-```
+```swift
 let volunteerCounts = [1,3,40,32,2,53,77,13]
 
 let volunteersSorted = volunteerCounts.sorted(by: {
@@ -1888,15 +1900,15 @@ let volunteersSorted2 = volunteerCounts.sorted(by: {
 })
 ```
 
-* 示例中这种直接将闭包作为参数的形式称为 内联闭包
+* 示例中这种直接将闭包作为参数的形式称为 `内联闭包`
 
 #### (2)、根据类型推断简化闭包
 
-闭包表达式也可使用Swift的类型推断。
+闭包表达式也可使用 Swift 的类型推断。
 
 也就是说，在前一小节的示例中：i、j 的类型可以根据数组元素的类型进行推断；而闭包返回值的类型则可以根据闭包中的代码进行推断，既然返回值类型可以省略，那么返回标记 `->` 也就可以直接省掉，所以。。。
 
-```
+```swift
 let volunteerCounts = [1,3,40,32,2,53,77,13]
 
 let volunteersSorted = volunteerCounts.sorted(by: {
@@ -1913,13 +1925,13 @@ let volunteersSorted2 = volunteerCounts.sorted(by: {
 
 在前面的示例中，编译器知道 `sorted(by:)` 接收一个闭包，也知道闭包中的参数个数和参数类型。在这种情况下，我们可以不必再为闭包的参数声明变量名——也就是说，可以直接省略 i、j 、a、b 的定义和间隔符 `in`，然后在闭包的代码语句中直接使用`快捷参数`进行相关运算。
 
- **快捷参数，就是以 `$index` 格式表示的函数参数。$ 是其中的固定格式，index 表示参数的索引（函数的第几个参数，从0计数）。** 如：`$0`, 表示函数的第一个参数；`$1` , 表示函数的第二个参数，依次类推。
+ **快捷参数**，就是以 `$index` 格式表示的函数参数。$ 是其中的固定格式，index 表示参数的索引（函数的第几个参数，从0计数）。 如：`$0`, 表示函数的第一个参数；`$1` , 表示函数的第二个参数，依次类推。
 
 内联闭包表达式中可以使用快捷参数。（CnPeng 还有哪些使用场景？）
 
 * 使用快捷参数简化排序代码
 
-```
+```swift
 let volunteerCounts = [1,3,40,32,2,53,77,13]
 
 let volunteersSorted = volunteerCounts.sorted(by: {$0<$1})
@@ -1929,14 +1941,14 @@ let volunteersSorted2 = volunteerCounts.sorted(by: {$0>$1})
 
 #### (4)、尾部闭包
 
- **如果某个函数的最后一个参数是闭包表达式，那么，在调用该函数时可以将这个闭包放置在 `（ ）` 外部, 并且可以省略参数名**。这就叫做尾部闭包语法（trailing closure syntax）。
+**如果某个函数的最后一个参数是闭包表达式，那么，在调用该函数时可以将这个闭包放置在 `（ ）` 外部, 并且可以省略参数名**。这就叫做尾部闭包语法（trailing closure syntax）。
 
-> CnPeng 在Kotlin中如果某个函数的最后一个参数为lambda表达式，那么，调用该函数时可以将lambda移到 () 外部。
+> CnPeng 在Kotlin中如果某个函数的最后一个参数为 lambda 表达式，那么，调用该函数时可以将lambda移到 () 外部。
 
 
 * 使用尾部闭包语法简化代码 
 
-```java
+```swift
 let volunteerCounts = [1,3,40,32,2,53,77,13]
 let volunteersSorted = volunteerCounts.sorted{$0<$1}
 let volunteersSorted2 = volunteerCounts.sorted{$0>$1}
@@ -1952,7 +1964,7 @@ let volunteersSorted2 = volunteerCounts.sorted{$0>$1}
 #### (1)、函数A没有参数
 
 
-```
+```swift
 //--------将函数作为返回值-----------------
 func getLightCount() -> (Int,Int)->Int {
     func calcuLightNum(newAdd : Int , existed : Int)->Int{
@@ -1975,15 +1987,16 @@ print("当前总的路灯数量为\(curLightCount(newAddLights,existedLightCount
 existedLightCount=curLightCount(newAddLights,existedLightCount)
 print("当前总的路灯数量为\(existedLightCount)")
 ```
+
 上述示例中：
+
 * 使用了嵌套函数，并且把内部嵌套的函数作为返回值
 * 我们定义了 (Int,Int)->Int 类型的常量curLightCount，由于 getLightCount() 没有参数，所以在为curLightCount赋值时，getLightCount后面必须追加（）
 * 当我们使用 curLightCount 时才传递了新、旧路灯的数量
 
 #### (2)、函数A有参数
 
-
-```
+```swift
 func getLightCount(str:String) ->(Int)->Int {
     print("有参数的函数，也可以把另一个函数作为返回值")
     func calcuLightNum(count:Int)->Int{
@@ -1998,6 +2011,7 @@ var newAddLights=6
 //已经存在的路灯总数量
 var existedLightCount=10
 var str="哈哈哈"
+
 //调用函数类型的常量时，注意这里参数的传递形式！！
 existedLightCount=curLightCount(str)(newAddLights)
 print("当前总的路灯数量为\(existedLightCount)")
@@ -2009,7 +2023,7 @@ print("当前总的路灯数量为\(existedLightCount)")
 
 下面的示例中，`getLightCount(str: "哈哈哈哈")(666)` 和 `getLightCount2()(777)`都包含了两个（）。前一个（）表示 getLightCount/getLightCount2 自己需要的参数，后一个括号表示返回值中所需要的参数。
 
-```
+```swift
 func getLightCount(str:String) ->(Int)->Int {
     print("有参数的函数，也可以把另一个函数作为返回值")
     func calcuLightNum(count:Int)->Int{
@@ -2038,9 +2052,9 @@ print("当前总的路灯数量为\(existedLightCount2)")
 
 函数可以作为其它函数的参数。
 
-其实在 [闭包语法] 一节中，就是把 sortAscending() 作为 sorted()函数的参数。
+其实在 [闭包语法] 一节中，就是把 `sortAscending()` 作为 `sorted()`函数的参数。
 
-```
+```swift
 func addNewLights(budget:Int,condition:(Int)->Bool)->((Int,Int)->Int)?{
     if condition(budget) {
         func getLightCount(newAdd:Int,exited:Int)->Int {
@@ -2074,7 +2088,7 @@ print(totalLightCount)
 
 ### 5、闭包能捕获变量
 
-```
+```swift
 func getNumCount(count:Int) -> (Int)->Int {
     var totalNumCount=count
 
@@ -2122,7 +2136,7 @@ sumBy2(12)(3)
 
 所以，在构建函数类型的常量/变量时，这个常量/变量实际是持有了闭包的引用。
 
-```
+```swift
 func getNumCount(count:Int) -> (Int)->Int {
     var totalNumCount=curCount
 
@@ -2176,7 +2190,7 @@ sumBy2(16)
 
 map(_:)可以用来改变数组的元素值（注意：不是增删，只是改值）, 然后将修改后的元素组合成一个新的数组作为返回值。
 
-```
+```swift
 let oldNumArr=[1,2,3,4]
 
 let newNumArr=oldNumArr.map{
@@ -2192,7 +2206,7 @@ print(newNumArr)
 
 filter(_:)对数组内容进行过滤，将符合过滤条件的元素组成一个新数组返回。
 
-```
+```swift
 let oldNumArr=[1,2,3,4]
 let newNumArr=oldNumArr.filter {
     return $0 % 2 == 0
@@ -2216,7 +2230,7 @@ reduce [rɪ'djuːs] 归纳，整理
 * 起始值也会参与运算。
 * 调用方为空时，直接返回指定的起始值
 
-```
+```swift
 let oldNumArr=[1,2,3,4]
 let result=oldNumArr.reduce(10){
     return $0 + $1
@@ -2239,7 +2253,7 @@ print(result2)
 
 ### 1、基本枚举
 
-* 定义枚举的方式是 `enum` 关键字后面跟  **枚举 类**  的名字
+* 定义枚举的方式是 `enum` 关键字后面跟  **枚举类**  的名字
 * 枚举的内容使用 `{}` 包裹
 * 枚举中至少包含一个 `case` , 表示枚举的成员
 
@@ -2247,7 +2261,7 @@ print(result2)
 
 枚举类型的变量在声明时，必须初始化
 
-```java
+```swift
 enum TextAlignment{
     case left
     case right
@@ -2258,11 +2272,12 @@ enum TextAlignment{
 var alignment=TextAlignment.left
 print(alignment)
 ```
+
 #### (2)、枚举类型的推断
 
-如果变量已经确定类型为枚举类型，再次赋值时，可以省略枚举类型，直接使用 .xxx 的形式调用
+如果变量已经确定类型为枚举类型，再次赋值时，可以省略枚举类型，直接使用 `.xxx` 的形式调用
 
-```java
+```swift
 enum TextAlignment{
     case left
     case right
@@ -2279,7 +2294,7 @@ print(alignment)
 ```
 #### (3)、枚举成员的比较
 
-```
+```swift
 enum TextAlignment{
     case left
     case right
@@ -2301,12 +2316,10 @@ if alignment == .center {
 
 #### (4)、使用switch比较枚举值
 
-* 在switch语句中，如果 case 已经完全涵盖了 枚举类的成员，那么就可以省略default语句。
+* 在switch语句中，如果 case 已经完全涵盖了枚举类的成员，那么就可以省略default语句。
 * 但是，通常来说，为了保险，还是会保留default
 
-
-
-```java
+```swift
 enum TextAlignment{
     case left
     case right
@@ -2362,13 +2375,14 @@ print(TextAlignment.left.rawValue)
 ```
 
 上述示例代码中：
+
 * 声明了一个 TextAlignment 枚举，其成员的原始类型为 ：Int 。
 * 示例中，指定了成员类型为Int，但并没有为成员进行初始赋值，此时，使用默认值，第一个成员默认值为0，第二个为1，第三个为2...
 * 使用 `枚举名.成员名.rawValue` 可以获取成员的原始值
 
 #### (2)、指定原始值（为枚举成员赋初值）
 
-```java
+```swift
 enum TextAlignment : Int{
     case left=10
     case right=20
@@ -2385,11 +2399,11 @@ print(TextAlignment.left.rawValue)
 
 #### (3)、将原始值转换为枚举成员
 
-使用原始枚举值的作用在于：在传输或存储枚举时，通过rawValue将枚举成员转换成原始值进行存储/传输。
+使用原始枚举值的作用在于：在传输或存储枚举时，通过 rawValue 将枚举成员转换成原始值进行存储/传输。
 
 那么，又该如何将原始值转换为枚举成员呢？
 
-```java
+```swift
 enum TextAlignment : Int{
     case left=10
     case right=20
@@ -2408,6 +2422,7 @@ if let alignment=TextAlignment(rawValue:myAlignment){
 ```
 
 上述示例代码中
+
 * 使用 `TextAlignment(rawValue:myAlignment)` 构造枚举成员，返回值类型为 `TextAlignment?`
 
 
@@ -2415,7 +2430,7 @@ if let alignment=TextAlignment(rawValue:myAlignment){
 
 * 原始值类型为字符串时，如果没有指定初始值，那么rawValue 输出的就是成员的名字
 
-```java
+```swift
 enum TextAlignment : String{
     case left="left——指定的rawValue"
     case right="right——指定的rawValue"
@@ -2444,7 +2459,7 @@ Swift 中枚举也可以有函数
  **注意：**
  **Swift中，所有的方法/函数都会存在一个隐式参数 `self`——表示当前函数所在类的实例。（ 同Java中的this )** 
 
-```
+```swift
 enum LightBulb{
     case on
     case off
@@ -2465,12 +2480,12 @@ print("当前电灯泡的开关状态为：\(lightBulb),温度为：\(curLightTe
 ```
 #### (2)、修改self的值
 
-* Swift 中，枚举是`值类型(value type)`, 值类型中的函数不能修改self。(第15章会有介绍值类型）
+* Swift 中，枚举是`值类型(value type)`, 值类型中的函数不能修改 self。(第15章会有介绍值类型）
 * 如果需要让值类型中包含的函数修改 self, 需要在声明该函数时，在func 关键字前面增加 `mutating`
 
 下面的示例代码中增加了 灯泡的开关函数--toggle. 触发该函数之后，改变self的值——也就是 LightBulb 的值。
  
-```java
+```swift
 enum LightBulb{
     case on
     case off
@@ -2509,6 +2524,7 @@ print("当前电灯泡的开关状态为：\(lightBulb),温度为：\(curLightTe
 前面的示例中，都是在枚举中定义了一个单纯的枚举静态成员。
 
 Swift 中，枚举的成员还可以有关联值。
+
 * 通过关联值可以把数据附着在枚举实例上
 * 不同的成员可以有不同的关联值
 
@@ -2518,7 +2534,7 @@ Swift 中，枚举的成员还可以有关联值。
 
 我们在获取某个形状的面积时，不同的形状，需要的参数不一样：正方形只要知道边长即可，长方形则需要宽和高。所以，我们下面定义了一个关联值的枚举：正方形关联了边长，长方形关联了宽和高。
 
-```
+```swift
 enum ShapeDimensions{
     case square(side:Double)
     case rectangelr(width:Double,height:Double)
@@ -2527,11 +2543,12 @@ enum ShapeDimensions{
 var squareShape=ShapeDimensions.square(side: 10)
 var rectShape=ShapeDimensions.rectangelr(width: 20, height: 10)
 ```
+
 #### (2)、switch中使用带有关联值的枚举
 
 下面 area() 函数中, 在switch中使用了模式匹配的形式，将带有关联值的枚举绑定到了新的常量上——绑定实例。如果不在绑定实例，会报错。
 
-```
+```swift
 enum ShapeDimensions{
     case square(side:Double)
     case rectangelr(width:Double,height:Double)
@@ -2581,7 +2598,7 @@ enum A1{
 
 在上述示例中，我们要想知道 A 的内存空间，就必须先知道 B 占用的内存空间。由于 B 中有关联值 c ，所以，B 的内存空间最终由 c 确定。但 c 又是 A 类型的，这样就产生了一个递归循环关系。
 
-如果我们没有添加 indirect 关键字，那么编译器就会任务 A 需要无限空间，然后就会报错。如果我们添加了 indirect 关键字，那么，编译器就会分配一个指针的大小给 A——在64为架构下，一个指针有8位。
+如果我们没有添加 indirect 关键字，那么编译器就会认为 A 需要无限空间，然后就会报错。如果我们添加了 indirect 关键字，那么，编译器就会分配一个指针的大小给 A——在64为架构下，一个指针有8位。
 
 综上， **`indirect` 关键字的作用是：告知编译器把枚举数据放到一个指针大小的内存空间中。** 
 
@@ -2624,13 +2641,13 @@ main.swift表示程序的入口。
 
 main.swift 通常包含“顶层”代码，也就是不包括在任何函数中或不在其它类型(比如结构体或类)中定义的代码。这个文件中的代码是顺序执行的:从上到下。
 
-main.swift中的代码通常用来做初始化工作。（CnPeng 这个类似于Android中的Application类）
+main.swift 中的代码通常用来做初始化工作。（CnPeng 这个类似于Android中的Application类）
 
-我们在单独的文件中定义类，然后在main.swift中创建类的实例。比如，创建一个 Town.swift 文件保存结构体 Town 的定义，然后在main.swift中创建Town的实例。
+我们在单独的文件中定义类，然后在 main.swift 中创建类的实例。比如，创建一个 Town.swift 文件保存结构体 Town 的定义，然后在 main.swift 中创建 Town 的实例。
 
 新建的工程中，main.swift 文件包含如下内容：
 
-```
+```swift
 //  main.swift
 //  MonsterTown
 //
@@ -2647,7 +2664,7 @@ print("Hello, World!")
 
 #### (4)、构建和运行程序
 
-* 方式1：Product -> run
+* 方式1：`Product -> run`
 
 ![](https://images.gitee.com/uploads/images/2019/0121/143932_2dceb600_930142.png "屏幕截图.png")
 
@@ -2682,7 +2699,7 @@ print("Hello, World!")
 
 * 结构体使用关键字 struct 修饰
 
-```java
+```swift
 import Foundation
 struct Town{
     
@@ -3263,7 +3280,7 @@ willSet 用来观察即将发生的变化；disSet 用来观察已经发生的�
 
 * 使用 willSet 和 didSet 来监测 Town 结构体中人口数量的变化：
 
-```
+```swift
 struct Town{
     var population=3500{
         willSet{
@@ -3292,9 +3309,10 @@ struct Town{
     ... 
 }
 ```
+
 * main.swift中的调用函数为：
 
-```
+```swift
 var zombie1=Zombie()
 var town1=Town()
 zombie1.town=town1
@@ -7077,7 +7095,7 @@ Program ended with exit code: 0
 
 #### (1)、添加一个会计类来记录Person的净资产
 
-```
+```swift
 import Foundation
 
 class Accountant {

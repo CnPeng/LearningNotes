@@ -85,6 +85,8 @@ Win | `gradlew.bat -v `| 查看 gradle 版本等信息
 
 ![](pics/1-2-查看gradle版本信息.png)
 
+> 如果在已有的项目中可以正常执行 `./gradlew -v` 命令，但是新建或拉取其他项目之后，再执行该命令时提示：`permission denied: ./gradlew` ，则可以先尝试使用该命令：`chmod +x gradlew` 修改其权限。
+
 ### 1.4.2 基本构架任务
 
 命令 | 含义

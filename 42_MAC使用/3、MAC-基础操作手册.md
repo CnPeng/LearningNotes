@@ -1,1 +1,1 @@
-https://help.apple.com/macOS/high-sierra/mac-basics/#/gestures
+[https://help.apple.com/macOS/high-sierra/mac-basics/#/gestures](https://help.apple.com/macOS/high-sierra/mac-basics/#/gestures)

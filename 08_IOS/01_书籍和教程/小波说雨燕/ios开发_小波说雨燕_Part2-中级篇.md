@@ -10,6 +10,12 @@
 	* [iOS 10 开发第一季 ④高级篇](http://xiaoboswift.com/course/43)
 	* [iOS 10 开发第一季 ⑤上架篇](http://xiaoboswift.com/my/course/44)
 
+以下内容基于 XCode 11.0 及更高版本, 2019-10-09
+
+* [Part1-初级篇-笔记](ios开发_小波说雨燕_Part1-初级篇.md) 
+* [Part2-中级篇-笔记](ios开发_小波说雨燕_Part2-中级篇.md)
+* [Part3-高级篇-笔记](ios开发_小波说雨燕_Part3-高级篇.md)
+* [Part4-上架篇-笔记](ios开发_小波说雨燕_Part4-上架篇.md)
 
 # [③中级篇](http://xiaoboswift.com/course/42)
 
@@ -673,7 +679,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 设置导航条的字体:
 
-![](pics/166-设置导航条字体.png)
+![](pics/166-设置导航条的字体.png)
 
 修改标题栏文本色：(TODO 这里不知道为啥不生效啊，设置了白色但是依旧显示黑色)
 
