@@ -977,7 +977,7 @@ class GuideViewController: UIPageViewController,UIPageViewControllerDataSource {
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        // 上一页的内容
+        // 上一页的内容。注意，这里的 index 是 ContentViewController 中自定义的
         var index = (viewController as! ContentViewController).index
         index-=1
         

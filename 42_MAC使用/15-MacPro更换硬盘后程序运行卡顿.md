@@ -14,4 +14,4 @@
 
 ## 3.参考
 
-* [Mac开机时按住Command+Option+P+R 键，重置Pram和Nvram，从而达到恢复系统速度的方法真的有效么？](https://www.zhihu.com/question/20401972)
+* [Mac开机时按住Command+Option+P+R`` 键，重置Pram和Nvram，从而达到恢复系统速度的方法真的有效么？](https://www.zhihu.com/question/20401972)
