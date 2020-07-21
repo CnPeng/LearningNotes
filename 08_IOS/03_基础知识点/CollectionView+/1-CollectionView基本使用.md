@@ -1,0 +1,5 @@
+* [iOS开发- UICollectionView详解+实例](https://www.cnblogs.com/ios8/p/iOS-UICollectionView.html)
+* [swift-iOS开发之UICollectionViewCompositionalLayout](https://www.jianshu.com/p/7d7e56bd58ce)
+* [iOS学习之UICollectionView](https://www.jianshu.com/p/d0b034f59020)
+* [iOS CollectionView 的那些事](https://www.jianshu.com/p/ec7ad4f3c6e2)
+* [iOS-UICollectionView基本使用](https://mp.weixin.qq.com/s/q7kvj5oRM2o3MSSWLpGgeQ)
