@@ -260,7 +260,12 @@ Podfile 只配置了主 target , 必须让 FansAreaTests 这个 target 也能使
 
 ![](pics/471-修改podfile.png)
 
-然后切换到项目根目录下，执行更新命令：`pod update --no-repo-update` ，如下图：
+然后切换到项目根目录下，执行更新命令：
+
+```swift
+pod update --no-repo-update
+``` 
+，如下图：
 
 ![](pics/472-执行pod更新.png)
 
