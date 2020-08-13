@@ -1228,13 +1228,15 @@ Ajax 技术的核心是 `XMLHttpRequest` 对象，简称 `XHR`。也就是说，
 
 > 虽然 XMLHttpRequest 名字中包含 XML ，但 Ajax 通信与数据格式无关，所以，其中传递的数据不一定是 XML.
 
-##### 8.3.2.1.1 构建 XMLHttpRequest 请求对象：
+##### 8.3.2.1.1 XHR 的用法
+
+###### 8.3.2.1.1.1 构建 XMLHttpRequest 请求对象：
 
 ```javascript
 var xhr = new XMLHttpRequest();
 ```
 
-##### 8.3.2.1.2 open()
+###### 8.3.2.1.1.2 open()
 
 在使用 XHR 对象时，要调用的第一个方法是 `open()` ，它接收三个参数:
 
@@ -1247,7 +1249,7 @@ var xhr = new XMLHttpRequest();
 xhr.open("get","example.text",false);
 ```
 
-##### 8.3.2.1.3 send()
+###### 8.3.2.1.1.3 send()
 
 `send()` 表示发送请求，接收一个参数，即要发送给服务端的请求数据。如果不需要通过请求主体发送数据，则必须传入 `null`.
 
@@ -1257,7 +1259,7 @@ xhr.open("get", "example.text", false);
 xhr.send(null);
 ```
 
-##### 8.3.2.1.4 填充属性
+###### 8.3.2.1.1.4 填充属性
 
 请求发送并且收到响应后，响应的数据会自动填充 XHR 对象的属性，相关的属性介绍如下：
 
@@ -1280,7 +1282,7 @@ if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
 }
 ```
 
-##### 8.3.2.1.5 readyState
+###### 8.3.2.1.1.5 readyState
 
 在发送异步请求时，需要通过 readyState 判断发送操作是否已经达成。
 
@@ -1314,7 +1316,7 @@ xhr.open("get", "example.text", false);
 xhr.send(null);
 ```
 
-##### 8.3.2.1.6 abort()
+###### 8.3.2.1.1.6 abort()
 
 在接收到响应之前还可以调用 `abort()` 方法来取消异步请求，如下：
 
@@ -1324,9 +1326,326 @@ xhr.abort();
 
 调用这个方法之后，XHR 对象会停止触发事件，而且也不再允许访问与响应有关的对象属性。在终止请求之后，还应该对 XHR 对象进行解引用操作——由于内存原因，不建议重用 XHR 对象。
 
-#### 8.3.2.1 XMLHttpRequest 的 Header
+##### 8.3.2.1.2 XMLHttpRequest 的 Header
 
+###### 8.3.2.1.2.1 Heaer 信息 
+
+每个 Http 请求和响应都会带有相应的头部信息。默认情况下，在发送 XHR 请求的同时，会发送下列头部信息：
+
+头信息标识|含义
+---|---
+`Accept` | 浏览器能够处理的内容类型
+`Accept-Charset` | 浏览器能够显示的字符集 
+`Accept-Encoding` | 浏览器能够处理的压缩编码 
+`Accept-Language`| 浏览器当前设置的语言
+`Connection`| 浏览器与服务器之间连接的类型
+`Cookie`| 当前页面设置的任何 Cookie
+`Host`| 发出请求的页面所在的域
+`Referer`| 发出请求的页面的 URI。 ( HTTP 规范中将该字段写错了，应该是 `referrer`——推荐人，上线人。`referer`——参考，引用)
+`User-Agent`| 浏览器的用户代理字符串
+
+虽然不同浏览器实际发送的头部信息会有所不同，但以上列出的基本上是所有浏览器都会发送的。
+
+###### 8.3.2.1.2.2 发送时设置 Heaer 信息——`setRequestHeader()`
+
+使用 `setRequestHeader()` 方法可以设置自定义的请求头部信息。该方法接收两个参数：头部字段的名称和头部字段的值。要成功发送请求头信息，**必须在调用 `open()` 方法之后且调用 `send()` 方法之前调用 `setRequestHeader()`**。如下:
+
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function() {
+    if (this.readyState == 4) {
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+            alert(xhr.responseText);
+        } else {
+            alert("请求失败：" + xhr.status);
+        }
+    }
+};
+
+xhr.open("get", "example.php", true);
+xhr.setRequestHeader("MyHeader","myValue");
+xhr.send(null);
+```
+
+###### 8.3.2.1.2.3 获取响应中的 Heaer 信息
+
+调用 XHR  对象的 `getResponseHeader()` 方法并传入头部字段名称可以取得相应的响应头部信息。
+
+调用 XHR 对象的 `getAllResponseHeaders()` 方法则可以取得一个包含所有头部信息的长字符串。
+
+```javascript
+var myHeader = xhr.getResponseHeader("MyHeader");
+var allHeaders = xhr.getAllResponseHeaders();
+```
+
+##### 8.3.2.1.3 XMLHttpRequest 的 GET
+
+GET 是最常见的请求类型，用户向服务器查询某些信息。可以将查询字符串参数追加到 URL 的末尾。
+
+对于 XHR ，传入 `open()` 方法的带有查询字符串的 URL 必须经过正确的编码。也就是说，查询字符串中每个参数的名称和值都必须使用 `encodeURIComponent()` 进行编码，然后才能放到 URL 的末尾。而且多个键值对之间都必须使用 `&` 分割。
+
+```javascript
+xhr.open("get", "example.php?name1=value1&name2=value2", true);
+```
+
+下面的示例是向现有 URL 的末尾添加查询字符串参数：
+
+```javascript
+function addURLParam(url, name, value) { 
+    url += (url.indexof("?") == -1 ? "?" : "&");
+    url += encodeURIComponent(name) + "=" + encodeURIComponent(value);
+    return url;
+}
+```
+
+上述代码调用示例如下：
+
+```javascript
+var url = "example.php";
+url = addURLParam(url, "name", "张三");
+url = addURLParam(url, "book", "JavaScript");
+
+xhr.open("get",url,true);
+```
+
+##### 8.3.2.1.4 XMLHttpRequest 的 POST
+
+POST 请求通常用于向服务器发送应该被保存的数据，也就是说，POST 需要把数据作为请求的主体提交给服务器。
+
+在 `open()` 方法中将第一个参数设置为 `"post"` 即可初始化一个 POST 请求。
+
+```javascript
+xhr.open("post", url, true);
+```
+
+发送 POST 请求的第二步就是向 `send()` 方法中传入某些数据。由于 XHR 最初的设计主要是为了处理 XML，因此可以在此传入 XML DOM 文档，传入的文档经过序列化字后将作为请求主体被提交到服务器。也可以在此传入任何想发送到服务器的字符串。
+
+默认情况下，服务器对 POST 请求和提交 Web 表单的处理是不一样的。因此服务器端必须有程序来读取发送过来的原始数据，并从中解析出有用的数据。不过，我们可以使用 XHR 来模仿表单提交：首先将 `Content-Type` 头部信息设置为 `application/x-www-form-urlencoded` 也就是表单提交时的内容类型；然后以适当的格式创建一个字符串。
+
+
+```javascript
+function submitData() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4) {
+            if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+                alert(xhr.responseText);
+            } else {
+                alert("请求失败：" + xhr.status);
+            }
+        }
+    };
+
+    xhr.open("post", "example.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var form = document.getElementById("user-info");
+    xhr.send(serialize(form));
+}
+```
+
+上述函数可以将 ID 为 `user-info` 的表单中的数据序列化之后发送给服务器。
+
+
+#### 8.3.2.2 XMLHttpRequest 2 
+
+XMLHttpRequest 1 仅把已有的 XHR 对象的实现细节描述了出来。而 XMLHttpRequest 2 则进一步发展的 XHR。并非所有的浏览器都完整的 XMLHttpRequest 2 的规范，但所有浏览器都实现了它规定的部分内容。
+
+##### 8.3.2.2.1 FormData
+
+现代 Web 应用中频繁使用的一项功能就是表单数据的序列化，XMLHttpRequest 2 为此定义了 FormData 类型。
+
+下面的示例代码中创建了一个 FormData  对象，并向其中添加了一些数据:
+
+```javascript
+var data = new FormData();
+data.append("name", "张三");
+``` 
+
+或者也可以使用如下方式：将表单元素的数据传入到 FormData 的构造函数中。
+
+```javascript
+var data2 = new FormData(document.forms[0]);
+``` 
+
+创建了 FromData 实例之后，就可以直接将他传给 XHR 的 send() 方法，如下：
+
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.onreadystatechange = function () {
+    if (xhr.readyState == 4) {
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+            alert(xhr.responseText);
+        } else { 
+            alert("请求失败："+xhr.status);
+        }
+    }
+};
+
+xhr.open("post", "example.php", true);
+var form = document.getElementById("user-info");
+xhr.send(new FormData(form));
+``` 
+
+使用 FormData 的方便之处在于：不必在 XHR 的请求头中明确设置使用表单格式。XHR 对象能够识别传入的输入类型是  FormData 的实例，并配置适当的头部信息。
+
+##### 8.3.2.2.2 超时设定
+
+IE 中有效，参考原书：21.2.2
+
+##### 8.3.2.2.3 overrideMimeType()
+
+FireFox 中有效，参考原书 21.2.3
+
+##### 8.3.2.2.4 进度事件
+
+Progress Events 规范是 W3C 的一个工作草案，定义了与客户端服务器通信有关的事件。有如下六个进度事件：
+
+事件|说明
+---|---
+loadstart | 在接收到响应数据的第一个字节时触发
+progress | 在接收到响应期间持续不断的触发
+error | 在请求发生错误时触发
+abort | 在因为调用 `abort()` 方法而终止连接时触发
+load | 在接收到完整的响应数据时触发
+loadend | 在通信完成或者触发 error,abort 或 load 事件后触发。
+
+每个请求都从触发 loadstart 开始，接下来时一个或多个 progress 事件，然后触发 error、abort 或 load 事件中的一个，最后以触发 loadend 结束。
+
+###### 8.3.2.2.4.1 load 事件
+
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.onload = function() {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+        alert(xhr.responseText);
+    } else {
+        alert("请求失败：" + xhr.status);
+    }
+};
+
+xhr.open("get", "example.php", true);
+xhr.send(null);
+```
+
+load 事件用于替换 readystatechange 事件。只要浏览器接收到服务器的响应，不管状态如何，都会触发 load 事件，所以就不需要去检查 readyState 属性了，但我们依旧需要检查 status 去确定数据是否真的已经可用。
+
+###### 8.3.2.2.4.2 progress 事件
+
+progress 事件会在浏览器接收新数据期间周期性地触发。必须在调用 XHR  的 open() 之前添加 progress 事件。
+
+progress 事件处理程序会接收到一个 event 对象，其 target 属性是 XHR 对象，但包含着三个额外的属性：`lengthComputable`、`position`、`totalSize`。各属性的含义如下：
+
+属性|含义
+---|---
+lengthComputable | 表示进度信息是否可用（布尔值）
+position | 表示已经接收的字节数
+totalSize | 表示根据 `Content-Length` 响应头确定的预期字节数。
+
+```javascript
+var xhr = new XMLHttpRequest();
+xhr.onload = function() {
+    if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+        alert(xhr.responseText);
+    } else {
+        alert("请求失败：" + xhr.status);
+    }
+};
+
+xhr.onprogress = function(event) {
+    var divStatus = document.getElementById("status");
+    if (event.lengthComputable) {
+        divStatus.innerHTML = "已接收：" + event.position + "/" + "总大小：" + event.totalSize;
+    }
+};
+
+xhr.open("get", "example.php", true);
+xhr.send(null);
+``` 
 
 
 ### 8.3.3 跨域通信
 
+通过 XHR 实现 Ajax 通信的一个主要限制是跨域安全策略。**默认情况下，XHR 对象只能访问与包含它的页面位于同一个域中的资源**。该策略可以预防某些恶意行为，但是，实现合理的跨域请求对于开发某些浏览器应用程序也是至关重要的。
+
+#### 8.3.3.1 CORS
+
+##### 8.3.3.1.1 CORS 介绍
+
+`CORS（Cross-Origin Resource Sharing，跨资源共享）` 定义了在必须访问跨源资源时，浏览器与服务器应该如何沟通。其基本思想是： **使用自定义的 HTTP 头部，让浏览器与服务器进行沟通，从而决定请求或响应是应该成功还是应该失败。**  
+
+比如，一个简单的 GET 或 POST 请求，没有自定义头部，其主体内容是 `text/plain` 。在发送该请求时，需要给他附加一个额外的 Origin 头部，其中包含请求页面的源信息（协议、域名和端口）, 以便服务器根据该头部信息来决定是否给予响应。下面是 Origin 头部的一个示例：
+
+```javascript
+Origin: http://www.nczonline.net
+```
+
+如果服务器认为该请求可以接受，就会在 `Access-Control-Allow-Origin` 头部中返回相同的源信息（如果是公共资源，会返回 `*`）。例如：
+
+```javascript
+Access-Control-Allow-Origin:http://www.nczonline.net
+```
+
+如果没有这个头部，或者有这个头部但源信息不匹配，浏览器就会驳回该请求。正常情况下，浏览器会处理请求。注意，**请求和响应都不包含 cookie 信息。**
+
+##### 8.3.3.1.2 XHR 跨域的限制
+
+跨域 XHR 对象为了安全有如下限制：
+
+* 不能使用 `setRequestHeader()` 设置自定义头部
+* 不能发送和接收 `cookie`
+* 调用 `getAllResponseHeaders()` 方法总会返回空字符串
+
+##### 8.3.3.1.3 带凭据的跨域请求
+
+默认情况下，跨源请求不提供凭据（cookie、HTTP 认证及客户端 SSL 证明等）。通过将 `withCredentials` 属性设置为 true，可以指定某个请求应该发送凭据。如下：
+
+```javascript
+xhr.withCredentials = true;
+```
+
+如果服务器接受带凭据的请求，会用下面的 HTTP 头部来响应：
+
+```javascript
+Access-Control-Allow-Credentials:true
+```
+
+如果发送的是带凭据的请求，但服务器的响应中没有包含该头部，那么浏览器就不会把响应交给 JavaScript（于是，responseText 中将是空字符串，status 的值为 0，而且会调用 onerror(）事件处理程序）。另外，服务器还可以在 Preflight 响应中发送这个 HTTP 头部，表示允许源发送带凭据的请求。
+
+
+#### 8.3.3.2 JSONP
+
+JSONP 即  `JSON with padding （填充式 JSON 或 参数式 JSON）`，是 JSON 的一种新的应用场景。JSONP 本质上就是被包含在函数调用中的 JSON，如 `callback(("name":"张三"));`
+
+JSONP 由两部分组成：回调函数和数据。
+
+回调函数是当响应到来时应该在页面中调用的函数。回调函数的名字一般是在请求中指定的。而数据就是传入回调函数中的 JSON 数据。下面是一个典型的 JSONP 请求：
+
+```javascript
+http://freegeoip.net/json/?callback=handleResponse
+``` 
+
+上述代码是在请求一个 JSONP 地理定位服务。通过查询字符串来指定 JSONP 服务的回调参数是很常见的，上述代码中回调函数的名称为：`handleResponse`。
+
+JSONP 是通过动态 `<script>` 元素来使用的，使用时可以为 `src` 属性指定一个跨域 URL。这里的 `<script>` 元素与 `<img>` 元素类似，都有能力不受限制的从其他域加载资源。因为 JSONP 是有效的 JavaScript  代码，所以在请求完成后，即在 JSONP 响应加载到页面中以后，就会立即执行。示例如下：
+
+```javascript
+function handleResponse(response) { 
+    alert("You‘re at IP address:"+response.IP +",which is in :"+response.city+","+response.region_name);
+}
+
+var script = document.createElement("script");
+script.src = "http://freegeoip.net/json/?callback=handleResponse";
+document.body.insertBefore(script,document.body.firstChild);
+``` 
+
+上述例子通过查询地理定位服务来显示我们的 IP 地址和位置信息。
+
+JSONP 之所以在开发人员中极为流行，是因为它简单易用。与`图像 Ping` （另一中跨域技术，参考原书 21.5.1 ）相比，它的有点在于能够直接访问响应文，支持在浏览器与服务器之间双向通信。
+
+但是，JSONP 也有不足之处:
+
+* JSONP 是从其他域中加载代码执行，如果其他域不安全，很可能会在响应中夹带一些恶意代码，而此时除了完全放弃 JSONP 调用之外，没有办法追究，所以，在使用非自己运维的 Web 服务时，必须保证它的安全性。
+* 要确定 JSONP 请求是否失败并不容易。虽然 HTML5 给 `<script>` 元素新增了一个 onerror 事件处理程序，但浏览器对它的支持并不理想。所以，开发人员不得不使用计时器检测指定时间内是否接收到了相应。
+
+
+> 更多跨域内容参考原书 21 章

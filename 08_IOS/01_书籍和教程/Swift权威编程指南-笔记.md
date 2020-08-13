@@ -1205,7 +1205,7 @@ var arr1=[Int]()
 array.append()|向数组array中追加元素
 array.remove(at:index)| 删除数组array中index位置的元素
 array.count|获取array数组的元素个数
-array[start...end]| 获取array数组在指定区间的元素
+array[start...end]| 获取array数组在指定区间的元素，得到的是 ArraySlice 类型数组，可以通过 `Array(切片结果)` 将切片结果转换为数组。
 array[x]=y | 将array数组中索引为x的元素值修改为y
 array[x]+=y | 为array数组中索引为x的元素追加内容y
 array += array1 | 将array1中的元素追加到array中
