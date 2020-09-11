@@ -1,6 +1,6 @@
 在获取本地视频时，会展示视频时长，时长通常取到的是毫秒值，在转换成时分秒结构时，可以使用SimpleDateFormat进行转换。
 
-```
+```java
  public static String timeParseMinute(long duration) {
         try {
             SimpleDateFormat msFormat = null;

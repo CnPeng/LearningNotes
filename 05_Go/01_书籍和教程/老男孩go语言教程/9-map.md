@@ -325,3 +325,65 @@ func main() {
 }
 ```
 
+### 9.5.2 统计单词出现的次数：
+
+```go
+package main
+
+import (
+	"fmt"
+	"strings"
+)
+
+func main() {
+	s1 := "how do you do "
+	strSlice := strings.Split(s1, " ")
+
+	strMap := make(map[string]int, 10)
+	for _, w := range strSlice {
+		if _, ok := strMap[w]; !ok {
+			strMap[w] = 1
+		} else {
+			strMap[w]++
+		}
+	}
+	for k, v := range strMap {
+		fmt.Println(k, v)
+	}
+}
+```
+
+### 9.5.2 回文判断
+
+一个字符串从左向右读和从右向左读含义一致，就称为回文。如：
+
+“上海自来水来自海上”、“山西运煤车煤运西山”、“黄山落叶松叶落山黄”
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	s1 := "山西运煤车煤运西山"
+	// 规律：s1[0]==s[len(ss)-1]
+	// 		s1[1]==s[len(ss)-1-1]
+	// 		s1[2]==s[len(ss)-1-2]
+	// 		s1[3]==s[len(ss)-1-3]
+	// 。。。s1[i]==s[len(ss)-1-i]
+
+	// 将字符串转换成 rune 切片
+	r := make([]rune, 0, len(s1))
+	for _, c := range s1 {
+		r = append(r, c)
+	}
+
+	// 只比较前面一半和后面一个就可以
+	for i := 0; i < len(r)/2; i++ {
+		if r[i] != r[len(r)-1-i] {
+			fmt.Println("不是回文")
+			return
+		}
+	}
+}
+```

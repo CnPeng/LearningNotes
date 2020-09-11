@@ -1264,7 +1264,19 @@ province == province3
 let province=["山东","河北","北京"]
 ```
 
-### 5、查看 Swift API 文档
+### 5、数组遍历
+
+```swift
+for item in itemArr{
+
+}
+
+for (index,item) in  itemArr.enumerated(){
+            
+}
+```
+
+### 6、查看 Swift API 文档
 
 点击 Xcode 界面中的 `Help--Developer Documentation` 即可打开 Swift API 文档界面——第二张图中的界面。然后在第二张图顶部的搜索框中输入搜索内容即可。
 
