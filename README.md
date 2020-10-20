@@ -1,6 +1,6 @@
 # LearningNotes
 
-最近更新日期：<font color="#ff0000">2020-07-21</font>
+最近更新日期：<font color="#ff0000">2020-10-20</font>
 
 >**注意：**
 >
@@ -22,9 +22,11 @@ LearningNotes 是个人综合性学习笔记。
 
 我的微信公众号：CnPeng
 
-[我的简书（持续更新，但更新不一定及时）:https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
+[我的简书 : https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
 
-[我的CSDN（停更）：http://blog.csdn.net/north1989](http://blog.csdn.net/north1989)
+[我的CSDN：http://blog.csdn.net/north1989](http://blog.csdn.net/north1989)
+
+因个人原因，以上三个平台不保证更新频率。最新内容以本仓库为准。
 
 
 ## 二、详细目录
