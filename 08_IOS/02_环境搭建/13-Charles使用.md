@@ -12,4 +12,8 @@
 
 ## 1.2 《iOS Charles抓包》
 
-原文：[iOS Charles抓包](https://www.jianshu.com/p/724ef9d3efb6)
+抓包参考文章 ：[轻松搞定Charles的HTTPS抓包（iOS13可用）](https://blog.csdn.net/y277an/article/details/103573163)
+
+注意：按照上面文章配置完成之后，如果还不显示抓包数据，就需要检查 `Proxy ` 中的 `Recording Settings` - `Include` 中的配置。如果需要拦截全部 https 则清空 `Include` 中的内容，否则需要指定 host 和 端口。
+
+其他参考文章：[iOS Charles抓包](https://www.jianshu.com/p/724ef9d3efb6)
