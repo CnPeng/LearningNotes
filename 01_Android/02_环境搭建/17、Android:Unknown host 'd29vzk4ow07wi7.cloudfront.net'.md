@@ -30,12 +30,27 @@ Preferences > Gradle > 取消Offline work
 ![](https://upload-images.jianshu.io/upload_images/2551993-36692da165774c94.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ### (4)、更改maven仓库地址
-在 project的 build.gradle 文件中更改Maven地址为 阿里云镜像仓库, 参考链接：http://www.yrom.net/blog/2015/02/07/change-gradle-maven-repo-url/
+
+> 2020-10-28 新建项目碰见该问题时，该方案解决了问题
+
+在 project 的 build.gradle 文件中更改 Maven地址为 阿里云镜像仓库, 参考链接：[https://blog.csdn.net/qq_38287890/article/details/100512456](https://blog.csdn.net/qq_38287890/article/details/100512456)
 
 ```
+
+buildscript {
+    repositories {
+        google()
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }//阿里云镜像服务
+
+        jcenter()
+    }
+}
+
 allprojects {
     repositories {
-        maven{ url '[http://maven.aliyun.com/nexus/content/groups/public/](http://maven.aliyun.com/nexus/content/groups/public/)'}
+    	   google()
+         maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }//阿里云镜像服务
+        	    jcenter()
     }
 }
 ```

@@ -38,6 +38,13 @@ func timestampDemo() {
 	fmt.Printf("current timestamp1:%v\n", timestamp1)
 	fmt.Printf("current timestamp2:%v\n", timestamp2)
 }
+
+func timeStamp2() {
+	fmt.Printf("时间戳（秒）：%v;\n", time.Now().Unix())
+	fmt.Printf("时间戳（纳秒）：%v;\n",time.Now().UnixNano())
+	fmt.Printf("时间戳（毫秒）：%v;\n",time.Now().UnixNano() / 1e6)
+	fmt.Printf("时间戳（纳秒转换为秒）：%v;\n",time.Now().UnixNano() / 1e9)
+}
 ```
 
 * 使用 `time.Unix()`函数可以将时间戳转为时间格式。

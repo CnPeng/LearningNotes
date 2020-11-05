@@ -1,8 +1,8 @@
-https://blog.csdn.net/shift_wwx/article/details/78468397
+[https://blog.csdn.net/shift_wwx/article/details/78468397](https://blog.csdn.net/shift_wwx/article/details/78468397)
 
 平台版本是android 7.0，在adb install *.apk 会提示下面的错误：
 
- Failure [INSTALL_FAILED_TEST_ONLY: installPackageLI]
+ `Failure [INSTALL_FAILED_TEST_ONLY: installPackageLI]`
 
 
 
@@ -14,17 +14,20 @@ https://blog.csdn.net/shift_wwx/article/details/78468397
 
 方法2：
 
->adb push *.apk /tmp
->adb shell pm install -t /tmp/*.apk
-
+```
+adb push *.apk /tmp
+adb shell pm install -t /tmp/*.apk
+```
 
 方法3：(已测可用)
 
->adb install -t *.apk
+```
+adb install -t *.apk
+```
 
 方法4：
 
-[Android Studio 3.0 and FLAG_TEST_ONLY](https://commonsware.com/blog/2017/10/31/android-studio-3p0-flag-test-only.html)  一文中，给出了关于Android studio 3.0中出现问题的说明：
+[`Android Studio 3.0 and FLAG_TEST_ONLY`](https://commonsware.com/blog/2017/10/31/android-studio-3p0-flag-test-only.html)  一文中，给出了关于Android studio 3.0中出现问题的说明：
 
 ```
 Option to indicate this application is only for testing purposes.
@@ -37,5 +40,4 @@ This kind of application can not be installed without the INSTALL_ALLOW_TEST fla
 
 解决办法：
 
-在gradle.properties(项目根目录或者gradle全局配置目录 ~/.gradle/)文件中添加：
->android.injected.testOnly=false
+在  `gradle.properties`文件中添加：`android.injected.testOnly=false`

@@ -105,3 +105,5 @@ if(uri != null) {
 [通过H5（浏览器/WebView/其他）唤起本地app](https://blog.csdn.net/u014727709/article/details/78770422)
 
 [Android Intents with Chrome](https://developer.chrome.com/multidevice/android/intents)
+
+[通过Scheme协议打开APP界面](https://www.jianshu.com/p/57f79fc83233)
