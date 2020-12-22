@@ -1,1 +1,1 @@
-[参考网址:http://jingyan.baidu.com/article/7f766daf8cc5c24100e1d071.html](http://jingyan.baidu.com/article/7f766daf8cc5c24100e1d071.html)
+原文已经被删除，本质是通过破解软件：`Adobe Zii` 来破解的，百度搜索该软件安装并运行即可。

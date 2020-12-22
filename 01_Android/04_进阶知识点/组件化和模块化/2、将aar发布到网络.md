@@ -77,7 +77,7 @@ group='com.github.CnPeng'
 #### （1）、在何处引用 jitpack.io 仓库
 `Note: do not add the jitpack.io repository under buildscript`
 
-这句话的意思是：添加引用时，不要在 buildscript 节点下引用 jitpack.io ，而必须是在 allprojects.repositories 中引用。即：
+这句话的意思是：添加引用时，不要在 `buildscript` 节点下引用 `jitpack.io` ，而必须是在 `allprojects.repositories` 中引用。即：
 
 ```xml
 allprojects {
@@ -88,9 +88,9 @@ allprojects {
 }
 ```
 
-#### (2)、添加示例APP时的注意事项
+#### (2)、添加示例 APP 时的注意事项
 
-如果在 library module 的同仓库同目录下添加了 示例APP module，那么，该示例module 需要在其 build.gradle 文件中以如下方式引用该 library：
+如果在 library module 的同仓库同目录下添加了 示例 APP module，那么，该示例 module 需要在其 `build.gradle` 文件中以如下方式引用该 library：
 
 ```xml
 dependencies {
@@ -98,9 +98,9 @@ dependencies {
 }
 ```
 
-#### (3)、代码仓库的 .gitignore 文件中的注意事项
+#### (3)、代码仓库的 `.gitignore` 文件中的注意事项
 
-在代码仓库的 .gitignore 文件中，不要添加 `gradle 文件夹`（注意是 gradle 文件夹，不是 .gradle 文件夹） 、`gradlew 文件`、 `gradlew.bat 文件` , 也就是说，列举的这三项需要提交到 github 仓库中。如果不提交的话，在 JitPack 中 `get it` 时会构建失败。构建失败时的截图没有了，参考下图吧：
+在代码仓库的 `.gitignore` 文件中，不要添加 `gradle 文件夹`（注意是 gradle 文件夹，不是 `.gradle` 文件夹） 、`gradlew 文件`、 `gradlew.bat 文件` , 也就是说，列举的这三项需要提交到 github 仓库中。如果不提交的话，在 JitPack 中 `get it` 时会构建失败。构建失败时的截图没有了，参考下图吧：
 
 ![](pics/10-JitPack构建结果查看.png)
 
@@ -200,4 +200,4 @@ fastlane/readme.md
 
 - [《将jar或aar包发布到JitPack.io》](https://blog.csdn.net/haha223545/article/details/89955883)
 
-- [《官方文档——创建 Android 库》](https://developer.android.com/studio/projects/android-library?hl=zh-cn)
+- [《官方文档——创建 Android 库》](https://developer.android.google.cn/studio/projects/android-library?hl=zh-cn)

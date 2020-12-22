@@ -1,46 +1,46 @@
 # LearningNotes
 
-最近更新日期：<font color="#ff0000">2020-10-20</font>
 
->**注意：**
->
-* README 文档更新不一定及时
-* 建议使用 Chrome 浏览器的小伙伴安装 Octotree 插件，这样就可以方便的以树形结构的形式查看仓库完整内容。
-* 鉴于 公众号、简书、CSDN 等对文章的种种限制，不保证在上述媒体中做同步更新
-* <font color="#ff0000">欢迎添加我的 QQ：893612134、微信: P893612134 一起学习、交流 </font>
+最近更新日期：<font color="#ff0000">2020-12-22</font>
 
+>**注意：** README 文档更新不一定及时
 
-<br>
-LearningNotes 是个人综合性学习笔记。
+## 1. 内容说明
 
-涵盖 软件编程、硬件维护、多媒体、文学、历史等诸多方面。总之，看到啥，学到啥都会记录笔记总结。
+LearningNotes 是我的个人综合性学习笔记，主要是为了完善自己的知识体系达到查漏补缺的目的。
+
+内容涵盖 软件编程、硬件维护、多媒体、文学、历史等诸多方面。
+
+**建议使用 `Chrome` 浏览器的小伙伴安装 `Octotree` 插件，该插件能够让我们以树形结构的形式查看仓库完整内容；同时可以安装 `Smart TOC` 插件，该插件可以查看 markdown 文档中的目录结构。**
 
 
+## 2. 与我相关
+
+### 2.1 个人介绍
+
+不知名 Android 程序员，iOS 练习生，golang 小学生。
 
 
-## 一、个人其他连链
+### 2.2 联系方式
 
-我的微信公众号：CnPeng
+平台| 账号/地址
+---|---
+QQ | 893612134
+QQ群 | 957639236
+微信 | P893612134
+微信公众号 | CnPeng
+[简书](https://www.jianshu.com/u/414acf7abc2b) | [CnPeng](https://www.jianshu.com/u/414acf7abc2b)
+[CSDN](http://blog.csdn.net/north1989) | [north1989](http://blog.csdn.net/north1989) 
 
-[我的简书 : https://www.jianshu.com/u/414acf7abc2b](https://www.jianshu.com/u/414acf7abc2b)
-
-[我的CSDN：http://blog.csdn.net/north1989](http://blog.csdn.net/north1989)
-
-因个人原因，以上三个平台不保证更新频率。最新内容以本仓库为准。
+> 因个人原因，不保证 公众号、简书、CSDN 的更新频率。最新内容以本仓库为准。
 
 
-## 二、详细目录
-
-[点击查看完整目录](全部文章目录.md)
-
-由于是通过代码读写的目录，所以，文章顺序可能有点混乱，后续后逐步优化
-
-## 三、其他
+## 二、其他
 
 如果你觉得这个仓库中的某个内容对你有用，不妨打赏一下。
 
 **一块两块不嫌少，千儿八百有点多。** 谢谢O(∩_∩)O哈！
 
-![k7CSBV.png](https://s2.ax1x.com/2019/02/28/k7CSBV.png) ![k79X1s.png](https://s2.ax1x.com/2019/02/28/k79X1s.png)
+![k7CSBV.png](https://s2.ax1x.com/2019/02/28/k7CSBV.png)  ![k79X1s.png](https://s2.ax1x.com/2019/02/28/k79X1s.png)
  
 

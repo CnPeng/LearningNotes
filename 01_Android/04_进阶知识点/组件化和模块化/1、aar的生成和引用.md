@@ -3,26 +3,26 @@
 * 新建 module library , 并编写想要封装的代码
 * 然后按照下图操作
 
-![](pics/1生成aar.png)
+![](pics/1-生成aar.png)
 
 > jar 和 aar 的区别在于，aar 会打包 res 下的文件，如果要封装的代码中不牵涉 res ，则可以使用 jar 
 
 
 ## 二、aar 文件的坑
 
-在文章 [AndroidStudio之如何引入和使用aar包](https://blog.csdn.net/Maiduoudo/article/details/79217151) 中指出，通过 gradle 中的 assmble 命令生成 aar 时，build.gradle 中通过 implemention 依赖的三方库并没有打包进 aar 中，项目引用时必须再引用一次。
+通过 gradle 中的 `assmble` 命令生成 `aar` 时，`build.gradle` 中通过 `implemention` 依赖的三方库并没有打包进 `aar` 中，项目引用时必须再引用一次。
 
 
-## 三、引用方式：
+## 三、项目中引用 aar
 
-### 1、直接引用 .arr 文件
+项目中引用 aar 文件时有两种方式，一种是直接引用 `aar` 文件，一种是将 aar 发布到远程之后引用。
 
-[参考 https://blog.csdn.net/arnozhang12/article/details/45818319](https://blog.csdn.net/arnozhang12/article/details/45818319)
+### 1、直接引用 .aar 文件
 
 导入步骤
 
-* 先将 aar 文件放到 libs 目录，
-* 然后在当前 module 中 gradle 文件的 android 节点中增加如下内容：
+* 先将 `aar` 文件放到 `libs` 目录，
+* 然后在当前 `module` 中 `gradle` 文件的 `android` 节点中增加如下内容：
 
 ```xml
 //这个必须要有
@@ -40,7 +40,9 @@ compileOptions {
 }
 ```
 
-* 然后在 dependencies 节点中增加如下内容：
+* 然后在 `dependencies` 节点中增加对 `aar` 文件的依赖：
+
+> 此处以自己封装的 `piclib-release.aar` 为例
 
 ```xml
 // 这一句最核心
@@ -48,8 +50,10 @@ implementation(name:'piclib-release', ext:'aar')
 ```
 
 
-* 由于生成 aar 文件时并不会把 gradle 中的 implemention 依赖的三方库打包，所以，必须增加 module library 中所需要的引用，在 piclib 中需要的 依赖如下：
+* 由于生成 `aar` 文件时并不会把 `gradle` 中的 `implemention` 依赖的三方库打包，所以，必须增加 `module library` 中所需要的引用，在 piclib 中需要的 依赖如下：
 
+> 此处需要依赖的内容以自己实际需求为准，下面只代表我封装的  `piclib` 中所需要的内容。
+ 
 ```xml
 //CnPeng 2019-06-25 19:20 以下都是图片选择库需要使用，因为 aar 中没有打包 build.gradle 中使用的依赖项
 implementation "io.reactivex.rxjava2:rxjava:2.2.0"
