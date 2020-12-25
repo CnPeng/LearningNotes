@@ -3,6 +3,8 @@
 
 最近更新日期：<font color="#ff0000">2020-12-22</font>
 
+[本项目在 Gitee 同步更新，点击可从 Gitee 中查看](https://gitee.com/CnPeng_1/LearningNotes)
+
 >**注意：** README 文档更新不一定及时
 
 ## 1. 内容说明
