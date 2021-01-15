@@ -222,6 +222,27 @@ time.Sleep(time.Duration(n))
 time.Sleep(100)
 ```
 
+## 14.8 其他
+
+### 14.8.1 获取月份的第一天和最后一天
+
+```go
+func getDate() {
+	now := time.Now()
+	currentYear, currentMonth, _ := now.Date()
+	currentLocation := now.Location()
+
+	// 获取某月的第一天和最后一天
+	firstOfMonth := time.Date(currentYear, currentMonth, 1, 0, 0, 0, 0, currentLocation)
+	lastOfMonth := firstOfMonth.AddDate(0, 1, -1)
+
+	// 1609430400
+	fmt.Println(firstOfMonth.Unix())
+	// 1612022400
+	fmt.Println(lastOfMonth.Unix())
+}
+```
+
 ## 练习题：
 
 * 获取当前时间，格式化输出为 2017/06/19 20:30:05`格式。

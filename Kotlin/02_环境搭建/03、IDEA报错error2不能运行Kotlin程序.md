@@ -12,4 +12,4 @@ Error:Cannot run program "/Applications/IntelliJ IDEA CE.app/Contents/jre/jdk/Co
 
 File --> Project Structures --> Project 然后参考下图配置一个 JDK 即可。
 
-![](https://s2.ax1x.com/2019/02/28/kH9hMn.png)
+![](pics/3-1-指定SDK信息.png)
