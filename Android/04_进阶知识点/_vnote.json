@@ -1,0 +1,42 @@
+{
+    "created_time": "2021-02-19T03:14:48Z",
+    "files": [
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "——Android进阶知识点——.md",
+            "tags": [
+            ]
+        }
+    ],
+    "sub_directories": [
+        {
+            "name": "Gradle"
+        },
+        {
+            "name": "Jetpack"
+        },
+        {
+            "name": "其他"
+        },
+        {
+            "name": "性能优化"
+        },
+        {
+            "name": "新特性和适配"
+        },
+        {
+            "name": "沉浸式"
+        },
+        {
+            "name": "组件化和模块化"
+        },
+        {
+            "name": "自定义View"
+        }
+    ],
+    "version": "1"
+}

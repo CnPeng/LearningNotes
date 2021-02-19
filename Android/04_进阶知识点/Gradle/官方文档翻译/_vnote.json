@@ -1,0 +1,68 @@
+{
+    "created_time": "2021-02-19T03:14:48Z",
+    "files": [
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "* 05、Gradle_Flavor的配置.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "* 06、Gradle_完整属性介绍.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "01、Gradle构建基础.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "02、Gradle_设置应用ID.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "03、Gradle_构建类型的配置1.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "04、Gradle_清单文件中引用构建变量.md",
+            "tags": [
+            ]
+        }
+    ],
+    "sub_directories": [
+    ],
+    "version": "1"
+}

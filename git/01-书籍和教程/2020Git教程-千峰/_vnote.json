@@ -1,0 +1,158 @@
+{
+    "created_time": "2021-02-19T03:14:48Z",
+    "files": [
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "1-Git引言及安装.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "10-idea克隆远程仓库.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "11-多人协同的流程.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "2-架构及仓库的基本使用.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "3-远程仓库入门.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "4-远程仓库克隆和共享.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "5-分支概述及基本操作.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "6-分支细节提升.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "7-分支与快速合并及三方合并.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "8-分支合并之冲突解决.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "9-idea忽略文件.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z的副本.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z的副本2.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z的副本3.md",
+            "tags": [
+            ]
+        }
+    ],
+    "sub_directories": [
+    ],
+    "version": "1"
+}

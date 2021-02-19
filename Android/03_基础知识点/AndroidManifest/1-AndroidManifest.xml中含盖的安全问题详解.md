@@ -1,10 +1,10 @@
 原文：[AndroidManifest.xml中含盖的安全问题](https://blog.csdn.net/samlirongsheng/article/details/104904522)
 
-## 1.1 关于AndroidManifest.xml
+## 1. 关于AndroidManifest.xml
 
 AndroidManifest.xml 是每个android程序中必须的文件。它位于整个项目的根目录，Manifest文件提供有关应用程序到Android系统的基本信息，系统必须具有该信息才能运行任何应用程序的代码。换句话说APP是跑在Android系统上，既然要跑在其上，就必须提供信息给Android System，这些信息就存在AndroidManifest中。AndroidManifest.xml 存放在 app/src/main/ 目录下。在反编译APK文件后，其文件是以乱码格式存在，需要进行转换才能正常查看。
 
-### 1.1.1 AndroidManifest.xml的主要功能
+### 1.1. AndroidManifest.xml的主要功能
 
 * 命名应用程序Java包，软件包名称作为应用程序的唯一标识符;
 * 描述了应用程序的组件，其中包括构成应用程序的Activity，Service，Broadcast Receiver和Content Provider；它还命名实现每个组件并发布其功能的类，例如Intent可以处理的消息。这些声明通知Android系统的组件及其可以启动的条件;
@@ -45,9 +45,9 @@ AndroidManifest.xml 是每个android程序中必须的文件。它位于整个�
 </manifest>
 ```
 
-## 1.2 AndroidManifest.xml 风险点分析
+## 2. 1.2 AndroidManifest.xml 风险点分析
 
-### 1.2.1 allowBackup 设置风险
+### 2.1. 1.2.1 allowBackup 设置风险
 
 Android API Level 8 （Android 2.1）及其以上Android系统提供了为应用程序数据的备份和恢复功能，此功能的开关决定于该应用程序中 AndroidManifest.xml 文件中的 allowBackup 属性值，其属性值默认是 true。当allowBackup的属性值没有显示设置为false时，攻击者可通过 adb backup 和 adb restore 来进行对应用数据的备份和恢复，从而可能获取明文存储的用户的敏感信息。
 
@@ -67,7 +67,7 @@ $ adb restore com.example.demo
 - f表示备份的.ab文件路径和文件名，最后是要备份应用的packageName
 - restore是恢复备份的数据
 
-### 1.2.2、debuggable设置风险
+### 2.2. 1.2.2、debuggable设置风险
 
 该属性用于指定应用程序是否能够被调试，即使是以用户模式运行在设备上的时候，如果设置为true，则可以被调试；但是现在Android版本均默认debuggable的属性值为false，所以建议使用默认配置。
 
@@ -75,7 +75,7 @@ $ adb restore com.example.demo
 android:debuggable=["true" | "false"]
 ```
 
-### 1.2.3、组件导出风险
+### 2.3. 1.2.3、组件导出风险
 
 四大组件
 
@@ -99,7 +99,7 @@ Content Provider中exported的默认值
 
 >当minSdkVersion或者targetSdkVersion小于16时，默认为true 大于17时，默认为false
 
-### 1.2.4、自定义权限风险
+### 2.4. 1.2.4、自定义权限风险
 
 在Android系统的安全模型中，应用程序在默认的情况下不可以执行任何对其他应用程序、系统或用户带来负面影响的操作。如果应用需要执行某些操作，就需要声明使用这个操作对应的权限，也就是在AndroidManifest.xml文件中添加<uses-permission>标记,当然也可以自定义属于自己的permission。但是如果权限控制不当，那么就可能导致各种越权等安全问题。
 
@@ -118,7 +118,7 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
 * signature：这种权限级别叫做高级权限或者系统权限，只有当发请求的应用和接收此请求的应用使用同一签名文件，并且声明了该权限才会授权，并且是默认授权，不会提示用户授权
 * signatureOrSystem：这种权限应该尽量避免使用，偏向系统级
 
-## 1.3 AndroidManifest.xml结构
+## 3. 1.3 AndroidManifest.xml结构
 
 ```xml
 <?xmlversion="1.0"encoding="utf-8"?>
@@ -162,9 +162,9 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
 ```
 
 
-## 1.4 AndroidManifest.xml分节介绍
+## 4. 1.4 AndroidManifest.xml分节介绍
 
-### 1.4.1、manifest
+### 4.1. 1.4.1、manifest
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
@@ -177,7 +177,7 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
 </manifest>
 ```
 
-### 1.4.2、application
+### 4.2. 1.4.2、application
 
 ```xml
 <application android:allowClearUserData=["true" | "false"]
@@ -201,7 +201,7 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
 </application>
 ```
 
-### 1.4.3、activity
+### 4.3. 1.4.3、activity
 
 ```xml
 <activity android:allowTaskReparenting=["true" | "false"]
@@ -239,7 +239,7 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
 ```
 
 
-### 1.4.4、intent-filter
+### 4.4. 1.4.4、intent-filter
 
 ```xml
 <intent-filter android:icon="drawable resource"
@@ -251,7 +251,7 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
 </intent-filter>
 ```
 
-### 1.4.5、meta-data
+### 4.5. 1.4.5、meta-data
 
 ```xml
 <meta-data android:name="string"
@@ -259,7 +259,7 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
   android:value="string"/>
 ```  
   
-### 1.4.6、activity-alias
+### 4.6. 1.4.6、activity-alias
 
 ```xml
 <activity-alias android:enabled=["true" | "false"]
@@ -275,7 +275,7 @@ android:protectionLevel=["normal" | "dangerous" | "signature" | "signatureOrSyst
 </activity-alias>
 ```
 
-### 1.4.7、service
+### 4.7. 1.4.7、service
 
 ```xml
 <service android:enabled=["true" | "false"]
@@ -288,9 +288,9 @@ android:process="string">
 </service>
 ```
 
-### 1.4.8、receiver
+### 4.8. 1.4.8、receiver
 
-### 1.4.9、provider
+### 4.9. 1.4.9、provider
 
 ```xml
 <provider android:authorities="list"
@@ -312,8 +312,8 @@ android:writePermission="string">
 </provider>
 ```
 
-### 1.4.10、uses-library 
-### 1.4.11、supports-screens
+### 4.10. 1.4.10、uses-library 
+### 4.11. 1.4.11、supports-screens
 
 ```xml
 <supports-screens android:smallScreens=["true" | "false"]
@@ -322,7 +322,7 @@ android:writePermission="string">
    android:anyDensity=["true" | "false"] />
 ```
    
-### 1.4.12、uses-configuration和uses-feature
+### 4.12. 1.4.12、uses-configuration和uses-feature
 
 ```xml
 <uses-configuration android:reqFiveWayNav=["true" | "false"]
@@ -336,7 +336,7 @@ android:writePermission="string">
   android:required=["true" | "false"] />
 ```
   
-### 1.4.13、uses-sdk
+### 4.13. 1.4.13、uses-sdk
 
 ```xml
 <uses-sdk android:minSdkVersion="integer"
@@ -344,7 +344,7 @@ android:writePermission="string">
   android:maxSdkVersion="integer"/>
 ```
   
-### 1.4.14、instrumentation
+### 4.14. 1.4.14、instrumentation
 
 ```xml
 <instrumentation android:functionalTest=["true" | "false"]
@@ -355,7 +355,7 @@ android:writePermission="string">
    android:targetPackage="string"/>
 ```   
    
-### 1.4.15、<permission>、<uses-permission>、<permission-tree />、<permission-group />区别
+### 4.15. 1.4.15、<permission>、<uses-permission>、<permission-tree />、<permission-group />区别
 
 最常用的当属 <uses-permission>，当我们需要获取某个权限的时候就必须在我们的manifest文件中声明，此<uses-permission>与<application>同级，具体权限列表请看此处
 

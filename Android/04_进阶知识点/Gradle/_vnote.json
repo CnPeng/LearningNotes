@@ -1,0 +1,74 @@
+{
+    "created_time": "2021-02-19T03:14:48Z",
+    "files": [
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "01、动态配置APP名称.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "02、手机上安装不同环境的APP.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "03、Gradle打包相关.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "04、gradlew命令查看APP的依赖包情况.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "05、api和implementation的区别.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "空.md",
+            "tags": [
+            ]
+        }
+    ],
+    "sub_directories": [
+        {
+            "name": "书籍"
+        },
+        {
+            "name": "官方文档翻译"
+        }
+    ],
+    "version": "1"
+}

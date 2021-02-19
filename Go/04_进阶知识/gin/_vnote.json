@@ -1,0 +1,108 @@
+{
+    "created_time": "2021-02-19T03:14:48Z",
+    "files": [
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "1-Gin框架介绍及使用.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "2-JSONWebToken入门教程.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "3-在gin框架中使用JWT.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "4-gin框架路由拆分与注册.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "5-swagger生成接口文档.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z的副本2.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z的副本3.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z的副本4.md",
+            "tags": [
+            ]
+        },
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "z的副本5.md",
+            "tags": [
+            ]
+        }
+    ],
+    "sub_directories": [
+    ],
+    "version": "1"
+}

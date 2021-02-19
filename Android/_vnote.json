@@ -1,0 +1,48 @@
+{
+    "created_time": "2021-02-19T03:14:48Z",
+    "files": [
+        {
+            "attachment_folder": "",
+            "attachments": [
+            ],
+            "created_time": "2021-02-19T03:14:48Z",
+            "modified_time": "2021-02-19T03:14:48Z",
+            "name": "——Android——.md",
+            "tags": [
+            ]
+        }
+    ],
+    "sub_directories": [
+        {
+            "name": "00_面试"
+        },
+        {
+            "name": "01_书籍和教程"
+        },
+        {
+            "name": "02_环境搭建"
+        },
+        {
+            "name": "03_基础知识点"
+        },
+        {
+            "name": "04_进阶知识点"
+        },
+        {
+            "name": "06_库和工具"
+        },
+        {
+            "name": "07_开源DEMO"
+        },
+        {
+            "name": "08_FrameWork层"
+        },
+        {
+            "name": "09_Docs笔记"
+        },
+        {
+            "name": "xx_其他"
+        }
+    ],
+    "version": "1"
+}
