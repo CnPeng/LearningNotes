@@ -161,3 +161,52 @@ func main() {
 fmt.Println(Squares()())    //1
 fmt.Println(Squares()())    //1
 ```
+
+## 3. 扩展：空结构体
+
+
+`struct{}` 空结构体
+
+### 3.1. 空结构体的用途
+
+在使用 chan 时，如果不关心 chan 传递的数据，只关心 chan 中是否有数据的情况时，这个数据就被称为信号，推荐用空结构体做这个信号。
+
+在定义 chan 时我们可能用使用 `chan bool` 但是在结构中看到 chan bool 的定义时，有时不容易理解如何使用该值，例如：
+
+```go
+type Service struct {
+    deleteCh chan bool // what does this bool mean? 
+}
+```
+
+我们可以将其改为明确的 `chan struct {}`  来使其更清楚：我们不在乎值（它始终是 struct {}），我们关心可能发生的事件，例如：
+
+```go
+type Service struct {
+    deleteCh chan struct{} // ok, if event than delete something.
+}
+```
+
+### 3.2. 空结构体的注意事项
+
+在使用 go/src/buildIn 中的 print 函数对空结构体实例的内存地址判等时，会得到 false , 如下：
+
+```go
+func EmptyStruct1() {
+	var a, b struct{}
+	// go/src/buildIn 中的 print
+	print(&a, "\n", &b, "\n") // Prints same address
+	print(&a == &b, "\n")     //false
+	print(a == b, "\n")       // true
+
+	fmt.Println(&a == &b) // false
+	fmt.Println(a == b)   // true
+}
+
+func EmptyStruct2() {
+	var a, b struct{}
+	fmt.Printf("%p\n%p\n", &a, &b) // Again, same address
+	fmt.Println(&a == &b)          //  true
+	fmt.Println(a == b)            //  true
+}
+```
