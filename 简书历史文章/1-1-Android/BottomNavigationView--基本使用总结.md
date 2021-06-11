@@ -173,6 +173,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
 </selector>
 ```
 ## 4、总结
+
 * （1）BottomNavigationView 整体实现比较简单，但是扩展性不强。比如，想在某个条目的右上角加上小红点，这就行不通了。。。
 
 * （2）没有提供直接选中某项的方法，默认选中第一项。如果想更改默认选中，就需要通过getMenu( ) 方法获取menu 对象，然后获取其中的具体 item，最后再调用item 的 setChecked(true)
