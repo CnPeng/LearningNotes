@@ -8,4 +8,4 @@
 * 4- delete all `.iml` files
 * 5- open Android Studio IDE and import the project
 
-`shift + cmd + >` 可以查看隐藏目录。
+`shift + cmd + .` 可以查看隐藏目录。

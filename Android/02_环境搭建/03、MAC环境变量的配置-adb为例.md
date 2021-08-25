@@ -23,7 +23,7 @@ touch .bash_profile
 
 * 查看 Android SDK 目录
 
-![](pics/7-查看AndroidSDK目录.png)
+![](pics/20210817234932311_66906502.png)
 
 * 编辑配置文件
 

@@ -1,9 +1,9 @@
 >2020-04-28 内容基于 AndroidStudio 3.6.3
 
 
-# 1、Gradle 和 AndroidStudio 入门
+# 1. 1、Gradle 和 AndroidStudio 入门
 
-## 1.2 理解 Gradle 基础
+## 1.1. 1.2 理解 Gradle 基础
 
 使用 Gradle 构建 Android 项目时，需要有一个名为 `build.gradle` 的构建脚本文件。
 
@@ -13,7 +13,7 @@ Gradle 构建脚本的书写是基于 Groovy 的领域专用语言（DSL），�
 
 Groovy 是一种基于 Java 虚拟机的动态语言。
 
-### 1.2.1 项目和任务
+### 1.1.1. 1.2.1 项目和任务
 
 Gradle 中，最重要的两个概念是项目和任务。每次构建都包括至少一个项目，每个项目又包括一个或多个任务。
 
@@ -23,7 +23,7 @@ Gradle 中，最重要的两个概念是项目和任务。每次构建都包括�
 
 一个单独的动作对象就是一个待执行的代码块，它和 Java　中的方法类似。
 
-### 1.2.2 构建声明周期
+### 1.1.2. 1.2.2 构建声明周期
 
 执行一个 Gradle 构建最简单的形式是，只执行任务中的动作，而这些任务又依赖于其他任务。
 
@@ -37,7 +37,7 @@ Gradle 中，最重要的两个概念是项目和任务。每次构建都包括�
 配置 | 在该阶段，构建脚本被执行，并为每个项目实例创建和配置任务。
 执行 | 在该阶段，Gradle 将决定哪个任务被执行。哪些任务被执行取决于开始本次构建的参数配置和该 Gradle 文件的当前目录。
  
-### 1.2.3 构建配置文件
+### 1.1.3. 1.2.3 构建配置文件
 
 每一个基于 Gradle 构建的项目，都至少有一个 `build.gradle` 文件。
 
@@ -62,13 +62,13 @@ buildscript {
 
 在每一个可运行的 Android Module 的 `build.gradle` 文件中，都必须申请如下插件：`apply plugin: 'com.android.application'`；如果这个 module 是一个被依赖的仓库，则需要声明 `apply plugin: 'com.android.library'`
   
-## 1.3 创建新项目
+## 1.2. 1.3 创建新项目
 
 构建项目的三种方式：
 
 ![](pics/1-1-构建项目的方式.png)
 
-## 1.4 Gradle wrapper 入门
+## 1.3. 1.4 Gradle wrapper 入门
 
 Gradle 是一个不断发展的工具，新版本可能会打破对低版本的兼容，而使用 Gradle wrapper 则不必担心该问题。
 
@@ -87,7 +87,7 @@ Win | `gradlew.bat -v `| 查看 gradle 版本等信息
 
 > 如果在已有的项目中可以正常执行 `./gradlew -v` 命令，但是新建或拉取其他项目之后，再执行该命令时提示：`permission denied: ./gradlew` ，则可以先尝试使用该命令：`chmod +x gradlew` 修改其权限。
 
-### 1.4.2 基本构架任务
+### 1.3.1. 1.4.2 基本构架任务
 
 命令 | 含义
 ---|---
@@ -101,6 +101,13 @@ Win | `gradlew.bat -v `| 查看 gradle 版本等信息
   
  为了避免大量的终端输入，**Gradle 支持驼峰式缩写任务名**，但需要注意的是，如果其他任务具有相同的缩写，则该缩写任务名将不生效。如：我们可以使用  `gradlew assDeb` 代表 `gradlew assembleDebug`，也可以使用 `gradlew aDeb` 、`gradlew asDeb` 。
  
+## 1.4. 补充
+
+Mac 中在 AS 的终端中直接输入 `gradle -v` 命令时 , 会提示：`zsh: command not found: gradle`
+
+这是因为，我们应该使用 `gradlew -v` 命令。如下：
+
+![](pics/20210617215142796_934372536.png)
  
   
 
