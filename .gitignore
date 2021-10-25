@@ -1,5 +1,10 @@
-_vnote.json
+
+vx_notebook/
+vx_recycle_bin/
 _v_recycle_bin/
+
 *.vswp
 vx.json
+_vnote.json
 .keep.markdown
+*/.keep

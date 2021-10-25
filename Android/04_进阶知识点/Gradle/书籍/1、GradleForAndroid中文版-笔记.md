@@ -1,8 +1,8 @@
-## 一、Gradle 和 AndroidStudio 入门
+## 1. 一、Gradle 和 AndroidStudio 入门
 
-### 1、理解 Gradle 基础
+### 1.1. 1、理解 Gradle 基础
 
-####（1）、Gradle 基础
+#### 1.1.1. Gradle 基础
 
 * 使用 Gradle 构建 Android 项目时，必然要有一个构建脚本，即 `build.gradle`。
 * Gradle 有 **约定优于配置的原则**，即 为设置和属性提供默认值。
@@ -11,7 +11,7 @@
 * Gradle 中，项目和任务是两个最重要的概念。每次构建都至少有一个项目，每一个项目包含一个或多个任务。
 * 每个 build.gradle 都代表一个项目。
 
-#### (2)、构建生命周期
+#### 1.1.2. 1.1.2. 构建生命周期
 
 * 执行一个 Gradle 构建的最简单的形式是，只执行任务中的动作，而这些任务又依赖于其他任务。
 * 为简化构建过程，构建工具会生成一个动态模型流——Directed Acyclie Graph (DAG)。也就是说，任务会顺序执行。
@@ -24,9 +24,9 @@
 * 配置，该阶段执行构建脚本，并为每个项目创建和配置任务。
 * 执行，该阶段 Gradle 会决定哪个任务被执行。（哪些任务被执行取决于开始该次构建的参数配置和该 Gradle 文件的当前目录。）
 
-### 2、Gradle Wrapper 入门
+### 1.2. 2、Gradle Wrapper 入门
 
-#### （1）、获取 Gradle Wrapper
+#### 1.2.1. 获取 Gradle Wrapper
 
 在 MAC  版 AndroidStudio 的终端执行 `./gradlew -v` 可以检查项目中的 Gradle Wrapper 是否可用，并显示 Gradle 版本号及其他信息。（如果 Gradle 不是新版，该命令还会执行下载逻辑）。
 
@@ -34,7 +34,7 @@
 
 `gradle-wrapper.properties` 文件中包含了参数配置，能决定使用哪一个版本的 Gradle.
 
-#### (2)、运行基本构建任务
+#### 1.2.2. (2)、运行基本构建任务
 
 > 后续如无特殊说明，相关命令都是在 MAC 版 AndroidStudio 中的 terminal 执行。
 
@@ -47,13 +47,13 @@
 `gradlew build`  | 触发 assemble 和 check | 
 `gradlew clean` | 清除项目的输出|
 
-## 二、基本自定义构建
+## 2. 二、基本自定义构建
 
-### (1)、理解 Gradle
+### 2.1.  理解 Gradle
 
-###（2）、任务入门
+### 2.2. 任务入门
 
-### (3)、自定义构建
+### 2.3.  自定义构建
 
 
-## 三、依赖管理
+## 3. 三、依赖管理
