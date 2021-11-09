@@ -1,5 +1,6 @@
 原文链接：https://blog.csdn.net/xiaochenuu/article/details/80245931
 
+错误信息：You have JVM property "https.proxyHost" .md
 
 两种方法解决：
 

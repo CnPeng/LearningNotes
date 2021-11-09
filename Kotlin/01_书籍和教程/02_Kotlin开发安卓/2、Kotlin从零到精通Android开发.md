@@ -13,9 +13,9 @@
 
 
 
-## 一：环境搭建
+## 1. 一：环境搭建
 
-### 1、配置本地Gradle
+### 1.1. 1、配置本地Gradle
 
 * 先从网络下载gradle，地址为：[https://services.gradle.org/distributions/](https://services.gradle.org/distributions/)
 * 下载完成后解压到自定义目录
@@ -25,7 +25,7 @@
 ![](https://images.gitee.com/uploads/images/2018/1129/214440_8c733db9_930142.png "屏幕截图.png")
 
 
-### 2、手动升级Kotlin插件
+### 1.2. 2、手动升级Kotlin插件
 
 虽然 AndroidStudio 集成了 Kotlin ，但可能不是最新，所以需要手动升级
 
@@ -38,7 +38,7 @@
 ![](https://images.gitee.com/uploads/images/2018/1129/215320_d86b7099_930142.png "屏幕截图.png") 
 
 
-### 3、查看/修改 Kotlin 的编译版本
+### 1.3. 3、查看/修改 Kotlin 的编译版本
  
  * **在设置中查看** 
  
@@ -49,7 +49,7 @@
 ![](https://images.gitee.com/uploads/images/2018/1129/215834_4e884a86_930142.png "屏幕截图.png") 
 
 
-### 4、引用 Anko 库
+### 1.4. 4、引用 Anko 库
 
 [**点击查看更多 Anko 库相关内容 https://github.com/Kotlin/anko**](https://github.com/Kotlin/anko)
 
@@ -67,9 +67,9 @@
 
 ---
 
-## 二：数据类型
+## 2. 二：数据类型
 
-### 1、基本数据类型
+### 2.1. 1、基本数据类型
 
 * 基本类型
 
@@ -79,9 +79,9 @@ Int、Long、Float、Double、Boolean、Char、String
 
 toInt()、toLong()、toFloat()、toDouble()、toBoolean()、toChar()、toString()
 
-### 2、数组
+### 2.2. 2、数组
 
-#### (1)、数组的声明
+#### 2.2.1. (1)、数组的声明
 
 * 基本数据类型数组的声明：
 
@@ -98,7 +98,7 @@ val strArray : Array<String> = arrayOf("中国","山东","济南")
 
 其他基本数据类型也可以使用 arrayOf(...) 初始化对应的数组
 
-#### (2)、数组元素操作
+#### 2.2.2. (2)、数组元素操作
 
 * 数组长度：
 
@@ -109,9 +109,9 @@ val strArray : Array<String> = arrayOf("中国","山东","济南")
 除了 `array[index]` 模式，也可以通过 `set()/get()` 获取和修改元素
 
 
-### 3、字符串
+### 2.3. 3、字符串
 
-#### (1)、字符串操作
+#### 2.3.1. (1)、字符串操作
 
 * 查找——indexOf()
 * 截取——substring()
@@ -121,7 +121,7 @@ val strArray : Array<String> = arrayOf("中国","山东","济南")
  **注意：** 
 Java 中 split() 返回的是一个 String[], 而 **kotlin中返回的是一个 List<String>** 
 
-#### (2)、字符串模板和拼接
+#### 2.3.2. (2)、字符串模板和拼接
 
 * 占位符 `${...}`
 
@@ -131,7 +131,7 @@ val str = "用户的昵称是${user.name}"
 val str2 = "str的值是$str"
 ```
 
-#### (3)、如何显示货币符号$
+#### 2.3.3. (3)、如何显示货币符号$
 
 * 方式1：`${‘＄’}` 
 
@@ -151,11 +151,11 @@ val str = "人民币转换后的美元金额为\$ $rmbNum"
 ```
 
 
-### 4、容器
+### 2.4. 4、容器
 
-#### (1)、容器的基本操作
+#### 2.4.1. (1)、容器的基本操作
 
-##### A: 分类：
+##### 2.4.1.1. A: 分类：
 
 分为可变和不可变，可变就是能执行增删改查操作的。
 
@@ -163,7 +163,7 @@ val str = "人民币转换后的美元金额为\$ $rmbNum"
 * 可变的容器：MutableSet、MutableList、MutableHashMap
 
 
-##### B: 通用方法
+##### 2.4.1.2. B: 通用方法
 
 * isEmpty —— 是否为空
 * isNotEmpty —— 是否非空
@@ -172,7 +172,7 @@ val str = "人民币转换后的美元金额为\$ $rmbNum"
 * iterator —— 获取迭代器
 * count —— 获取元素个数/ 也可以通过 size 获取
 
-##### C: 容器初始化
+##### 2.4.1.3. C: 容器初始化
 
 kotlin中的容器可以在定义的时候就执行初始化赋值操作。
 
@@ -183,9 +183,9 @@ kotlin中的容器可以在定义的时候就执行初始化赋值操作。
 * mapOf()、mutableMapOf()
 
 
-#### (2)、Set/MutableSet
+#### 2.4.2. (2)、Set/MutableSet
 
-##### A: 特点
+##### 2.4.2.1. A: 特点
 
 * 内部元素无序
 * 内部元素唯一（通过哈希值判断是否唯一，重复则覆盖）
@@ -194,7 +194,7 @@ kotlin中的容器可以在定义的时候就执行初始化赋值操作。
 * MutableSet 没有修改元素值的方法，元素被添加之后不可被修改
 * MutableSet 的 remove 方法仅接收元素作为参数，不能接收索引——因为Set无序没有索引
 
-##### B: 遍历
+##### 2.4.2.2. B: 遍历
 
 有三种遍历方式：for-in 、 迭代器、 forEach
 
@@ -226,16 +226,16 @@ while(iterator.hasNext()){
 userSet.forEache{"用户的姓名为${it.name}"}
 ```
 
-#### (3)、List/MutableList
+#### 2.4.3. (3)、List/MutableList
 
-##### A: 特点
+##### 2.4.3.1. A: 特点
 
 * 有序有索引
 * 能够通过set修改元素值，能够通过get获取元素值
 * 通过add方法添加元素
 * removeAt可以删除指定索引位置的元素
 
-##### B: 遍历方式
+##### 2.4.3.2. B: 遍历方式
 
 除了 for-in 、迭代器、forEach, 还有一种根据索引遍历的方式：
 
@@ -247,7 +247,7 @@ for(i in userList.indices){
 }
 ```
 
-##### C: 排序
+##### 2.4.3.3. C: 排序
 
 MutableList 可以执行排序的操作：
 
@@ -260,13 +260,13 @@ userNameList.sortBy{it.length}
 
 
 
-#### (4)、Map/MutableMap
+#### 2.4.4. (4)、Map/MutableMap
 
-##### A: 特点
+##### 2.4.4.1. A: 特点
 
 * 以键值对的形式存储元素，键唯一
 
-##### B: 初始化
+##### 2.4.4.2. B: 初始化
 
 调用 mapOf / mutableMapOf 执行初始化，在组织键值对元素时都有如下两种方式：
 
@@ -282,7 +282,7 @@ val userMAp2:MutableMap<String,String>=mutableOf(Pair("姓名",“张三”), Pa
 to 模式底层也是使用 Pair()对象构建的。
 
 
-##### C: 常用方法
+##### 2.4.4.3. C: 常用方法
 
 * containsKey 是否包含某个键
 * containsValue 是否包含某个值
@@ -290,7 +290,7 @@ to 模式底层也是使用 Pair()对象构建的。
 * remove 根据键名删除值——删除元素
 
 
-##### D: 遍历
+##### 2.4.4.4. D: 遍历
 
 三种模式：for-in 、 迭代器、 forEach
 
@@ -305,11 +305,11 @@ for(item in userMap){
 ---
 
 
-## 三：控制语句
+## 3. 三：控制语句
 
-### 1、条件分支
+### 3.1. 1、条件分支
 
-#### (1)、简单分支--if...else
+#### 3.1.1. (1)、简单分支--if...else
 
 kotlin 中 if...else 语句具有返回值，类似于Java中的三目运算
 
@@ -318,9 +318,9 @@ kotlin 中 if...else 语句具有返回值，类似于Java中的三目运算
 nameTextView.text=if(a>b) a else b
 ```
 
-#### (2)、多分支
+#### 3.1.2. (2)、多分支
 
-##### A: 特点
+##### 3.1.2.1. A: 特点
 kotlin 中没有 switch/case ，
 
 * **使用 when/else 替代** 
@@ -329,7 +329,7 @@ kotlin 中没有 switch/case ，
 * 分支中判断条件可以是常量/变量/表达式——Java中的switch/case 中 case 节点只能是常量
 * 为了确定所有情况都做了判断，通常不能省略else
 
-##### B: 基本使用
+##### 3.1.2.2. B: 基本使用
 
 ```kotlin
 var count:Int = 0
@@ -344,7 +344,7 @@ btn_when_simple.setOnClickListener {
 }
 ```
 
-##### C: 穿透
+##### 3.1.2.3. C: 穿透
 
 java 中 switch/case 需要穿透时需要列出每一个常量条件，但 kotlin中可以简化——
 
@@ -364,7 +364,7 @@ btn_when_region.setOnClickListener {
 }
 ```
 
-##### D、以表达式为分支条件
+##### 3.1.2.4. D、以表达式为分支条件
 
 kotlin 中 通过  **is**  关键字用来判断 A 是否为 B 的实例——`A is B `，等同于 Java中的 `A instance B` .
 
@@ -387,18 +387,18 @@ btn_when_instance.setOnClickListener {
 ```
 
 
-### 2、循环处理
+### 3.2. 2、循环处理
 
-#### (1)、遍历循环
+#### 3.2.1. (1)、遍历循环
 
 即 for-in 、forEach、 迭代器的使用
 
 
-#### (2)、条件循环
+#### 3.2.2. (2)、条件循环
 满足某个条件时执行/终止循环。
 
 
-##### A: 使用关键字
+##### 3.2.2.1. A: 使用关键字
 
 为此，新增了多个关键字：until、setp、downTo
 
@@ -419,7 +419,7 @@ for (i in 50 downTo 7) {
 }
 ```
 
-##### B: 使用while、do/while
+##### 3.2.2.2. B: 使用while、do/while
 
 由于关键字有限，能实现的效果有限，所以，更复杂的逻辑可以使用 while 或 do/while实现
 
@@ -459,7 +459,7 @@ btn_repeat_end.setOnClickListener {
 ```
 
 
-#### (3)、中断循环
+#### 3.2.3. (3)、中断循环
 
 使用 break——中断循环、continue——跳过本次循环，基本用法同Java，
 
@@ -485,9 +485,9 @@ btn_repeat_break.setOnClickListener {
 }
 ```
 
-### 3、空处理
+### 3.3. 3、空处理
 
-#### (1)、字符串的有效性判断
+#### 3.3.1. (1)、字符串的有效性判断
 校验空字符串的方法：
 
 * isNullOrEmpty —— 为null或长度为0时返回true。
@@ -497,14 +497,14 @@ btn_repeat_break.setOnClickListener {
 * isNotEmpty —— 长度大于0时返回true，必须先判断非null
 * isNotBlank —— 长度大于0并且非空格返回true，必须先判断非null
 
-#### (2)、声明可空变量
+#### 3.3.2. (2)、声明可空变量
 kotlin中默认变量非空，如果需要声明一个可空的变量，则在类型后面追加一个问号？
 
 ```kotlin
 var strCanNull:String?
 ```
 
-#### (3)、校验空值的运算符——?、?:、!!
+#### 3.3.3. (3)、校验空值的运算符——?、?:、!!
 
 * ? 表示可空，如果空直接返回null
 * ?: 表示一旦为空返回冒号后面的值，否则返回正常的值
@@ -538,37 +538,37 @@ btn_exclamation_two.setOnClickListener {
 ```
 
 
-### 4、等式判断
+### 3.4. 4、等式判断
 
-#### (1)、结构相等
+#### 3.4.1. (1)、结构相等
 * kotlin中使用  **==** 判断两个数据是否相等，使用  **!=** 判断是否不相等。
 
 * kotlin中的String也是使用这种方式。Java中使用equals()  
 
  **kotlin中比较字符串时不再比较在内存中的存储地址，而是直接比较变量值** ，这种方式就被叫做 结构相等，即模样相同/外观相同。
 
-#### (2)、引用相等
+#### 3.4.2. (2)、引用相等
 如果需要判断引用是否相等，也就是判断内存地址是否一致，kotlin中使用  **===**，如果判断不一致，则使用 **！==**
 
 * 对于基本数据类型(包括字符串)，结构相等和引用相等一致。
 * 通过 clone 得到的对象即便属性值一样，但引用地址不一致。
 
-#### (3)、is 和 in
+#### 3.4.3. (3)、is 和 in
 
 * is 和 !is —— 判断A是否为B的实例,如：`对象名 is 类名 `
 * in 和 !in —— 判断数组中是否包含某个元素，如 `变量名 in 数组名`
 
 ---
 
-## 四：函数
+## 4. 四：函数
 
 Kotlin中设计师的初衷是把函数作为一个特殊的变量
 
-### 1、函数基本用法
+### 4.1. 1、函数基本用法
 
 此处可参考 [传智Kotlin基础--张泽华](https://gitee.com/CnPeng_1/LearningNotes/wikis/2%E3%80%81%E4%BC%A0%E6%99%BAKotlin%E5%9F%BA%E7%A1%80--%E5%BC%A0%E6%B3%BD%E5%8D%8E?sort_id=364269) 中的函数内容
 
-### 2、输入参数的变化
+### 4.2. 2、输入参数的变化
 
 
 * 默认参数
@@ -577,9 +577,9 @@ Kotlin中设计师的初衷是把函数作为一个特殊的变量
 
 此处可参考 [传智Kotlin基础--张泽华](https://gitee.com/CnPeng_1/LearningNotes/wikis/2%E3%80%81%E4%BC%A0%E6%99%BAKotlin%E5%9F%BA%E7%A1%80--%E5%BC%A0%E6%B3%BD%E5%8D%8E?sort_id=364269) 中的函数内容
 
-### 3、特殊函数
+### 4.3. 3、特殊函数
 
-#### (1)、泛型函数
+#### 4.3.1. (1)、泛型函数
 
 * kotlin中使用 T 表示泛型。
 * 在定义泛型函数时需要在 fun 后面加入 <T> , 然后指明某个参数的类型为 T 
@@ -613,11 +613,11 @@ btn_vararg_generic.setOnClickListener {
 }
 ```
 
-#### (2)、内联函数
+#### 4.3.2. (2)、内联函数
 
 注意：《Kotlin从零到精通Android开发》书中并没有详细说明什么是内联函数，为什么需要内联函数，而是直接给出了一个具体化参数类型的内联函数——对应下面的B示例。
 
-##### A: 内联函数(内容摘自《Kotlin实战》)
+##### 4.3.2.1. A: 内联函数(内容摘自《Kotlin实战》)
 
 > 此处只是节选了《Kotlin实战》中内联函数的部分内容，详细内容还是参考《Kotlin实战》第八章内容
 
@@ -685,7 +685,7 @@ fun main(args: Array<String>) {
 
 * 使用 inline 关键字只能提高带有 lambda 参数的函数的性能，
 
-##### B: 具体化参数类型的内联函数
+##### 4.3.2.2. B: 具体化参数类型的内联函数
 假设我们定义了下面一个方法：
 
 ```kotlin
@@ -737,7 +737,7 @@ btn_generic_number.setOnClickListener {
 
 内联函数在调用的时候会在调用出把该函数的代码直接复制一份，调用10次就会复制10次，而并非普通函数一样直接引用函数地址。
 
-#### (3)、简化函数
+#### 4.3.3. (3)、简化函数
 
 数学上存在求阶乘的函数，比如5的阶乘为：5! =5*4*3*2*1，在kotlin中使用函数表示为：
 
@@ -753,7 +753,7 @@ fun factorial(n:Int):Int {
 fun factorial(n:Int):Int = if (n <= 1) n else n * factorial(n-1)
 ```
 
-#### (4)、尾递归函数
+#### 4.3.4. (4)、尾递归函数
 
 * 在上一节中求阶乘的函数是一个递归函数。
 * kotlin中，如果某个函数的末尾又调用了函数自身，这种就称为尾递归函数。
@@ -768,7 +768,7 @@ tailrec fun findFixPoint(x: Double = 1.0): Double
             = if (x == Math.cos(x)) x else findFixPoint(Math.cos(x))
 ```
 
-#### (5)、高阶函数
+#### 4.3.5. (5)、高阶函数
 
 * 高阶函数就是以另 一个函数作 为参数或者返回值的函数。
 * 在Kotiin中， 函数可以用lambda或者函数引用来表示
@@ -906,11 +906,11 @@ fun <T> Collection<T>.joinToString(
 }    
 ```
 
-### 4、增强系统函数
+### 4.4. 4、增强系统函数
 
-#### (1)、扩展函数
+#### 4.4.1. (1)、扩展函数
 
-##### A: 基本使用
+##### 4.4.1.1. A: 基本使用
 
 ```kotlin
 //要扩展哪个类中的方法，被扩展的类名就是哪个
@@ -930,7 +930,7 @@ fun Array<Int>.swap(pos1: Int, pos2: Int) {
 }
 ```
 
-#### B: 配合泛型的扩展函数
+#### 4.4.2. B: 配合泛型的扩展函数
 
 * 在kotlin中也是使用  **T** 标记泛型
 
@@ -945,7 +945,7 @@ fun <T> Array<T>.swap(pos1: Int, pos2: Int) {
 ```
 
 
-#### (2)、扩展高阶函数
+#### 4.4.3. (2)、扩展高阶函数
 
 前面在介绍高阶函数时定义了一个求数组元素中最大值的方法，如果我们将该扩束扩展到Array<T> 类中，就可以省略第一个参数，写法如下：
 
@@ -961,7 +961,7 @@ fun <T> Array<T>.maxCustomize(greater: (T, T) -> Boolean): T? {
 ```
 
 
-#### (3)、日期时间函数函数
+#### 4.4.4. (3)、日期时间函数函数
 
 示例：Java中获取日期的工具类
 
@@ -1052,7 +1052,7 @@ btn_extend_date.setOnClickListener {
 ```
 
 
-#### (4)、单例对象
+#### 4.4.5. (4)、单例对象
 * 使用 object 修饰类，替代 class . 类似于Java中的 static class ,外部可以不需要构建对象就可以直接调用其中的属性和函数
 
 示例：将日期工具类改为单例
@@ -1109,10 +1109,10 @@ btn_object_date.setOnClickListener {
 
 ---
 
-## 五、类和对象
+## 5. 五、类和对象
 
-### 1、类的构造
-#### (1)、类的定义
+### 5.1. 1、类的构造
+#### 5.1.1. (1)、类的定义
 
 与Java定义类相比，kotlin有如下修改：
 
@@ -1130,7 +1130,7 @@ class Animal {
 }
 ```
 
-#### (2)、类的构造函数
+#### 5.1.2. (2)、类的构造函数
 
 kotlin把函数看做特殊的变量，那么，类也可以被看做一个特殊的函数。
 
@@ -1141,7 +1141,7 @@ kotlin把函数看做特殊的变量，那么，类也可以被看做一个特�
 * 一个类中既可以没有主构造，也可以没有次构造，或者都没有
 * 如果一个非抽象类没有声明任何(主或次)构造函数，它会有一个默认的不带参数的主构造函数。
 
-##### A: 主构造函数
+##### 5.1.2.1. A: 主构造函数
 主构造函数示例：
 
 ```kotlin
@@ -1187,7 +1187,7 @@ class Person(val firstName: String, val lastName: String, var age: Int) {
 }
 ```
 
-##### B: 次构造
+##### 5.1.2.2. B: 次构造
 
 * 次构造定义在类内部，必须用 constructor 修饰 
 * 如果某个类既有主构造也有次构造，那么次构造需要委托(继承)主构造
@@ -1221,7 +1221,7 @@ class Person(val name: String) {
 ```
 
 
-#### (3)、带默认参数的构造函数
+#### 5.1.3. (3)、带默认参数的构造函数
 可以为构造中的参数配置默认值：
 
 默认参数构造的声明：
@@ -1247,7 +1247,7 @@ btn_class_default.setOnClickListener {
 }
 ```
 
-#### (4)、Java中调用Kotlin带默认参数的构造函数
+#### 5.1.4. (4)、Java中调用Kotlin带默认参数的构造函数
 
 如果Kotlin中定义了一个带有默认参数的函数(包括构造函数和其他函数)，该函数需要被Java代码调用，如果希望让该默认参数在Java中也生效，就需要 **展示 constructor ,并在其前面增加 @JvmOverloads 注解** 
 
@@ -1281,9 +1281,9 @@ public void onClick(View v) {
 }
 ```
 
-### 2、类的成员
+### 5.2. 2、类的成员
 
-#### (1)、成员属性
+#### 5.2.1. (1)、成员属性
 
 * 非空的成员属性必须在声明时赋值，或者在构造中赋值
 
@@ -1307,11 +1307,11 @@ class WildAnimalMember (var name:String, val sex:Int = 0) {
 ```
 
 
-#### (2)、成员方法
+#### 5.2.2. (2)、成员方法
 
 就是在类内部定义一个函数，详细可以参考前面函数声明的部分。
 
-#### (3)、伴生对象
+#### 5.2.3. (3)、伴生对象
 
 * 伴生对象类似Java中的静态内部类。
 * 伴生对象需要在类名前面添加 companion object
@@ -1345,18 +1345,18 @@ class MyClass {
 }
 ```
 
-#### (4)、静态属性
+#### 5.2.4. (4)、静态属性
 
 * 伴生对象中的属性就称为静态属性。
 
 声明方式省略，调用方式参考上面伴生对象方法的调用
 
 
-### 3、类的继承
+### 5.3. 3、类的继承
 
-#### (1)、开放性修饰符
+#### 5.3.1. (1)、开放性修饰符
 
-##### A: 可继承关键字
+##### 5.3.1.1. A: 可继承关键字
 
 * Kotlin中 open 关键字修饰类时表示类可以被继承，修饰成员(含变量和方法)时表示可以被重写
 * Kotlin中的 **类默认是不能被继承的** 
@@ -1381,7 +1381,7 @@ open class AnotherDerived() : Base() {
 }
 ```
 
-##### B: 公开性修饰符
+##### 5.3.1.2. B: 公开性修饰符
 
 Kotlin中用来修饰成员的公开性修饰符有：
 
@@ -1397,7 +1397,7 @@ Kotlin中用来修饰成员的公开性修饰符有：
 * open和private不能同时修饰一个成员，否则报错：Modifier 'open' is incompatible with 'private'
 
 
-#### (2)、普通类继承
+#### 5.3.2. (2)、普通类继承
 
 * 对比Java，继承时使用  **:** 替代 extends, 并且冒号后面跟的是 父类的构造 
 * 默认情况下，重写的成员具有与父类中对应成员的相同可见属性。
@@ -1420,7 +1420,7 @@ class Derived() : Base() {
 ```
 
 
-#### (3)、抽象类
+#### 5.3.3. (3)、抽象类
 
 * 抽象类定义的是事物的共性，接口定义的则是事物的特性
 * 抽象类中可以包含非抽象的方法
@@ -1429,7 +1429,7 @@ class Derived() : Base() {
 
 
 
-#### (4)、接口
+#### 5.3.4. (4)、接口
 
 * 抽象类定义的是事物的共性，接口定义的则是事物的特性
 * 由于接口没有构造，所以某个类实现接口时不需要在接口名后面添加“()”——括号表示构造
@@ -1503,7 +1503,7 @@ fun main(args:Array<String>) {
 }
 ```
 
-#### (5)、接口代理
+#### 5.3.5. (5)、接口代理
 
 * 把自己不想做的事情交给别人做称为委托，做别人委托的事件称为代理
 * 只有接口才能被代理
@@ -1511,7 +1511,7 @@ fun main(args:Array<String>) {
 
 以下代理示例内容摘自： [传智Kotlin基础--张泽华](https://gitee.com/CnPeng_1/LearningNotes/wikis/2%E3%80%81%E4%BC%A0%E6%99%BAKotlin%E5%9F%BA%E7%A1%80--%E5%BC%A0%E6%B3%BD%E5%8D%8E?sort_id=364269)
 
-##### A、场景说明
+##### 5.3.5.1. A、场景说明
 
 ```
 围裙妈妈只负责做饭，不负责洗碗
@@ -1520,7 +1520,7 @@ fun main(args:Array<String>) {
 小头爸爸承揽了洗碗的活，最终交给大头儿子做，中间赚了9元差价
 ```
 
-##### B、代码实现——完全委托
+##### 5.3.5.2. B、代码实现——完全委托
 
 * 定义洗碗的接口
 
@@ -1568,9 +1568,10 @@ fun main(args: Array<String>) {
 ![](https://gitee.com/uploads/images/2018/0510/104919_b477339e_930142.png "屏幕截图.png")
 
 
-### 4、特殊类
+### 5.4. 4、特殊类
 
-#### (1)、嵌套类
+#### 5.4.1. (1)、嵌套类
+
 * A类中包含B类，则B类就是A的嵌套类
 * 嵌套类不能直接访问外部类的成员
 * 外部类访问嵌套类时，需要先构造嵌套类
@@ -1578,7 +1579,7 @@ fun main(args: Array<String>) {
 示例代码在内部类中。
 
 
-#### (2)、内部类
+#### 5.4.2. (2)、内部类
 
 * A类中包含B类，并且B类用  **inner** 修饰， 则B类就是A的嵌套类
 * 内部类可以直接访问外部类的成员
@@ -1635,10 +1636,10 @@ fun main(args:Array<String>){
 }
 ```
 
-#### (3)、枚举类
+#### 5.4.3. (3)、枚举类
 
-* Kotlin中，枚举是一个类，关键字为 enum
-* 枚举类中的成员默认定义了两个属性：ordinal——索引；name——名字
+* Kotlin 中，**枚举是一个类**，关键字为 `enum`
+* 枚举类中的成员默认定义了两个属性：`ordinal`——索引；`name`——名字
 * 枚举类可以有构造，但该构造只对成员有效，不对外开放——外部不能调用其构造
 * 枚举类不能被继承，也不能被实现。
 * 更多内容可以参考 [官方文档](https://www.kotlincn.net/docs/reference/enum-classes.html)
@@ -1700,8 +1701,37 @@ GREEN的索引为1,name为GREEN,rgb值为65280
 BLUE的索引为2,name为BLUE,rgb值为255
 ```
 
+> 补充：最后一个枚举变量必须使用分号结束。不然定义不了抽象方法。
 
-#### (4)、密封类/印章类
+```kotlin
+enum class Color(val rgb: Int) {
+        RED(0xFF0000) {
+            override fun print() {
+                print("red")
+            }
+        },
+        GREEN(0x00FF00) {
+            override fun print() {
+                print("green")
+            }
+        },
+        BLUE(0x0000FF) {
+            override fun print() {
+                print("blue")
+            }
+        };
+
+        // 抽象方法
+        abstract fun print()
+    }
+
+fun main() {
+        Color.BLUE.print()
+    }
+```
+
+#### 5.4.4. (4)、密封类/印章类
+
 以下内容摘自 [Kotlin官方文档](https://kotlinlang.org/docs/reference/sealed-classes.html)
 
 如果某个类的子类有限，则可以将该类定义为密封类。
@@ -1710,9 +1740,9 @@ CnPeng: 比如，按性别区分人的时候，只有两种可能：男人、女
 
 看起来密封类和枚举差不多，都是用来表示有限的内容。 **但枚举中的成员都是单例的，密封类的子类非单例。** 
 
-* 声明密封类时，在 class 前面添加 sealed 关键字即可。
-* 密封类默认是open可继承的
-* 密封类的子类，在Kotlin 1.1 之前，必须声明在密封类内部（也就是作为密封类的嵌套类）；但是之后的版本中，只要确保他们在同一个kt文件中即可。
+* 声明密封类时，在 `class` 前面添加 `sealed` 关键字即可。
+* 密封类默认是 `open` 可继承的
+* 密封类的子类，在 Kotlin 1.1 之前，必须声明在密封类内部（也就是作为密封类的嵌套类）；但是之后的版本中，只要确保他们在同一个 kt 文件中即可。
 * 密封类本身是抽象的，不能直接被实例化，可以拥有抽象成员。
 * 密封类的所有构造都必须是私有的。
 * 密封类的孙子类，可以放置在任意位置，并非必须在同一个kt文件中。
@@ -1790,17 +1820,18 @@ fun main(args: Array<String>) {
 }
 ```
 
-#### (5)、数据类
-所谓数据类就是编码过程中的各种实体类, 数据类关键字 data
+#### 5.4.5. (5)、数据类
+
+所谓数据类就是编码过程中的各种实体类, 数据类关键字 `data`，主构造必须非空。
 
 Kotlin中数据类的优点包括：
 
 * 自动声明与构造函数入参同名的属性字段
-* 自动实现每个属性的set/get方法
-* 自动提供equals 方法，用来判断两个数据对象(的属性值)是否相等
-* 自动提供copy方法，允许完整复制某个数据对象，也可以在复制之后单独修改部分字段的值
-* 自动提供 toString 方法
-* 自动提供hashCode 方法判断根据属性值生成的哈希值是否一致
+* 自动实现每个属性的 `set/get` 方法
+* 自动提供 `equals` 方法，用来判断两个数据对象(的属性值)是否相等
+* 自动提供 `copy` 方法，允许完整复制某个数据对象，也可以在复制之后单独修改部分字段的值
+* 自动提供 `toString` 方法
+* 自动提供 `hashCode` 方法判断根据属性值生成的哈希值是否一致
 
  **注意：** 没有在主构造中声明的属性，不会加入到 equals 、hashCode的判断中去 
 
@@ -1841,12 +1872,13 @@ var lotus = Plant("莲", "莲藕", "莲叶", "莲花", "莲蓬", "莲子")
 }
 ```
 
-#### (6)、模板类/泛型类
+#### 5.4.6. (6)、模板类/泛型类
 
 更多内容可参考 [官方文档中的Generics](https://kotlinlang.org/docs/reference/generics.html)
 
 下列内容摘自《Kotlin实战》
-* Kotlin通过在类名称后加上一对尖括号，井把类型参数放在尖括号内来声明泛型类及泛型接口。
+
+* Kotlin 通过在类名称后加上一对尖括号，井把类型参数放在尖括号内来声明泛型类及泛型接口。
 * 一旦声明之后，就可以在类的主体内像其他类型一样使用类型参数
 
 List泛型接口的声明：
@@ -1876,10 +1908,12 @@ class ArrayList<T> : List<T> {
 
 ---
 
-## 六、Kotlin使用简单控件
+## 6. 六、Kotlin使用简单控件
 
-### 1、使用按钮控件
-#### (1)、Button
+### 6.1. 1、使用按钮控件
+
+#### 6.1.1. (1)、Button
+
 实现点击事件的三种形式：
 
 ```kotlin
@@ -1893,32 +1927,32 @@ btn_click_anonymos.setOnClickListener { v ->
 
 * 关于上面示例代码中匿名对象为什么这么写，可以参考[《KotlinForAndroid》读书笔记中的——简化setOnCliclListener](https://gitee.com/CnPeng_1/LearningNotes/wikis/1%E3%80%81KotlinForAndroid%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0?sort_id=365441)
 
-#### (2)、CheckBox
+#### 6.1.2. (2)、CheckBox
 
 略
 
-#### (3)、RadioButton
+#### 6.1.3. (3)、RadioButton
 略
 
-### 2、使用页面布局
+### 6.2. 2、使用页面布局
 
-#### (1)、LinearLayout
+#### 6.2.1. (1)、LinearLayout
 
 * Anko中为Context扩展了dp和px互转的工具：dip(x) ——转换dp为px, px2dp(x)——转换px为dp
 
-#### (2)、RelativeLayout
+#### 6.2.2. (2)、RelativeLayout
 * 相对布局中，可以通过 RelativeLayout.LayoutParams 的 `addRule(int verb, int subject)` 方法手动在代码中指定视图的布局规则。
 
 addRule 中前者表示布局规则，后者表示相对目标View的id
 
 * Anko中为了简化addRule增加了 RelativeLayoutLayoutParamsHelpers.kt ,该文件中增加了部分封装好的布局规则，只需要传入视图id即可。如 rlLayoutParams.above(viewID)
  
-#### (3)、ConstraintLayout
+#### 6.2.3. (3)、ConstraintLayout
 
 * ConstraintLayout 的LayoutParams 可以控制视图位置，ConstraintSet也可以控制视图位置
 * 在为LayoutParams配置margin时，尽量使用marginStart、marginEnd,如果使用 leftMargin、rightnMargin,可能会出现不生效的情况
 
-##### A: ConstraintSet 
+##### 6.2.3.1. A: ConstraintSet 
 
 是代码控制view之间约束条件的辅助类，ConstraintLayout.LayoutParams的高级版本。
 * connect() 可以一次性指定存在约束关系的两个控件以及他们的间距
@@ -1969,7 +2003,7 @@ set.connect(tv_first.id, ConstraintSet.START, cl_content.id, Constr aintSet.STAR
 }
 ```
 
-##### B: TransitionManager
+##### 6.2.3.2. B: TransitionManager
 当布局参数发生变化时提供重新布局的切换动画。
 
 ```kotlin
@@ -1980,9 +2014,9 @@ btn_move_soft.setOnClickListener {
 }
 ```
 
-### 3、使用图文控件
+### 6.3. 3、使用图文控件
 
-#### (1)、TextView
+#### 6.3.1. (1)、TextView
 * Kotlin中使用 or 替代Java中的 | ,如： 
 
 ```kotlin
@@ -2003,8 +2037,8 @@ kotlin中都有对应的关键字替代Java中的位运算，对应关系如下�
 * ushr —— >>> —— 无符号右移，高位补0
 
 
-#### (2)、ImageView
-#### (3)、EditText
+#### 6.3.2. (2)、ImageView
+#### 6.3.3. (3)、EditText
 intputType的类型：
 
 - `TYPE_CLASS_TEXT` —— 普通文本
@@ -2015,8 +2049,8 @@ intputType的类型：
 更多类型可查看 InputType 类中的定义
 
 
-### 4、使用Activity跳转
-#### (1)、传送配对字段数据
+### 6.4. 4、使用Activity跳转
+#### 6.4.1. (1)、传送配对字段数据
 
 * Kotlin中跳转Activity的普通写法：
 
@@ -2034,7 +2068,7 @@ startActivity<ChipActivity>()
 ```
 * 目标页面获取被传递数据的方式不变
 
-#### (2)、传送序列化数据
+#### 6.4.2. (2)、传送序列化数据
 
 Kotlin中如果需要序列化，则为数据类添加一个@Parcelize注解，并实现该接口即可。比Java中的序列化简单了太多太多。。。
 
@@ -2079,9 +2113,9 @@ class ParcelableSecondActivity : AppCompatActivity() {
     }
 }
 ```
-#### (3)、跳转时指定启动模式
+#### 6.4.3. (3)、跳转时指定启动模式
 
-##### A: Anko中的 intentFor()
+##### 6.4.3.1. A: Anko中的 intentFor()
 从其他页面跳转到Activity界面时，可能还会通过Intent对象设置Action、Flag等内容，Anko提供了构建Intent对象的 intentFor()函数。
 
 ```kotlin
@@ -2095,7 +2129,7 @@ intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 startActivity(intent)
 ```
 
-##### B：清单文件中配置Activity启动模式
+##### 6.4.3.2. B：清单文件中配置Activity启动模式
 
 >1、此处内容摘自：《黑马程序员:阳哥面试宝典V3.0》中的启动模式部分。
 >2、在Activity界面中调用 this.toString() 可以获取Activity的唯一标识，通过判断标识是否一致得知是否创建了新的实例。
@@ -2136,7 +2170,7 @@ startActivity(intent)
 ![](https://images.gitee.com/uploads/images/2018/1228/100604_fc273f64_930142.png "屏幕截图.png")
 
 
-##### C：代码中配置Activity启动模式——setFlags(Flag)
+##### 6.4.3.3. C：代码中配置Activity启动模式——setFlags(Flag)
 
 Flag的部分取值为：
 
@@ -2170,7 +2204,7 @@ Flag的部分取值为：
 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
 ```
 
-##### D: 代码配置Flag的便捷方式
+##### 6.4.3.4. D: 代码配置Flag的便捷方式
 Anko中为我们定义了代码设置Flag的更加便捷的方式——预置配置Flag的方法。
 
 这样，我们就不用再调用 intent.flag=xxx ,而直接在startActivity()函数中传参即可。
@@ -2201,7 +2235,7 @@ Flag和Anko中扩展函数的对应关系为：
 这些函数都定义在Anko库的 Intents.kt 文件中。
 
 
-#### (4)、处理返回数据——startActivityForResult
+#### 6.4.4. (4)、处理返回数据——startActivityForResult
 
 Anko中也扩展了startActivityResult方法，示例如下：
 
@@ -2214,9 +2248,9 @@ startActivityForResult<ActResponseActivity>(0, "message" to info)
 返回数据时的 setResult() 函数和JAVA中的一致。
 
 
-### 5、实战：电商APP登录界面
+### 6.5. 5、实战：电商APP登录界面
 
-#### (1)、展示AlertDialog
+#### 6.5.1. (1)、展示AlertDialog
 
 Anko库中为Context封装了一个alert函数，通过该函数可以极大的简化弹窗构建流程。格式为
 
@@ -2232,16 +2266,16 @@ alert("你确定要卸载么？", "亲爱的用户") {
 ```
 ---
 
-## 七、Kotlin操作复杂控件
+## 7. 七、Kotlin操作复杂控件
 
-### 1、使用视图排列(列表类控件)
+### 7.1. 1、使用视图排列(列表类控件)
 
 ![类表类控件继承关系图1](https://images.gitee.com/uploads/images/2018/1228/144015_56b1c144_930142.png "屏幕截图.png")
 
-#### (1)、Spinner
+#### 7.1.1. (1)、Spinner
 
 
-##### A: Spinner的基本使用：
+##### 7.1.1.1. A: Spinner的基本使用：
 
 >以下内容摘自之前总结的《Android读书笔记》.doc
 
@@ -2253,15 +2287,15 @@ Spinner和Gallery 都继承自AbsSpinner, AbsSpinner又继承自AdapterView，�
  
 属性|含义
 ---|---
-android:entries| Reference to an array resource that will populate the Spinner. 
-android:dropDownHorizontalOffset|Amount of pixels by which the drop down should be offset horizontally. 
-android:dropDownSelector|List selector to use for spinnerMode="dropdown" display. 
-android:dropDownVerticalOffset|Amount of pixels by which the drop down should be offset vertically. 
-android:dropDownWidth|Width of the dropdown in spinnerMode="dropdown". 
-android:gravity|Gravity setting for positioning the currently selected item. 
-android:popupBackground|Background drawable to use for the dropdown in spinnerMode="dropdown". 
+android:entries| Reference to an array resource that will populate the Spinner. 
+android:dropDownHorizontalOffset|Amount of pixels by which the drop down should be offset horizontally. 
+android:dropDownSelector|List selector to use for spinnerMode="dropdown" display. 
+android:dropDownVerticalOffset|Amount of pixels by which the drop down should be offset vertically. 
+android:dropDownWidth|Width of the dropdown in spinnerMode="dropdown". 
+android:gravity|Gravity setting for positioning the currently selected item. 
+android:popupBackground|Background drawable to use for the dropdown in spinnerMode="dropdown". 
 android:prompt|当用dialog模式展示spinner的时候的提示标题，取值字符串，但是必须是引用类型的字符串，不能硬编码。对应方法：spinnser.setPrompt(charsquence).
-android:spinnerMode|Spinner的展示模式，有两种取值，dialog，dropdown。默认是dropdown模式 
+android:spinnerMode|Spinner的展示模式，有两种取值，dialog，dropdown。默认是dropdown模式 
 
 
  **注意** 
@@ -2425,7 +2459,7 @@ activity_spinner.xml
 ```
 
 
-##### B: Anko中Dialog模式Spinner的替代
+##### 7.1.1.2. B: Anko中Dialog模式Spinner的替代
 
 Dialog 模式的Spinner可以使用一个 TextView + 列表Dialog实现。
 
@@ -2481,22 +2515,22 @@ override fun items(
   }
 ```
 
-#### (2)、ListView
+#### 7.1.2. (2)、ListView
 
-##### A: lateinit
+##### 7.1.2.1. A: lateinit
 lateinit表示延迟初始化，放在var/val前面，表示属性不需要在声明时就初始化。而且，即便没有初始化，也不会为空！
 
 这样，定义时未初始化的成员就不需要赋null值了。
 
-#### (3)、GridView
+#### 7.1.3. (3)、GridView
 
 略
 
 
-#### (4)、RecyclerView
+#### 7.1.4. (4)、RecyclerView
 
 
-##### A: LayoutContainer
+##### 7.1.4.1. A: LayoutContainer
 
 在Activity界面中，Anko库帮我们实现了findViewById的操作，我们使用控件时直接调用控件ID即可。
 
@@ -2512,7 +2546,7 @@ android{
 }
 ```
 
-##### B：Kotlin下Rv的基本使用
+##### 7.1.4.2. B：Kotlin下Rv的基本使用
 
 * ExtractRvAdapterActivity.kt
 
@@ -2582,7 +2616,7 @@ class ExtractRvAdapter(private var itemList: MutableList<String>) : RecyclerView
 }
 ```
 
-##### C：抽取基类适配器（重点）
+##### 7.1.4.3. C：抽取基类适配器（重点）
 
 运用了模板类、高阶函数等内容。
 
@@ -2758,9 +2792,9 @@ class ExtractRvAdapterActivity : AppCompatActivity() {
 </androidx.constraintlayout.widget.ConstraintLayout>
 ```
 
-### 2、使用MaterialDesign
+### 7.2. 2、使用MaterialDesign
 
-#### (1)、CoordinatorLayout基本使用
+#### 7.2.1. (1)、CoordinatorLayout基本使用
 
 CoordinatorLayout继承自ViewGroup, 其效果类似于相对布局, 控制子视图位置时有如下方法：
 
@@ -2827,9 +2861,9 @@ class CoordinatorLayoutTestActivity : AppCompatActivity() {
 }
 ```
 
-#### (2)、工具栏ToolBar
+#### 7.2.2. (2)、工具栏ToolBar
 
-##### A: 使用须知
+##### 7.2.2.1. A: 使用须知
 * APP通常会有一个顶部导航栏，Android5.0之前，这个顶部导航栏为 ActionBar；但ActionBar不容易扩展，所以，5.0 之后推出了 ToolBar.
 
 * 使用TooBar时需要先关闭 ActionBar —— 为当前界面或者应用引用 NoActionBar主题
@@ -2882,12 +2916,12 @@ class ToolBarDemoActivity : AppCompatActivity() {
 }
 ```
 
-##### B：其他相关参考文章：
+##### 7.2.2.2. B：其他相关参考文章：
 * [官方文档](https://developer.android.com/training/appbar/setting-up) 
 * [CnPeng——ToolBar使用详解(暂未开始)](https://gitee.com/CnPeng_1/LearningNotes/wikis/*%2084%E3%80%81ToolBar%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3?sort_id=1215101)
 
 
-#### (3)、AppBarLayout
+#### 7.2.3. (3)、AppBarLayout
 
 * AppBarLayout继承自LinearLayout
 * AppBarLayout可以实现协调滚动
@@ -2974,13 +3008,13 @@ class AppBarLayoutActivity : AppCompatActivity() {
 }
 ```
 
-#### (4)、CollapsingToolbarLayout
+#### 7.2.4. (4)、CollapsingToolbarLayout
 可折叠工具栏，可以实现视察特效——展开和收起工具栏
 
 >该部分内容主要参考 [ **官方文档--CollapsingToolbarLayout** ](https://developer.android.com/reference/android/support/design/widget/CollapsingToolbarLayout)
 
 
-##### A: 实现要点：
+##### 7.2.4.1. A: 实现要点：
 
 * 根布局为 CoordinaterLayout
 * AppBarLayout中包裹 CollapsingToolBarLayout, CollapsingToolBarLayout中包裹 ToolBar
@@ -2988,14 +3022,14 @@ class AppBarLayoutActivity : AppCompatActivity() {
 * 定义RV作为滚动事件提供者，并配置 layout_behavior
 
 
-##### B: CollapsingToolbarLayout.LayoutParams的属性
+##### 7.2.4.2. B: CollapsingToolbarLayout.LayoutParams的属性
 
 在 CollapsingToolbarLayout 中LayoutParams 中定义了如下两个重要属性：
 * layout_collapseMode——子视图折叠模式
 * layout_collapseParallaxMultiplier
 
 
-##### C: CollapsingToolbarLayout的属性
+##### 7.2.4.3. C: CollapsingToolbarLayout的属性
 
 CollapsingToolbarLayout是对ToolBar的包装，作为AppBarLayout的直接子类使用。
 
@@ -3020,7 +3054,7 @@ title|标题（如果子View中包裹了ToolBar,那么该title会覆盖ToolBar�
 titleEnabled|是否启用标题
 
 
-##### D: CollapsingToolbarLayout的方法
+##### 7.2.4.4. D: CollapsingToolbarLayout的方法
 
 只列出没有属性对应的方法，对应的get方法省略
 
@@ -3034,7 +3068,7 @@ setCollapsedTitleTypeface|标题收起时的字体
 setCollapsedTitleTextColor|标题收起时的颜色——ARGB
 setCollapsedTitleTextColor|标题收起时的颜色——ColorStateList
 
-##### E: 基本使用
+##### 7.2.4.5. E: 基本使用
 
 APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效果实际是 CollapsingToolBarLayout的高度变化触发的。
 
@@ -3102,7 +3136,7 @@ APP运行过程中，ToolBar 的高度是固定的，展开和收起的视觉效
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 ```
 
-#### (5)、仿支付宝首页标题栏展开和折叠
+#### 7.2.5. (5)、仿支付宝首页标题栏展开和折叠
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/0102/152329_cdb2b46d_930142.gif "1.gif")
 
 
@@ -3482,8 +3516,8 @@ data class LifeItem(var pic_id: Int, var title: String) {
     }
 }
 ```
-### 3、实现页面切换
-#### (1)、ViewPager
+### 7.3. 3、实现页面切换
+#### 7.3.1. (1)、ViewPager
 
 PageTabStrip也是ViewPager指示器。使用时必须在xml中嵌套在ViewPager内部
 
@@ -3588,9 +3622,9 @@ class VpActAdapter(private var funcList: MutableList<AlipayBaseFuncItem>, val co
 ```
 
 
-#### (2)、Fragment
+#### 7.3.2. (2)、Fragment
 
-##### A: 基本使用
+##### 7.3.2.1. A: 基本使用
 重点参考下面代码中 获取Framgent实例的实现方法
 
 ```kotlin
@@ -3625,7 +3659,7 @@ class VpChildFragment : Fragment() {
 
 ```
 
-##### B: setUserVisibleHint()
+##### 7.3.2.2. B: setUserVisibleHint()
 对应原书 7.5.4
 
 * Fragment界面对用户可见时做相关处理。
@@ -3648,21 +3682,21 @@ override fun setUserVisibleHint(isVisibleToUser: Boolean) {
 ```
 
 
-#### (3)、TabLayout
+#### 7.3.3. (3)、TabLayout
 参考内容：https://www.jianshu.com/p/58c168ef4fa8
 
 参考内容2：https://www.jianshu.com/p/c1aa1056176b
 
-### 4、收发广播——Broadcast
+### 7.4. 4、收发广播——Broadcast
 
 
 * val——运行时常量
 
 * const val ——编译时常量
 
-#### (1)、系统广播
+#### 7.4.1. (1)、系统广播
 
-##### A: 静态注册
+##### 7.4.1.1. A: 静态注册
 
 * 适用于 开机启动、用户解锁、定时闹钟等APP未启动也可以接收的广播
 
@@ -3675,7 +3709,7 @@ override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         </intent-filter>
 </receiver>
 ```
-##### B:动态注册
+##### 7.4.1.2. B:动态注册
 
 * registerReceiver（）
 * unregisterReceiver（）
@@ -3690,19 +3724,19 @@ registerReceiver(timeReceiver, filter)
 ```
 
 
-#### (2)、本地广播
+#### 7.4.2. (2)、本地广播
 
 只能动态注册
 
 
 
-### 5、实战：电商APP的商品频道
+### 7.5. 5、实战：电商APP的商品频道
 
-#### (1)、需求分析
+#### 7.5.1. (1)、需求分析
 
 略
 
-#### (2)、SwipeRefreshLayout
+#### 7.5.2. (2)、SwipeRefreshLayout
 
 函数|含义
 ---|---
@@ -3718,11 +3752,11 @@ refreshLayout.setColorSchemeResources(R.color.red, R.color.orange, R.color.green
 
 ---
 
-## 八、Kotlin进行数据存储
+## 8. 八、Kotlin进行数据存储
 
-### 1、SharedPreference
+### 8.1. 1、SharedPreference
 
-#### (1)、SP读写工具类
+#### 8.1.1. (1)、SP读写工具类
 
 ```kotlin
 class Preference<T>(val context: Context, val name: String, val default: T) : ReadWriteProperty<Any?, T> {
@@ -3789,23 +3823,23 @@ private var age: Int by Preference(ctx, "age", 0)
 name="zhangsan"
 ```
 
-#### (2)、属性代理等
+#### 8.1.2. (2)、属性代理等
 
-##### A：T、Any、* 的区别
+##### 8.1.2.1. A：T、Any、* 的区别
 
 * T 是抽象的类型，在模板类中用来占位子，外部调用模板类时才能确定T的具体类型。
 * Any是Kotlin的基本类型，所有类都是从Any派生而来，相当于Java中的Object
 * “*” 表示一个不确定的类型，同样也是在外部调用时才能确定，这一点跟T比较像，但是，T出现在模板类的定义当中，而“* ”与模板类无关。它出现在单个函数定义的参数列表中，相当于Java中的“？”
 
 
-##### B: 属性委托/属性代理
+##### 8.1.2.2. B: 属性委托/属性代理
 
 属性代理：该属性的类型不变，但是属性的读写行为被后面的类接管了。该类接管之后，通过自定义的set/get 进行存储和读取数据。
 
 >属性代理有点类似于实现了 Observable 的 DataBinding
 
 
-##### C: lazy
+##### 8.1.2.3. C: lazy
 
 被lazy修饰的内容表示， **只在第一次使用时执行初始化。** 
 
@@ -3816,7 +3850,7 @@ Kotlin中初始化的几种情况：
 * 通过lazy修饰的首次使用时初始化：声明变量时就指定初始化操作，但只有第一次被调用时才执行这些操作。
 
 
-##### D: with 函数
+##### 8.1.2.4. D: with 函数
 * 格式为：with(函数头){函数体}
 
 * 函数头：位于紧跟with的小括号内，先于函数体执行，并且函数头会返回一个对象。
@@ -3824,15 +3858,15 @@ Kotlin中初始化的几种情况：
 * 函数体：位于大括号内，要等函数头执行完毕之后才执行，同时函数体只在函数头返回对象的命名空间中运行。也就是说，函数体语句可以直接调用该对象的方法，而无须指定头部对象的实例名称。
 
 
-#### (3)、记住密码功能
+#### 8.1.3. (3)、记住密码功能
 略
 
 
-### 2、SQLite
+### 8.2. 2、SQLite
 
-#### (1)、SQLiteOpenHelper、SQLiteDatabase
+#### 8.2.1. (1)、SQLiteOpenHelper、SQLiteDatabase
 
-##### A: SQLiteDatabase
+##### 8.2.1.1. A: SQLiteDatabase
 
 SQLiteDatabase是SQLite的数据库管理类，开发者可以在任意能获取到Context对象的地方获取数据库的实例。
 
@@ -3886,7 +3920,7 @@ getString|获取指定字段的String值
 getType|获取指定字段的字段类型。
 
 
-##### B: SQLiteOpenHelper
+##### 8.2.1.2. B: SQLiteOpenHelper
 
 SQLiteDatabase只是提供了数据库的DDL(数据库定义)和DML(数据库管理)的操作，并未提供完整的业务处理流程。
 
@@ -3901,7 +3935,7 @@ SQLiteDatabase只是提供了数据库的DDL(数据库定义)和DML(数据库管
 * 提供增删改查的方法
 
 
-#### (2)、ManagedSQLiteOpenHelper
+#### 8.2.2. (2)、ManagedSQLiteOpenHelper
 
 ManagedSQLiteOpenHelper是Anko提供的数据库帮助类。 **主动封装了数据库连接的开启和关闭操作** ，这样开发者就不用再手动的开关了。
 
@@ -4158,12 +4192,12 @@ private fun readSQLite() {
 ```
 
 
-#### (3)、优化记住密码功能
+#### 8.2.3. (3)、优化记住密码功能
 
 略
 
-### 3、文件I/O
-#### (1)、文件保存空间
+### 8.3. 3、文件I/O
+#### 8.3.1. (1)、文件保存空间
 * 获取公共存储空间：Environment.getExternalStoragePublicDirectory
 * 获取当前APP的私有存储空间：getExternalFilesDir
 
@@ -4181,9 +4215,9 @@ class FilePathActivity : AppCompatActivity() {
 ```
 
 
-#### (2)、读写文本
+#### 8.3.2. (2)、读写文本
 
-##### A:Java版文本读写工具类
+##### 8.3.2.1. A:Java版文本读写工具类
 
 ```kotlin
 public class FileUtil {
@@ -4215,7 +4249,7 @@ public class FileUtil {
 }
 ```
 
-##### B:Kotlin为File类扩展的文本存取工具方法
+##### 8.3.2.2. B:Kotlin为File类扩展的文本存取工具方法
 
 下列方法定义在 FileReadWrite.kt 中。
 
@@ -4226,7 +4260,7 @@ appendText（str）|追加文本内容
 readText|读取文本形式的文件
 readLines|按行读取文件内容，返回字符串List，文件有多少行，List中就有多少个元素
 
-##### C:完整示例
+##### 8.3.2.3. C:完整示例
 
 
 ```kotlin
@@ -4366,7 +4400,7 @@ class TextReadActivity : AppCompatActivity() {
 }
 ```
 
-#### (3)、读写图片
+#### 8.3.3. (3)、读写图片
 
 像图片等二进制格式的文件，可以通过字节数组的形式写入文件。
 
@@ -4427,7 +4461,7 @@ tv_path.text = "用户注册信息图片的保存路径为：\n$file_path"
 toast("图片已存入临时目录")
 ```
 
-#### (4)、遍历文件目录
+#### 8.3.4. (4)、遍历文件目录
 
 Kotlin中提供了 **FileTreeWalk** 用来遍历文件目录。通过File(path).walk()可以获取该对象。
 
@@ -4453,11 +4487,11 @@ fileTree.maxDepth(1)
 ```
 
 
-### 4、Application全局变量
+### 8.4. 4、Application全局变量
 
-#### (1)、Application单例化
+#### 8.4.1. (1)、Application单例化
 
-##### A:Java示例
+##### 8.4.1.1. A:Java示例
 
 ```kotlin
 public class MainApplication extends Application {
@@ -4474,7 +4508,7 @@ public class MainApplication extends Application {
 }
 ```
 
-##### B: 手动声明单例
+##### 8.4.1.2. B: 手动声明单例
 
 ```kotlin
 class MainApplication : Application() {
@@ -4495,7 +4529,7 @@ class MainApplication : Application() {
 }
 ```
 
-##### C: 借助 Delegates 的委托属性实现单例
+##### 8.4.1.3. C: 借助 Delegates 的委托属性实现单例
 
 Delegates提供了 notNull 的非空校验方法，使用它之后，开发者不需要手动校验非空。
 
@@ -4513,7 +4547,7 @@ class MainApplication : Application() {
 }
 ```
 
-##### D:自定义代理行为的单例
+##### 8.4.1.4. D:自定义代理行为的单例
 
 前面几种方式虽然判断了非空，但不能保证真正的单例——有且只有一次赋值！
 
@@ -4549,7 +4583,7 @@ private class NotNullSingleValueVar<T>() : ReadWriteProperty<Any?, T> {
 
 
 
-#### (2)、利用Application实现全局变量
+#### 8.4.2. (2)、利用Application实现全局变量
 
 适合在Application保存的全局变量包含如下内容：
 * 会频繁读写的信息，如用户名，手机号等
@@ -4558,10 +4592,10 @@ private class NotNullSingleValueVar<T>() : ReadWriteProperty<Any?, T> {
 
 
 
-### 5、实战——购物车
-#### (1)、需求描述
+### 8.5. 5、实战——购物车
+#### 8.5.1. (1)、需求描述
 
-#### (2)、选项菜单——OptionsMenu
+#### 8.5.2. (2)、选项菜单——OptionsMenu
 
 res/menu/menu_option.xml
 
@@ -4674,13 +4708,13 @@ class MenuOptionActivity : AppCompatActivity() {
 }
 ```
 
-#### (3)、控件设计
+#### 8.5.3. (3)、控件设计
 略
 
 
-#### (4)、关键代码
+#### 8.5.4. (4)、关键代码
 
-##### A: 页面跳转
+##### 8.5.4.1. A: 页面跳转
 
 商品列表和购物车之间来回跳转时使用clearTop模式，防止多次向栈中添加内容。
 
@@ -4694,10 +4728,10 @@ iv_cart.setOnClickListener {
 }
 ```
 
-##### B: 弹出Menu
+##### 8.5.4.2. B: 弹出Menu
 省略
 
-##### C: 本地图片缓存
+##### 8.5.4.3. C: 本地图片缓存
 
 在 ShoppingCartActivity.kt 中
 
@@ -4741,20 +4775,20 @@ companion object {
     }
 ```
 
-##### D:列表的实现
+##### 8.5.4.4. D:列表的实现
 
 略
 
-##### E:弹窗的实现
+##### 8.5.4.5. E:弹窗的实现
 
 略
 
 
 ---
-## 九、Kotlin自定义控件
+## 9. 九、Kotlin自定义控件
 
-### 1、自定义普通视图
-#### (1)、构造对象
+### 9.1. 1、自定义普通视图
+#### 9.1.1. (1)、构造对象
 
  **自定义视图务必要在类名后面增加“@JvmOverloads constructor”** ，表示该类支持被Java代码调用，因为xml布局文件中声明自定义控件之后， **系统是通过SDK中的Java代码找到自定义视图类的** 。所以，自定义视图必须加上给注解，否则报错。
 
@@ -4787,7 +4821,7 @@ class CustomPagerTab @JvmOverloads constructor(context: Context, attrs: Attribut
 ```
 
 
-#### (2)、测量尺寸
+#### 9.1.2. (2)、测量尺寸
 
 完整的自定义视图步骤有三：
 
@@ -4834,7 +4868,7 @@ class NoScrollListView @JvmOverloads constructor(context: Context, attr s: Attri
 }
 ```
 
-#### (3)、绘制部件
+#### 9.1.3. (3)、绘制部件
 
 绘制函数有 onDraw 和 dispatchDraw 两种。
 
@@ -4882,12 +4916,12 @@ class RoundLayout @JvmOverloads constructor(context: Context, attrs: AttributeSe
 }
 ```
 
-### 2、自定义简单动画
+### 9.2. 2、自定义简单动画
 
-#### (1)、Runnable
+#### 9.2.1. (1)、Runnable
 Kotlin中声明Runnable对象有四种方式：内部类、匿名内部类、简化类实例、匿名实例
 
-##### A: 内部类
+##### 9.2.1.1. A: 内部类
 
 示例：点击之后每隔1秒计数一次
 
@@ -4907,7 +4941,7 @@ inner private class Counter : Runnable {
 handler.post(Counter())
 ```
 
-##### B: 匿名内部类形式
+##### 9.2.1.2. B: 匿名内部类形式
 
 ```kotlin
 //使用关键字object占位，表示这是一个匿名内部类。
@@ -4925,7 +4959,7 @@ handler.post(counter)
 
 内部类和匿名内部类的内部都拥有该类的实例，所以run方法内允许使用this代指当前对象。
 
-##### C:简化类实例
+##### 9.2.1.3. C:简化类实例
 
 ```kotlin
 //简化类继承和方法重写的内容，
@@ -4940,7 +4974,7 @@ handler.post(counter)
 
 这种方式，虽然在写法上简练了，但是， **Runnable后面的大括号中调用 this 时，该this不再代表Runnable实例，而是当前页面的实例。** 
 
-##### D:匿名实例
+##### 9.2.1.4. D:匿名实例
 
 ```kotlin
 //写法1：
@@ -4965,7 +4999,7 @@ handler.postDelayed({
 匿名实例方式仅能被调用一次。不能被其他地方调用。
 
 
-#### (2)、ProgressBar
+#### 9.2.2. (2)、ProgressBar
 
 水平 ProgressBar 的 progressDrawable的需要使用 LayerDrawable。
 
@@ -5010,7 +5044,7 @@ class ProgressBarActivity : AppCompatActivity() {
 ```
 
 
-#### (3)、自定义文本进度条
+#### 9.2.3. (3)、自定义文本进度条
 
 图形变化的同时显示对应的文字提示：
 
@@ -5042,7 +5076,7 @@ class TextProgressBar @JvmOverloads constructor(context: Context, attrs: Attribu
 ```
 
 
-##### 补充：通过TextView背景变更的形式，实现上述效果——Java版
+##### 9.2.3.1. 补充：通过TextView背景变更的形式，实现上述效果——Java版
     
 ```kotlin
  /**
@@ -5079,7 +5113,7 @@ class TextProgressBar @JvmOverloads constructor(context: Context, attrs: Attribu
     }
 
 ```
-#### (4)、实现进度条动画
+#### 9.2.4. (4)、实现进度条动画
 
 ```kotlin
 class ProgressAnimationActivity : AppCompatActivity() {
@@ -5115,13 +5149,13 @@ class ProgressAnimationActivity : AppCompatActivity() {
 }
 ```
 
-### 3、自定义通知栏
+### 9.3. 3、自定义通知栏
 
 [点击查看Notification官方文档](https://developer.android.com/guide/topics/ui/notifiers/notifications?hl=zh-cn)
 
 [ **Notificaiotn在8.0及更高版本中必须声明channel，点击查看** ](https://developer.android.com/training/notify-user/channels)
 
-#### (1)、Notification
+#### 9.3.1. (1)、Notification
 
 构建通知时需要使用 Notification.Builder，其主要方法如下：
 
@@ -5145,7 +5179,7 @@ setDeleteIntent|设置删除通知时的跳转意图——PendingIntent
 build|构建通知对象。
 
 
-##### A: 静止的简单消息
+##### 9.3.1.1. A: 静止的简单消息
 
 setSmallIcon必须调用，否则不显示通知
 
@@ -5196,7 +5230,7 @@ class NotifySimpleActivity : AppCompatActivity() {
 }
 ```
 
-##### B: 带有计时器和进度条的通知消息
+##### 9.3.1.2. B: 带有计时器和进度条的通知消息
 * setWhen和setUsesChronometer不能同时调用,
 * setNumber和setContentInfo不能同时调用
 
@@ -5247,7 +5281,7 @@ class NotifySimpleActivity : AppCompatActivity() {
 }
 ```
 
-#### (2)、大视图通知
+#### 9.3.2. (2)、大视图通知
 
 大视图通知比普通通知具有更大的视图，使用 NotificationCompat.Builder 进行构建。
 
@@ -5389,16 +5423,16 @@ class NotifyLargeActivity : AppCompatActivity() {
     }
 }
 ```
-#### (3)、三种特殊的通知类型
+#### 9.3.3. (3)、三种特殊的通知类型
 进度通知、浮动通知、锁屏通知
 
-##### A: 进度通知
+##### 9.3.3.1. A: 进度通知
 进度通知指能在通知栏动态刷新进度的消息通知。
 
 随书示例代码中实际使用了一个一个setProgress的通知+runnbale实现，这种虽然实现了进度变更，但是会一直有通知到达的提醒。
 
 
-##### B: 浮动通知
+##### 9.3.3.2. B: 浮动通知
 * 是指不离开当前页面并在屏幕顶部悬挂显示的通知。
 * 适用于5.0及以上版本。
 * 实现核心是Notification.Builder的setFullScreenIntent
@@ -5412,7 +5446,7 @@ CnPeng 实测并不怎么好使...具体测试情况为：
  **注意：ChannelID 必须是一个字符串常量，否则，在通知管理界面中会出现一大堆通知名称**，前面使用UUID变量作为id时就会出现好多好多通知名称。 
 
 
-##### C: 锁屏通知
+##### 9.3.3.3. C: 锁屏通知
 
 * 锁屏界面依旧显示的通知消息。
 * 适用于5.0及以上版本
@@ -5427,7 +5461,7 @@ Notification.VISIBILITY_PUBLIC|显示通知的全部内容
 Notification.VISIBILITY_SECRET|不显示任何内容，包括图标
 
 
-##### D:以上三种特殊通知的完整示例代码
+##### 9.3.3.4. D:以上三种特殊通知的完整示例代码
  
 ```kotlin
 class NotifySpecialActivity : AppCompatActivity() {
@@ -5582,17 +5616,17 @@ class NotifySpecialActivity : AppCompatActivity() {
 ```
 
 
-#### (4)、远程视图：RemoteViews
+#### 9.3.4. (4)、远程视图：RemoteViews
 
 * 借助 RemoteViews可以修改通知消息的布局文件。
 * 核心方法是 Notification.Builder中的setContent(), 接收的参数就是RemoteViews,设置后将替换默认的布局
 
-##### A: RemoteViews 的使用限制：
+##### 9.3.4.1. A: RemoteViews 的使用限制：
 * RemoteViews主要用于通知部件和桌面部件的布局，
 * 仅支持少数几种控件，如TextView、 ImageView 、 Button 、ImageButton、ProgressBar、Chronometer(计时器)、AnalogClock(模拟时钟)
 * RemoteViews不可以直接获取和设置控件信息，只能通过该对象的set方法来设置控件信息。
 
-##### B:RemoteViews的常用函数
+##### 9.3.4.2. B:RemoteViews的常用函数
 
 函数|含义
 ---|---
@@ -5611,7 +5645,7 @@ setOnClickPendingIntent|控件的点击事件
 
 需要动态改变控件的属性时调用上述方法，如果不需要动态改变的直接从布局文件中编写即可。
 
-##### C: 修改默认的通知视图
+##### 9.3.4.3. C: 修改默认的通知视图
 构建完 RemoteViews对象之后，修改默认通知视图的方式有：
 
 * Notification.Builder中的setContent() ——适用于API24之前
@@ -5619,11 +5653,11 @@ setOnClickPendingIntent|控件的点击事件
 * Notification对象的contentView 属性——上面两个方法最终也是将值赋给该属性
 
 
-##### D: 示例代码
+##### 9.3.4.4. D: 示例代码
 
 在下面 折叠通知中 包含了全部代码
 
-#### (5)、自定义折叠式通知
+#### 9.3.5. (5)、自定义折叠式通知
 
 前面介绍的大视图通知，可以看做是一种折叠式通知，处于折叠状态时显示普通通知内容，展开之后显示大视图通知内容。
 
@@ -5917,11 +5951,11 @@ class NotifyCustomActivity : AppCompatActivity() {
 
  **注意，实际运行后并未得到上图效果：测试机包括 OppoR15——8.1， 小米6x——8.1，模拟器——9.0** 
 
-### 4、Service服务
+### 9.4. 4、Service服务
 
 服务需要在清单文件中的<service>节点注册。
 
-#### (1)、普通方式启动服务
+#### 9.4.1. (1)、普通方式启动服务
 
 基本写法：
 
@@ -6027,7 +6061,7 @@ class NormalService : Service() {
 
 }
 ```
-#### (2)、绑定方式开启服务
+#### 9.4.2. (2)、绑定方式开启服务
 
 * bindService() ——绑定的方式开启服务
 * unbindService() ——绑定的形式关闭服务
@@ -6116,7 +6150,7 @@ class BindService : Service() {
 }
 ```
 
-#### (3)、两种开启方式的比较_CnPeng
+#### 9.4.3. (3)、两种开启方式的比较_CnPeng
 
 start方式开启的服务特点
 
@@ -6143,15 +6177,15 @@ Start方式开启的服务的生命周期:
 
 
 
-#### (3)、推送服务到前台——显示到通知栏中
+#### 9.4.4. (3)、推送服务到前台——显示到通知栏中
 
-##### A: 服务的使用注意事项
+##### 9.4.4.1. A: 服务的使用注意事项
 在前面的示例代码中，为了观察服务的运行情况，所以强行调用了XXActivity中的静态方法,但这样很不安全，因为，页面随时可能会被销毁。所以——
 
 * 实际应用时，服务不要依托于界面。
 * 但是，android 系统允许服务以通知栏的形式进行展示——也就是所谓的显示到前台
 
-##### Ｂ: 如何将服务显示到前台
+##### 9.4.4.2. Ｂ: 如何将服务显示到前台
 服务内部的下列两个函数可以决定是否将服务显示到通知栏中：
 
 函数|含义
@@ -6159,7 +6193,7 @@ Start方式开启的服务的生命周期:
 startForeground|把当前服务切换到前台运行——显示到通知栏，第一个参数表示通知的编号，第二个参数为Notification对象。
 stopForeground|停止前台运行。true时清除通知，false则不清除
 
-##### C: 应用场景
+##### 9.4.4.3. C: 应用场景
 
 服务在前台运行的常见场景就是音乐播放器。
 
@@ -6353,12 +6387,12 @@ class MusicService : Service() {
 ```
 
 
-### 5、实战：APP生鲜团购
+### 9.5. 5、实战：APP生鲜团购
 
-#### (1)、需求分析
+#### 9.5.1. (1)、需求分析
 略
 
-#### (2)、振动器--vibrate
+#### 9.5.2. (2)、振动器--vibrate
 
 使用震动器时首先需要在清单文件中声明权限：
 
@@ -6431,18 +6465,18 @@ val Context.audio: AudioManager
 ```
 
 
-#### (3)、控件设计
+#### 9.5.3. (3)、控件设计
 略
 
-#### (4)、关键代码
+#### 9.5.4. (4)、关键代码
 略
 
 ---
-## 十、Kotlin实现网络通信
+## 10. 十、Kotlin实现网络通信
 
-### 1、多线程技术
+### 10.1. 1、多线程技术
 
-#### （1）、Thread与消息传递
+#### 10.1.1. （1）、Thread与消息传递
 
 自定义线程类示例：
 
@@ -6559,8 +6593,8 @@ class MessageActivity : AppCompatActivity() {
 
 
 
-#### （2）、ProgressDialog
-##### A: 水平ProgressDialog
+#### 10.1.2. （2）、ProgressDialog
+##### 10.1.2.1. A: 水平ProgressDialog
 
 Java版：
 
@@ -6581,7 +6615,7 @@ dialog!!.show()
 
 在更新进度时，调用 `dialog!!.progress = 10`
 
-##### B: 圆圈类型的进度
+##### 10.1.2.2. B: 圆圈类型的进度
 
 Java版本
 
@@ -6600,19 +6634,19 @@ dialog = progressDialog("正在努力加载页面", "请稍候")
 dialog!!.show()
 ```
 
-#### （3）、异步任务doAsync 和 doAsyncResult
+#### 10.1.3. （3）、异步任务doAsync 和 doAsyncResult
 
-##### A: doAsync
+##### 10.1.3.1. A: doAsync
 
 * doAsync 用来标识牵涉界面交互的子线程
 * uiThread 用来标识将子线程中的数据传递给主线程
 
-##### B: doAsyncResult
+##### 10.1.3.2. B: doAsyncResult
 有些时候，App需要启动多个线程，然后在代码中对这些线程对象进行调度，从而动态的控制每个线程的状态。此时需要使用 doAsyncResult。
 
 * 有返回值，返回的就是异步线程对象。通过调用该线程对象的相应方法可以人为干预线程的运行功能。
 
-##### C : 完整示例代码
+##### 10.1.3.3. C : 完整示例代码
 
 注意：doAsyncResult 那一块示例好像有问题。点击《红楼梦》 之后dialog会一直卡在那里，直到延时任务跑完。
 
@@ -6699,13 +6733,13 @@ class AsyncTaskActivity : AppCompatActivity() {
 }
 ```
 
-### 2、访问HTTP接口
+### 10.2. 2、访问HTTP接口
 
-#### (1)、移动数据JSON格式
+#### 10.2.1. (1)、移动数据JSON格式
 
 Android自带Json格式的处理工具包，主要提供了 JsonObject 和 JsonArray
 
-##### A: JsonObject
+##### 10.2.1.1. A: JsonObject
 
 常用函数解析
 
@@ -6721,7 +6755,7 @@ getJsonArray|获取指定名称的JsonArray
 put|添加一个JSONObject对象
 toString|把当前JsonObejct输出为一个JSON串
 
-##### B: JsonArray
+##### 10.2.1.2. B: JsonArray
 
 常用函数解析
 
@@ -6731,7 +6765,7 @@ length|获取jsonArray数组对象的长度
 getJsonObject|获取JsonArray中指定位置的JsonObject对象
 put|向JsonArray中添加一个JsonObject对象
 
-##### C: Json串构造和解析示例
+##### 10.2.1.3. C: Json串构造和解析示例
 
 使用JsonObject / JsonArray 手动构造和解析 
 
@@ -6792,7 +6826,7 @@ class JsonParseActivity : AppCompatActivity() {
     }
 }
 ```
-#### (2)、JSON转数据类—GSON
+#### 10.2.2. (2)、JSON转数据类—GSON
 谷歌提供了GSON用来实现JSON串的自动解析。
 
 使用Gson时首先需要在 module的build.gradle文件中新增依赖
@@ -6801,7 +6835,7 @@ class JsonParseActivity : AppCompatActivity() {
     implementation "com.google.code.gson:gson:2.8.2"
 ```
 
-##### A： 常用函数
+##### 10.2.2.1. A： 常用函数
 
 函数|含义
 ---|---
@@ -6809,7 +6843,7 @@ toJson|把数据对象转换为Json串
 fromJson| 把Json串转换为数据对象。
  fromJson的调用格式|fromJson(json串, 数据类名::class.java)
 
-##### B: 转换示例
+##### 10.2.2.2. B: 转换示例
 
 ```kotlin
 class JsonConvertActivity : AppCompatActivity() {
@@ -6839,7 +6873,7 @@ UserInfo.kt 数据类
 ```kotlin
 data class UserInfo(var name: String="", var age: Int=0, var height: Long=0L, var weight: Float=0F, var married: Boolean=false)
 ```
-#### (3)、HTTP接口调用
+#### 10.2.3. (3)、HTTP接口调用
 
 如果直接使用HttpURLConnection 调用Http接口，需要考虑如下因素：
 
@@ -6855,7 +6889,7 @@ data class UserInfo(var name: String="", var age: Int=0, var height: Long=0L, va
 
 Kotlin把网络交互看做是跟文件读写一样的I/O 操作。后端服务器地址就像一个文件路径，这样， 请求服务器的数据就像读取文件内容一样。同时，文本分为文本文件和二进制文件，对应的，HTTP接口就有获取文本数据和获取二进制数据两种。这样， 网络请求就被简化为网络数据的保存和读取了。
 
-##### A： 常用函数
+##### 10.2.3.1. A： 常用函数
 
 函数|含义
 ---|---
@@ -6865,7 +6899,7 @@ readBytes|获取二进制形式的应答数据。如图片、音频等大文件
 
 网络访问是一个耗时操作，所以需要放到单独的线程中，这样就需要借助 doAsync 和 uiThread
 
-##### B: 示例: 根据经纬度获取详细地址——核心代码
+##### 10.2.3.2. B: 示例: 根据经纬度获取详细地址——核心代码
 
 ```kotlin
     private val mapsUrl = "http://maps.google.cn/maps/api/geocode/json?latlng={0},{1}&sensor=true&language=zh-CN"
@@ -6903,7 +6937,7 @@ readBytes|获取二进制形式的应答数据。如图片、音频等大文件
     }
 ```
 
-##### C: 完整示例代码
+##### 10.2.3.3. C: 完整示例代码
 
 **注意:** 下列示例代码中如果运行在6.0以上系统，需要先添加手动申请定位、网络权限的代码
 
@@ -7033,16 +7067,16 @@ val Context.criteria: Criteria
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 ```
-#### (4)、HTTP图片获取
+#### 10.2.4. (4)、HTTP图片获取
 
-##### A: 实现思路:
+##### 10.2.4.1. A: 实现思路:
 
 * 通过URL类构建地址对象
 * 然后在 doAsync中调用 readBytes 得到图片的字节数组
 * 利用 BitmapFactory的decodeByteArray将图片字节数组转换为位图对象
 * 利用File对象的writeBytes 可以根据图片的字节数组保存为本地图片
 
-##### B: 示例——动态获取图片验证码
+##### 10.2.4.2. B: 示例——动态获取图片验证码
 
 ```kotlin
 class HttpImageActivity : AppCompatActivity() {
@@ -7084,9 +7118,9 @@ class HttpImageActivity : AppCompatActivity() {
 }
 ```
 
-### 3、文件下载
+### 10.3. 3、文件下载
 
-#### (1)、下载管理器 DownloadManager
+#### 10.3.1. (1)、下载管理器 DownloadManager
 
 URL 对象的 readBytes 可以方便的获取小图片(如验证码图片)，但是有诸多限制，如:
 
@@ -7098,7 +7132,7 @@ Android从2.3(API 9) 开始提供专门的下载工具——DownLoadManager，�
 
 使用 DownLoadManager 时可以分为三个步骤：构建下载请求，执行下载操作，查询下载进度。
 
-##### A： 构建下载请求——Request
+##### 10.3.1.1. A： 构建下载请求——Request
 
 要想使用下载功能，首先需要构建一个下载请求。请求中指明从哪里下载、下载参数是什么、下载的文件保存到哪里等信息。这个下载请求就时DownLoadManager内部的Request。该类的常用函数如下：
 
@@ -7133,7 +7167,7 @@ NETWORK_BLUETOOTH |蓝牙
 `VISIBILITY_VISIBLE_NOTIFY_COMPLETED`|下载进行时和完成后都可见
 `VISIBILITY_VISIBLE_NOTIFY_ONLY_COMPLETION`|只有下载完成后可见
 
-##### B: 进行下载操作
+##### 10.3.1.2. B: 进行下载操作
 
 构建完下载请求之后才能进行DownloadManager的下载操作。主要函数包括：
 
@@ -7146,7 +7180,7 @@ openDownloadedFile|打开下载完成的文件
 getMimeTypeForDownloadedFile|获取已下载文件的媒体类型
 query|根据查询请求获取符合条件的结果游标集
 
-##### C: 查询下载进度——Query
+##### 10.3.1.3. C: 查询下载进度——Query
 
 虽然下载进度可以在通知栏中查看，但APP本身也想监测进度时，可以通过DownloadManager 的 query() 函数实现。该函数接收一个 Query 对象，返回结果集的游标 Cursor ，该游标集对象中包含完整的下载任务信息。
 
@@ -7180,28 +7214,28 @@ DownlaodManager的下载字段|含义
 
 Android7.0之后增强了文件访问权限，`DownloadManager.COLUMN_LOCAL_FILENAME` 被废弃。所以，在7.0以上的手机中访问该字段会触发 java.lang.SecurityException 异常。此时，如果需要获取下载文件的路径，需要使用 `DownloadManager.COLUMN_LOCAL_URI`
 
-#### (2)、下载相关的三个广播
+#### 10.3.2. (2)、下载相关的三个广播
 
 此外，系统的下载服务还提供了三种下载事件，开发者可以通过监听对应的广播消息从而进行相应的处理。这三种下载事件的处理过程说明如下：
 
-##### A: 下载完成
+##### 10.3.2.1. A: 下载完成
 
 下载完成时系统会发出：`DownloadManager.ACTION_DOWNLOAD_COMPLETE `广播，该广播对应的具体值为：`"android.intent.action.DOWNLOAD_COMPLETE"`。
 
 所以，可以注册一个该广播的接收器，判断当前下载任务是否已经完成。
 
-##### B: 下载进行时的通知栏点击事件
+##### 10.3.2.2. B: 下载进行时的通知栏点击事件
 下载过程中，如果用户点击了通知栏中的下载任务，系统会发出 `DownloadManager. ACTION_NOTIFICATION_CLICKED` 广播，该广播的具体值为：`android.intent.action.DOWNLOAD_ NOTIFICATION_CLICKED`。
 
 所以，可以注册一个该广播的接收器，执行相应的点击事件，如跳转到该任务的下载进度页面。
 
-##### C: 下载完成后的通知栏点击事件
+##### 10.3.2.3. C: 下载完成后的通知栏点击事件
 
 下载完成之后，点击通知栏中的下载任务会触发 Intent.ACTION_VIEW（即 浏览行为），对于文件浏览行为，系统会根据媒体类型自动寻找对应的APP打开文件。
 
 因此，开发者如果要控制此时的点击行为，可以调用 Request 对象的 setMimeType 来设置媒体类型。这样Android系统就会根据指定的类型去打开该APP。
 
-###  (3): 下载示例： 
+### 10.4. (3): 下载示例： 
 * activity_download_apk.xml
 
 
@@ -7370,7 +7404,7 @@ class DownloadApkActivity : AppCompatActivity() {
         </receiver>
 ```
 
-#### (4)、自定义文本进度圈
+#### 10.4.1. (4)、自定义文本进度圈
 
 ```kotlin
 //自定义视图务必要在类名后面增加“@JvmOverloads constructor”，因为布局文件中的自定义视图必须兼容Java
@@ -7463,7 +7497,7 @@ class TextProgressCircle @JvmOverloads constructor(private val mContext: Context
     }
 }
 ```
-#### (5)、页面上动态显示下载进度
+#### 10.4.2. (5)、页面上动态显示下载进度
 
 ```kotlin
 class DownloadImageActivity : AppCompatActivity() {
@@ -7593,12 +7627,12 @@ class DownloadImageActivity : AppCompatActivity() {
 ```
 另外，下载时通知栏中的下载进度是默认显示的，也就是取值为 VISIBILITY_VISIBLE
 
-### 4、ContentProvider
+### 10.5. 4、ContentProvider
 ContentProvider用于在不同的APP之间共享数据。其内部又细分为：ContentProvider、ContentResolver、ContentObserver
 
-#### (1)、内容提供者 ContentProvider
+#### 10.5.1. (1)、内容提供者 ContentProvider
 
-##### A: 基本介绍
+##### 10.5.1.1. A: 基本介绍
 ContentProvider为APP存取内部数据提供了统一的外部接口。它让其他APP可以访问本APP内部的数据
 
 实际编码中，ContentProvider类似于一个服务端的数据存储接口，开发者需要定义一个它的实现类。并重写下列重要函数：
@@ -7614,7 +7648,7 @@ getType|获取数据类型
 
 ContentProvider作为中间的接口，并不直接操作数据，而是通过SQLiteOpenHelper 和 SQLiteDatabase间接操作底层的SQLite。所以，在实现ContentProvider前，需要先自定义SQLite的数据库帮助类，然后再通过ContentProvider将SQLite中提供的方法对外暴露。
 
-##### B: 示例代码
+##### 10.5.1.2. B: 示例代码
 * 数据库帮助类——UserDBHelper.kt
 
 
@@ -7819,8 +7853,8 @@ class UserInfoProvider : ContentProvider() {
             android:exported="true" />
 ```
 
-#### (2)、内容解析者 ContentResolver
-##### A: 基本介绍
+#### 10.5.2. (2)、内容解析者 ContentResolver
+##### 10.5.2.1. A: 基本介绍
 
 如果A APP中提供了ContentProvider，那么B APP 就可以通过 ContentResolver来访问A中的数据。
 
@@ -7836,7 +7870,7 @@ selection| 字符串类型，指定查询条件
 selectionArgs|字符串数组，指定查询条件中的参数值列表
 sortOrder|字符串类型，指定查询结果的排序条件
 
-##### B: 示例
+##### 10.5.2.2. B: 示例
 
 * activity_content_provider.xml
 
@@ -8041,7 +8075,7 @@ object ViewUtil {
 }
 ```
 
-##### C: 操作系统联系人的示例
+##### 10.5.2.3. C: 操作系统联系人的示例
 实际使用中，APP一般不会向外暴露数据，更多的时候是通过ContenResolver读取和修改系统的联系人、短信、通话记录等。
 
 系统联系人对外暴露的ContentUri为 `content://com.android.contacts/`
@@ -8377,9 +8411,9 @@ class ContentResolverActivity : AppCompatActivity() {
 
 为了避免这种情况，所以Android又提供了 **ContentProviderOperation** 来进行批量的数据操作。它**可以在一个insert操作中封装多条信息的修改操作，然后一次性提交给ContentProvider**, 这样就实现了在一个事务中操作多条数据的需求。如果某个信息插入失败，那么它就会遵从事务原则，回滚相关数据。详细代码在上面的 `addFullContacts` 中
 
-#### (3)、内容观察者 ContentObserver
+#### 10.5.3. (3)、内容观察者 ContentObserver
 
-##### A: 基本介绍
+##### 10.5.3.1. A: 基本介绍
 ContentResolver采用主动查询的方式去获取其他APP的数据，如果不触发就不会获取。如果我们想即时检测其他APP数据的变化，就需要使用 ContentObserver。
 
 比如：在注册APP或者付款时，通常需要输入验证码。当手机收到系统发送的验证码时，如果我们在自己的APP中注册了ContentObserver ，那么就可以实时监测到验证码内容，然后主动填写到验证码输入框中。
@@ -8392,7 +8426,7 @@ registerContentObserver|注册内容观察者
 unregisterContentObserver|注销内容观察者
 notifyChange|通知内容观察者数据发生变化
 
-##### B: 实现流量校准的功能
+##### 10.5.3.2. B: 实现流量校准的功能
 主动给10086 发送查询流量的短信，借助 ContentOberver监测到短信到达之后解析到界面中。
 
 * activity_content_observer.xml
@@ -8538,19 +8572,19 @@ class ContentObserverActivity : AppCompatActivity() {
 }
 ```
 
-### 5、电商APP自动升级
-#### (1)、需求描述
+### 10.6. 5、电商APP自动升级
+#### 10.6.1. (1)、需求描述
 * 检测是否有新版本
 * 检测本地SD卡中是否已经下载了新版本
 * 检测下载进度并显示在Dialog中，而非通知栏（部分手机通知栏不显示）
 
 
-#### (2)、可变字符串——SpannableString
+#### 10.6.2. (2)、可变字符串——SpannableString
 Java中如果某个字符串需要多个span只能多次调用`setSpan`。但是，
 
 Anko库中封装了 `buildSpanned` 函数，在该函数内部调用格式为 `append("需要改变样式的文本", span样式对象)` 的代码就可以实现包含多个span的字符串。
 
-##### A : 示例：一个字符串中定义多个span
+##### 10.6.2.1. A : 示例：一个字符串中定义多个span
 
 * 基本写法：
  
@@ -8580,7 +8614,7 @@ val str: Spanned = buildSpanned {
       append("提出来的", Underline) 
 }
 ```
-##### B: 常用Span样式
+##### 10.6.2.2. B: 常用Span样式
 完整的Span样式定义在 android.text.style 包中，共有三十多个，常用的有如下：
 
 Span类型|Anko中简化写法|含义
@@ -8642,14 +8676,14 @@ class SpannableActivity : AppCompatActivity() {
     }
 }
 ```
-#### (3)、控件设计
+#### 10.6.3. (3)、控件设计
 
 若要查找手机上的APK安装包，可到媒体资源库中查找媒体类型为：`application/vnd.android.package- archive` 的文件。该类型就表示Android的安装包，也就是apk文件。
 
 
-#### (4)、关键代码
+#### 10.6.4. (4)、关键代码
 
-#####  A: 从服务端请求版本信息
+##### 10.6.4.1. A: 从服务端请求版本信息
 
 ```kotlin
  btn_need_request.setOnClickListener {
@@ -8665,7 +8699,7 @@ class SpannableActivity : AppCompatActivity() {
         }
 ```
 
-##### B:  扩展SpannableString工具类
+##### 10.6.4.2. B:  扩展SpannableString工具类
 
 ```kotlin
 //字符串中的关键语句用指定样式高亮显示
@@ -8678,7 +8712,7 @@ fun String.highlight(key: String, style: CharacterStyle): SpannableString {
 }
 ```
 
-##### C: alert中显示SpannableString
+##### 10.6.4.3. C: alert中显示SpannableString
 Anko中扩展的alert 函数中 title 和 message 只能接受string，而SpannableString和String时两个类型，所以，可以再扩展一个接受 charsequence 的alert
 
 ```kotlin
@@ -8695,7 +8729,7 @@ fun Context.alert(
 }
 ```
 
-##### D: 如何获取手机中的APK及其信息
+##### 10.6.4.4. D: 如何获取手机中的APK及其信息
 通过PackageManager的`getPackageArchiveInfo() `函数可以获取相关信息，包括包名、版本号等
 
 ```kotlin
@@ -8732,7 +8766,7 @@ data class VersionCheck(var app_name: String="", var package_name: String="",
 }
 ```
 
-##### E: APK下载的操作过程
+##### 10.6.4.5. E: APK下载的操作过程
 如果本地已有安装包，则直接进行操作；如果不存在，则从网络下载安装包。
 
 ```kotlin
@@ -8763,7 +8797,7 @@ data class VersionCheck(var app_name: String="", var package_name: String="",
     }
 ```
 
-##### F :完整示例代码
+##### 10.6.4.6. F :完整示例代码
 
 ```kotlin
 class AutoUpdateActivity : AppCompatActivity() {
