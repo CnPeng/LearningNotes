@@ -1,4 +1,9 @@
-问题原因：
+* 问题现象：
+
+Dex Archive Merger Exception: Unable to merge dex
+
+* 问题原因：
+
 libs 目录下有重复的 jar 包
 
 在升级小米推送SDK是，3.2.2 版本的jar没有删除，然后直接引入了 3.6.9 ，然后编译/部署的时候就爆了上述错误。
