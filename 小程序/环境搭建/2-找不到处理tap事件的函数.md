@@ -1,3 +1,12 @@
+* 错误信息:
+
+```
+does not have a method to handle event "tap"
+```
+
+
+* 复现步骤：
+
 wxml 文件如下：
 
 ```xml
