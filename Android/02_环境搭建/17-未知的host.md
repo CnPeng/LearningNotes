@@ -1,7 +1,9 @@
 > 已发布：https://www.jianshu.com/p/bfaa9dc6a7d6
 
-昨天公司网络莫名挂掉了，等运维小伙伴调整好了之后，AndroidStidio 就不能正常的 SyncProject 了，一直提示 `Unknown host 'd29vzk4ow07wi7.cloudfront.net'`。但此时VPN可以正常访问谷歌，项目中也没有修改gradle内容。所以，直接搜索——
 
+错误提示：`Android:UnknownHost'd29vzk4ow07wi7.cloudfront.net'`
+
+昨天公司网络莫名挂掉了，等运维小伙伴调整好了之后，AndroidStidio 就不能正常的 SyncProject 了，一直提示 `Unknown host 'd29vzk4ow07wi7.cloudfront.net'`。但此时VPN可以正常访问谷歌，项目中也没有修改gradle内容。所以，直接搜索——
 
 
 ## 1、未解决问题的方案
