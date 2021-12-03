@@ -11,7 +11,7 @@
 
 ![](pics/docker入门-1.png )
 
-## .1 环境配置的难题
+## 1. 环境配置的难题
 
 软件开发最大的麻烦事之一，就是环境配置。用户计算机的环境都不相同，你怎么知道自家的软件，能在那些机器跑起来？
 
@@ -21,7 +21,7 @@
 
 环境配置如此麻烦，换一台机器，就要重来一次，旷日费时。很多人想到，能不能从根本上解决问题，**软件可以带环境安装？也就是说，安装的时候，把原始环境一模一样地复制过来。**
 
-## .2 虚拟机
+## 2. 虚拟机
 
 **`虚拟机（virtual machine）` 就是带环境安装的一种解决方案**。它可以在一种操作系统里面运行另一种操作系统，比如在 Windows 系统里面运行 Linux 系统。应用程序对此毫无感知，因为虚拟机看上去跟真实系统一模一样，而**对于底层系统来说，虚拟机就是一个普通文件，不需要了就删掉，对其他部分毫无影响**。
 
@@ -39,7 +39,7 @@
 
 启动操作系统需要多久，启动虚拟机就需要多久。可能要等几分钟，应用程序才能真正运行。
 
-## .3 Linux 容器
+## 3.  Linux 容器
 
 由于虚拟机存在前述三个缺点，所以 Linux 发展出了另一种虚拟化技术：**Linux 容器（Linux Containers，缩写为 LXC）**。
 
@@ -61,7 +61,7 @@
 
 总之，**容器有点像轻量级的虚拟机，能够提供虚拟化的环境，但是成本开销小得多**。
 
-## .3 Docker 是什么？
+## 4.  Docker 是什么？
 
 **`Docker` 属于 `Linux` 容器的一种封装，提供简单易用的容器使用接口。**它是目前最流行的 Linux 容器解决方案。
 
@@ -69,7 +69,7 @@
 
 总体来说，`Docker` 的接口相当简单，用户可以方便地创建和使用容器，把自己的应用放入容器。**容器还可以进行版本管理、复制、分享、修改，就像管理普通的代码一样。**
 
-## .5 Docker 的用途
+## 5.  Docker 的用途
 
 Docker 的主要用途，目前有三大类。
 
@@ -77,7 +77,7 @@ Docker 的主要用途，目前有三大类。
 * 提供弹性的云服务。因为 Docker 容器可以随开随关，很**适合动态扩容和缩容**。
 * 组建微服务架构。通过多个容器，一台机器可以跑多个服务，因此在本机就可以模拟出微服务架构。
 
-## .6 Docker 的安装
+## 6.  Docker 的安装
 
 Docker 是一个开源的商业产品，有两个版本：**社区版（Community Edition，缩写为 CE）**和**企业版（Enterprise Edition，缩写为 EE）**。企业版包含了一些收费服务，个人开发者一般用不到。下面的介绍都针对社区版。
 
@@ -115,7 +115,7 @@ $ sudo service docker start
 $ sudo systemctl start docker
 ```
 
-## .6 image 文件
+## 7.  image 文件
 
 **Docker 把应用程序及其依赖，打包在 image 文件里面**。
 
@@ -138,7 +138,7 @@ $ docker image rm [imageName]
 
 为了方便共享，image 文件制作完成后，可以上传到网上的仓库。[Docker 的官方仓库 Docker Hub 是最重要、最常用的 image 仓库](https://hub.docker.com/)。此外，出售自己制作的 image 文件也是可以的。
 
-## .7 实例：hello world
+## 8.  实例：hello world
 
 下面，我们通过最简单的 image 文件 ["hello world"](https://hub.docker.com/_/hello-world)，感受一下 Docker。
 
@@ -199,7 +199,7 @@ $ docker container run -it ubuntu bash
 $ docker container kill [containID]
 ```
 
-## .8 容器文件
+## 9.  容器文件
 
 **image 文件生成的容器实例，本身也是一个文件，称为 `容器文件`**。也就是说，一旦容器生成，就会同时存在两个文件： image 文件和容器文件。而且**关闭容器并不会删除容器文件**，只是容器停止运行而已。
 
@@ -221,7 +221,7 @@ $ docker container rm [containerID]
 
 运行上面的命令之后，再使用 `docker container ls --all` 命令，就会发现被删除的容器文件已经消失了。
 
-## .9 Dockerfile 文件
+## 10.  Dockerfile 文件
 
 学会使用 image 文件以后，接下来的问题就是，如何可以生成 image 文件？如果你要推广自己的软件，势必要自己制作 image 文件。
 
@@ -229,7 +229,7 @@ $ docker container rm [containerID]
 
 下面通过一个实例，演示如何编写 `Dockerfile` 文件。
 
-## .10 实例：制作自己的 Docker 容器
+## 11.  实例：制作自己的 Docker 容器
 
 下面我以 [koa-demos](http://www.ruanyifeng.com/blog/2017/08/koa.html) 项目为例，介绍怎么写 `Dockerfile` 文件，实现让用户在 Docker 容器里面运行 Koa 框架。
 
@@ -240,7 +240,7 @@ $ git clone https://github.com/ruanyf/koa-demos.git
 $ cd koa-demos
 ```
 
-### .10.1 编写 Dockerfile 文件
+### 11.1.  编写 Dockerfile 文件
 
 首先，在项目的根目录下，新建一个文本文件 `.dockerignore`，写入下面的内容。
 
@@ -271,7 +271,7 @@ EXPOSE 3000
 * `EXPOSE 3000` ：将容器 3000 端口暴露出来， 允许外部连接这个端口。
 
 
-### .10.2 创建 image 文件
+### 11.2.  创建 image 文件
 
 有了 `Dockerfile` 文件以后，就可以使用 `docker image build` 命令创建 image 文件了。
 
@@ -292,7 +292,7 @@ $ docker image build -t koa-demo:0.0.1 .
 $ docker image ls
 ```
 
-### .10.3 生成容器
+### 11.3. 生成容器
 
 `docker container run` 命令会从 image 文件生成容器。
 
@@ -351,7 +351,7 @@ $ docker container rm [containerID]
 $ docker container run --rm -p 8000:3000 -it koa-demo /bin/bash
 ```
 
-### .10.4 CMD 命令
+### 11.4.  CMD 命令
 
 上一节的例子里面，容器启动以后，需要手动输入命令 `node demos/01.js` 。我们可以把这个命令写在 `Dockerfile` 里面，这样容器启动以后，这个命令就已经执行了，不用再手动输入了。
 
@@ -377,7 +377,7 @@ CMD node demos/01.js
 $ docker container run --rm -p 8000:3000 -it koa-demo:0.0.1
 ```
 
-### .10.5 发布 image 文件
+### 11.5.  发布 image 文件
 
 **容器运行成功后，就确认了 image 文件的有效性**。这时，我们就可以考虑把 image 文件分享到网上，让其他人使用。
 
@@ -409,11 +409,11 @@ $ docker image push [username]/[repository]:[tag]
 
 发布成功以后，登录 `hub.docker.com`，就可以看到已经发布的 image 文件。
 
-## .11 其他有用的命令
+## 12.  其他有用的命令
 
 docker 的主要用法就是上面这些，此外还有几个命令，也非常有用。
 
-### .11.1 `docker container start`
+### 12.1.  `docker container start`
 
 前面的 `docker container run` 命令是**新建容器，每运行一次，就会新建一个容器**。同样的命令运行两次，就会生成两个一模一样的容器文件。如果希望重复使用容器，就要使用 `docker container start` 命令，它用来**启动已经生成、已经停止运行的容器文件**。
 
@@ -421,7 +421,7 @@ docker 的主要用法就是上面这些，此外还有几个命令，也非常�
 $ docker container start [containerID]
 ```
 
-### .11.2 `docker container stop`
+### 12.2.  `docker container stop`
 
 前面的 `docker container kill` 命令终止容器运行，相当于向容器里面的主进程发出 `SIGKILL` 信号。而 `docker container stop` 命令也是用来终止容器运行，相当于向容器里面的主进程发出 `SIGTERM` 信号，然后过一段时间再发出 `SIGKILL` 信号。
 
@@ -434,7 +434,7 @@ $ bash container stop [containerID]
 * 应用程序收到 `SIGTERM` 信号以后，可以自行进行收尾清理工作，但也可以不理会这个信号。
 * 如果收到 `SIGKILL` 信号，就会强行立即终止，那些正在进行中的操作会全部丢失。
 
-### .11.3 `docker container logs`
+### 12.3.  `docker container logs`
 
 `docker container logs` 命令用来查看 docker 容器的输出，即容器里面 `Shell` 的标准输出。如果 `docker run` 命令运行容器的时候，没有使用 `-it` 参数，就要用这个命令查看输出。
 
@@ -442,7 +442,7 @@ $ bash container stop [containerID]
 $ docker container logs [containerID]
 ```
 
-### .11.4 `docker container exec`
+### 12.4.  `docker container exec`
 
 `docker container exec` 命令用于**进入一个正在运行的 docker 容器**。如果 `docker run` 命令运行容器的时候，没有使用 `-it` 参数，就要用这个命令进入容器。一旦进入了容器，就可以在容器的 Shell 执行命令了。
 
@@ -450,7 +450,7 @@ $ docker container logs [containerID]
 $ docker container exec -it [containerID] /bin/bash
 ```
 
-### .11.5 `docker container cp`
+### 12.5.  `docker container cp`
 
 `docker container cp` 命令用于**从正在运行的 Docker 容器里面，将文件拷贝到本机**。下面是拷贝到当前目录的写法。
 

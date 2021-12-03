@@ -1,23 +1,25 @@
 
 
-基于 [Data Binding Library 官方指南](https://developer.android.com/topic/libraries/data-binding) 翻译整理。
+基于 [Data Binding Library 官方指南](https://developer.android.google.cn/topic/libraries/data-binding) 翻译整理。
 
 目录结构：
 
 章节|官方文档
 ---|---|
-<a href="#1">一、概览</a> | [data-binding](https://developer.android.com/topic/libraries/data-binding)
-<a href="#2">二、入门</a> | [data-binding/start](https://developer.android.com/topic/libraries/data-binding/start)
-<a href="#3">三、布局和绑定表达式</a> | [data-binding/expressions](https://developer.android.com/topic/libraries/data-binding/expressions)
-<a href="#4">四、可观察的数据对象</a> | [data-binding/observability](https://developer.android.com/topic/libraries/data-binding/observability)
-<a href="#5">五、生成的绑定类</a> | [data-binding/generated-binding](https://developer.android.com/topic/libraries/data-binding/generated-binding)
-<a href="#6">六、绑定适配器</a> | [data-binding/binding-adapters](https://developer.android.com/topic/libraries/data-binding/binding-adapters)
-<a href="#7">七、将布局视图绑定到架构组件</a> | [data-binding/architecture](https://developer.android.com/topic/libraries/data-binding/architecture)
-<a href="#8">八、双向绑定</a> | [data-binding/two-way](https://developer.android.com/topic/libraries/data-binding/two-way)
+<a href="#1">一、概览</a> | [data-binding](https://developer.android.google.cn/topic/libraries/data-binding)
+<a href="#2">二、入门</a> | [data-binding/start](https://developer.android.google.cn/topic/libraries/data-binding/start)
+<a href="#3">三、布局和绑定表达式</a> | [data-binding/expressions](https://developer.android.google.cn/topic/libraries/data-binding/expressions)
+<a href="#4">四、可观察的数据对象</a> | [data-binding/observability](https://developer.android.google.cn/topic/libraries/data-binding/observability)
+<a href="#5">五、生成的绑定类</a> | [data-binding/generated-binding](https://developer.android.google.cn/topic/libraries/data-binding/generated-binding)
+<a href="#6">六、绑定适配器</a> | [data-binding/binding-adapters](https://developer.android.google.cn/topic/libraries/data-binding/binding-adapters)
+<a href="#7">七、将布局视图绑定到架构组件</a> | [data-binding/architecture](https://developer.android.google.cn/topic/libraries/data-binding/architecture)
+<a href="#8">八、双向绑定</a> | [data-binding/two-way](https://developer.android.google.cn/topic/libraries/data-binding/two-way)
 
-<h2 id="1">一、概览</h2>
+## 1. 概览
 
-### 1、DataBinding 基本介绍
+<h6 id="1"></h6>
+
+### 1.1. DataBinding 基本介绍
 
 DataBinding 库可以让我们以非编码的形式将布局和数据进行绑定。
 
@@ -40,25 +42,30 @@ textView.setText(viewModel.getUserName());
 
 下面的示例代码，则展示了如何使用 DataBinding 将数据直接在布局文件中绑定给对应的控件。通过下面的这种方式，我们省略了上面示例中的 java/Kotlin 代码。注意  `@{ }` 是 DataBinding 的固定格式，花括号内部是具体需要绑定的数据内容。
 
-```kotlin
+```xml
 <TextView
     android:text="@{viewmodel.userName}" />
 ```
 
-### 2、如何使用 DataBinding 库
+### 1.2. 如何使用 DataBinding 库
 
 下面介绍一下我们将要学习的 DataBidning 的内容。
 
-#### <a href="#2">(1)、入门</a>
+#### 1.2.1. 入门
+
+<a href="#2"></a>
+
 主要介绍如何基于　AndroidStudio 搭建 DataBinding 的开发环境。
 
-#### <a href="#3">(2)、布局和绑定表达式</a>
+#### 1.2.2. 布局和绑定表达式
+
+<a href="#3"></a>
 
 绑定表达式能够让我们将 数据变量 和 view 直接进行关联。然后 DataBinding 库会自动生成关联二者时所需的类（classes）。
 
 DataBinding 库提供了可以让我们在布局文件中使用的 `import`、`variable`、`include` 属性, 这些属性用来声明绑定到 View 的数据及其类型。 这些属性的父节点为 `data`, 而 `data` 的父节点为 `layout`, `layout` 的另一个子节点就是 View 的根节点。示例如下:
 
-```kotlin
+```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -66,24 +73,30 @@ DataBinding 库提供了可以让我们在布局文件中使用的 `import`、`v
             name="viewmodel"
             type="com.myapp.data.ViewModel" />
     </data>
-    
+
     <ConstraintLayout... >
     	 <!-- View/ViewGroup 的根节点 -->
     </ConstraintLayout... >
 </layout>
 ```
 
-#### <a href="#4">(3)、可观察的数据对象</a> 
+#### 1.2.3. 可观察的数据对象
+
+<a href="#4"></a> 
 
 所谓可观察的数据对象，就是当数据发生变化时，能够自动通知布局文件进行刷新。这就类似于回调或监听器的作用。
 
 DataBinding 库提供了一些类和函数，这些类和函数能够实现对数据变化的监听，进而由该库自动实现布局文件的刷新。DataBinding 库可以实现对 对象（object）、字段（field）、集合（collection）的监听。
 
-#### <a href="#5">(4)、生成的绑定类</a>
+#### 1.2.4. 生成的绑定类
+
+<a href="#5"></a>
 
 DataBinding 库会自动生成绑定 数据变量 和 View 时所需要的绑定类（binding classes）。我们也可以自定义这个绑定类。
 
-#### <a href="#6">(5)、绑定适配器</a>
+#### 1.2.5. 绑定适配器
+
+<a href="#6"></a>
 
 布局文件中使用的每一个绑定表达式都有一个对应的绑定适配器（bingding adapter）。该绑定适配器内部实现了属性或者监听器与视图的绑定。比如，绑定适配器内部会调用 `setText()` 为 TextView 设置 `android:text` 的属性值，或者调用 `setOnClickListener()` 设置点击监听。
 
@@ -107,31 +120,37 @@ public static void goneUnless(View view, Boolean visible) {
 }
 ```
 
-#### <a href="#7">(6)、将布局视图绑定到架构组件</a>
+#### 1.2.6. 将布局视图绑定到架构组件
 
-Android Support 库中包含的 [`Architecture Components`](https://developer.android.com/topic/libraries/architecture/index.html) 可以帮助我们构建出更加健壮(robust)、易于测试(testable)、方便维护(maintainable) 的 app。
+<a href="#7"></a>
+
+Android Support 库中包含的 [`Architecture Components`](https://developer.android.google.cn/topic/libraries/architecture/index.html) 可以帮助我们构建出更加健壮(robust)、易于测试(testable)、方便维护(maintainable) 的 app。
 
 `Architecture Components` 和 DataBinding 的组合使用，可以进一步简化 UI
 
-#### <a href="#8">(7)、双向数据绑定</a>
+#### 1.2.7. 双向数据绑定
+
+<a href="#8"></a>
 
 DataBinding 库支持双向数据绑定。也就是说，当 View 的属性发生变化时可以通知对应的绑定数据进行更新，同理，当绑定数据发生变化时也可以通知 View 去更新对应的属性值。
 
 比如，我们使用双向绑定为 RadioButton 绑定一个文本。当 RadioButton 选中时会显示 “选中”，取消选中时显示 “未选中”；同理，当我们变更文本时，双向绑定就会自动更新 RadioButton 的选中状态。
 
 
-<h2 id="2">二、入门</h2>
+## 2. 入门
+
+<h6 id="2"></h6>
 
 DataBinding 库是以 support 库的形式提供的，具有良好的兼容性，适用于 Andorid 4.0(API  14) 及以上版本。
 
-使用 DataBinding 时最好保持 Gradle 插件为最新版本。(从 1.5.0 版本的 Gradle 插件开始，都可以支持 DataBinding )。[点击此处可以查看如何升级 Gradle 插件](https://developer.android.com/studio/releases/gradle-plugin.html#updating-plugin)
+使用 DataBinding 时最好保持 Gradle 插件为最新版本。(从 1.5.0 版本的 Gradle 插件开始，都可以支持 DataBinding )。[点击此处可以查看如何升级 Gradle 插件](https://developer.android.google.cn/studio/releases/gradle-plugin.html#updating-plugin)
 
 
-### 1、启用数据绑定
+### 2.1. 启用数据绑定
 
 在 module 的 `build.gradle` 文件的 android 节点中增加 dataBinding 节点即可启用数据绑定。具体如下：
 
-```kotlin
+```groovy
 android {
     ...
     dataBinding {
@@ -143,13 +162,13 @@ android {
 注意：
 **如果当前 module 所依赖的 libraries 中使用了数据绑定，那么，不论 该 module 是否使用了数据绑定，都必须在当前 module 的 gradle 文件中启用数据绑定。**
 
-### 2、Android Studio 中对数据绑定的支持
+### 2.2. Android Studio 中对数据绑定的支持
 
 Android Studio 对 DataBinding 的代码提供了诸多支持，如：
 
 * 语法高亮 （ xml 中使用数据绑定的部分会高亮显示）
 * 语法错误提示 （ xml 中使用数据绑定的部分如果有错误会爆红提示）
-* 代码补全 
+* 代码补全
 * 快速跳转 （ Mac 下按住 Cmd , 然后单击数据绑定中使用的 变量或方法，就会跳转到对应的声明位置）
 
 如果我们为数据绑定表达式提供了 `default` 属性及值，那么，在布局编辑器的预览面板中，就会显示 default 的值；程序运行之后，如果数据绑定表达式没有获取到结果，也会展示 default 对应的值。
@@ -170,12 +189,13 @@ Android Studio 对 DataBinding 的代码提供了诸多支持，如：
 
 [Android:Tools命名空间原来是有大用处的](https://www.jianshu.com/p/2912bcba4465)  
 
-[Tools Attributes Reference](https://developer.android.com/studio/write/tool-attributes.html).
+[Tools Attributes Reference](https://developer.android.google.cn/studio/write/tool-attributes.html).
 
 
-### 3、新的数据绑定编译器
+### 2.3. 新的数据绑定编译器
 
-#### (1)、启用新的绑定编译器
+#### 2.3.1. 启用新的绑定编译器
+
 从 Android Gradle 插件的 3.1.0-alpha06 版本开始，在生成 绑定类时 使用了新的数据绑定编译器。新的编译器使用增量编译的方式来创建绑定类，极大的提高了程序的构建速度。关于绑定类的更多内容可以查看 <a href="#5">生成的绑定类</a> 一节
 
 在老版本的绑定编译器中，生成绑定类的操作 是与 编译你自己的代码 同步的。所以，在之前的版本中，如果我们自己写的代码出了错误，也会导致生成绑定类的操作终止，然后我们就会在 Android Studio 的 Logcat 面板中看见无数个 `找不到绑定类 ( the binding calsses aren't found )` 的错误提示。而在 **新的绑定编译器中，会先处理绑定类的生成操作，然后再去编译我们自己编写的其他代码**。
@@ -190,13 +210,13 @@ android.databinding.enableV2=true
 
 在 3.1 的 Gradle 插件中，绑定编译器向下兼容并不完善，我们必须手动启用新版编译器；但 3.2 开始能够完全向下兼容，并且从 3.2 开始默认启用新版编译器。
 
-#### (2)、新的绑定编译器的变更
+#### 2.3.2. 新的绑定编译器的变更
 
 新的绑定编译器做了如下改变：
 
 * 先生成绑定类，然后再去编译我们自己的代码
 
-* 库 module 中的绑定类会被编译/打包到 AAR 文件中. 引用这个库时，不需要再重新编译和生成这些绑定类。（ 关于 AAR 的更多内容，可以查看：[Create an Android Library.](https://developer.android.com/studio/projects/android-library)）
+* 库 module 中的绑定类会被编译/打包到 AAR 文件中. 引用这个库时，不需要再重新编译和生成这些绑定类。（ 关于 AAR 的更多内容，可以查看：[Create an Android Library.](https://developer.android.google.cn/studio/projects/android-library)）
 
 * 当前 module 中定义的绑定适配器不会影响到 依赖库中的绑定适配器。也就是说，绑定适配器的作用域只在当前 module 中。
 
@@ -204,7 +224,9 @@ android.databinding.enableV2=true
 
 
 
-<h2 id="3">三、布局和绑定表达式</h2>
+## 3. 布局和绑定表达式
+
+<h6 id="3"></h6>
 
 在绑定表达式中，我们不只可以绑定数据，也可以绑定用于事件处理的方法/函数。
 
@@ -248,7 +270,7 @@ DataBinding 的布局文件与普通的布局文件差异很小，DataBinding �
 **注意：绑定表达式要尽量简洁。**  借助 <a href="#6">绑定适配器</a> 可以简化绑定表达式。
 
 
-### 1、数据对象
+### 3.1. 数据对象
 
 假设我们现在有一个 User 数据类：
 
@@ -305,7 +327,7 @@ public class User2 {
 
 
 
-### 2、创建和获取绑定类
+### 3.2. 创建和获取绑定类
 
 每一个被绑定的布局文件都会生成一个对应的 binding 类。
 
@@ -315,7 +337,7 @@ public class User2 {
 
 通常我们会在填充布局的时候创建和获取绑定类。示例如下：
 
-#### (1)、Activtiy 
+#### 3.2.1. Activtiy 
 
 在 activity 中，我们使用 `DataBindingUtil.setContentView()` 替代 `setContentView()`
 
@@ -343,7 +365,7 @@ protected void onCreate(Bundle savedInstanceState) {
 }
 ```
 
-#### (2)、Fragment、ListView、RecyclerView
+#### 3.2.2. Fragment、ListView、RecyclerView
 
 在 Fragment、ListView、RecyclerView 中填充视图时，我们使用的是 `DataBindingUtil.inflate()`
 
@@ -360,9 +382,9 @@ java版
 ListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_item, viewGroup, false);
 ```
 
-### 3、数据绑定的表达式语句
+### 3.3. 数据绑定的表达式语句
 
-#### (1)、支持的关键字和操作
+#### 3.3.1. 支持的关键字和操作
 
 数据绑定的表达式语句和其他普通语句类似，它支持如下操作(符)和关键字
 
@@ -384,16 +406,23 @@ ListItemBinding binding = DataBindingUtil.inflate(layoutInflater, R.layout.list_
 
 示例:
 
-```kotlin
+```xml
 android:text="@{String.valueOf(index + 1)}"
+
 android:visibility="@{age > 13 ? View.GONE : View.VISIBLE}"
+
 android:transitionName='@{"image_" + id}'
+
+android:marginLeft="@{@dimen/margin + @dimen/avatar_size}"
+
+android:text='@{@string/user_name+bean.name}' 
 ```
 
 ><b>注意</b>：<br>
-xml 中使用 `&&` 时，需要使用 `&amp;&amp;` 进行转义
+* xml 中使用 `&&` 时，需要使用 `&amp;&amp;` 进行转义
+* xml 中使用 `<` 时，需要使用 `&lt;` 进行转义，包括 `List<Object>`  中的 `<` 也要转义。
 
-#### (2)、不支持的内容
+#### 3.3.2. 不支持的内容
 
 数据绑定的表达式语句中，不支持如下内容：
 
@@ -403,7 +432,7 @@ xml 中使用 `&&` 时，需要使用 `&amp;&amp;` 进行转义
 * Explicit generic invocation
 
 
-#### (3)、null 合并操作符——`??`
+#### 3.3.3. null 合并操作符——`??`
 
 > CnPeng Swift 中有这种操作符
 
@@ -421,7 +450,7 @@ android:text="@{user.displayName ?? user.lastName}"
 android:text="@{user.displayName != null ? user.displayName : user.lastName}"
 ```
 
-#### (4)、属性引用
+#### 3.3.4. 属性引用
 
 数据绑定表达式在访问 属性（fields）、get方法（getters）、ObservableField 时都使用如下格式：
 
@@ -429,7 +458,7 @@ android:text="@{user.displayName != null ? user.displayName : user.lastName}"
 android:text="@{user.lastName}"
 ```
 
-#### (5)、空指针异常的规避
+#### 3.3.5. 空指针异常的规避
 
 在数据绑定自动生成的代码中，会进行 null 检查，并规避空指针异常。
 
@@ -437,8 +466,11 @@ android:text="@{user.lastName}"
 
 也就是说，如果被引用的对象为空，那么会使用对象字段的默认值。
 
+**注意：**
 
-#### (6)、表达式中的集合（**重点**）
+此处的检查和保护，是单层的检查和保护，只检查最外一层，就向上面的表达式一样，只会检查 user，如果 user 为空，会对 name 和 age 给出默认值。但是，如果在 `user.locaiont.state` 这种多层嵌套的表达式中，如果 user 不为空，但是 location 为空，此时，数据绑定将无法做到保护，无法给出默认值。如果这时候没有手动进行判断和操作，就会报空指针异常。
+
+#### 3.3.6. 表达式中的集合（**重点**）
 
 在数据绑定的表达式中，可以通过 `[ ]` 访问 arrays, lists, sparse lists, maps 的元素。
 
@@ -448,7 +480,7 @@ android:text="@{user.lastName}"
 
 此处要注意: `<` 需要用 `&lt;` 替代
 
-```kotlin
+```xml
 <data>
     <import type="android.util.SparseArray"/>
     <import type="java.util.Map"/>
@@ -465,39 +497,69 @@ android:text="@{list[index]}"
 android:text="@{sparse[index]}"
 …
 android:text="@{map[key]}"
-``` 
+```
 
-#### (7)、字符串字面值
+#### 3.3.7. 字符串字面值
 
 当绑定表达式中需要使用字符串的字面值时，有两种方式：
 
-##### A: 单引号包裹双引号
+##### 3.3.7.1. 单引号包裹双引号
 
 如果字符串字面值使用 双引号包裹，那么，绑定表达式就需要使用 单引号包裹。
 
-```kotlin
+```xml
 android:text='@{map["firstName"]}'
-``` 
+```
 
-##### B: 双引号包裹反引号
+##### 3.3.7.2. 双引号包裹反引号
 
 如果使用双引号包裹绑定表达式，那么，字符串字面值就需要使用 反引号包裹。 
 
 （反引号就是英文状态下键盘左上角的 `~` 按键。）
 
-```kotlin
+```xml
 android:text="@{map[`firstName`]}"
 ```
 
-#### (8)、引用资源
+#### 3.3.8. 引用资源
 
 可以通过如下格式访问资源文件
 
-```kotlin
+```xml
 android:padding="@{large? @dimen/largePadding : @dimen/smallPadding}"
+
+android:marginLeft="@{@dimen/margin + @dimen/avatar_size}"
 ```
 
-关于格式化字符串和数量字符串的使用，此处省略。
+注意：**按照如下方式拼接资源时，需要使用单引号。**
+
+```xml
+android:text='@{@string/user_name + bean.name}'
+```
+
+此外，需要特别注意的是，**字符串拼接时最好不要直接使用显示的文字表示**，比如：
+
+```xml
+android:text='@{"user的name:"+bean.name}'
+```
+
+因为不同电脑的编码不同，这样写很容易出现编码错误的问题。
+
+
+#### 3.3.9. 引用格式化字符串资源
+
+布局文件中引用：
+
+```xml
+android:text="@{@string/nameFormat(firstName, lastName)}"
+```
+
+格式化字符串资源的定义：
+
+```xml
+<string name="nameFormat">%s, %s</string>
+```
+
 
 在绑定表达式中引用资源时和未使用绑定表达式时略有区别，具体如下：
 
@@ -512,7 +574,7 @@ color int | @color	| @color
 ColorStateList | @color |	@colorStateList
 
 
-### 4、事件处理
+### 3.4. 事件处理
 
 数据绑定表达式也可以绑定一些方法用来处理 View 的事件。
 
@@ -531,15 +593,13 @@ ZoomControls	| setOnZoomOutClickListener(View.OnClickListener)| android:onZoomOu
 通过数据绑定的方式处理 View 的事件时，有两种方式：
 
 * 绑定方法（引用方法）：
-	* 被绑定的方法需要和对应的监听方法有同样的参数和返回值。当我们把一个方法与 View 的事件绑定以后，DataBinging 就会把这个方法封装到 事件监听器中，然后把这个监听器设置给 View。 
+	* 被绑定的方法需要**和对应的监听方法有同样的参数和返回值**。当我们把一个方法与 View 的事件绑定以后，DataBinging 就会把这个方法封装到 事件监听器中，然后把这个监听器设置给 View。 
 * 绑定监听器：
 	* 绑定监听器时使用了 lambda 表达式，同样也会创建一个监听器，当触发 View 的事件时，就会调用 lambda 表达式。
-	
-	 
-#### (1)、引用函数/方法（绑定方法）
+ 
+#### 3.4.1. 引用函数/方法（绑定方法）
 
 在 Activity 的 layout 布局文件中，我们可以为 View 的 `android:onClick` 属性绑定一个在 Activity 中声明的方法。同样的，我们也可以使用数据绑定的方式为该属性绑定位于任意位置的事件处理的方法。与前一种方式相比，数据绑定的方式会在编译期检查被绑定的方法是否存在，该方法是否与对应监听器的方法具有同样的声明格式（参数和返回值需要一致)，如果不一致就会直接报错。
-
 
 绑定方法 与 绑定监听器 的主要区别在于：
 
@@ -566,7 +626,7 @@ class MyHandlers {
 
 * 在 `activity_main.xml` 中绑定
 
-```kotlin
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
    <data>
@@ -577,6 +637,8 @@ class MyHandlers {
        android:orientation="vertical"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
+
+       <--注意：事件绑定使用双冒号 :: -->
        <TextView android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@{user.firstName}"
@@ -613,11 +675,11 @@ class MainActivity : AppCompatActivity() {
 
 注意：**被绑定的方法必须是 public 的**
 
-#### (2)、绑定监听器
+#### 3.4.2. 绑定监听器
 
 绑定方法时，被绑定的方法必须与对应监听的方法具有相同的参数和返回值；**而在绑定监听器时，只要具有相同的返回值就可以了。**
 
-示例1：
+##### 3.4.2.1. 示例1：
 
 ```kotlin
 class MainActivity : AppCompatActivity() {
@@ -641,7 +703,7 @@ class MyHandlers {
 }
 ```
 
-```kotlin
+```xml
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
@@ -673,20 +735,22 @@ class MyHandlers {
 
 需要注意的是，**在 DataBinding 的布局文件中，默认会提供一个 `context` 变量，其值为当前跟布局的  `getContext()` 的返回值**。如果我们有需要，可以重新定义一个 context 并指定它的类型。
 
+
+##### 3.4.2.2. 示例2：
+
 上述示例代码中，我们并没有声明 `onClick()` 所需要的 view 参数，因为我们在 `onClickButton` 中并没有用到它.
 
 它的完整写法应该是下面的样子：
 
-```kotlin
+```xml
 android:onClick="@{(view)-> handler.onClickButton(args,context)}"
 ```
+
 上面的这行代码中，我们在 lambda 表达式的括号中定义了一个名为 view 的参数，这是 OnClickListener 中的 onClick 所需要的参数。
 
 对于监听器回调方法的参数，有两种处理方式：直接省略或者**全**都声明出来。声明出来之后，我们就可以在绑定表达式中使用它。
 
-示例2：
-
-```kotlin 
+```kotlin
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -707,20 +771,20 @@ class MyHandlers {
 }
 ```
 
-```kotlin
+```xml
 android:onClick="@{(view)-> handler.onClickButton2(args,view)}"
 ```
 
-示例3：
+##### 3.4.2.3. 示例3：
 
-```kotlin
+```xml
 <CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
       android:onCheckedChanged="@{(cb, isChecked) -> presenter.completeChanged(task,isChecked)}" />
 ```
 
-如果监听器的回调方法有返回值，那么我们的数据绑定表达式也必须有相同的返回值。比如，我们监听 View 的 longClick 事件时，我们的数据绑定表达式也必须返回一个 boolean 值。
+##### 3.4.2.4. 示例4：
 
-示例4：
+如果监听器的回调方法有返回值，那么我们的数据绑定表达式也必须有相同的返回值。比如，我们监听 View 的 longClick 事件时，我们的数据绑定表达式也必须返回一个 boolean 值。
 
 ```kotlin
 class Presenter {
@@ -728,26 +792,27 @@ class Presenter {
 }
 ```
 
-```kotlin
+```xml
 android:onLongClick="@{(theView) -> presenter.onLongClick(theView, task)}"
 ```
 
 在上面的示例代码中，如果 presenter 为 null ，那么，该数据绑定表达式就会返回对应类型的默认值。引用类型会返回 null， int 类型会返回 0， bololean 类型会返回 false 等等。
 
+##### 3.4.2.5. void 表达式
+
 我们在数据绑定表达式中使用具有断言效果的语句（比如 三目运算）时，我们可以使用 `void` 作为一个分支，示例如下：
 
-```kotlin
+```xml
 android:onClick="@{(v) -> v.isVisible() ? doSomething() : void}"
 ```
 
 上面这段代码就表示，如果 view 可见，执行 `doSometthing` 方法， 否则执行 void —— 也就是啥也不干。
 
-
 注意:
 
 在绑定监听器时，绑定表达式一定要简洁。（CnPeng 其实所有的绑定表达式都应该简洁明了）
 
-### 5、import、variale、include
+### 3.5. import、variale、include
 
 DataBinding 库提供了 import、variable、include 属性。
 
@@ -755,13 +820,13 @@ DataBinding 库提供了 import、variable、include 属性。
 - variable 可以声明一些我们将要在 绑定表达式中使用的变量
 - include 可以实现布局文件的复用
 
-#### (1)、import
+#### 3.5.1. import
 
 就像在 `.java` 或者 `.kt` 文件中一样，如果我们想在布局文件中使用某个类，那么就可以直接通过 import 导入这个类。
 
 示例如下：
 
-```kotlin
+```xml
 <data>
     <import type="android.view.View"/>
 </data>
@@ -769,7 +834,7 @@ DataBinding 库提供了 import、variable、include 属性。
 
 我们导入某个类之后，就可以在绑定表达式中使用这个类了，下面的示例引用了 View 的显示和隐藏属性，具体如下：
 
-```kotlin
+```xml
 <TextView
    android:text="@{user.lastName}"
    android:layout_width="wrap_content"
@@ -777,11 +842,11 @@ DataBinding 库提供了 import、variable、include 属性。
    android:visibility="@{user.isAdult ? View.VISIBLE : View.GONE}"/>
 ```
 
-##### A: 类型别名
+##### 3.5.1.1. A: 类型别名
 
 如果被导入的类具有相同的类名，为了在使用时避免冲突，我们可以为这个类通过 `alias` 定义一个别名。
 
-```kotlin
+```xml
 <import type="android.view.View"/>
 <import type="com.example.real.estate.View"
         alias="Vista"/>
@@ -789,11 +854,11 @@ DataBinding 库提供了 import、variable、include 属性。
 
 上面的示例中我们为 `com.example.real.estate.View` 定义了一个别名 `Vista`， 这样当我们引用其中的属性或者方法时，就可以直接使用 `Vista.xxx` 进行引用了。而 `View` 则只会指向 `android.view.View`.
 
-##### B: 使用导入的类
+##### 3.5.1.2. B: 使用导入的类
 
 在声明变量时，我们可以直接使用已经 import 的类，如：
 
-```kotlin
+```xml
 <data>
     <import type="com.example.User"/>
     <import type="java.util.List"/>
@@ -804,7 +869,7 @@ DataBinding 库提供了 import、variable、include 属性。
 
 我们也可以使用 import 的类进行类型强转，下面的示例中，将 `connection` 属性强转成了 `User` 类型：
 
-```kotlin
+```xml
 <TextView
    android:text="@{((User)(user.connection)).lastName}"
    android:layout_width="wrap_content"
@@ -813,7 +878,7 @@ DataBinding 库提供了 import、variable、include 属性。
 
 import 的类中如果有静态属性和方法，我么也可以直接在绑定表达式中调用. 下面的示例代码中，调用了 MyStringUtils 中的 capitalize() 静态方法
 
-```kotlin
+```xml
 <data>
     <import type="com.example.MyStringUtils"/>
     <variable name="user" type="com.example.User"/>
@@ -827,19 +892,19 @@ import 的类中如果有静态属性和方法，我么也可以直接在绑定�
 
 对于 `java.lang.*` 包下的类，我们在数据绑定的布局文件中，可以直接使用，而不需要 import . 比如  String,
 
-```kotlin
+```xml
 <data>
 	<variable name = "uName" type = "String">
 </data>
 ```
 
-#### (2)、variable
+#### 3.5.2. variable
 
 `<variable>` 节点表示声明将要在绑定表达式中使用到的变量。
 
 下面的示例代码中，声明了多个绑定变量。
 
-```kotlin
+```xml
 <data>
     <import type="android.graphics.drawable.Drawable"/>
     <variable name="user" type="com.example.User"/>
@@ -857,13 +922,13 @@ import 的类中如果有静态属性和方法，我么也可以直接在绑定�
 **`context` 是一个特殊的变量名，默认情况下，它的值是当前布局文件根节点的 `getContext()` 的值。如果我们显示的声明了一个同名的变量，该变量的类型和值就会覆盖默认的类型和值。**
 
 
-#### (3)、include 
+#### 3.5.3. include 
 
 数据绑定的布局文件中声明的变量可以传递给被 include 的布局中，在传递时使用 app 或 bind 命名空间，对应的属性名就是变量名。被 include 的布局也应该是以 `<layout></layout>` 作为根节点。
 
 下面的示例代码，分别把 user 传递到了 `name.xml` 和 `contact.xml` 文件中。
 
-```kotlin
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:bind="http://schemas.android.com/apk/res-auto">
@@ -874,10 +939,10 @@ import 的类中如果有静态属性和方法，我么也可以直接在绑定�
        android:orientation="vertical"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
-       
+
        <include layout="@layout/name"
            bind:user="@{user}"/>
-           
+
        <include layout="@layout/contact"
            bind:user="@{user}"/>
    </LinearLayout>
@@ -886,7 +951,7 @@ import 的类中如果有静态属性和方法，我么也可以直接在绑定�
 
 name.xml
 
-```kotlin
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:bind="http://schemas.android.com/apk/res-auto">
@@ -897,7 +962,7 @@ name.xml
        android:orientation="vertical"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
-       
+
        <TextView
        	 android:layout_width="wrap_content"
            android:layout_height="wrap_content"
@@ -909,7 +974,7 @@ name.xml
 
 如果被 `include` 节点是 `mserge` 的子节点，那么，DataBinding 的数据传递将不会生效，如下：
 
-```kotlin
+```xml
 <!--这是一个错误的示例，错误的，错误的-->
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -917,7 +982,7 @@ name.xml
    <data>
        <variable name="user" type="com.example.User"/>
    </data>
-   
+
    <!-- 这样不生效 这样不生效 这样不生效 -->
    <merge>
        <include layout="@layout/name"
@@ -927,8 +992,10 @@ name.xml
    </merge>
 </layout>
 ```
- 
-<h2 id="4">四、使用可观察的数据对象</h2>
+
+## 4. 使用可观察的数据对象
+
+<h6 id="4"></h6>
 
 所谓可观察就是指当数据本身发生变化时，会通知该数据的调用者去刷新。这类似于监听回调。
 
@@ -937,7 +1004,7 @@ DataBinding 库中，我们可以把 对象(objects)、属性（fields）和 集
 我们在数据绑定中使用非可观察的数据对象时，当对象内部的数据发生变化后，并不能自动实现 UI 的刷新；而可观察的数据对象在数据发生变化时，会自动触发 UI 的更新。
 
 
-### 1、Observable fields
+### 4.1. Observable fields
 
 当某个类中的字段比较少的时候，我们如果让该类去实现 `Observable` 显得有些大材小用，这种情况下，我们完全可以把这些属性定义为下面这些预置的 Observable 类型：
 
@@ -987,7 +1054,7 @@ data class StatusBean(
 
 `activity_temp.xml`
 
-```kotlin
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -1030,13 +1097,13 @@ data class StatusBean(
 </layout>
 ```
 
-### 2、Observable collections
+### 4.2. Observable collections
 
 在 APP 中存储和处理数据时，我们通常使用的都是静态数据结构，也就是提前定义好一个数据解析类，确定好字段个数和字段类型，当收到服务器返回的 JSON 数据时直接进行解析。与之相对的，不需要提前定义数据解析类的方式称为动态数据结构, 通常我们会借助 collections （List、Map）实现动态数据结构.
 
 Observable collections 和 普通 collections 一样，允许我们通过 键 去访问 值 。
 
-#### (1)、ObservableArrayMap
+#### 4.2.1. ObservableArrayMap
 
 如果 键 是引用类型，比如 String，此时，建议使用 `ObservableArrayMap` 来组织数据：
 
@@ -1059,7 +1126,7 @@ class TempActivity : AppCompatActivity() {
 
 `activity_temp.xml`
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools">
 
@@ -1101,7 +1168,7 @@ class TempActivity : AppCompatActivity() {
 </layout>
 ```
 
-#### (2)、ObservableArrayList
+#### 4.2.2. ObservableArrayList
 
 如果 键 是 int 类型，建议使用 `ObservableArrayList`
 
@@ -1132,7 +1199,7 @@ class TempActivity : AppCompatActivity() {
 
 `activtiy_temp.xml`
 
-```kotlin
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools">
 
@@ -1208,7 +1275,7 @@ class Fields {
 
 刚开始的时候没弄明白此处该咋写，还在 stackoverflow 中提了一个问题：[what's the content of “com.example.my.app.Fields” in DataBinding example?](https://stackoverflow.com/questions/55283784/whats-the-content-of-com-example-my-app-fields-in-databinding-example/55338983#55338983) , 最终还是自己解决了！
 
-### 3、Observable objects
+### 4.3. Observable objects
 
 Observable objects 表示实现了 Observable 接口的类。
 
@@ -1216,7 +1283,7 @@ Observable 接口中有 增加 和 删除监听的方法， 类实现 Observable
 
 为了让实现更简单， DataBinding 库提供了 BaseObservable 类，BaseObservable 内部实现了监听器的注册。
 
-#### (1)、实现 BaseObservable 接口
+#### 4.3.1. 实现 BaseObservable 接口
 
 我们为 BaseObservable 实现类中属性的 getter 添加 Bindable 注解，并在 setter 中调用 `notifyPropertyChanged()`, 这样，当该属性值发生变化时，就会触发 `notifyPropertyChanged()` 去通知调用者进行更新
 
@@ -1265,7 +1332,7 @@ class User : BaseObservable() {
 
 `activity_temp.xml`
 
-```kotlin
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:tools="http://schemas.android.com/tools">
 
@@ -1345,7 +1412,7 @@ DataBdinding 库会在当前 module 的包中会生成一个 BR 类文件，其�
 在编译时，BataBinding 库会检测所有 Bindable 注解，如果某个属性有这个注解，就会在 BR 文件中生成一个对应的 id。该 id 以当前属性为名称，调用时直接使用 `BR.属性名` 即可，就像上面示例中的 `notifyPropertyChanged(BR.lastName);`
 
 
-#### (2)、实现 Observable
+#### 4.3.2. 实现 Observable
 
 通常是让 基类 实现 Observable 接口，然后注册一个 PropertyChangeRegistry 监听器。
 
@@ -1388,7 +1455,9 @@ open class ObservableViewModel : ViewModel(), Observable {
 
 
 
-<h2 id="5">五、生成的绑定类</h2>
+## 5. 生成的绑定类
+
+<h6 id="5"></h6>
 
 DataBinding 库会为每一个使用了数据绑定的布局文件生成一个对应的绑定类。
 
@@ -1401,7 +1470,7 @@ DataBinding 库会为每一个使用了数据绑定的布局文件生成一个�
 默认情况下，自动生成的绑定类的名字取决于布局文件的名字。在根据布局文件名字生成绑定类名时，会去除下划线连接符，第一个单词首字母大写，其余遵循驼峰规则, 末尾追加 Binding。比如 `activity_main.xml` 生成的绑定类名称为：`ActivityMainBinding` . 
 
 
-### 1、创建一个绑定对象
+### 5.1. 创建一个绑定对象
 
 在将布局文件填充之后应该立即创建绑定对象，以确保布局文件中的绑定表达式与 view 绑定之前 view 视图树不会被修改。
 
@@ -1513,7 +1582,7 @@ ViewDataBinding binding = DataBindingUtil.bind(viewRoot);
 
 ---
 
-### 2、view 和 id
+### 5.2. view 和 id
 
 DataBinding 库在 绑定类 中为布局文件内拥有 ID 的所有 View 都创建了一个不可修改的字段。
 
@@ -1545,9 +1614,9 @@ DataBinding 库在 绑定类 中为布局文件内拥有 ID 的所有 View 都�
 DataBinding 库会直接从视图树中提取拥有 ID 的 view ，这种方式比 `findViewById()` 快多了
 
 
-### 3、变量
+### 5.3. 变量
 
-DataBinding 库为在布局文件中通过 <variable> 声明的变量在绑定类中生成了访问方法。比如，下面的示例代码中，在生成的 绑定类中会包含 user、image、note 变量，以及他们的 setter/getter 方法
+DataBinding 库为在布局文件中通过 `<variable>` 声明的变量在绑定类中生成了访问方法。比如，下面的示例代码中，在生成的 绑定类中会包含 user、image、note 变量，以及他们的 setter/getter 方法
 
 ```xml
 <data>
@@ -1559,7 +1628,7 @@ DataBinding 库为在布局文件中通过 <variable> 声明的变量在绑定�
 ```
 
 
-### 4、ViewStubs
+### 5.4. ViewStubs
 
 与普通 View 不同，ViewStub 默认状态下是不可见的。当 ViewStub 被置为 可见（Visible）或者被 填充（infalte）后，就会被指定的填充布局替换掉。（关于 ViewStub 可参考我之前的整理 [ViewStub--使用介绍](https://www.jianshu.com/p/175096cd89ac)）
 
@@ -1703,11 +1772,11 @@ object Fields {
 ```
 
 
-### 5、即刻绑定（Immediate Binding）
+### 5.5. 即刻绑定（Immediate Binding）
 
 默认情况下，当变量（variable）或者可观察对象（observable object）发生变化时，界面只有在下一次刷新时才会更新。但实际应用时，我们期望数据发生变化时能及时更新界面，此时我们就可以调用 `executePendingBindings()` 强制刷新。
 
-### 6、高级绑定——动态变量
+### 5.6. 高级绑定-动态变量
 
 有时候，我们不需要明确的获知 Binding 类，也可以将数据设置给View .
 
@@ -1819,7 +1888,7 @@ class TempRvAdapter(private val descList: MutableList<String>) : RecyclerView.Ad
 注意：BR 是 DataBinding 库自动生成的。内部包含了在使用了数据绑定的布局文件中声明的 变量 和 View 
 
 
-### 7、后台线程
+### 5.7. 后台线程
 
 我们可以在线程中更改数 DataBinding 中被绑定的数据，但前提是该数据不能是集合。
 
@@ -1827,7 +1896,7 @@ class TempRvAdapter(private val descList: MutableList<String>) : RecyclerView.Ad
 
 >TODO: CnPeng 尝试使用 协程+ObservalbeXX 写一个DEMO。
 
-### 8、自定义绑定类的名称
+### 5.8. 自定义绑定类的名称
 
 默认情况下，在根据布局文件生成绑定类名时，首字母大写，去除下划线，后续内容遵从驼峰规则，末尾后缀 Binding。
 
@@ -1862,23 +1931,25 @@ class TempRvAdapter(private val descList: MutableList<String>) : RecyclerView.Ad
 ```
 
 
-<h2 id="6">六、绑定适配器</h2>
+## 6. 绑定适配器
+
+<h6 id="6"></h6>
 
 绑定适配器 是把数据绑定给指定 View 的一种方式。类似于我们通过 setText() 给 TextView 设置文本。
 
 DataBinding 库允许我们通过 绑定适配器 调用 特定的方法 给 View 设置属性值。在这个特定的方法中，我们可以编辑自己的绑定逻辑、也可以指定返回类型。
 
-### 1、设置属性值
+### 6.1. 设置属性值
 
 当某个 View 绑定的值被改变时，自动生成的绑定类必定会调用该值的 setter 方法，并触发绑定在该 View 上的绑定表达式。我们可以让 DataBinding 库自动匹配将要被触发的 setter 方法，也可以指定一个具有自定义逻辑的自定义方法
 
-#### (1)、自动匹配方法
+#### 6.1.1. 自动匹配方法
 
 假设在布局文件中，我们为某个 view 指定了一个属性，其名称为 `example`, 那么 DataBinding 库会自动去寻找参数类型与 `example` 的值类型相匹配的 `setExample(arg)` 方法。在寻找这个 setter 方法时，DataBinding 库不关心其命名空间是啥，只会去匹配属性名称及其值的类型。
 
 举个例子，我们有这么一个绑定表达式：`android:text="@{user.name}"`, 那么 DataBinding 库就会去寻找名称为 `setText(arg)` 的方法， 并且该方法接收的参数类型必须与 `user.name` 的类型一致。假设 `user.getName()` 的返回值类型为 String，那么 DataBinding 库就会去匹配 参数为 String 类型的 setText()。当然了，如果我们已经知道 setter 方法的参数类型，但是 `user.name` 的返回值类型与参数类型不匹配，那么，我们就可以为 `user.name` 使用类型强转。
 
-即便我们指定的这个属性不存在，DataBinding 也能正常运行——我们可以通过数据绑定为任意的 setter 方法创建对应的属性. 
+即便我们指定的这个属性不存在，DataBinding 也能正常运行——我们可以通过数据绑定为任意的 setter 方法创建对应的属性.
 
 比如，DrawerLayout 没有任何属性，但是却有大量的 setter。在下面的布局文件中 DataBinding 库就会自动为 `app:scrimColor` 和 `app:drawerListener` 匹配 `setScrimColor(int)` 和 `setDrawerListener(DrawerListener)` 方法：
 
@@ -1892,7 +1963,7 @@ DataBinding 库允许我们通过 绑定适配器 调用 特定的方法 给 Vie
 ```
 
 
-#### (2)、指定方法
+#### 6.1.2. 指定方法
 
 有一些属性的 setter 与属性名字并不能完全匹配。在这种情况下，通过 `BindingMethods` 注解可以将属性及其 setter 进行关联。 
 
@@ -1913,8 +1984,9 @@ KOTLIN
 java
 
 ```java
+// 在文档中，type 后面的取值使用双引号包裹，这样是错误的.实际应该按照下面的样子给出 class
 @BindingMethods({
-       @BindingMethod(type = "android.widget.ImageView",
+       @BindingMethod(type = android.widget.ImageView.class,
                       attribute = "android:tint",
                       method = "setImageTintList")
 })
@@ -1928,9 +2000,9 @@ public class xxx{
 
 > 注意，使用 `@BindingMethods` 时，需要将该注解放在文件的 import 语句之后，类定义之前。参考上面示例代码中的 java 代码
 
-#### (3)、提供自定义逻辑
+#### 6.1.3. 提供自定义逻辑
 
-#### A: 基本格式和用法 
+##### 6.1.3.1. 基本格式和用法 
 
 一些属性需要自定义逻辑。比如 `android:marginLeft` 属性，就没有对应的 setter, 而必须先获取控件的 LayoutParams , 然后通过 LayoutParams 的 `setMargins(left, top, right, bottom)` 去设置。
 
@@ -2035,7 +2107,7 @@ object TestBindingAdapter {
 
 我们自定义的绑定适配器与 Android 库中已经实现的绑定适配器冲突时，自定义的会覆盖 Android 库中已有的。
 
-#### B: 绑定多个参数
+##### 6.1.3.2. 绑定多个参数
 
 我们可以为绑定适配器定义多个参数，示例如下：
 
@@ -2072,7 +2144,7 @@ public static void loadImage(ImageView view, String url, Drawable error) {
 
 当 `imageUrl` 和 `error` 同时被 ImageView 调用，并且 `imageUrl` 的类型为 String ，`error` 的类型为 `Drawable` 时，就会触发我们上面通过 `@BindingAdapter` 绑定的 `loadImage(,,)` 方法。
 
-#### C: `requireAll` 标记
+##### 6.1.3.3.  `requireAll` 标记
 
 如果我们希望在部分属性被调用时就触发 `loadImage(,,)` , 我们可以给在 `@BindingAdapter` 中增加 `requireAll` 标记，并将其值设置为 `false`, 示例如下：
 
@@ -2086,7 +2158,7 @@ fun setImageUrl(imageView: ImageView, url: String, placeHolder: Drawable) {
         MyImageLoader.loadInto(imageView, url, placeholder);
     }
 }
-```  
+```
 
 ```java
 @BindingAdapter(value={"imageUrl", "placeholder"}, requireAll=false)
@@ -2099,7 +2171,7 @@ public static void setImageUrl(ImageView imageView, String url, Drawable placeHo
 }
 ```
 
-#### D: 绑定适配器中的旧值
+##### 6.1.3.4. 绑定适配器中的旧值
 
 在 `@BindingAdapter` 注解的方法中，我们可以根据需要决定是否使用属性的旧值。如果这个注解方法中同时声明旧值和新值，那么，需要先声明旧值，然后再声明新值，示例如下：
 
@@ -2118,7 +2190,7 @@ class TempActivity : AppCompatActivity() {
 }
 
 object BindingAdaptersUtil {
-    
+
     @BindingAdapter(value = ["android:layout_marginLeft"])
     @JvmStatic
     fun setMarginLeft(view: View, oldMargin: Float, newMargin: Float) {
@@ -2165,7 +2237,7 @@ object BindingAdaptersUtil {
 </layout>
 ```
 
-#### E: 绑定监听器
+##### 6.1.3.5. 绑定监听器
 
 `@BindingAdapter` 也可以绑定一些接口或者抽象类形式的监听器，监听器中可以做一些事件处理，示例如下：
 
@@ -2210,7 +2282,7 @@ public static void setOnLayoutChangeListener(View view, View.OnLayoutChangeListe
 <View android:onLayoutChange="@{() -> handler.layoutChanged()}"/>
 ```
 
-#### F: 被绑定的监听器中有多个方法
+##### 6.1.3.6. 被绑定的监听器中有多个方法
 
 如果被绑定的监听器中有多个方法需要实现，我们必须将他们拆解到不同的监听器中。
 
@@ -2333,9 +2405,9 @@ public static void setListener(View view, OnViewDetachedFromWindow detach, OnVie
 
 
 
-### 2、对象转换（Object conversions）
+### 6.2. 对象转换（Object conversions）
 
-#### (1)、自动的对象转换
+#### 6.2.1. 自动的对象转换
 
 如果绑定表达式返回了一个 Object，那么 DataBinding 库会自动去找寻属性的 setter , 然后把这个 Object 自动转换为 setter 能接收的数据类型，并把它设置给该属性。(CnPeng，注意，强转时也可能会出错！！所以，必要的时候需要我们手动强转)
 
@@ -2352,7 +2424,7 @@ public static void setListener(View view, OnViewDetachedFromWindow detach, OnVie
 
 上述示例代码中，我们通过绑定表达式 `@{userMap["lastName"]}` 获取到了一个返回值，该值会被自动转换为 `android:text` 属性对应的 `setText(CharSequence)` 所能接收的类型。如果返回值的类型与 setter 方法接收的参数类型不一致，我们就必须在绑定表达式中手动强转，否则就会报错从而导致程序崩溃。（CnPeng 更多关于 ObservableMap 的示例可以参考前面的 <a href="#4">可观察的数据对象</a> ）
 
-#### (2)、自定义转换——`@BindingConversion`
+#### 6.2.2. 自定义转换-`@BindingConversion`
 
 某些情况下，我们必须使用自定义的的转换。
 
@@ -2382,7 +2454,6 @@ java 版
 public static ColorDrawable convertColorToDrawable(int color) {
     return new ColorDrawable(color);
 }
-
 ```
 
 我们在绑定表达式中提供的值的类型必须是一致的，**下面的示例就是一个错误的代码：** ,因为三目表达式中我们提供了一个 Drawable 和 color。正确的做法是，要么全是 Drawable , 要么全是 color
@@ -2396,21 +2467,23 @@ public static ColorDrawable convertColorToDrawable(int color) {
 ```
 
 
-<h2 id="7">七、将布局视图绑定到架构组件</h2>
+## 7. 将布局视图绑定到架构组件
 
-在 AndroidX 中包含了 架构组件（ [Architecture Components](https://developer.android.com/topic/libraries/architecture/index.html) ）, 通过这些架构组件我们能构建出强健、易于测试、方便维护的 APP。
+<h6 id="7"></h6>
+
+在 AndroidX 中包含了 架构组件（ [Architecture Components](https://developer.android.google.cn/topic/libraries/architecture/index.html) ）, 通过这些架构组件我们能构建出强健、易于测试、方便维护的 APP。
 
 DataBinding + Architecture Components 的组合能够更进一步的简化 UI 的开发。布局文件可以 与 架构组件中的数据进行绑定，这些数据可以帮我们管理 UI 控制器（controllers）的生命周期，而且当数据发生变化时也会主动通知 UI 去更新。
 
-该章节主要介绍如何在我们的 APP 中使用 架构组件，从而进一步提升 DataBinding 的优点（benefits）。
+该章节主要介绍如何在我们的 APP 中使用 架构组件，从而进一步提升 DataBinding 的优点（ benefits ）。
 
-### 1、使用 LiveData 通知界面更新
+### 7.1. 使用 LiveData 通知界面更新
 
-我们可以使用 `LiveData` 对象作为数据绑定的数据源，这样，当数据发生变化时就会主动的通知 UI 界面去更新。关于 LiveData 的更多内容可以查看 [LiveData 概览](https://developer.android.com/topic/libraries/architecture/livedata)
+我们可以使用 `LiveData` 对象作为数据绑定的数据源，这样，当数据发生变化时就会主动的通知 UI 界面去更新。关于 LiveData 的更多内容可以查看 [LiveData 概览](https://developer.android.google.cn/topic/libraries/architecture/livedata)
 
-与实现了 Observable 的对象（如 ：ObservableField ）不同, LiveData 对象能够获取数据观察者的生命周期。这一特点带来了许多益处，这些益处在 [LiveData 概览](https://developer.android.com/topic/libraries/architecture/livedata) 有说明。
+与实现了 Observable 的对象（如 ：ObservableField ）不同, LiveData 对象能够获取数据观察者的生命周期。这一特点带来了许多益处，这些益处在 [LiveData 概览](https://developer.android.google.cn/topic/libraries/architecture/livedata) 有说明。
 
-从 Android Studio version 3.1 开始，我们在数据绑定的代码中使用 LiveData 替代 Observable 对象。
+**从 Android Studio version 3.1 开始，我们在数据绑定的代码中使用 LiveData 替代 Observable 对象。**
 
 在绑定类中使用 LiewData 对象时，需要指定由谁来持有该绑定类的生命周期，从而限定 LiveData 对象的作用域——只在持有者内部有效。（这个持有者就是 LiveData 的数据观察者）
 
@@ -2475,15 +2548,15 @@ class ScheduleViewModel extends ViewModel {
 }
 ```
 
-### 2、使用 ViewModel 管理关联到 UI 界面的数据
+### 7.2. 使用 ViewModel 管理关联到 UI 界面的数据
 
-DataBinding 库能够与 [ViewModel](https://developer.android.com/reference/android/arch/lifecycle/ViewModel) 组件完美协作
+DataBinding 库能够与 [ViewModel](https://developer.android.google.cn/reference/android/arch/lifecycle/ViewModel) 组件完美协作
 
 ViewModel 组件 + DataBinding 库的组合能够让我们把 UI 逻辑从 布局文件 转移到 ViewModel 中，这样我们就能够更容易的进行测试。
 
 DataBinding 会根据场景需要把 view 与 数据源绑定或者解绑，这样，我们只需要关注是否提供了合适的数据即可。
 
-关于架构组件（ Architecture Component）的更多内容，可以查看 [ViewModel Overview](https://developer.android.com/topic/libraries/architecture/viewmodel.html).
+关于架构组件（ Architecture Component）的更多内容，可以查看 [ViewModel Overview](https://developer.android.google.cn/topic/libraries/architecture/viewmodel.html).
 
 
 将 ViewModel 组件与 DataBinding 库配合使用时，我们必须先获取一个继承自 ViewModel 的实例、获取绑定类的实例，然后将 ViewModel 组件的实例指定给绑定类中的一个属性变量 (该变量需要先从布局文件中通过 variable 声明)。示例如下：
@@ -2536,7 +2609,7 @@ class ViewModelActivity extends AppCompatActivity {
 
 
 
-### 3、使用 可观察的 ViewModel 获取绑定适配器的更多控制权限
+### 7.3. 使用 可观察的 ViewModel 获取绑定适配器的更多控制权限
 
 （本节详细示例代码可参考 [官方数据绑定示例](https://github.com/googlesamples/android-databinding)）
 
@@ -2638,7 +2711,9 @@ class ObservableViewModel extends ViewModel implements Observable {
 ```
 
 
-<h2 id="8">八、双向数据绑定</h2>
+## 8. 双向数据绑定 
+
+<h6 id="8"></h6>
 
 
 使用单向的数据绑定时，我们给 View 绑定一个属性值，如果我们想在监听到某个动作后去更改这个被绑定的属性值，还必须要绑定一个监听器，示例如下：
@@ -2663,7 +2738,7 @@ class ObservableViewModel extends ViewModel implements Observable {
 
 双向绑定时使用 `@={}`，其中的 `=` 非常重要。在上面的示例中当控件 `checked` 属性值被改变之后，它会通知 ViewModel 修改 `rememberMe` 的值，而当代码逻辑中改变了该 `rememberMe` 的值之后，它也会去通知 `checked` 改变属性值并更新 UI。它实际上起到了一个双向监听的作用
 
-当然了，实现双向绑定的一个前提是，布局文件中使用的 ViewModel 必须实现 Observable —— 实际使用时通常是直接实现 BaseObservable, 并且给 getter 方法添加 `@Bindable` 注解，而在 setter 中当属性值改变时需要调用 `notifyPropertyChanged(BR.xx) ` (其中的 xx 表示 setter 和 getter 对应的属性值)，示例如下：
+当然了，实现双向绑定的一个前提是，**布局文件中使用的 ViewModel 必须实现 Observable —— 实际使用时通常是直接实现 BaseObservable, 并且给 getter 方法添加 `@Bindable` 注解，而在 setter 中当属性值改变时需要调用 `notifyPropertyChanged(BR.xx) ` (其中的 xx 表示 setter 和 getter 对应的属性值)**，示例如下：
 
 KOTLIN
 
@@ -2721,9 +2796,9 @@ class LoginViewModel : BaseObservable {
 
 
 
-### 1、让自定义属性实现双向绑定
+### 8.1. 让自定义属性实现双向绑定
 
-#### (1)、实现自定义属性的双向绑定
+#### 8.1.1. 实现自定义属性的双向绑定
 
 DataBinding 库已经实现了很多属性和监听器的双向绑定逻辑，我们直接调用即可。
 
@@ -2749,10 +2824,10 @@ JAVA
 
 ```java
 @BindingAdapter("time")
-@JvmStatic fun setTime(view: MyView, newValue: Time) {
+public static void setTime(MyView view, Time newValue) {
     // Important to break potential infinite loops.
     if (view.time != newValue) {
-        view.time = newValue
+        view.time = newValue;
     }
 }
 ```
@@ -2772,14 +2847,14 @@ JAVA
 
 ```java
 @InverseBindingAdapter("time")
-@JvmStatic fun getTime(view: MyView) : Time {
-    return view.getTime()
+public static Time getTime(MyView view) {
+    return view.getTime();
 }
 ```
 
-这样，DataBinding 库就知道当数据发生改变时取调用被 `@BindableAdapter` 注解的方法，而当属性值发生改变时就会去调用被 `@InverseBindingListener` 注解的方法。
+这样，DataBinding 库就知道当数据发生改变时去调用被 `@BindableAdapter` 注解的方法，而当属性值发生改变时就会去调用被 `@InverseBindingListener` 注解的方法。
 
-#### (2)、为自定义属性添加监听
+#### 8.1.2. 为自定义属性添加监听
 
 虽然在前一节中我们已经实现了自定义属性的双向绑定，但是，DataBinding 库并不知道属性值什么时候被改变，也不知道是怎么被改变的。
 
@@ -2817,7 +2892,7 @@ public static void setListeners(
 每一个双向绑定的属性都需要有一个对应的事件属性，事件属性的名称通常是 被绑定属性的名称 + 后缀 `AttrChanged `.
 而 DataBinding 库会使用这个事件属性去创建一个使用 `@BindableAdapter` 注解的事件监听方法. 实际应用中，这个监听器方法中会包含一些重要的逻辑，这些逻辑中也包含单向绑定的监听逻辑。具体示例可以参考  [TextViewBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/TextViewBindingAdapter.java#344) 中 `text` 属性的变化监听——`setTextWatcher()`
 
-### 2、转换器 
+### 8.2. 转换器 
 
 如果绑定到 View 对象的变量需要在显示前进行格式化等操作，那么，我们就可以使用转换器（Converter）去执行这些操作：
 
@@ -2867,7 +2942,7 @@ public class Converter {
 }
 ```
 
-### 3、无限循环的双向绑定
+### 8.3. 无限循环的双向绑定
 
 双向绑定的逻辑是，当被绑定的数据发生改变时会触发 `@BindingAdapter` 注解的方法去改变属性值，当属性值发生改变时也会触发 `InverseBindingListener` 然后触发 `@InverseBindingAdapter` 注解的方法去改变被绑定的数据。
 
@@ -2876,7 +2951,7 @@ public class Converter {
 为了避免让这个过程形成了一个无限的死循环，我们就需要在 `@BindingAdapter` 中判断新的值是否与旧的中一致，一致则终止循环；不一致，才去更新值并执行其他逻辑。
 
 
-### 4、双向绑定的属性
+### 8.4. 双向绑定的属性
 
 DataBinding 库已经为我们实现了许多属性的双向绑定逻辑，具体如下表，我们可以点击超链接查看对应 xxBindingAdapter 内部的实现逻辑：
 
@@ -2897,7 +2972,9 @@ TimePicker |	android:hour <br> android:minute | [TimePickerBindingAdapter](https
 
 
 
-<h2 id="9">九、相关资料</h2>
+## 9. 相关资料
+
+<h6 id="9"></h6>
 
 * [官方数据绑定示例](https://github.com/googlesamples/android-databinding)
 * [Android Data Binding codelab](https://codelabs.developers.google.com/codelabs/android-databinding/#0)
