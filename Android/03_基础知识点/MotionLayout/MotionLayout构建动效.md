@@ -247,7 +247,10 @@ MotionScene 文件中完整的节点嵌套结构如下：
     |    ├─ OnSwipe
     |    └─ KeyFrameSet
     |        ├─ KeyPosition
-    │        └─ KeyAttribute
+    |        ├─ KeyAttribute
+    |        ├─ KeyCycle
+    |        ├─ KeyTrigger
+    │        └─ KeyTimeCycle
     │  └─ ConstraintSet
     |    └─ Constraint
     │        └─ CustomAttribute
@@ -292,7 +295,7 @@ MotionScene 文件中完整的节点嵌套结构如下：
 
 属性 | 作用/含义 | 备注
 ---|---|---|---
-`constraintSetStart` | 动效的初始状态 | 取值可以是 `<ConstraintSet>` 的 ID，也可以是布局。<br>如需指定 `<ConstraintSet>`，取值为 `@+id/constraintSetId`。<br>如需指定布局，取值为 `@layout/layoutState`。
+`constraintSetStart` | 动效的初始状态 | 取值可以是 `<ConstraintSet>` 的 ID，也可以是布局。<br>如需指定 `<ConstraintSet>`，取值为 `@+id/constraintSetId`。<br>如需指定布局，取值为 `@layout/layoutID`。
 `constraintSetEnd` |动效的最终状态 | 取值同上
 `duration` | 动效的时长 | 以毫秒为单位。<br>如果未指定，则使用 `<MotionScene>`  元素的 `defaultDuration` 属性。
 
