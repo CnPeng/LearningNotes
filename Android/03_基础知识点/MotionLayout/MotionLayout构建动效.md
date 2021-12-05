@@ -2,7 +2,7 @@
 
 MotionLayout 是 ConstrainLayout 的子类，它能够让我们更方便的为视图添加动效。
 
->注意：**MotionLayout 仅适用于其直接子级，不支持嵌套布局层次结构或 Activity 转换**。
+>注意：**MotionLayout 的动画效果仅适用于其直接子级，不支持嵌套布局层次结构或 Activity 转换**。
 
 使用 MotionLayout 前需要先在 model 的 `build.gradle` 文件中添加对 ConstraintLayout 的依赖，版本不能低于 2.0，此处使用的是 2.0.4：
 
@@ -260,7 +260,7 @@ MotionScene 文件中完整的节点嵌套结构如下：
 
 节点名 | 作用 | 数量限制| 备注
 ---|---|---|---
-`<Transition>` | 指定需要执行的动效的起始和结束状态，以及两种状态之间的转换 | 一个或多个 | 有多个 `<Transition>` 元素时，MotionLayout 会根据用户的动作选择最合适的元素。例如，`<MotionScene>` 可能有四个 `<Transition>` 子元素，每个元素都包含一个 `<onSwipe>`，分别响应用户在不同方向的滑动操作。当用户在屏幕上滑动时，MotionLayout 会使用适当的 `<Transition>` 以便沿该方向滑动。
+`<Transition>` | 指定动画的起始和结束状态，<br> 以及两种状态之间的转换 | 一个或多个 | 有多个 `<Transition>` 元素时，<br>MotionLayout 会根据用户的动作选择最合适的元素。<br>例如，`<MotionScene>` 可能有四个 `<Transition>` 子元素，<br>每个元素都包含一个 `<onSwipe>`，<br>分别响应用户在不同方向的滑动操作。<br>当用户在屏幕上滑动时，<br>MotionLayout 会使用适当的 `<Transition>` 以便沿该方向滑动。
 
 #### 1.2.1.2. 可选子节点
 
@@ -272,7 +272,7 @@ MotionScene 文件中完整的节点嵌套结构如下：
 
 属性 | 作用/含义 | 备注
 ---|---|---|---
-`defaultDuration` | 定义 `<Transition>` 节点的默认持续时间（以毫秒为单位）。 | 例如，在设置了 `defaultDuration="300"` 的情况下，如果所有 `<Transition>` 节点都没有明确指定自己 `duration` 属性，则默认持续时间为 300 毫秒。如果 `<Transition>` 节点有设置，则不使用。
+`defaultDuration` | 定义 `<Transition>` 节点的默认持续时间<br>（以毫秒为单位）。 | 例如，设置 `defaultDuration="300"` 后，<br>如果所有 `<Transition>` 节点都没有指定自己 `duration` 属性，<br>则默认持续时间为 300 毫秒。如果 `<Transition>` 节点有设置，则不使用。
 
 ### 1.2.2. Transition
 
@@ -292,9 +292,9 @@ MotionScene 文件中完整的节点嵌套结构如下：
 
 属性 | 作用/含义 | 备注
 ---|---|---|---
-`constraintSetStart` | 动效的初始状态 | 取值可以是 `<ConstraintSet>` 的 ID，也可以是布局。如需指定 `<ConstraintSet>`，取值为 `@+id/constraintSetId`。如需指定布局，取值为 `@layout/layoutState`。
+`constraintSetStart` | 动效的初始状态 | 取值可以是 `<ConstraintSet>` 的 ID，也可以是布局。<br>如需指定 `<ConstraintSet>`，取值为 `@+id/constraintSetId`。<br>如需指定布局，取值为 `@layout/layoutState`。
 `constraintSetEnd` |动效的最终状态 | 取值同上
-`duration` | 动效的时长 | 以毫秒为单位。如果未指定，则使用 `<MotionScene>`  元素的 `defaultDuration` 属性。
+`duration` | 动效的时长 | 以毫秒为单位。<br>如果未指定，则使用 `<MotionScene>`  元素的 `defaultDuration` 属性。
 
 ### 1.2.3. Transition 的子节点
 
@@ -307,7 +307,7 @@ MotionScene 文件中完整的节点嵌套结构如下：
 属性 | 作用/含义 | 备注
 ---|---|---|---
 `targetId` |  触发 `Transition` 事件的 ViewID | 点击 targetId 对应的 View 时，触发 `Transition`
-`clickAction` | 点按视图时要执行的操作 | 可选。默认情况下，如果当前处于 `constraintSetStart` 状态，点击后则移动到 end 状态并带有动效；反之，点击后则移动到 start 状态。
+`clickAction` | 点按视图时要执行的操作 | 可选。<br>默认情况下，如果当前处于 `constraintSetStart` 状态，<br>点击后则移动到 end 状态并带有动效；<br>反之，点击后则移动到 start 状态。
 
 `clickAction` 的取值如下：
 
@@ -419,9 +419,9 @@ MotionScene 文件中完整的节点嵌套结构如下：
 属性 | 作用/含义 | 备注
 ---|---|---|---
 `touchAnchorId` | 在滑动之后移动的视图。| 
-`touchAnchorSide` | 滑动所固定到的目标视图的一侧。| MotionLayout 将尝试在该固定点与用户手指之间保持恒定的距离。可接受的值包括 "`left`"、"`right`"、"`top`" 和 "`bottom`"。（**CnPeng : 这个属性有点难理解，实测也没看出来有啥不一样。** ）
-`dragDirection` | 用户滑动动作的方向。 | 如果设置了此属性，此 `<onSwipe>` 将仅适用于沿特定方向的滑动。可接受的值包括 "`dragLeft`"、"`dragRight`"、"`dragUp`" 和 "`dragDown`"。
-`dragScale` | 控制视图相对于滑动长度的移动距离。| 默认值为 1，表明视图移动的距离应与滑动距离一致。<br>如果 dragScale 小于 1，视图移动的距离会远远小于滑动距离（例如，dragScale 为 0.5 意味着如果滑动移动 4 厘米，目标视图会移动 2 厘米）。<br>如果 dragScale 大于 1，视图移动的距离会大于滑动距离（例如，dragScale 为 1.5 意味着如果滑动移动 4 厘米，目标视图会移动 6 厘米）。
+`touchAnchorSide` | 滑动所固定到的目标视图的一侧。| MotionLayout 将尝试在该固定点与用户手指之间保持恒定的距离。<br>可接受的值包括 "`left`"、"`right`"、"`top`" 和 "`bottom`"。<br>（**CnPeng : 这个属性有点难理解，实测也没看出来有啥不一样。** ）
+`dragDirection` | 用户滑动动作的方向。 | 如果设置了此属性，此 `<onSwipe>` 将仅适用于沿特定方向的滑动。<br>可接受的值包括 "`dragLeft`"、"`dragRight`"、"`dragUp`" 和 "`dragDown`"。
+`dragScale` | 控制视图相对于滑动长度的移动距离。| 默认值为 1，表明视图移动的距离应与滑动距离一致。<br>如果 dragScale 小于 1，视图移动的距离会远远小于滑动距离<br>（例如，dragScale 为 0.5 意味着如果滑动移动 4 厘米，目标视图会移动 2 厘米）。<br>如果 dragScale 大于 1，视图移动的距离会大于滑动距离<br>（例如，dragScale 为 1.5 意味着如果滑动移动 4 厘米，目标视图会移动 6 厘米）。
 `maxVelocity` | 目标视图的最大速度。 | 
 `maxAcceleration` | 目标视图的最大加速度。| 
 
@@ -450,17 +450,17 @@ MotionScene 文件中完整的节点嵌套结构如下：
 属性 | 作用/含义 | 备注
 ---|---|---|---
 `motionTarget` | 指定当前 `<KeyPosition>` 作用于哪个 View。| 取值为目标 view 的 id
-`framePosition` | 指定动效中视图何时到达该 `<KeyPosition>` 指定的点。| 取值为 1 到 99 之间的整数。例如，如果 framePosition 为 25，则视图在整个运动路径的四分之一处到达指定点。
-`percentX`、`percentY` | 指定视图应到达的位置。| 取值为 0~1 之间的浮点数。具体位置会受到 `keyPositionType` 属性值的影响。
+`framePosition` | 指定动效中视图何时到达该 `<KeyPosition>` 指定的点。| 取值为 1 到 99 之间的整数。<br>例如，framePosition 为 25，则视图在动画的四分之一处到达指定点。
+`percentX`、<br>`percentY` | 指定视图应到达的位置。| 取值为 0~1 之间的浮点数。<br>具体位置会受到 `keyPositionType` 属性值的影响。
 `keyPositionType` | 指定 `percentX` 和 `percentY` 的计算方式。 | 
 
 `keyPositionType` 的取值说明如下：
 
 取值|说明
 ---|---
-`parentRelative` | 表示计算相对于**父视图**  的 `percentX` 和 `percentY` 值。<br>X 为横轴，范围从 0（左端）到 1（右端）。Y 为纵轴，其中 0 为顶部，1 为底部。<br><br>例如，如果我们希望目标视图到达父视图右端中间的某个点，可以将 `percentX` 设置为 1，将 `percentY` 设置为 0.5。
-`deltaRelative` | 此时 ,  `percentX` 的取值相对于 `<Transtion>` 在 X 轴方向的移动距离； `percentY` 的取值相对于 `<Transtion>` 在 Y 轴方向的移动距离。<br><br>例如，假设目标视图向上移动 100 dp，然后再向右移动 100 dp。但我们希望视图首先在运动的前四分之一部分向上移动 40 dp，然后向上呈弧形移动。为此，**需要将 `framePosition` 设置为 25，将 `keyPositionType` 设置为 `deltaRelative` ，并将 `percentY` 设置为 **-0.4**。**
-`pathRelative` | 此时，以 `<Transtion>` 起点和终点的连线作为 x 轴，与该线垂直的线作为 y 轴。x 轴向右为正，y 轴向下为正。 `percentX` 和 `percentY` 是相对于起点和终点连线长度的取值。<br><br>假设我们希望视图：在动效前半部分的移动距离占总距离的 10％，然后加速移动以覆盖剩余 90％ 的距离。为此，**需要将 `framePosition` 设置为 50，将 `keyPositionType` 设置为 `pathRelative` ，并将 `percentX` 设置为 0.1。**
+`parentRelative` | 表示计算相对于**父视图**  的 `percentX` 和 `percentY` 值。<br>X 为横轴，范围从 0（左端）到 1（右端）。<br>Y 为纵轴，其中 0 为顶部，1 为底部。<br><br>例如，如果我们希望目标视图到达父视图右端中间的某个点，可以将 `percentX` 设置为 1，将 `percentY` 设置为 0.5。
+`deltaRelative` | 此时 ,  `percentX` 的取值相对于 `<Transtion>` 在 X 轴方向的移动距离；<br> `percentY` 的取值相对于 `<Transtion>` 在 Y 轴方向的移动距离。<br><br>例如，假设目标视图向上移动 100 dp，然后再向右移动 100 dp。<br>但我们希望视图首先在运动的前四分之一部分向上移动 40 dp，然后向上呈弧形移动。<br>为此，**需要将 `framePosition` 设置为 25，将 `keyPositionType` 设置为 `deltaRelative` ，并将 `percentY` 设置为 **-0.4**。**
+`pathRelative` | 此时，以 `<Transtion>` 起点和终点的连线作为 x 轴，与该线垂直的线作为 y 轴。<br> x 轴向右为正，y 轴向下为正。 `percentX` 和 `percentY` 是相对于起点和终点连线长度的取值。<br><br>假设我们希望视图：在动效前半部分的移动距离占总距离的 10％，然后加速移动以覆盖剩余 90％ 的距离。<br>为此，**需要将 `framePosition` 设置为 50，将 `keyPositionType` 设置为 `pathRelative` ，并将 `percentX` 设置为 0.1。**
 
 
 * parentRelative 示意图
@@ -518,7 +518,7 @@ MotionScene 文件中完整的节点嵌套结构如下：
 属性 | 作用/含义 | 备注
 ---|---|---|---
 `motionTarget` |  受该 `<KeyAttribute>` 控制的 ViewID
-`framePosition` | 取值为 1 到 99 之间的整数。用于指定在动效中视图何时具有该 `<KeyAttribute>` 指定的属性。<br>例如，如果 `framePosition` 为 25，则表示 View 在动效执行到四分之一时具有指定属性。
+`framePosition` | 取值为 1 到 99 之间的整数。<br>用于指定在动效中视图何时具有该 `<KeyAttribute>` 指定的属性。<br>例如，如果 `framePosition` 为 25，则表示 View 在动效执行到四分之一时具有指定属性。
 
 * 示例：
 
@@ -621,8 +621,8 @@ MotionScene 文件中完整的节点嵌套结构如下：
 属性|说明
 ---|---
 `motionTarget`  | 被控制的 ViewId
-`framePosition` | 动画的 frame(帧) 的百分比，取值为 1~99 之间的整数。当动画执行到该百分比位置时，执行 `onCross`、`onPositiveCross`、`onNegativeCross` 中指定的方法。
-`onCross` | 动画执行到 `framePosition` 时需要调用的方法名。**该方法名称必须是 `motionTarget` 指定的 View 中所具备的`空参`方法**。正向动画（start 到 end）和反向动画 (end 到 start) 都会执行。
+`framePosition` | 动画的 frame(帧) 的百分比，取值为 1~99 之间的整数。<br>当动画执行到该百分比位置时，执行 `onCross`、`onPositiveCross`、`onNegativeCross` 中指定的方法。
+`onCross` | 动画执行到 `framePosition` 时需要调用的方法名。<br>**该方法名称必须是 `motionTarget` 指定的 View 中所具备的`空参`方法**。<br>正向动画（start 到 end）和反向动画 (end 到 start) 都会执行。
 `onPositiveCross` | 正向动画执行到 `framePosition` 时需要调用的方法名。
 `onNegativeCross` |  正向动画执行到 `framePosition` 时需要调用的方法名。
 
@@ -734,7 +734,7 @@ MotionScene 文件中完整的节点嵌套结构如下：
 属性 | 作用/含义 | 备注
 ---|---|---|---
 `id` | 此约束条件集的唯一标识符。 | `<Transition>` 需要此 ID 来确定动画序列的起点和终点。
-`deriveConstraintsFrom` | 另一个 ConstraintSet 的 ID | 使用该 id 对应的 ConstrainSet 中的约束信息替换当前 ConstraintSet 中的全部约束信息。除非当前 ConstraintSet 中有明确声明的约束信息。
+`deriveConstraintsFrom` | 另一个 ConstraintSet 的 ID | 使用该 id 对应的 ConstrainSet 中的约束信息替换当前 ConstraintSet 中的全部约束信息。<br>除非当前 ConstraintSet 中有明确声明的约束信息。
 
 ### 1.2.5. ConstraintSet 的子节点
 
@@ -813,3 +813,16 @@ MotionScene 文件中完整的节点嵌套结构如下：
 
 * [MotionLayout 动画从未如此简单！](https://mp.weixin.qq.com/s/MXZheSIwt0E9Evi6mSJw2Q)
 * [丝滑！MotionLayout的高级玩法我学会了](https://mp.weixin.qq.com/s/-Ayv1gA9-fIvlTqJrJV4qw)
+
+
+
+
+C:\Users\CnPeng\AppData\Local\Android\Sdk\tools\bin>
+
+![](pics/20211204011020854_29906.png)
+
+[报错： Failed to install the following Android SDK packages as some licences have not been accepted.](https://blog.csdn.net/qq_30346413/article/details/96137430)
+
+[windows 10 配置Java 环境变量](https://www.jianshu.com/p/9fc41ea941aa)
+
+[找不到.jvm.cfg'的问题](https://blog.csdn.net/m0_37482190/article/details/94414196)
