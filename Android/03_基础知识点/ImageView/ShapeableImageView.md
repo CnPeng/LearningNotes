@@ -1,6 +1,6 @@
 # 1. ShapeableImageView
 
-## 1.1. 基本介绍
+## 1.1. 介绍
 
 ShapeableImageView 继承自 AppCompatImageView 并实现了 Shapeable 接口。
 
@@ -315,6 +315,38 @@ cornerFamily：cut 处理模式变为裁剪
     </style>
 ```
 
+### 1.3.13. 水滴
+
+```xml
+ <!-- 水滴 -->
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/image7"
+        android:layout_width="@dimen/dimen_80_dp"
+        android:layout_height="@dimen/dimen_80_dp"
+        android:layout_marginTop="@dimen/dimen_10_dp"
+        android:padding="@dimen/dimen_1_dp"
+        android:scaleType="fitXY"
+        android:src="@mipmap/pic_test"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/image8"
+        app:layout_constraintTop_toBottomOf="@+id/image5"
+        app:shapeAppearanceOverlay="@style/waterImageStyle" />
+```
+
+```xml
+    <!-- 水滴 -->
+    <style name="waterImageStyle">
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerFamilyTopLeft">rounded</item>
+        <item name="cornerFamilyTopRight">rounded</item>
+        <item name="cornerSizeBottomLeft">25dp</item>
+        <item name="cornerSizeBottomRight">25dp</item>
+        <item name="cornerSizeTopLeft">70%</item>
+        <item name="cornerSizeTopRight">70%</item>
+    </style>
+```
+
 ## 1.4. 源码解析
 
 ### 1.4.1. 构造函数
@@ -462,146 +494,14 @@ mBinding.text3.setTextColor(Color.WHITE)
 mBinding.text3.background = drawable3
 ```
 
-### 1.5.1. MaterialShapeDrawable
-
-源码（有删减）：
-
-```java
-public class MaterialShapeDrawable extends Drawable implements TintAwareDrawable, Shapeable {
-...
-  @Override
-  public void draw(@NonNull Canvas canvas) {
-    fillPaint.setColorFilter(tintFilter);
-    final int prevAlpha = fillPaint.getAlpha();
-    fillPaint.setAlpha(modulateAlpha(prevAlpha, drawableState.alpha));
-
-    strokePaint.setColorFilter(strokeTintFilter);
-    strokePaint.setStrokeWidth(drawableState.strokeWidth);
-
-    final int prevStrokeAlpha = strokePaint.getAlpha();
-    strokePaint.setAlpha(modulateAlpha(prevStrokeAlpha, drawableState.alpha));
-
-    if (pathDirty) {
-      calculateStrokePath();
-      calculatePath(getBoundsAsRectF(), path);
-      pathDirty = false;
-    }
-
-    maybeDrawCompatShadow(canvas);
-    if (hasFill()) {
-      drawFillShape(canvas);
-    }
-    if (hasStroke()) {
-      drawStrokeShape(canvas);
-    }
-...
-  static final class MaterialShapeDrawableState extends ConstantState {
-    ...
-    public MaterialShapeDrawableState(@NonNull MaterialShapeDrawableState orig) {
-      shapeAppearanceModel = orig.shapeAppearanceModel;
-      elevationOverlayProvider = orig.elevationOverlayProvider;
-      strokeWidth = orig.strokeWidth;
-      colorFilter = orig.colorFilter;
-      fillColor = orig.fillColor;
-      strokeColor = orig.strokeColor;
-      tintMode = orig.tintMode;
-      tintList = orig.tintList;
-      alpha = orig.alpha;
-      scale = orig.scale;
-      shadowCompatOffset = orig.shadowCompatOffset;
-      shadowCompatMode = orig.shadowCompatMode;
-      useTintColorForShadow = orig.useTintColorForShadow;
-      interpolation = orig.interpolation;
-      parentAbsoluteElevation = orig.parentAbsoluteElevation;
-      elevation = orig.elevation;
-      translationZ = orig.translationZ;
-      shadowCompatRadius = orig.shadowCompatRadius;
-      shadowCompatRotation = orig.shadowCompatRotation;
-      strokeTintList = orig.strokeTintList;
-      paintStyle = orig.paintStyle;
-      if (orig.padding != null) {
-        padding = new Rect(orig.padding);
-      }
-    }
-	...
-  }
-...
-}
-```
-
-没什么特别的，你只需要知道除了可以设置描边之外，还可以设置背景、阴影等其他属性。
-
-说明
-
-* ShapeAppearanceModel只能是实现Shapeable接口的View才可以设置，比如Chip、MaterialButtom等。
-* 而MaterialShapeDrawable其实就是Drawable，是所有View都可以设置的。
-
-### 1.5.2. 默认圆角问题
-
-> 实测在 `com.google.android.material:material:1.4.0-alpha02` API 30 中没有默认圆角。
-
-有细心的同学会发现啊，第一个常规的 ShapeableImageView 还是有一点圆角的，没错，属于默认的，跟踪一下源码来看一下：
-
-```xml
-<style name="Widget.MaterialComponents.ShapeableImageView" parent="android:Widget">
-    <item name="strokeColor">@color/material_on_surface_stroke</item>
-    <item name="shapeAppearance">?attr/shapeAppearanceMediumComponent</item>
-</style>
-```
-
-第一个是颜色，很明显不是我们要找的，继续看 shapeAppearanceMediumComponent
-
-```xml
-<attr format="reference" name="shapeAppearanceMediumComponent"/>
-```
-
-只是一个简单的属性，继续查找关联引用
-
-```xml
-    <item name="shapeAppearanceMediumComponent">
-      @style/ShapeAppearance.MaterialComponents.MediumComponent
-    </item>
-```
-
-又引用了一个style，继续看ShapeAppearance.MaterialComponents.MediumComponent这个style
-
-```xml
-<style name="ShapeAppearance.MaterialComponents.MediumComponent">
-    <item name="cornerSize">@dimen/mtrl_shape_corner_size_medium_component</item>
-</style>
-```
-
-哦豁，看到了熟悉的属性 cornerSize，藏的还挺深，继续看看数值是多少
-
-```xml
-<dimen name="mtrl_shape_corner_size_medium_component">4dp</dimen>
-```
-
-默认4dp。
-
-那如果不想要这个圆角怎么办呢，可以学习源码仿写一个，不过上面也看到了，有点绕，不如直接写个style搞定：
-
-```xml
-    <!--ShapeableImageView 去圆角-->
-    <style name="Corner0Style">
-        <item name="cornerSize">0dp</item>
-    </style>
-```
-
-然后引用
-
-```
-app:shapeAppearance="@style/Corner0Style"
-```
-
-### 1.5.3. 查看支持的属性
+## 1.6. 补充：查看支持的属性
 
 我们先在 xml 文件中定义一个 `app:shapeAppearance` 引用的 style , 然后点击该 style 中的 item 的名称即可跳转到 `values.xml` 文件中，在该文件中我们就可以获知支持的属性信息。如下图：
 
 ![](pics/20211210125255900_1870265431.png)
 
 
-## 1.6. 参考
+## 1.7. 参考
 
 * [ShapeableImageView 官方 reference 文档](https://developer.android.google.cn/reference/com/google/android/material/imageview/ShapeableImageView)
 * [ShapeAppearanceModel 官方 reference 文档](https://developer.android.google.cn/reference/com/google/android/material/shape/ShapeAppearanceModel)
