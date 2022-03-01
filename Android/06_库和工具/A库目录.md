@@ -20,3 +20,10 @@
 ## 1.2. AS插件
 
 * [《 The-pit-of-the-Android-Studio》——As插件整理](https://gitee.com/AWeiLoveAndroid/The-pit-of-the-Android-Studio/blob/master/Android%20Studio好用的插件.md)
+
+
+
+
+### 1.2.1. 其他汇总
+
+[https://www.jianshu.com/p/8bb7124e8cc0](https://www.jianshu.com/p/8bb7124e8cc0)

@@ -1,5 +1,7 @@
 # 1. README
 
+**注意：** 由于该教程原文写于 2018/2019 年，所以，其中部分内容的运行效果可能会与原文不一致。
+
 [点击查看《跟煎鱼学 Go》教程目录](https://eddycjy.com/go-categories/)
 
 本教程内容摘录自 [《跟煎鱼学 Go》](https://eddycjy.com/go-categories/)，摘录在此仅为学习参考并方便查阅，不做商业用途。

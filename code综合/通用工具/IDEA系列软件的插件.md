@@ -1,4 +1,4 @@
-# 1. IDEA系列软件的插件
+## 1. IDEA系列软件的插件
 
 插件名|说明 | 图片
 ---|---|---
@@ -7,3 +7,10 @@
  [codota](https://www.codota.com/?utm_source=jbmarket&utm_campaign=jbrainbowbrackets&utm_medium=banner) | 代码补充工具 | ![](pics/20211205191437356_8977.png)
 [GitToolBox](https://plugins.jetbrains.com/plugin/7499-gittoolbox/) | Git 辅助工具，单击某行代码可以在该行末尾显示Git信息，支持自动拉取等更多功能 | 
 [Alibaba Java Coding Guidelines](https://plugins.jetbrains.com/plugin/10046-alibaba-java-coding-guidelines) | 阿里的java编码指导 | 
+
+
+
+## 2. 待整理
+
+[Intellij idea高效使用教程](https://www.toutiao.com/i6929867921162273292/)
+
