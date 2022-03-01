@@ -1,7 +1,7 @@
 # LearningNotes
 
 
-最近更新日期：<font color="#ff0000">2021-10-25</font>
+最近更新日期：<font color="#ff0000">2022-03-01</font>
 
 本项目在 Gitee 和 Github 同步更新
 
@@ -23,7 +23,7 @@ LearningNotes 是我的个人综合性学习笔记，主要是为了完善自己
 
 ### 2.1 个人介绍
 
-不知名 Android 程序员，iOS 练习生，golang 小学生。
+不知名 Android 程序员，会一点儿 Golang，懂一点 iOS，还略微了解一点微信小程序。
 
 
 ### 2.2 联系方式
@@ -46,6 +46,6 @@ QQ群 | 957639236
 
 **一块两块不嫌少，千儿八百有点多。** 谢谢O(∩_∩)O哈！
 
-![k7CSBV.png](https://s2.ax1x.com/2019/02/28/k7CSBV.png)  ![k79X1s.png](https://s2.ax1x.com/2019/02/28/k79X1s.png)
+![k7CSBV.png](https://s2.ax1x.com/2019/02/28/k7CSBV.png) ![k79X1s.png](https://s2.ax1x.com/2019/02/28/k79X1s.png)
  
 
