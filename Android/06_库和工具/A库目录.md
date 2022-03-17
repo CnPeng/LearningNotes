@@ -26,4 +26,12 @@
 
 ### 1.2.1. 其他汇总
 
-[https://www.jianshu.com/p/8bb7124e8cc0](https://www.jianshu.com/p/8bb7124e8cc0)
+* [https://www.jianshu.com/p/8bb7124e8cc0](https://www.jianshu.com/p/8bb7124e8cc0)
+* AndroidAutoSize:屏幕适配库,地址 [https://github.com/JessYanCoding/AndroidAutoSize](https://github.com/JessYanCoding/AndroidAutoSize)
+* Andpermission: 权限申请库,地址 [https://github.com/yanzhenjie/AndPermission](https://github.com/yanzhenjie/AndPermission)
+* FlycoTabLayout:tab标签框架配合viewpager使用,地址 [https://github.com/H07000223/FlycoTabLayout](https://github.com/H07000223/FlycoTabLayout)
+* Takephoto: 拍照及从相册选择图片,地址[https://github.com/crazycodeboy/TakePhoto](https://github.com/crazycodeboy/TakePhoto)
+* Pickerview: 底部dialog库,地址[https://github.com/Bigkoo/Android-PickerView](https://github.com/Bigkoo/Android-PickerView)
+* Smartrefresh:列表刷新库,地址 [https://github.com/scwang90/SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
+* BGAQRCode:二维码扫描库,地址[https://github.com/bingoogolapple/BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android)
+* clipimage:图片裁剪库,
