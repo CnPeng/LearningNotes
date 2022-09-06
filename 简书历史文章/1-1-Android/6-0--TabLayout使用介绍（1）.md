@@ -1,13 +1,18 @@
-##1.TabLayout基本介绍
+## 1. TabLayout基本介绍
+
 TabLayout是安卓6.0推出的，可以替代 ViewPagerIndicator 的一个控件，存放在 design 包下，继承自 HorizontalScrollView 。使用的时候需要先导入 android.support.design.widget 包。
 
 ## 2. TabLaout的使用介绍
-### (1). 单独使用TabLayout
+
+### 2.1. 单独使用TabLayout
+
 使用TabLayout的时候，需要给它添加 Tab , 添加 Tab 的方式有两种，一种是在代码中通过 tablayout.new Tab( ) 动态添加，一种是在xml中通过 TabItem 添加。具体如下：
 
-####1）代码中动态添加Tab
-activity_tablayout_test.xml 布局文件：
-``` 
+#### 2.1.1. 代码中动态添加Tab
+
+* `activity_tablayout_test.xml` 布局文件：
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -27,9 +32,9 @@ activity_tablayout_test.xml 布局文件：
 </LinearLayout>
 ```
 
-TabLayoutTestActivity.java 具体使用：
+* `TabLayoutTestActivity.java` 具体使用：
 
-```
+```java
 /**
  * Created by CnPeng on 2016/12/7.
  * <p>
@@ -38,9 +43,7 @@ TabLayoutTestActivity.java 具体使用：
 
 public class TabLayoutTestActivity extends AppCompatActivity {
     @Override
-    protected void onCreate(
-            @Nullable
-                    Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablayout_test);
 
@@ -90,9 +93,12 @@ public class TabLayoutTestActivity extends AppCompatActivity {
     }
 }
 ```
-####2）布局文件中添加Tab
+
+#### 2.1.2. 布局文件中添加Tab
+
 xml布局文件
-```
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -131,8 +137,10 @@ xml布局文件
 
 </LinearLayout>
 ```
+
 代码中使用：
-```
+
+```java
 /**
  * Created by CnPeng on 2016/12/7.
  * <p>
@@ -185,15 +193,22 @@ public class TabLayoutTestActivity extends AppCompatActivity {
 }
 
 ```
->总结：
-A:
-在xml布局文件中添加Tab时，只能使用 TabItem , 而且TabItem只有三个属性， layout ， text  , icon ; 而 Tab 则只是用在java代码中，但 Tab  的属性值和方法更加丰富，所以，实际使用的时候，推荐使用Tab 在代码中动态添加 
->
-B:
->在 TabLayout节点中，定义了app:tabMode="scrollable"  ，这个 tabMode 表示tab的排列方式，有两个取值：
->* scrollable表示tab过多超出屏幕宽度时，一直横着往外排列，然后滚动可以查看；
->* fixed表示TabLayout的最大宽度满屏，各Tab宽度均分。当 tab 过多超出屏幕宽度时，会挤吧一下 ; 
->* 如果不设置，默认fixed。
->
->具体下过参考下图：
+
+## 3. 总结：
+
+### 3.1. A:
+
+在xml布局文件中添加Tab时，只能使用 TabItem , 而且TabItem只有三个属性， layout ， text  , icon ; 
+
+而 Tab 则只是用在java代码中，但 Tab  的属性值和方法更加丰富，所以，实际使用的时候，推荐使用Tab 在代码中动态添加 
+
+### 3.2. B:
+
+在 TabLayout节点中，定义了`app:tabMode="scrollable"`  ，这个 tabMode 表示 tab 的排列方式，有两个取值：
+
+* `scrollable` 表示 tab 过多超出屏幕宽度时，一直横着往外排列，然后滚动可以查看；
+* `fixed` 表示 TabLayout 的最大宽度满屏，各 Tab宽 度均分。当 tab 过多超出屏幕宽度时，会挤吧一下 ; 
+* 如果不设置，默认 `fixed` 。
+
+具体下过参考下图：
 >![TabMode 的两种取值模式的效果差异](http://upload-images.jianshu.io/upload_images/2551993-be5215013b9c5783.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)

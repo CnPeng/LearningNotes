@@ -20,18 +20,17 @@
 * [Part3-高级篇-笔记](ios开发_小波说雨燕_Part3-高级篇.md)
 * [Part4-上架篇-笔记](ios开发_小波说雨燕_Part4-上架篇.md)
 
-# [①入门篇](http://xiaoboswift.com/course/39)
+# 1. [①入门篇](http://xiaoboswift.com/course/39)
+
 ---------------------
 
-* 注册开发者账号：[点击进行注册](http://developer.apple.com/programs/register), 注册为开发者之前需要先有 AppleID 
+* **提交应用到市场时，使用正式版 Xcode, 不要使用 beta 版**
 
-* 提交应用到市场时，使用正式版 Xcode, 不要使用 beta 版
-
-## 一、Swift Playground
+## 1.1. 一、Swift Playground
 
 playground : 游乐园，游乐场，运动场
 
-### 1、运行第一个 playground 
+### 1.1.1. 1、运行第一个 playground 
 
 新建一个 playground
 
@@ -54,7 +53,7 @@ playground : 游乐园，游乐场，运动场
  ![](pics/5_playground4_run2.png)
  
  
-### 2、用 playground 构建一个圆角矩形
+### 1.1.2. 2、用 playground 构建一个圆角矩形
 
 ```swift
 import UIKit
@@ -80,14 +79,14 @@ roundCornerBtn.clipsToBounds=true
 
 
 
-## 二、第一个 APP - HelloWorld
+## 1.2. 二、第一个 APP - HelloWorld
 
 * xx.storyboard 是界面编辑器，同 Android 中的 xml 布局文件
 * xx.swift 是代码内容，同 Android 中的 .java/ .kt 文件
 
 ![](pics/9-storyboard示意图.png)
 
-### 1、创建第一个文本View
+### 1.2.1. 1、创建第一个文本View
 
 * 选择控件
 
@@ -110,7 +109,7 @@ roundCornerBtn.clipsToBounds=true
 ![](pics/12-约束信息查看.png)
 
 
-## 三、理解 HelloWorld APP
+## 1.3. 三、理解 HelloWorld APP
 
 >* `xx.storyboard` ：为界面信息
 >* `ViewController.swift` ： 具体的功能实现
@@ -169,7 +168,7 @@ class ViewController: UIViewController {
 }
 ```
 
-## 四、指定 ViewController
+## 1.4. 四、指定 ViewController
 
 * 查看或修改 ViewController
 
@@ -181,14 +180,14 @@ class ViewController: UIViewController {
 
 ---
 
-# [②初级篇](http://xiaoboswift.com/my/course/40)
+# 2. [②初级篇](http://xiaoboswift.com/my/course/40)
 
 ---
 
 
-## 一、自动布局（Auto Layout）
+## 2.1. 一、自动布局（Auto Layout）
 
-### 1、认识添加约束的按钮
+### 2.1.1. 1、认识添加约束的按钮
 
 自动布局基于约束条件
 
@@ -230,7 +229,7 @@ class ViewController: UIViewController {
 
 ![](pics/33-预览设备.png)
 
-### 2、案例：添加约束，将控件固定在屏幕右下角
+### 2.1.2. 2、案例：添加约束，将控件固定在屏幕右下角
 
 新增控件并拖拽到预定位置,然后按住 Ctrl 键向下拖动 添加垂直约束
 
@@ -249,9 +248,9 @@ class ViewController: UIViewController {
 ![](pics/30-添加缺失的约束.png)
 
 
-## 二、堆叠视图——UIStackView
+## 2.2. 二、堆叠视图——UIStackView
 
-### 1、堆叠视图简介
+### 2.2.1. 1、堆叠视图简介
 
 在 UI 元素不断增加的时候，自动布局无法满足精确布局的要求，所以有了堆叠视图——`UIStackView` 
 
@@ -261,9 +260,9 @@ class ViewController: UIViewController {
 * 内含各组件排列和分布机制。
 * 可以无限嵌套。
 
-### 2、使用堆叠视图：文字堆叠
+### 2.2.2. 2、使用堆叠视图：文字堆叠
 
-#### （1）、堆叠视图的使用方式：
+#### 2.2.2.1. （1）、堆叠视图的使用方式：
 
 添加堆叠视图的有两种方法：
 
@@ -272,13 +271,13 @@ class ViewController: UIViewController {
 
 ![](pics/34-堆叠视图的使用方式及类型.png)
 
-#### （2）、添加图片到项目
+#### 2.2.2.2. （2）、添加图片到项目
 
-##### 1）、图片的命名规则：
+##### 2.2.2.2.1. 1）、图片的命名规则：
 
 ![](pics/36-不同尺寸图片的说明.png)
 
-##### 2）、添加图片到项目：
+##### 2.2.2.2.2. 2）、添加图片到项目：
 
 直接将图片拖拽到 `Assets.xcassets` 目录下即可。
 
@@ -289,7 +288,7 @@ class ViewController: UIViewController {
 [点击下载视频教程中图片资源](http://ese3a8b8c4d6ab.pri.qiqiuyun.net/coursematerial-40/20170330111350-8ejhoomb378co40g?attname=t-shirts.zip&e=1584425189&token=ExRD5wolmUnwwITVeSEXDQXizfxTRp7vnaMKJbO-:VY0OGdZK02eJnG-LFjEcRDHkalU=)
 
 
-#### （3）、对标题使用堆叠视图
+#### 2.2.2.3. （3）、对标题使用堆叠视图
 
 先通过拖拽添加一个 StackView：
 
@@ -333,9 +332,9 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 ![](pics/47-调整顶部边距方式2.png)
 
-### 3、使用堆叠视图：图像堆叠
+### 2.2.3. 3、使用堆叠视图：图像堆叠
 
-#### (1)、添加图像及约束
+#### 2.2.3.1. (1)、添加图像及约束
 
 先添加一个水平排列的 StackView , 然后在 StackView 中添加三个  ImageView。
 
@@ -351,7 +350,7 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 ![](pics/50-为存放图片的StackView添加对外约束.png)
 
-#### （2）、调整图像宽度
+#### 2.2.3.2. （2）、调整图像宽度
 
 在上一步中，存放图片的 StackView 比手机屏幕宽，导致左右图片显示不全，所以我们就需要限定 StackView 与父视图等宽。
 
@@ -365,7 +364,7 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 ![](pics/53-设置StackView的内容等比率缩放.png)
 
-#### (3)、添加底部的两个按钮
+#### 2.2.3.3. (3)、添加底部的两个按钮
 
 添加按钮的步骤省略。
 
@@ -385,28 +384,28 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 ![](pics/57-添加相对于父视图底部约束方式2.png)
 
-## 三、Size Class
+## 2.3. 三、Size Class
 
-### 1、屏幕尺寸的抽象
+### 2.3.1. 1、屏幕尺寸的抽象
 
 为简化屏幕适配引入的抽象概念。用来处理不同尺寸和旋转方向，配合自动布局使用。
 
 ![](pics/58-wRhC.png)
 
 
-### 2、堆叠视图的 Size Class 适配
+### 2.3.2. 2、堆叠视图的 Size Class 适配
 
  在前面的堆叠视图的示例中，当我们切换其他小屏设备或者旋转手机屏幕方向之后，界面就会显示异常，所以，我们需要使用 Size Class 进行适配优化。
  
-#### (1)、给视图加 Label
+#### 2.3.2.1. (1)、给视图加 Label
 
 给视图加 Label 就是给 View Controller 中的内容添加 Label 名称。
 
 ![](pics/59-为视图设置Label名.png)
  
-#### (2)、 适配
+#### 2.3.2.2. (2)、 适配
 
-##### 1)、顶部标题适配
+##### 2.3.2.2.1. 1)、顶部标题适配
 
 先切换到横屏，然后按下图操作：
 
@@ -416,7 +415,7 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 经过上面的操作，标题就实现了横屏模式下的水平排列。
 
-##### 2）、图片适配
+##### 2.3.2.2.2. 2）、图片适配
 
 ![](pics/62-图片适配1.png)
  
@@ -424,7 +423,7 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
  
  ![](pics/64-图片适配3.png)
  
-#### (3)、约束的可见性
+#### 2.3.2.3. (3)、约束的可见性
 
 我们在横屏下添加的约束不应该在竖屏下显示，同理，竖屏下添加的约束横屏下也不应该能看到。
 
@@ -433,20 +432,20 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 ![](pics/66-约束的可见性2.png)
  
 
-## 四、App 原型设计
+## 2.4. 四、App 原型设计
 
-### 1、原型设计简介
+### 2.4.1. 1、原型设计简介
 
 
-### 2、原型设计工具
+### 2.4.2. 2、原型设计工具
 
 * 纸上原型：Prototyping on Paper （可在 IOS 手机的应用商店下载）
 * 国内软件：[墨刀](https://modao.cc/)
 * 国外软件：[Origami Studio](http://origami.design)
 
-## 五、TableView
+## 2.5. 五、TableView
 
-### 1、UITableView 简介和 Demo
+### 2.5.1. 1、UITableView 简介和 Demo
 
 拖拽一个 TableView 到 StoryBorad 中，然后调整其大小铺满整个 SafeArea。
 
@@ -462,9 +461,9 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 
 ![](pics/69-空白的单元格列表.png)
 
-### 2、UITableView 相关协议及实现
+### 2.5.2. 2、UITableView 相关协议及实现
 
-#### (1)、UIKit 和 UiTableView
+#### 2.5.2.1. (1)、UIKit 和 UiTableView
 
  iOS SDK (Software Develop Kit) 包含一系列开发用的基础框架。一个框架是相似功能类（Class）的集合。
  
@@ -476,9 +475,9 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
  * 不同类型的数据可分组隔开
  * 表头和表尾是可选的。
 
-#### （2）、列表相关的协议
+#### 2.5.2.2. （2）、列表相关的协议
 
-##### 1)、协议简介
+##### 2.5.2.2.1. 1)、协议简介
 
 协议可以理解为中介或代理。
 
@@ -489,7 +488,7 @@ Distribution | 空间分配方式 | Fill Equally 为等高；其他均为原样�
 UITableView 显示数据时，必须先通过代理/协议（ViewController）获知要显示的数据是啥，这些数据要怎么显示。（这个代理可以理解为 Android 中的列表视图中的 Adapter ）
 
 
-##### 2）、为列表视图提供协议和数据源
+##### 2.5.2.2.2. 2）、为列表视图提供协议和数据源
 
  UITableViewDataSource 控制列表显示的数据内容，它需要实现如下方法：
 
@@ -508,7 +507,7 @@ UITableViewDelegate 处理列表视图的外观，没有强制要求实现的方
  var areas=["闵行区莘庄镇","兰州七里河区","三明市尤溪县","西宁城西区","广州白云区","闽侯县上街镇","哈尔滨市南岗区","临汾市尧都区","成都武侯区","汕头市金平区","长沙市芙蓉区","临沂市地方镇","济南市历下区"]
 ```
 
-##### 3）、让 ViewController 实现列表视图的必须协议
+##### 2.5.2.2.3. 3）、让 ViewController 实现列表视图的必须协议
 
 ![](pics/71-实现列表视图的必须协议.png)
 
@@ -539,9 +538,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
 }
 ```
-### 3、连接数据源和代理
+### 2.5.3. 3、连接数据源和代理
 
-#### （1）、将视图与数据源和代理进行关联
+#### 2.5.3.1. （1）、将视图与数据源和代理进行关联
 
 将视图与数据源和代理进行关联：
 
@@ -555,7 +554,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
 ![](pics/74-视图与代理关联后的数据显示.png)
 
-#### （2）、添加缩略图
+#### 2.5.3.2. （2）、添加缩略图
 
 [点击下载视频中的缩略图](https://pan.baidu.com/s/1c2449Yo)
 
@@ -583,7 +582,7 @@ cell.imageView?.image=areaIcon
 
 ![](pics/78-列表中添加图片的显示效果.png)
 
-#### （3）、隐藏状态栏
+#### 2.5.3.3. （3）、隐藏状态栏
 
 核心代码：
 
@@ -602,7 +601,7 @@ cell.imageView?.image=areaIcon
 
 ![](pics/79-状态栏隐藏之后的效果.png)
 
-### 4、添加布局约束
+### 2.5.4. 4、添加布局约束
 
 * `Command + 左方向键` 或 `Command + 右方向键` 可以实现模拟器的横屏切换
 * `Command + 上方向键` 可以调大模拟器的音量
@@ -620,11 +619,11 @@ cell.imageView?.image=areaIcon
 
 ![](pics/83-分割线满屏的效果.png)
 
-## 六、单元格
+## 2.6. 六、单元格
 
-### 1、使用 UITableViewController
+### 2.6.1. 1、使用 UITableViewController
 
-#### (1)、用 TableViewController 替换默认的 ViewController
+#### 2.6.1.1. (1)、用 TableViewController 替换默认的 ViewController
 
 新建项目 FansArea , 然后删除默认的 ViewController，如下图：
 
@@ -638,7 +637,7 @@ cell.imageView?.image=areaIcon
 
 ![](pics/86-新增TableViewController完成.png)
 
-#### （2）、新建 TableViewController.swift
+#### 2.6.1.2. （2）、新建 TableViewController.swift
 
 新建自定义的 `AreaTableViewController.swift` 文件，该类继承自 TableViewController：
 
@@ -678,7 +677,7 @@ Failed to instantiate the default view controller for UIMainStoryboardFile ‘Ma
 
 ![](pics/93-页面内查找元素.png)
 
-### 2、单元格专属缩略图
+### 2.6.2. 2、单元格专属缩略图
 
 [点击下载视频中的图片资源](http://ese3a8b8c4d6ab.pri.qiqiuyun.net/coursematerial-40/20170330111352-8ndv6uoh9m4okkkw?attname=areas-all.zip&e=1584539567&token=ExRD5wolmUnwwITVeSEXDQXizfxTRp7vnaMKJbO-:KB5aY0SknTamtKgxrXimEYeIuzU=)
 
@@ -734,11 +733,11 @@ class AreaTableViewController:UITableViewController {
 ![](pics/96-设置单元格专属图片.png)
 
 
-### 3、定制单元格外观
+### 2.6.3. 3、定制单元格外观
 
 因为之前的单元格样式都是使用的 `basic` , 运行之后界面并不美观，所以需要优化。
 
-#### (1)、定制单元格界面
+#### 2.6.3.1. (1)、定制单元格界面
 
 调整单元格和TableView的高度和样式:
 
@@ -756,7 +755,7 @@ class AreaTableViewController:UITableViewController {
 
 ![](pics/100-单元格中的3个Lebel.png)
 
-#### (2)、自定义单元格的控制器
+#### 2.6.3.2. (2)、自定义单元格的控制器
 
 新建 UITableViewCell 的实现类。
 
@@ -784,9 +783,9 @@ class AreaTableViewController:UITableViewController {
 
 ![](pics/105-查看控件关联关系2.png)
 
-### 4、单元格控制器代码编写
+### 2.6.4. 4、单元格控制器代码编写
 
-#### （1）、为自定义的单元格填充数据并展示
+#### 2.6.4.1. （1）、为自定义的单元格填充数据并展示
 
 使用 `as!` TableViewCell 强制转换为 `AreaTableViewCell` , 只有当我们确定能转换时才使用强转。否则就使用 `as?` 进行安全转换。强转出错会导致崩溃，但安全转换则不会。
 
@@ -817,9 +816,9 @@ class AreaTableViewController:UITableViewController {
 
 ![](pics/107-展示自定义单元格的效果.png)
 
-#### (2)、实现圆形图片
+#### 2.6.4.2. (2)、实现圆形图片
 
-##### 1）、视图处理类介绍——CALayer
+##### 2.6.4.2.1. 1）、视图处理类介绍——CALayer
 
 CALayer 类用来管理视图和处理视图相关动画，可调节的属性内容包括：
 
@@ -829,7 +828,7 @@ CALayer 类用来管理视图和处理视图相关动画，可调节的属性内
 * 透明度
 * 边角半径
 
-##### 2）、将列表单元格的图片变为圆形图
+##### 2.6.4.2.2. 2）、将列表单元格的图片变为圆形图
 
 由于我们设置的 thumbImageView 的宽高是相等的，所以，当 CALayer 的圆角半径为宽度的一半时，就能实现一个圆形图的效果。
 
@@ -849,23 +848,23 @@ CALayer 类用来管理视图和处理视图相关动画，可调节的属性内
 ![](pics/109-圆角图片的运行效果.png)
 
 
-## 七、单元格交互
+## 2.7. 七、单元格交互
 
 （本章节示例基于上一节自定义单元格的内容）
 
-### 1、最常见的单元格交互——点击
+### 2.7.1. 1、最常见的单元格交互——点击
 
-#### (1)、理解 UITableViewDelegate
+#### 2.7.1.1. (1)、理解 UITableViewDelegate
 
 delegate 是一种 “模式（pattern）”，每一个代理负责一个具体的角色或任务，类似“分包”。主要用来处理行为和交互。
 
 UITableViewDelegate 主要处理页眉页脚、单元格交互、排序等。
 
-#### (2)、QuickHelp 的使用
+#### 2.7.1.2. (2)、QuickHelp 的使用
 
 ![](pics/110-quickHelper界面.png)
 
-#### （3）、Selections
+#### 2.7.1.3. （3）、Selections
 
 在 IOS 中，使用 Selections 来表示选中事件，而不是用 click.
 
@@ -877,7 +876,7 @@ UITableViewDelegate 主要处理页眉页脚、单元格交互、排序等。
 
 如上图，需要注意函数参数中的 willSelectRowAt 和 didSelectRowAt 分别表示开始响应事件和响应完成。
 
-#### （4）、Selection 事件的实现
+#### 2.7.1.4. （4）、Selection 事件的实现
 
 核心代码：
 
@@ -892,11 +891,11 @@ UITableViewDelegate 主要处理页眉页脚、单元格交互、排序等。
 ![](pics/113-选中事件的示例.png)
 
 
-### 2、UIAlertController——通知框
+### 2.7.2. 2、UIAlertController——通知框
 
 UIAlertController 可以用来显示居于屏幕中间的通知框或者底部弹出菜单。
 
-#### (1)、UIAlertAction
+#### 2.7.2.1. (1)、UIAlertAction
 
 在配置通知框或者底部弹出菜单的时候，可以通过 `UIAlertAction` 配置相关的菜单参数，如：
 
@@ -906,7 +905,7 @@ UIAlertController 可以用来显示居于屏幕中间的通知框或者底部�
 `style` | 样式 | `.cancel`
 `handle` | 响应事件 |  nil (无操作） 
 
-#### (2)、显示位于屏幕中间的弹窗1
+#### 2.7.2.2. (2)、显示位于屏幕中间的弹窗1
 
 显示位于屏幕中间的弹窗的核心代码如下：
 
@@ -924,7 +923,7 @@ UIAlertController 可以用来显示居于屏幕中间的通知框或者底部�
 
 ![](pics/114-显示弹窗.png)
 
-#### （3）、显示位于屏幕中间的弹窗2
+#### 2.7.2.3. （3）、显示位于屏幕中间的弹窗2
 
 ```swift
    // 快速打出该方法的方式是，输入与其他函数不一样的参数，即 didSelect 然后就会在提示窗中展示该方法，选择即可。
@@ -945,7 +944,7 @@ UIAlertController 可以用来显示居于屏幕中间的通知框或者底部�
 
 ![](pics/115-显示中间的弹窗2.png)
 
-#### (3)、显示位于屏幕中间的弹窗3
+#### 2.7.2.4. (3)、显示位于屏幕中间的弹窗3
 
 ```swift
 // 快速打出该方法的方式是，输入与其他函数不一样的参数，即 didSelect 然后就会在提示窗中展示该方法，选择即可。
@@ -965,7 +964,7 @@ UIAlertController 可以用来显示居于屏幕中间的通知框或者底部�
 
 
 
-### 3、UIAlertController——底部弹出菜单
+### 2.7.3. 3、UIAlertController——底部弹出菜单
 
 ```swift
    // 快速打出该方法的方式是，输入与其他函数不一样的参数，即 didSelect 然后就会在提示窗中展示该方法，选择即可。
@@ -987,13 +986,13 @@ UIAlertController 可以用来显示居于屏幕中间的通知框或者底部�
 ![](pics/117-显示底部弹窗.png)
 
 
-###  4、可选链和复选 BUG 处理
+### 2.7.4. 4、可选链和复选 BUG 处理
 
-#### (1)、可选链
+#### 2.7.4.1. (1)、可选链
 
 在 `tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark`  中 `?` 即表示可选链，也就是空安全判断。非空执行后面的操作，空则不执行。
 
-#### (2)、事件响应完之后清除单元格的选中状态
+#### 2.7.4.2. (2)、事件响应完之后清除单元格的选中状态
 
 如下图，当我们点击了某个条目之后，条目会变灰，除非我们点击其他条目，否则这个灰色背景一直存在：
 
@@ -1008,7 +1007,7 @@ tableView.deselectRow(at: indexPath, animated: true)
 
 ![](pics/119-响应完事件就清除背景.png)
 
-#### （3）、修复单元格复用导致的 BUG
+#### 2.7.4.3. （3）、修复单元格复用导致的 BUG
 
 由于单元格存在复用机制，所以，在之前的代码中，假如我们选中并勾选了第一个条目，那么，复用该条目的条目也会被选中。
 
@@ -1128,9 +1127,9 @@ class AreaTableViewController:UITableViewController {
 ```
 
 
-## 八、单元格右划菜单
+## 2.8. 八、单元格右划菜单
 
-### 1、MVC 模式
+### 2.8.1. 1、MVC 模式
 
 
 无论哪种编程语言中，都有分离概念（SoC），其本质是将大程序或大的功能分解为小块，每一块各司其职（也就是设计模式中的单一职责原则）。
@@ -1144,7 +1143,7 @@ MVC (Model View Controller)
 * `Controller` 是视图和模型之间的桥梁，它把从视图来的用户交互信息转换成合适的模型操作。比如，用户按了视图上的删除按钮，控制器就会触发对模型的一个删除操作，删除完成，模型就要求视图更新自己，以便反映出对数据的更改。
 
 
-### 2、从 UITableView 删除一行
+### 2.8.2. 2、从 UITableView 删除一行
 
 需要操作的内容包括：
 
@@ -1152,7 +1151,7 @@ MVC (Model View Controller)
 * 删除行对应的数据
 * 刷新界面，将行视图从列表中删除
 
-#### (1)、启用 Cell 的滑动删除
+#### 2.8.2.1. (1)、启用 Cell 的滑动删除
 
 UITableViewDataSource 中有实现该功能的函数，如下：
 
@@ -1173,7 +1172,7 @@ UITableViewDataSource 中有实现该功能的函数，如下：
 
 ![](pics/121-显示侧滑效果.png)
 
-#### （2）、 修复崩溃的问题
+#### 2.8.2.2. （2）、 修复崩溃的问题
 
 在上一小节中，虽然我们从右向左滑动时展示了删除按钮，但是当我们点击这个按钮时，会触发崩溃。其崩溃信息中的核心错误是 `NSInternalInconsistencyException` , 完整错误如下：
 
@@ -1200,7 +1199,7 @@ UITableViewDataSource 中有实现该功能的函数，如下：
     }
 ```
 
-### (3)、`AreaTableViewController.swift` 的完整代码：
+### 2.8.3. (3)、`AreaTableViewController.swift` 的完整代码：
 
 ```swift
 import UIKit
@@ -1302,7 +1301,7 @@ class AreaTableViewController:UITableViewController {
 }
 ```
 
-#### （4）、刷新整个列表
+#### 2.8.3.1. （4）、刷新整个列表
 
 ```swift
 // 刷新整个TableView ，没有交互动画，比较生硬
@@ -1313,12 +1312,12 @@ tableView.deleteRows(at: [indexPath], with: .fade)
 ```
 
 
-### 3、定制单元格右划菜单
+### 2.8.4. 3、定制单元格右划菜单
 
 
 定制更多滑动菜单项时需要实现 返回 `UITableViewRowAction` 的 `tableView(_:editActionsForRowAt:)` 方法。需要注意的是，当我们手动实现该方法后，系统将不再提供默认的删除按钮了。
 
-#### (1)、自定义侧滑菜单中的选项
+#### 2.8.4.1. (1)、自定义侧滑菜单中的选项
 
 需要新增在 `AreaTableViewController.swift` 中的核心代码如下:
 
@@ -1356,7 +1355,7 @@ tableView.deleteRows(at: [indexPath], with: .fade)
 
 ![](pics/123-自定义侧滑菜单的效果.png)
 
-#### (2)、修改自定义菜单项的背景颜色
+#### 2.8.4.2. (2)、修改自定义菜单项的背景颜色
 
 ```swift
 //修改侧滑菜单项的背景颜色方式1：
@@ -1369,13 +1368,13 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
 ![](pics/124-修改自定义侧滑菜单项的背景色.png)
 
 
-## 九、导航、场景和转场
+## 2.9. 九、导航、场景和转场
 
 > 本章内容依旧基于前一章中的示例。
 
-### 1、导航相关术语介绍
+### 2.9.1. 1、导航相关术语介绍
 
-#### (1)、导航相关的术语
+#### 2.9.1.1. (1)、导航相关的术语
 
 * `导航栈（Stack）`: 把一个视图叠在另一个智商，加上返回按钮，这种层次结构就叫导航栈
 * `场景`：每一个页面都可以理解为一个场景
@@ -1399,9 +1398,9 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
 
 ![](pics/133-添加导航之后的效果.png)
 
-### 2、添加一个场景（即页面）
+### 2.9.2. 2、添加一个场景（即页面）
 
-#### (1)、添加场景
+#### 2.9.2.1. (1)、添加场景
 
 新建一个 ViewController , 里面放一个 UIImageView，用来显示大图。
 
@@ -1417,7 +1416,7 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
 
 ![](pics/130-为ImageView增加约束.png)
 
-#### (2)、通过转场（Segue）将视图连接在一起
+#### 2.9.2.2. (2)、通过转场（Segue）将视图连接在一起
 
 先选中 Cell，然后按住 Ctrl 键，然后将 Cell 向新建的 ViewController 中拖拽，然后选择转场弹窗中的 `Show`:
 
@@ -1427,14 +1426,14 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
 
 ![](pics/132-转场添加之后的效果.png)
 
-#### （3）、转场类型
+#### 2.9.2.3. （3）、转场类型
 
 * `Show` : 新的视图会被放入导航栈顶部，导航条会提供一个后退按钮，点击该按钮可以返回源视图。这是最常用的方式。
 * `Show detail` : 与 Show 相似，但会替换源视图，并且没有导航条和后退按钮。
 * `Present Modally` : 模态显示内容，新视图会从底部向上弹出，通常用户显示与页面连贯性不强的视图。
 * `Present as popover` : iPad 常用，模态显示一个带箭头指向圆角矩形弹窗，类似一个气泡式 弹出菜单。
 
-#### (4)、注释掉之前的单元格选中事件
+#### 2.9.2.4. (4)、注释掉之前的单元格选中事件
 
 注释掉或者删除 `AreaTableViewController.swift` 中的单元格选中事件相关的代码，如果不这么做，但我们点击条目时，会触发两个事件: 先弹出新的页面，然后在新页面底部弹出弹窗。
 
@@ -1460,7 +1459,7 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
     }*/
 ```
 
-### 3、定制详情页
+### 2.9.3. 3、定制详情页
 
 ####（1）、新建一个 `AreaDetailViewController.swift`
 
@@ -1473,13 +1472,13 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
 ![](pics/135-storyboard中的controller与swift文件关联.png)
 
 
-#### (2)、定义接收值的变量并关联视图 变量
+#### 2.9.3.1. (2)、定义接收值的变量并关联视图 变量
 
 ![](pics/136-将ViewController中的控件与swift文件中的变量关联.png)
 
-### 4、使用转场来传值
+### 2.9.4. 4、使用转场来传值
 
-#### (1)、prepare 方法
+#### 2.9.4.1. (1)、prepare 方法
 只有通过 storyboad 创建的转场才可以用转场传值，代码编写的转场不行。
 
 转场传值时使用的是 `override func prepare(for segue: UIStoryboardSegue, sender: Any?)` 方法。
@@ -1491,7 +1490,7 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
 ![](pics/137-为转场添加id.png)
 
 
-#### (3)、定制 prepare 方法体
+#### 2.9.4.2. (3)、定制 prepare 方法体
 
 定制的思路：
 
@@ -1537,7 +1536,7 @@ class AreaDetailViewController: UIViewController {
 ![](pics/138-查看cell详情的显示效果.png)
 
 
-#### (4)、调整图片平铺模式
+#### 2.9.4.3. (4)、调整图片平铺模式
 
 * `Scale To Fill` : 拉伸
 * `Aspect Fit` : 居中

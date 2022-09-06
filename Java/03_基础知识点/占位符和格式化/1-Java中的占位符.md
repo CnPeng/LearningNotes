@@ -1,14 +1,16 @@
 原文地址 [https://blog.csdn.net/gsls200808/article/details/39968749](https://blog.csdn.net/gsls200808/article/details/39968749)
 
-在Java中貌似很少有占位符(placeholder)这个概念，取而代之的是fomat类，另外一些框架也实现了占位符这样的东西。
+## 1. 占位符介绍
+
+在Java中貌似很少有占位符(placeholder)这个概念，取而代之的是 fomat 类，另外一些框架也实现了占位符这样的东西。
 
 在Java中有两种占位符%和{},
 
-%后面可以是d、f、s等中间也可以加其他参数。只能用于String类对象中，不能用于MessageFormat类对象。
+% 后面可以是d、f、s等中间也可以加其他参数。只能用于String类对象中，不能用于MessageFormat类对象。
 
 {}中的数字要与后面的参数位置对应。只能用于MessageFormat类对象中，不能用于String类对象。
 
-总的来说String.format()方法用起来不如MessageFormat.format()方法强大。
+总的来说 String.format() 方法用起来不如 MessageFormat.format() 方法强大。
 
 具体如何使用可以参考官方API文档
 
@@ -16,7 +18,7 @@
 
 下面的几个例子仅供参考
 
-```
+```java
 import java.text.MessageFormat;
 import java.util.Date;
  
@@ -62,7 +64,7 @@ public class test01 {
 ```
 
 
-## 二、Android中 string.xml 中使用
+## 2. Android 的 string.xml 中使用
 
 ```
 //string.xml 声明
@@ -73,15 +75,19 @@ public class test01 {
 ```
 
 
-## 三、其他内容：
-原文地址：https://www.jianshu.com/p/3d834f3a5e01
+## 3. 其他内容：
 
-在java中，可以通过String类中的format方法对字符串进行格式化和拼接相关操作。
-format方法有两种重载形式：
+原文地址：[https://www.jianshu.com/p/3d834f3a5e01](https://www.jianshu.com/p/3d834f3a5e01)
+
+
+在 java 中，可以通过 String 类中的 format 方法对字符串进行格式化和拼接相关操作。
+
+format 方法有两种重载形式：
+
 * format(Stringformat, Object... args) 新字符串使用本地语言环境，制定字符串格式和参数生成格式化的新字符串。
 * format(Locale locale, String format, Object... args) 使用指定的语言环境，制定字符串格式和参数生成格式化的字符串。
 
-format方法通常需要和转换字符进行配合实现不同数据类型到字符串的转换，下表列举部分转换字符串：
+format 方法通常需要和转换字符进行配合实现不同数据类型到字符串的转换，下表列举部分转换字符串：
 
 转换符	|说明|	示例
 ---|---|---
@@ -105,4 +111,4 @@ format方法通常需要和转换字符进行配合实现不同数据类型到�
 ![](https://images.gitee.com/uploads/images/2018/0904/103947_a5d35e28_930142.png "屏幕截图.png")
 
 
-可以看出，java支持丰富的字符串输出格式。可能唯一不太好的地方就是转义字符太多，不方便记忆。
+可以看出，java 支持丰富的字符串输出格式。可能唯一不太好的地方就是转义字符太多，不方便记忆。

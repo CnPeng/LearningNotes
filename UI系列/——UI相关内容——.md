@@ -1,3 +1,13 @@
+
+## 1. 原型设计
+
+[码前](https://www.devbefore.com/tutorial)
+
+[[mastergo](https://mastergo.com/)]
+
+
+## 2. 其他
+
 [快速在线生成APP图标——图标工场](https://icon.wuruihong.com/)
 
 [UI实战教程之切图标注篇（UI小白必备）](https://zhuanlan.zhihu.com/p/31622263)
@@ -7,6 +17,6 @@ UI相关PS插件截图：
 
 原型绘制工具：AxureRP
 
-[界面标注--摹客](https://idoc.mockplus.cn/team/qxyyeehptc)
+[界面标注--摹客](https://idoc.mockplus.cn)
 
 [知乎：UI设计师都用什么工具](https://www.zhihu.com/question/30367494)

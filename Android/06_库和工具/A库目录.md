@@ -6,15 +6,12 @@
 
 库名|功用| star数| 备注
 ---|---|---|---
+[fat-aar-android](https://github.com/kezong/fat-aar-android) | 将 library 及其依赖的 library 打包成一个完整 aar | 2.2k/2022-03-25 |  | 
 [3dTagCloudAndroid](https://github.com/misakuo/3dTagCloudAndroid) |基于ViewGroup实现的控件，支持将一组View展示为一个3D球形集合，并支持全方向滚动  |  1.5k / 2021-11-22|
 [BindingCollectionAdapter](https://github.com/evant/binding-collection-adapter) | 将集合数据和 item 布局绑定到 LV 或 RV 的 DataBinding 框架 | 1.8K /2021-11-22 | 
 [retrofit](https://github.com/square/retrofit) | 为 java 和 Android 而生的类型安全的网络请求框架 | 39k / 2021-11-22 | [参考文章](https://www.jianshu.com/p/eab096d82ce1)
 [youth5201314/banner](https://github.com/youth5201314/banner) | 自定义的轮播容器 | 11.6k/2021-11-22 | 
 [SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout) | 列表刷新组件 | 23.1k/ 2021-11-23 | 
-
-
-
-### 1.1.2. 有问题的库
 
 
 ## 1.2. AS插件
@@ -35,3 +32,5 @@
 * Smartrefresh:列表刷新库,地址 [https://github.com/scwang90/SmartRefreshLayout](https://github.com/scwang90/SmartRefreshLayout)
 * BGAQRCode:二维码扫描库,地址[https://github.com/bingoogolapple/BGAQRCode-Android](https://github.com/bingoogolapple/BGAQRCode-Android)
 * clipimage:图片裁剪库,
+
+

@@ -6,11 +6,15 @@
 
 在[6.0--TabLayout使用介绍（1）](http://www.jianshu.com/writer#/notebooks/8238235/notes/7501749)中，介绍了单独使用TabLayout的情况，接下来要说的是，TabLayout 与 ViewPager配合使用实现ViewPagerIndicator的功能。
 
-### (1). activity_vp_and_tl.xml 布局文件
+## 1. activity_vp_and_tl.xml 布局文件
+
 布局方式有两种，如下：
-######方式1 ：ViewPager 与TabLayout是平级关系
+
+### 1.1. 方式1 ：ViewPager 与TabLayout是平级关系
+
 activity_vp_and_tl.xml
-```
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -34,8 +38,10 @@ activity_vp_and_tl.xml
 
 </LinearLayout>
 ```
-######方式2 ：ViewPager 中嵌套TabLayout
-```
+
+### 1.2. 方式2 ：ViewPager 中嵌套TabLayout
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -57,15 +63,17 @@ activity_vp_and_tl.xml
     </android.support.v4.view.ViewPager>
 </LinearLayout>
 ```
-### (2).代码中的使用：
-VpAndTlActvitiy.java
-```
+
+## 2. 代码中的使用：
+
+* VpAndTlActvitiy.java
+
+```java
 /**
  * Created by CnPeng on 2016/12/6.
  * <p>
  * 展示viewPager 和 TabLayout的配合使用
  */
-
 public class VpAndTLActivity extends AppCompatActivity {
 
     public static void startVpAndTLActivity(Context context) {
@@ -111,12 +119,13 @@ public class VpAndTLActivity extends AppCompatActivity {
 }
 ```
 
-###(3). ViewPager适配器代码
-MyVpAndTlAdapter.java
-```
+## 3. ViewPager适配器代码
+
+* MyVpAndTlAdapter.java
+
+```java
 /**
  * Created by CnPeng on 2016/12/6.
- * <p>
  * ViewPager + TabLayout 时使用的适配器
  */
 public class MyVpAndTlAdapter extends PagerAdapter {
@@ -158,8 +167,10 @@ public class MyVpAndTlAdapter extends PagerAdapter {
 }
 
 ```
-附：layer_list_singleline.xml,这个是第一种方式中vp的那个backgroud
-```
+
+* 附：`layer_list_singleline.xml` ,这个是第一种方式中vp的那个backgroud
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -178,13 +189,21 @@ public class MyVpAndTlAdapter extends PagerAdapter {
     </item>
 </layer-list>
 ```
->总结：
-**A**:
+
+## 4. 总结：
+
+### 4.1. ViewPager 和 TabLayout 绑定
+
 如果vp 和 TL 是平级关系,需要使用 `tablayout.setupWithViewPager(viewPager);`  将二者关联。
+
 如果VP中包含TL时，会自动关联，不用写上面这句代码
-**B**:
-vp配合TL使用时，TabLayout 中的标签名称是通过ViewPager适配器中的getPageTitle()方法来设置的。所以，需要给适配器传入一个标签名称的集合。
+
+### 4.2. TabLayout 的标题
+
+vp配合TL使用时，TabLayout 中的标签名称是通过 ViewPager 适配器中的 `getPageTitle()` 方法来设置的。所以，需要给适配器传入一个标签名称的集合。
 
 [参考连接https://developer.android.com/reference/android/support/design/widget/TabLayout.html](https://developer.android.com/reference/android/support/design/widget/TabLayout.html)
 
-> **一个TL+一个VP +一个FM** 实现多页面切换时，VP使用FragmentPagerAdapter，其写法参考：https://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter.html
+### 4.3. ViewPager 的 Adapter
+
+> **一个TL+一个VP +一个FM** 实现多页面切换时，VP 使用 `FragmentPagerAdapter`，[其写法参考：](https://developer.android.com/reference/android/support/v4/app/FragmentPagerAdapter.html)
