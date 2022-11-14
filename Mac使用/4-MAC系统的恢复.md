@@ -132,5 +132,3 @@
 
 * [Apple支持-如何重新安装 macOS](https://support.apple.com/zh-cn/HT204904)
 * [Apple支持-抹掉并重新安装 macOS](https://support.apple.com/zh-cn/guide/mac-help/mh27903/mac)
-
-
