@@ -22,7 +22,7 @@
 * mac 系统会存放在 `~/.gitconfig` （对当前用户生效）或 `/usr/local/git/ect/gitconfig` （对系统中所有用户生效）文件中 ；
 * Windows 系统则在  `$HOME` 目录下（一般情况下是 `C:\Users\$USER` ）的 `.gitconfig` 文件中（对当前用户生效），或者 `C:\ProgramData\Git\config` 文件中（对系统中所有用户生效）。
 
-> * 还有仅对当前代码项目生效的配置，存放在项目中的 `.git` 目录中。
+> * 还有仅对当前代码项目生效的配置，存放在项目中的 `.git/config` 文件中。
 > * 按照 [《起步 - 初次运行 Git 前的配置》](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%88%9D%E6%AC%A1%E8%BF%90%E8%A1%8C-Git-%E5%89%8D%E7%9A%84%E9%85%8D%E7%BD%AE) 中的说明，作用范围低的会覆盖作用范围高的，也就是说，项目中 `.git` 目录下的配置会覆盖用户级别的配置，用户级别的配置会覆盖系统级别的配置。
 
 我们可以使用 `git config --list --show-origin` 命令查看现有的配置及其所在文件（即 gitconfig 文件）的位置：
