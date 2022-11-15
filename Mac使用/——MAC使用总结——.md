@@ -1,1 +1,0 @@
-[MAC用破解版软件下载](https://www.waitsun.com/)
