@@ -1,37 +1,37 @@
 原文地址：https://stackoverflow.com/questions/61212/how-to-remove-local-untracked-files-from-the-current-git-working-tree
 
 
-As per the Git Documentation [git clean](https://git-scm.com/docs/git-clean)
+As per the Git Documentation [git clean](https://git-scm.com/docs/git-clean)
 
 > Remove untracked files from the working tree
 
 * * *
 
-Step 1 is to show what will be deleted by using the `-n` option:
+Step 1 is to show what will be deleted by using the `-n` option:
 
 ```
 git clean -n
 
 ```
 
-Clean Step - **beware: this will delete files**:
+Clean Step - **beware: this will delete files**:
 
 ```
 git clean -f
 
 ```
 
-*   To remove directories, run `git clean -f -d` or `git clean -fd`
-*   To remove ignored files, run `git clean -f -X` or `git clean -fX`
-*   To remove ignored and non-ignored files, run `git clean -f -x` or `git clean -fx`
+*   To remove directories, run `git clean -f -d` or `git clean -fd`
+*   To remove ignored files, run `git clean -f -X` or `git clean -fX`
+*   To remove ignored and non-ignored files, run `git clean -f -x` or `git clean -fx`
 
-**Note** the case difference on the `X` for the two latter commands.
+**Note** the case difference on the `X` for the two latter commands.
 
-If `clean.requireForce` is set to "true" (the default) in your configuration, one needs to specify `-f`otherwise nothing will actually happen.
+If `clean.requireForce` is set to "true" (the default) in your configuration, one needs to specify `-f`otherwise nothing will actually happen.
 
-Again see the [`git-clean`](http://git-scm.com/docs/git-clean) docs for more information.
+Again see the [`git-clean`](http://git-scm.com/docs/git-clean) docs for more information.
 
-## Options
+## 1. Options
 
 **-f**
 
