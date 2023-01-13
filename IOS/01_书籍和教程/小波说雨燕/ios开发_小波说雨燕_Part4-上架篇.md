@@ -13,9 +13,9 @@
 * [Part4-上架篇-笔记](ios开发_小波说雨燕_Part4-上架篇.md)
  
 
-# [⑤上架篇](http://xiaoboswift.com/my/course/44)
+# 1. [⑤上架篇](http://xiaoboswift.com/my/course/44)
 
-## 一、App 本地化
+## 1.1. 一、App 本地化
 
 本地化（localization）即让 App 支持多种语言，把语言文字翻译成当地通用的。
 
@@ -26,9 +26,9 @@
 > 该章节实际操作时，与视频内容差异较大，可能是因为 Xcode 的版本跨度太大了😢
 
 
-### 1、用户交互的翻译
+### 1.1.1. 1、用户交互的翻译
 
-#### (1）、有默认翻译的关键字
+#### 1.1.1.1. (1）、有默认翻译的关键字
 
 对于 “删除”、“确认” 等常用关键字会有标准的翻译，对这这些关键字做本地化时可以使用 `NSLocalizedString`。
 
@@ -50,20 +50,20 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 
 ![](pics/443-本地化2.png)
 
-#### (2）、无默认翻译的字符串本地化
+#### 1.1.1.2. (2）、无默认翻译的字符串本地化
 
 使用两个参数的 `NSLocalizedString( , )`
 
-#### (3）、需要修改的内容
+#### 1.1.1.3. (3）、需要修改的内容
 
 * `.swift` 文件中的内容
 * storyboard 中的内容
 * `info.plist` 中的内容
 
 
-### 2、导出本地化
+### 1.1.2. 2、导出本地化
 
-#### (1）、增加多语言支持
+#### 1.1.2.1. (1）、增加多语言支持
 
 ![](pics/444-增加多语言支持.png)
 
@@ -71,7 +71,7 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 
 > 通过 `设置 > 通用 > 区域和语言` 可以更改系统语言
 
-#### (2）、把字符串自动导出
+#### 1.1.2.2. (2）、把字符串自动导出
 
 注意，必须先选中下图的 1， 然后再点击 Editor, 否则，看不到导入和导出。
 
@@ -85,7 +85,7 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 
 > `.xliff` 表示业内翻译标准文件； 另外，不知道为什么，视频中导出的是两个 xliff 文件，分别是中文的和日文的。但我导出的只有中文的。
 
-#### (3）、字符串翻译工具
+#### 1.1.2.3. (3）、字符串翻译工具
 
 在前面做本地化翻译时，我们都是挨个文本去翻译，效率太低，我们可以借助翻译工具实现。
 
@@ -101,26 +101,26 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 
 借助 XliffTool 可以方便的实现翻译，不用再满项目中导出找文本。
 
-### 3、导入本地化资源
+### 1.1.3. 3、导入本地化资源
 
 ![](pics/451-导入本地化的语言包.png)
 
-### 4、测试本地化App
+### 1.1.4. 4、测试本地化App
 
-#### (1）、更改测试本地化时的语言类型
+#### 1.1.4.1. (1）、更改测试本地化时的语言类型
 
 注意：在下图中，点击 1 时，必须点击红框内圈出来的图标，不要点击图片后面的部分，后面的部分是选择运行在哪个机器上的。 
 
 ![](pics/452-更改程序语言类型方式2.png)
 
-#### (2）、编辑过程中预览
+#### 1.1.4.2. (2）、编辑过程中预览
 
 在 storyboard 编辑的时候也可以进行本地化预览，方式如下：
 
 ![](pics/453-编辑的过程中预览.png)
 
 
-### 5、图片资源本地化
+### 1.1.5. 5、图片资源本地化
 
 [点击下载视频中的图片资源](http://xiaoboswift.com/course/44/task/425/show)
 
@@ -139,7 +139,7 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 然后运行 App 更改系统语言版本后就可以发现，“关于” 页面的图片也随之发生了变化
 
 
-## 二、App 真机部署
+## 1.2. 二、App 真机部署
 
 真机部署需要配置以下内容：
 
@@ -150,11 +150,11 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 
 工程基于上一章的内容
 
-### 1、为何需要证书
+### 1.2.1. 1、为何需要证书
 
 有了证书才安全。
 
-#### (1）、 证书和签名介绍
+#### 1.2.1.1. (1）、 证书和签名介绍
 
 部署到真机的 App, 代码都需要签名。
 
@@ -164,7 +164,7 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 
  真机部署时使用开发整数就可以了；上架时才使用发布证书。
 
-#### (2）、添加开发账号
+#### 1.2.1.2. (2）、添加开发账号
 
 ![](pics/459-添加开发账号.png)
 
@@ -174,19 +174,19 @@ let rowDelAction=UITableViewRowAction(style: .destructive, title: title) { (UITa
 
 ![](pics/461-自动签名管理.png)
 
-### 2、描述文件 `Provisioning Profile`
+### 1.2.2. 2、描述文件 `Provisioning Profile`
 
-#### (1）、描述文件简介
+#### 1.2.2.1. (1）、描述文件简介
 
 描述 App 在真机的运行过程，对全体组员的真机进行签名，从而能够运行 App。
 
 iOS 描述文件包含三部分：开发证书、AppId (Bundle Id)、授权设备（UDID）
 
-#### (2）、查看描述文件
+#### 1.2.2.2. (2）、查看描述文件
 
 ![](pics/462-描述文件.png)
 
-#### (3）、在真机上运行
+#### 1.2.2.3. (3）、在真机上运行
 
 在真机上第一次安装我们的 App 时，会爆出如下问题：  
 
@@ -197,26 +197,26 @@ iOS 描述文件包含三部分：开发证书、AppId (Bundle Id)、授权设�
 `设置 > 通用 > 描述文件与设备管理 > 点击开发者应用分组下我们的账号 > 信任开发者`
 
 
-#### (4）、问题解决
+#### 1.2.2.4. (4）、问题解决
 
-##### 1）、修改 target 版本
+##### 1.2.2.4.1. 1）、修改 target 版本
 
 TODO 
 
-##### 2）、为什么真机上运行黑屏
+##### 1.2.2.4.2. 2）、为什么真机上运行黑屏
 
 TODO
 
-## 三、单元测试
+## 1.3. 三、单元测试
 
 本章主要内容：
 
 * Xcode 的单元测试
 * 如何对一小块（单元）代码功能进行验证
 
-### 1、新增单元测试类
+### 1.3.1. 1、新增单元测试类
 
-#### (1）、新建测试 Bundle
+#### 1.3.1.1. (1）、新建测试 Bundle
 
 按照下图步骤新建一个测试 Bundle : 
 
@@ -226,9 +226,9 @@ TODO
 
 ![](pics/466-新增的测试包.png)
 
-#### (2）、导入要测试的项目
+#### 1.3.1.2. (2）、导入要测试的项目
 
-##### 1）、桥接头文件 
+##### 1.3.1.2.1. 1）、桥接头文件 
 
 因为 FansAreaTests 这个 target 是一个单独的项目，如果主 target (即 FansArea) 有桥接之类的配置，则必须再配置一次。
 
@@ -244,7 +244,7 @@ TODO
 
 ![](pics/469-拷贝并粘贴头文件.png)
 
-##### 2）、导入要测试的包
+##### 1.3.1.2.2. 2）、导入要测试的包
 
 这样，在测试中也就可以导入要测试的包了，导入语句为：`@testable import FansArea`，详细参考下图：
 
@@ -252,7 +252,9 @@ TODO
 
 然后用 `菜单栏 > Product > Build ` 对项目重新构建，如果构建成功，则表示可以对主 target 进行测试了。
 
-#### (3）、更新 podfile
+#### 1.3.1.3. (3）、更新 podfile
+
+> 如果是 clone 的远端代码内容进行运行，需要先执行 `pod install` , 如果能正常运行，则不需要更新依赖信息。
 
 Podfile 只配置了主 target , 必须让 FansAreaTests 这个 target 也能使用  cocoapods。
 
@@ -270,9 +272,9 @@ pod update --no-repo-update
 ![](pics/472-执行pod更新.png)
 
 
-### 2、开始单元测试
+### 1.3.2. 2、开始单元测试
 
-#### (1）、XCTest 框架
+#### 1.3.2.1. (1）、XCTest 框架
 
 ![](pics/473-XCtest测试框架.png)
 
@@ -280,11 +282,11 @@ pod update --no-repo-update
 
 ![](pics/474-测试界面的说明.png)
 
-#### (2）、测试案例
+#### 1.3.2.2. (2）、测试案例
 
 以 AreaTableViewController 中的 searchFilter 方法进行测试。
 
-##### 1）、初始化要测试的 VC
+##### 1.3.2.2.1. 1）、初始化要测试的 VC
 
 在 `FansAreaTests.swift` 中新增一个控制器属性：
 
@@ -303,7 +305,7 @@ let sb=UIStoryboard(name: "Main", bundle: Bundle.main)
 vc = sb.instantiateViewController(identifier: "AreaTableVC") as! AreaTableViewController
 ```
 
-##### 2）、编写测试方法
+##### 1.3.2.2.2. 2）、编写测试方法
 
 测试方法必须以 `test` 开头：
 
@@ -325,7 +327,7 @@ func testSearchFilter(){
 
 ![](pics/475-调试失败了.png)
 
-##### 3）、修正调试失败的原因
+##### 1.3.2.2.3. 3）、修正调试失败的原因
 
 上一小节中之所以测试失败，是因为在执行 `vc.searchFilter("大山坡")` 的时候 `AreaTableViewController` 中的视图还没有初始化，所以必然返回为0。解决方法就是，在搜索前加入 `vc.viewDidLoad()` 先对视图进行初始化：
 
@@ -340,7 +342,7 @@ func testSearchFilter(){
 ![](pics/476-测试成功.png)
 
  
-## 四、TestFlight
+## 1.4. 四、TestFlight
 
 [点击下载视频中的图片资源](http://xiaoboswift.com/course/44/task/424/show)
 
@@ -351,7 +353,7 @@ TestFlight 是苹果官方推荐的 beta 测试工具（即上架前的测试工
 
 缺点：邀请测试邮件及 TestFlight 界面都是英文。
 
-### 1、创建 App 记录
+### 1.4.1. 1、创建 App 记录
 
 iTunes Connect  是开发者管理发布 App 的在线系统。地址：[https://itunesconnect.apple.com](https://itunesconnect.apple.com)
 
@@ -405,9 +407,9 @@ iTunes Connect  是开发者管理发布 App 的在线系统。地址：[https:/
 
 ![](pics/494-确保版本号一致.png)
 
-### 2、打包和上传
+### 1.4.2. 2、打包和上传
 
-#### (1）、完善 App 图标
+#### 1.4.2.1. (1）、完善 App 图标
 
 先找一个  1024*1024 的 PNG 图片做母版，然后通过如下工具生成各尺寸的图标：
 
@@ -419,7 +421,7 @@ iTunes Connect  是开发者管理发布 App 的在线系统。地址：[https:/
 
 注意：不要直接使用视频中带的图片资源，那个没有尺寸标识，导入会报错的。
 
-#### (2）、打包
+#### 1.4.2.2. (2）、打包
 
 ![](pics/497-应用打包.png)
 
@@ -447,15 +449,15 @@ iTunes Connect  是开发者管理发布 App 的在线系统。地址：[https:/
 
 处理完毕后，Apple ID 的邮箱就会收到完成通知，然后就可以进行 TestFlight 的测试或提交上架了。
 
-### 3、内部测试
+### 1.4.3. 3、内部测试
 
-#### (1）、填写测试信息：
+#### 1.4.3.1. (1）、填写测试信息：
 
 ![](pics/504-填写测试信息1.png)
 
 ![](pics/505-填写测试信息2.png)
 
-#### (2）、添加测试用户
+#### 1.4.3.2. (2）、添加测试用户
 
 ![](pics/506-添加测试用户.png)
 
@@ -465,20 +467,20 @@ iTunes Connect  是开发者管理发布 App 的在线系统。地址：[https:/
 
 ![](pics/509-添加构建版本和测试员.png)
 
-#### (3）、开始测试
+#### 1.4.3.3. (3）、开始测试
 
 ![](pics/510-开始测试.png)
 
 ![](pics/511-收到测试邮件并测试.png)
 
-### 4、外部测试
+### 1.4.4. 4、外部测试
 
 * 版本需要先提交审核一次（后续无需再审核）
 * 无需添加用户，任意 Email 都可以
 
 ![](pics/512-外部测试1.png) 
 
-### 5、分发测试包的方式总结（非视频内容）
+### 1.4.5. 5、分发测试包的方式总结（非视频内容）
 
 方式一：
 
@@ -496,13 +498,13 @@ iTunes Connect  是开发者管理发布 App 的在线系统。地址：[https:/
 * 1、提供手机 UDID，获取方法参考链接:  https://www.jianshu.com/p/28550362efae;
 * 2、通过开发者提供的二维码扫码下载安装，此安装包推送功能会异常。
 
-## 五、提交 AppStore 上架
+## 1.5. 五、提交 AppStore 上架
 
-### 1、上架前准备
+### 1.5.1. 1、上架前准备
 
 ![](pics/513-上架的准备工作.png)
 
-### 2、提交 AppStore 审核
+### 1.5.2. 2、提交 AppStore 审核
 
 设置价格和销售范围:
 

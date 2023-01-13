@@ -137,3 +137,119 @@
 
 这种方式虽然省去了查找配置文件所在位置的步骤，但需要逐条添加，效率不高，不建议使用。
 
+### 1.4.3. 完整配置文件示例
+
+```bash
+[core]
+	excludesfile = ~/.gitignore
+	legacyheaders = false # >git 1.5
+	quotepath = false
+
+[user]
+	name = CnPeng
+	email = 893612134@qq.com
+
+[mergetool]
+	keepBackup = true
+
+[push]
+	default = simple # [ matching | simple ]
+
+[color]
+	ui = auto
+	interactive = auto
+
+[repack]
+	usedeltabaseoffset = true # >git 1.5
+
+[alias]
+	s = status
+
+	df = diff
+	d = diff
+
+	al = add .
+	a = !git add . && git status
+	au = !git add -u . && git status
+	aa = !git add . && git add -u . && git status
+
+	c = commit
+	cm = commit -m
+
+	ac = !git add . && git commit
+	acm = !git add . && git commit -m
+	ca = commit --amend # careful
+	am = commit --amend
+	amne = !git add . && git commit --amend --no-edit
+
+	br = branch
+	brd = branch -D 
+	
+	ck = checkout
+	ckb = checkout -b
+	ckd = checkout dev
+	ckm = checkout master
+	master = checkout master
+
+	pl = pull
+	plom = pull origin master
+	plod = pull origin dev
+	ps = push
+	psom = push origin master
+	psod = push origin dev
+
+	mg = merge
+	
+	rmt = remote
+	rmtv = remote -v
+
+	cgl = config --global -l 
+	rmch = rm --cached 
+	rsth = reset --hard
+	cp = cherry-pick
+
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+	
+	lg = log 
+	lg1 = log -1
+	lg2 = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	ll = log --stat --abbrev-commit
+	lg3 = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lg4 = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+
+	spull = svn rebase
+	spush = svn dcommit
+
+
+[include]	# as of 1.7.10 https://github.com/git/git/commit/9b25a0b52e09400719366f0a33d0d0da98bbf7b0
+	path = ~/.gitcinclude
+	path = .githubconfig
+	path = .gitcredential
+
+#[github]
+#	user =
+#	token =
+
+[diff]
+	# git does copy/rename *detection*. if you want it to track copies/renames:
+	# http://stackoverflow.com/questions/1043388/record-file-copy-operation-with-git
+	# renames = copies
+
+[diff "exif"]
+	textconv = exif
+
+[credential]
+	helper = osxkeychain
+
+[i18n]
+	commitencoding = utf-8
+	logoutputencoding = utf-8
+
+[gui]
+	encoding = utf-8
+
+[http]
+	version = HTTP/1.1
+
+```
