@@ -2,21 +2,21 @@ MAC 下配置环境变量，以 adb 的配置为例：
 
 * 先打开终端，然后输入
 
-```		
+```bash		
 // 切换到根目录
 cd ~/
 ```
 
 * 打开配置文件
 
-```
-//方式1：编辑时以普通文本模式编辑，关闭即保存
+```bash
+#方式1：编辑时以普通文本模式编辑，关闭即保存
 open -e .bash_profile		
 
-//方式2：以 vim 方式编辑，编辑和保存时需要使用 vim 命令
+#方式2：以 vim 方式编辑，编辑和保存时需要使用 vim 命令
 vim .bash_profile
 
-// 注意：如果配置文件不存在，可通过 touch 命令创建，如下
+# 注意：如果配置文件不存在，可通过 touch 命令创建，如下
 touch .bash_profile
 
 ```
@@ -27,7 +27,7 @@ touch .bash_profile
 
 * 编辑配置文件
 
-```
+```bash
 # 声明 SDK 目录变量
 export ANDROID_SDK_ROOT=/Users/cnpeng/Library/Android/sdk
 # 将 SDK 中的 tools 目录追加到环境变量 ${PATH} 表示已有的 PATH，:$xxx 表示末尾追加
@@ -38,7 +38,7 @@ export PATH=${PATH}:${ANDROID_SDK_ROOT}/platform-tools
 
 * 让修改立即生效
 
-```
+```bash
 source .bash_profile
 ```
 
