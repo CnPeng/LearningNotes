@@ -11,14 +11,15 @@
 
 
 文章摘录：
-### 一、 Android - Gradle 使用干货 之 生成版本号，打包重命名和多渠道
+
+# 1.  Gradle 使用干货 之 生成版本号，打包重命名和多渠道
 
 
 >作者：LABLENET 
 >
 >原文：https://blog.csdn.net/LABLENET/article/details/70864843 
 
-#### 1. 版本号
+## 1.1. 版本号
 * version code
 * version name
 
@@ -41,8 +42,9 @@
 
 <br>
 
-**A：获取 git 提交次数**
-```
+### 1.1.1. 获取 git 提交次数
+
+```groovy
 // 获取修订版本 git 提交次数
 static def getRevisionNumber() {
     Process process = "git rev-list --count HEAD".execute()
@@ -50,12 +52,15 @@ static def getRevisionNumber() {
     return process.getText().toInteger()
 }
 ```
- >**注意：git rev-list HEAD --first-parent --count 是获取当前分支的git提交次数！！** 
+
+ **注意：`git rev-list HEAD --first-parent --count` 是获取当前分支的git提交次数！！** 
 
 
- **Ｂ：获取提交记录后6位：没有返回 yyDDmm 日期** 
+### 1.1.2. 获取提交记录后6位
 
-```
+获取提交记录后6位：没有则返回 yyDDmm 日期
+
+```groovy
 // 获取修订版本最后一次 git 记录后6位
 static def getRevisionDescription() {
     String desc = 'git describe --always'.execute().getText().trim()
@@ -63,9 +68,9 @@ static def getRevisionDescription() {
 }
 ```
 
- **Ｃ：获取 version code** 
+### 1.1.3. 获取 version code
 
-```
+```groovy
 // 获取 version code
 static def getVersionCode(boolean isDebug) {
     if (isDebug) {
@@ -75,8 +80,9 @@ static def getVersionCode(boolean isDebug) {
 }
 ```
 
- **D:获取 version name** 
-```
+### 1.1.4. 获取 version name
+
+```groovy
 // 获取 version name
 def getVersionName(boolean isDebug) {
     String version = appConfig.appmajor +
@@ -91,25 +97,28 @@ def getVersionName(boolean isDebug) {
 }
 ```
 
- **E:使用** 
-```
+### 1.1.5. 调用上述方法
+ 
+```groovy
  versionCode getVersionCode(true)
  versionName getVersionName(true)
 ```
 
-#### 2. 打包重命名
-
-* debug 生成名称 :
-
->appName_buildType.apk
-
-* release 生成名称
-
->appName_channelName_buildType_vesionCode.apk
+## 1.2. 打包重命名
 
 
- **配置如下 ：** 
-```
+### 1.2.1. 名称示例
+
+* debug 生成名称 : `appName_buildType.apk`
+
+* release 生成名称：`appName_channelName_buildType_vesionCode.apk`
+
+
+### 1.2.2. gradle 中的配置信息
+
+ 配置如下 ：
+
+```groovy
  //打包命名
     applicationVariants.all {
         variant ->
@@ -133,11 +142,11 @@ def getVersionName(boolean isDebug) {
 ```
 
 
-#### 3. 多渠道
+## 1.3. 多渠道
 
 这里有两个版本 ： beta 和 production , 当然也可以写多个版本；
 
-```
+```groovy
 productFlavors {
         beta {
             buildConfigField "String", "API_BETA", "\"$appConfig.betaAPI\""
@@ -161,8 +170,9 @@ productFlavors {
     }
 ```
 
-配合 AndroidManifest.xml 使用，不同的版本可以不同的logo和name :
-```
+配合 AndroidManifest.xml 使用，不同的版本可以不同的 logo 和 name :
+
+```groovy
  <application
         android:name=".MainApplication"
         android:allowBackup="true"
@@ -175,15 +185,15 @@ productFlavors {
 ```
 
 
-#### 4. 全部配置(完整示例)
+## 1.4. 全部配置(完整示例)
 
- **A:配置 config.gradle** 
+### 1.4.1. 配置 config.gradle
 
 使用 配置如下
 
-```
+```groovy
 ext.versions = [
-        // 本地仓库版本     
+        // 本地仓库版本
 ]
 
 // app 相关信息总配置
@@ -204,9 +214,9 @@ ext.appConfig = [
 ]
 ```
 
- **B:build.gradle** 
+### 1.4.2. build.gradle
 
-```
+```groovy
 apply plugin: 'com.android.application'
 apply from: "$rootDir/config.gradle"
 

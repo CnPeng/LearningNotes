@@ -6,7 +6,7 @@
 
 > 下列示例中的 gorm 是导师 Fork 的，GORM 的原始路径是：[https://github.com/go-gorm/gorm](https://github.com/go-gorm/gorm)
 
-## .1 GORM 介绍
+## 1. GORM 介绍
 
 gorm 是一个使用 Go 语言编写的 ORM 框架。它文档齐全，对开发者友好，支持主流数据库。
 
@@ -16,13 +16,13 @@ gorm 是一个使用 Go 语言编写的 ORM 框架。它文档齐全，对开发
 * [GORM 中文文档](https://gorm.io/zh_CN/docs/)
 
 
-## .2 安装
+## 2. 安装
 
 ```
 go get -u github.com/jinzhu/gorm
 ```
 
-## .3 连接数据库
+## 3. 连接数据库
 
 连接不同的数据库都需要导入对应数据库驱动程序，GORM 已经贴心的为我们包装了一些驱动程序，只需要按如下方式导入需要的数据库驱动即可：
 
@@ -33,7 +33,7 @@ import _ "github.com/jinzhu/gorm/dialects/mysql"
 // import _ "github.com/jinzhu/gorm/dialects/mssql"
 ```
 
-### .3.1  连接MySQL
+### 3.1. 连接MySQL
 
 ```go
 import (
@@ -47,7 +47,7 @@ func main() {
 }
 ```
 
-### .3.2 连接PostgreSQL
+### 3.2. 连接PostgreSQL
 
 基本代码同上，注意引入对应 postgres 驱动并正确指定 gorm.Open() 参数。
 
@@ -63,7 +63,7 @@ func main() {
 }
 ```
 
-### .3.3  连接Sqlite3
+### 3.3. 连接Sqlite3
 
 基本代码同上，注意引入对应 sqlite 驱动并正确指定 gorm.Open() 参数。
 
@@ -79,7 +79,7 @@ func main() {
 }
 ```
 
-### .3.4 连接SQL Server
+### 3.4. .3.4 连接SQL Server
 
 基本代码同上，注意引入对应 mssql 驱动并正确指定 gorm.Open() 参数。
 
@@ -95,7 +95,7 @@ func main() {
 }
 ```
 
-## .4 GORM基本示例
+## 4. .4 GORM基本示例
 
 > 注意:
 > 
@@ -103,7 +103,7 @@ func main() {
 >* 往下阅读本文前，你需要有一个能够成功连接上的MySQL数据库实例。
 
 
-### .4.1 Docker 快速创建 MySQL 实例
+### 4.1. Docker 快速创建 MySQL 实例
 
 很多同学如果不会安装 MySQL 或者懒得安装 MySQL，可以使用一下命令快速运行一个 MySQL8.0.19 实例，当然前提是你要有 docker 环境…
 
@@ -119,7 +119,7 @@ docker run --name mysql8019 -p 13306:3306 -e MYSQL_ROOT_PASSWORD=root1234 -d mys
 docker run -it --network host --rm mysql mysql -h127.0.0.1 -P13306 --default-character-set=utf8mb4 -uroot -p
 ```
 
-### .4.2 创建数据库
+### 4.2. 创建数据库
 
 在使用 GORM 前手动创建数据库 db1：
 
@@ -127,7 +127,7 @@ docker run -it --network host --rm mysql mysql -h127.0.0.1 -P13306 --default-cha
 CREATE DATABASE db1;
 ```
 
-### .4.3 GORM 操作 MySQL
+### 4.3. GORM 操作 MySQL
 
 使用 GORM 连接上面的 `db1` 进行创建、查询、更新、删除操作。
 
@@ -180,11 +180,11 @@ func main() {
 }
 ```
 
-## .5 GORM Model定义
+## 5. GORM Model定义
 
 在使用 ORM 工具时，通常我们需要在代码中定义模型（Models）与数据库中的数据表进行映射，在 GORM 中模型（Models）通常是正常定义的**结构体、基本的 go 类型或它们的指针**。 同时也支持 `sql.Scanner` 及`driver.Valuer` 接口（interfaces）。
 
-### .4.1 gorm.Model
+### 5.1. gorm.Model
 
 为了方便模型定义，GORM 内置了一个 `gorm.Model` 结构体。`gorm.Model` 是一个包含了 `ID`, `CreatedAt`, `UpdatedAt`, `DeletedAt` 四个字段的 Golang 结构体。
 
@@ -218,7 +218,7 @@ type User struct {
 }
 ```
 
-### .4.2 模型定义示例
+### 5.2. 模型定义示例
 
 ```go
 type User struct {
@@ -235,7 +235,7 @@ type User struct {
 }
 ```
 
-### .4.3 结构体标记（tags）
+### 5.3. 结构体标记（tags）
 
 使用结构体声明模型时，标记（tags）是可选项。gorm 支持的标记如下
 
@@ -244,18 +244,18 @@ type User struct {
 
 标记（Tag）|	描述
 ---|---
-Column	 | 指定列名
-Type	 | 指定列数据类型
-Size 	| 指定列大小, 默认值255
+`Column`	 | 指定列名
+`Type`	 | 指定列数据类型
+`Size` 	| 指定列大小, 默认值255
 `PRIMARY_KEY`	| 将列指定为主键
-UNIQUE	 | 将列指定为唯一
-DEFAULT	| 指定列默认值
-PRECISION	| 指定列精度
-NOT NULL	| 将列指定为非 NULL
+`UNIQUE`	 | 将列指定为唯一
+`DEFAULT`	| 指定列默认值
+`PRECISION`	| 指定列精度
+`NOT NULL`	| 将列指定为非 NULL
 `AUTO_INCREMENT`	| 指定列是否为自增类型
-INDEX	| 创建具有或不带名称的索引, 如果多个索引同名则创建复合索引
+`INDEX`	| 创建具有或不带名称的索引, 如果多个索引同名则创建复合索引
 `UNIQUE_INDEX`	| 和 INDEX 类似，只不过创建的是唯一索引
-EMBEDDED	| 将结构设置为嵌入
+`EMBEDDED`	| 将结构设置为嵌入
 `EMBEDDED_PREFIX`	| 设置嵌入结构的前缀
 `-`	| 忽略此字段
 
@@ -264,10 +264,10 @@ EMBEDDED	| 将结构设置为嵌入
 
 标记（Tag）|	描述
 ---|---
-MANY2MANY	|指定连接表
-FOREIGNKEY	|设置外键
+`MANY2MANY`	|指定连接表
+`FOREIGNKEY`	|设置外键
 `ASSOCIATION_FOREIGNKEY`	| 设置关联外键
-POLYMORPHIC	| 指定多态类型
+`POLYMORPHIC`	| 指定多态类型
 `POLYMORPHIC_VALUE`	| 指定多态值
 `JOINTABLE_FOREIGNKEY`	| 指定连接表的外键
 `ASSOCIATION_JOINTABLE_FOREIGNKEY`	| 指定连接表的关联外键
@@ -277,9 +277,9 @@ POLYMORPHIC	| 指定多态类型
 `ASSOCIATION_SAVE_REFERENCE`	| 是否自动完成引用的 save 的相关操作
 `PRELOAD`	| 是否自动完成预加载的相关操作
 
-## .5 主键、表名、列名的约定
+## 6. 主键、表名、列名的约定
 
-### .5.1 主键（Primary Key）
+### 6.1. 主键（Primary Key）
 
 GORM 默认会使用名为 ID 的字段作为表的主键。
 
@@ -297,7 +297,7 @@ type Animal struct {
 }
 ```
 
-### .5.2 表名（Table Name）
+### 6.2. 表名（Table Name）
 
 表名默认就是结构体名称的复数，例如：
 
@@ -343,7 +343,7 @@ gorm.DefaultTableNameHandler = func (db *gorm.DB, defaultTableName string) strin
 }
 ```
 
-### .5.3 列名（Column Name）
+### 6.3. 列名（Column Name）
 
 列名由字段名称通过下划线分割来生成
 
@@ -366,9 +366,9 @@ type Animal struct {
 }
 ```
 
-### .5.4 时间戳跟踪
+### 6.4. 时间戳跟踪
 
-#### .5.4.1 CreatedAt
+#### 6.4.1. CreatedAt
 
 如果模型有 `CreatedAt `字段，该字段的值将会是初次创建记录的时间。
 
@@ -379,7 +379,7 @@ db.Create(&user) // `CreatedAt`将会是当前时间
 db.Model(&user).Update("CreatedAt", time.Now())
 ```
 
-#### .5.4.2 UpdatedAt
+#### 6.4.2. UpdatedAt
 
 如果模型有 `UpdatedAt` 字段，该字段的值将会是每次更新记录的时间。
 
@@ -389,11 +389,11 @@ db.Save(&user) // `UpdatedAt`将会是当前时间
 db.Model(&user).Update("name", "jinzhu") // `UpdatedAt`将会是当前时间
 ```
 
-#### .5.4.3  DeletedAt
+#### 6.4.3. DeletedAt
 
 **如果模型有 `DeletedAt` 字段，调用 `Delete` 删除该记录时，将会设置 `DeletedAt` 字段为当前时间，而不是直接将记录从数据库中删除。**
 
-## .6 CRUD
+## 7. CRUD
 
 > CRUD 即 Create、Refer、Update、Delete
 
@@ -415,9 +415,9 @@ func main() {
 }
 ```
 
-### .6.1 创建
+### 7.1. 创建
 
-#### .6.1.1 创建/添加记录
+#### 7.1.1. 创建/添加记录
 
 首先定义模型：
 
@@ -439,7 +439,7 @@ db.Create(&user)   // 创建user
 db.NewRecord(user) // 创建`user`后返回`false`
 ```
 
-#### .6.1.2  默认值
+#### 7.1.2. 默认值
 
 可以通过 `defalut`  tag 定义字段的默认值，比如：
 
@@ -493,7 +493,7 @@ user := User{Name: sql.NullString{"", true}, Age:18}
 db.Create(&user)  // 此时数据库中该条记录name字段的值就是''
 ```
 
-#### .6.1.3 扩展创建选项
+#### 7.1.3. 扩展创建选项
 
 例如 PostgreSQL 数据库中可以使用下面的方式实现合并插入, 有则更新, 无则插入。
 
@@ -503,9 +503,9 @@ db.Set("gorm:insert_option", "ON CONFLICT").Create(&product)
 // INSERT INTO products (name, code) VALUES ("name", "code") ON CONFLICT;
 ```
 
-### .6.2 查询
+### 7.2. 查询
 
-#### .6.2.1 一般查询
+#### 7.2.1. 一般查询
 
 ```go
 // 根据主键查询第一条记录
@@ -529,9 +529,9 @@ db.First(&user, 10)
 //// SELECT * FROM users WHERE id = 10;
 ```
 
-#### .6.2.2 Where 条件
+#### 7.2.2. Where 条件
 
-##### .6.2.2.1 普通SQL查询
+##### 7.2.2.1. 普通SQL查询
 
 ```go
 // Get first matched record
@@ -567,7 +567,7 @@ db.Where("created_at BETWEEN ? AND ?", lastWeek, today).Find(&users)
 //// SELECT * FROM users WHERE created_at BETWEEN '2000-01-01 00:00:00' AND '2000-01-08 00:00:00';
 ```
 
-##### .6.2.2.2 Struct & Map查询
+##### 7.2.2.2. Struct & Map查询
 
 ```go
 // Struct
@@ -608,7 +608,7 @@ type User struct {
 }
 ```
 
-#### .6.2.3 Not 条件
+#### 7.2.3. Not 条件
 
 作用与 Where 类似的情形如下：
 
@@ -636,7 +636,7 @@ db.Not(User{Name: "jinzhu"}).First(&user)
 //// SELECT * FROM users WHERE name <> "jinzhu";
 ```
 
-#### .6.2.4 Or 条件
+#### 7.2.4. Or 条件
 
 ```go
 db.Where("role = ?", "admin").Or("role = ?", "super_admin").Find(&users)
@@ -651,7 +651,7 @@ db.Where("name = 'jinzhu'").Or(map[string]interface{}{"name": "jinzhu 2"}).Find(
 //// SELECT * FROM users WHERE name = 'jinzhu' OR name = 'jinzhu 2';
 ```
 
-#### .6.2.5 内联条件
+#### 7.2.5. 内联条件
 
 作用与 Where 查询类似，**当内联条件与多个立即执行方法一起使用时, 内联条件不会传递给后面的立即执行方法。**
 
@@ -679,7 +679,7 @@ db.Find(&users, map[string]interface{}{"age": 20})
 //// SELECT * FROM users WHERE age = 20;
 ```
 
-#### .6.2.6 额外查询选项
+#### 7.2.6. 额外查询选项
 
 ```go
 // 为查询 SQL 添加额外的 SQL 操作
@@ -689,7 +689,7 @@ db.Set("gorm:query_option", "FOR UPDATE").First(&user, 10)
 
 > `for update` 就是一个行级锁。借助 `for update` 子句，我们可以在应用程序的层面手工实现**数据加锁保护**操作（防止多线程的情况下出现问题）如：`select * from 表名 for update`，就可以把查询出来的数据进行加锁控制，别人就无法查询更新了。如果是你自己锁的, 通过 `rollback` 或者 `commit` 都能解锁; 如果是别人锁的，解锁会麻烦一些。
 
-#### .6.2.7 FirstOrInit
+#### 7.2.7. FirstOrInit
 
 获取匹配的第一条记录，**否则根据给定的条件初始化一个新的对象** (仅支持 struct 和 map 条件)
 
@@ -705,7 +705,7 @@ db.FirstOrInit(&user, map[string]interface{}{"name": "jinzhu"})
 //// user -> User{Id: 111, Name: "Jinzhu", Age: 20}
 ```
 
-##### .6.2.7.1 Attrs
+##### 7.2.7.1. Attrs
 
 如果记录未找到，将使用参数初始化 struct.
 
@@ -725,7 +725,7 @@ db.Where(User{Name: "Jinzhu"}).Attrs(User{Age: 30}).FirstOrInit(&user)
 //// user -> User{Id: 111, Name: "Jinzhu", Age: 20}
 ```
 
-##### .6.2.7.2 Assign
+##### 7.2.7.2. Assign
 
 不管记录是否找到，都将参数赋值给 struct.
 
@@ -740,7 +740,7 @@ db.Where(User{Name: "Jinzhu"}).Assign(User{Age: 30}).FirstOrInit(&user)
 //// user -> User{Id: 111, Name: "Jinzhu", Age: 30}
 ```
 
-#### .6.2.8 FirstOrCreate
+#### 7.2.8. FirstOrCreate
 
 获取匹配的第一条记录, 否则根据给定的条件创建一个新的记录 (仅支持 struct 和 map 条件)
 
@@ -755,7 +755,7 @@ db.Where(User{Name: "Jinzhu"}).FirstOrCreate(&user)
 //// user -> User{Id: 111, Name: "Jinzhu"}
 ```
 
-##### .6.2.8.1 Attrs
+##### 7.2.8.1. Attrs
 
 如果记录未找到，将使用参数创建 struct 和记录.
 
@@ -772,7 +772,7 @@ db.Where(User{Name: "jinzhu"}).Attrs(User{Age: 30}).FirstOrCreate(&user)
 //// user -> User{Id: 111, Name: "jinzhu", Age: 20}
 ```
 
-##### .6.2.8.2 Assign
+##### 7.2.8.2. Assign
 
 不管记录是否找到，都将参数赋值给 struct 并保存至数据库.
 
@@ -790,9 +790,9 @@ db.Where(User{Name: "jinzhu"}).Assign(User{Age: 30}).FirstOrCreate(&user)
 //// user -> User{Id: 111, Name: "jinzhu", Age: 30}
 ```
 
-#### .6.2.9 高级查询
+#### 7.2.9. 高级查询
 
-##### .6.2.9.1 子查询
+##### 7.2.9.1. 子查询
 
 基于 `*gorm.expr` 的子查询
 
@@ -801,7 +801,7 @@ db.Where("amount > ?", db.Table("orders").Select("AVG(amount)").Where("state = ?
 // SELECT * FROM "orders"  WHERE "orders"."deleted_at" IS NULL AND (amount > (SELECT AVG(amount) FROM "orders"  WHERE (state = 'paid')));
 ```
 
-##### .6.2.9.2 选择字段
+##### 7.2.9.2. 选择字段
 
 Select，指定你想从数据库中检索出的字段，默认会选择全部字段。
 
@@ -817,11 +817,11 @@ db.Table("users").Select("COALESCE(age,?)", 42).Rows()
 //// SELECT COALESCE(age,'42') FROM users;
 ```
 
-##### .6.2.9.3 排序
+##### 7.2.9.3. 排序
 
 Order，指定从数据库中检索出记录的顺序。设置第二个参数 `reorder` 为 true ，可以覆盖前面定义的排序条件。
 
-```sql
+```go
 db.Order("age desc, name").Find(&users)
 //// SELECT * FROM users ORDER BY age desc, name;
 
@@ -835,11 +835,11 @@ db.Order("age desc").Find(&users1).Order("age", true).Find(&users2)
 //// SELECT * FROM users ORDER BY age; (users2)
 ```
 
-##### .6.2.9.4 数量
+##### 7.2.9.4. 数量
 
 Limit，指定从数据库检索出的最大记录数。
 
-```sql
+```go
 db.Limit(3).Find(&users)
 //// SELECT * FROM users LIMIT 3;
 
@@ -849,11 +849,11 @@ db.Limit(10).Find(&users1).Limit(-1).Find(&users2)
 //// SELECT * FROM users; (users2)
 ```
 
-##### .6.2.9.5 偏移
+##### 7.2.9.5. 偏移
 
 Offset，指定开始返回记录前要跳过的记录数。
 
-```sql
+```go
 db.Offset(3).Find(&users)
 //// SELECT * FROM users OFFSET 3;
 
@@ -863,11 +863,11 @@ db.Offset(10).Find(&users1).Offset(-1).Find(&users2)
 //// SELECT * FROM users; (users2)
 ```
 
-##### .6.2.9.6 总数
+##### 7.2.9.6. 总数
 
 Count，该 model 能获取的记录总数。
 
-```sql
+```go
 db.Where("name = ?", "jinzhu").Or("name = ?", "jinzhu 2").Find(&users).Count(&count)
 //// SELECT * from USERS WHERE name = 'jinzhu' OR name = 'jinzhu 2'; (users)
 //// SELECT count(*) FROM users WHERE name = 'jinzhu' OR name = 'jinzhu 2'; (count)
@@ -884,9 +884,9 @@ db.Table("deleted_users").Select("count(distinct(name))").Count(&count)
 
 **注意: Count 必须是链式查询的最后一个操作 ，因为它会覆盖前面的 SELECT；但如果里面使用了 count 时不会覆盖**
 
-##### .6.2.9.7 Group & Having
+##### 7.2.9.7. Group & Having
 
-```sql
+```go
 rows, err := db.Table("orders").Select("date(created_at) as date, sum(amount) as total").Group("date(created_at)").Rows()
 for rows.Next() {
   ...
@@ -912,11 +912,11 @@ type Result struct {
 db.Table("orders").Select("date(created_at) as date, sum(amount) as total").Group("date(created_at)").Having("sum(amount) > ?", 100).Scan(&results)
 ```
 
-##### .6.2.9.8 连接
+##### 7.2.9.8. 连接
 
 Joins，指定连接条件
 
-```sql
+```go
 rows, err := db.Table("users").Select("users.name, emails.email").Joins("left join emails on emails.user_id = users.id").Rows()
 for rows.Next() {
   ...
@@ -928,13 +928,13 @@ db.Table("users").Select("users.name, emails.email").Joins("left join emails on 
 db.Joins("JOIN emails ON emails.user_id = users.id AND emails.email = ?", "jinzhu@example.org").Joins("JOIN credit_cards ON credit_cards.user_id = users.id").Where("credit_cards.number = ?", "411111111111").Find(&user)
 ```
 
-#### .6.2.10 Pluck
+#### 7.2.10. Pluck
 
 > pluck : [plʌk] v. 采摘；扯；n. 胆识，勇气；（供食用的）内脏；快而猛的拉
 
 Pluck，查询 model 中的一个列作为切片，如果您想要查询多个列，您应该使用 Scan
 
-```sql
+```go
 var ages []int64
 db.Find(&users).Pluck("age", &ages)
 
@@ -947,11 +947,11 @@ db.Table("deleted_users").Pluck("name", &names)
 db.Select("name, age").Find(&users)
 ```
 
-#### .6.2.11 扫描
+#### 7.2.11. 扫描
 
 Scan，扫描结果至一个 struct.
 
-```sql
+```go
 type Result struct {
   Name string
   Age  int
@@ -967,13 +967,13 @@ db.Table("users").Select("name, age").Where("id > ?", 0).Scan(&results)
 db.Raw("SELECT name, age FROM users WHERE name = ?", "Antonio").Scan(&result)
 ```
 
-### .6.3 链式操作相关
+### 7.3. .6.3 链式操作相关
 
-#### .6.3.1 链式操作
+#### 7.3.1. 链式操作
 
 Method Chaining，Gorm 实现了链式操作接口，所以你可以把代码写成这样：
 
-```sql
+```go
 // 创建一个查询
 tx := db.Where("name = ?", "jinzhu")
 
@@ -991,14 +991,14 @@ if yetAnotherCondition {
 
 **在调用立即执行方法前不会生成 Query 语句**，借助这个特性你可以创建一个函数来处理一些通用逻辑。
 
-#### .6.3.2 立即执行方法
+#### 7.3.2. 立即执行方法
 
 Immediate methods ，**立即执行方法** 是指那些会立即生成 SQL 语句并发送到数据库的方法, 他们**一般是 CRUD 方法**，比如：`Create`, `First`, `Find`, `Take`, `Save`, `UpdateXXX`, `Delete`, `Scan`, `Row`, `Rows`…
 
 
 这有一个基于上面链式方法代码的立即执行方法的例子：
 
-```sql
+```go
 tx.Find(&user)
 ```
 
@@ -1008,13 +1008,13 @@ tx.Find(&user)
 SELECT * FROM users where name = 'jinzhu' AND age = 30 AND active = 1;
 ```
 
-#### .6.3.3 范围
+#### 7.3.3. 范围
 
 Scopes，Scope 是建立在链式操作的基础之上的。
 
 基于它，你可以抽取一些通用逻辑，写出更多可重用的函数库。
 
-```sql
+```go
 func AmountGreaterThan1000(db *gorm.DB) *gorm.DB {
   return db.Where("amount > ?", 1000)
 }
@@ -1043,11 +1043,11 @@ db.Scopes(AmountGreaterThan1000, OrderStatus([]string{"paid", "shipped"})).Find(
 // 查找所有金额大于 1000 且已付款或者已发货的订单
 ```
 
-#### .6.3.4 多个立即执行方法
+#### 7.3.4. 多个立即执行方法
 
 Multiple Immediate Methods，在 GORM 中使用多个立即执行方法时，**后一个立即执行方法会复用前一个立即执行方法的条件 (不包括内联条件)** 。
 
-```sql
+```go
 db.Where("name LIKE ?", "jinzhu%").Find(&users, "id IN (?)", []int{1, 2, 3}).Count(&count)
 ```
 
@@ -1059,13 +1059,13 @@ SELECT * FROM users WHERE name LIKE 'jinzhu%' AND id IN (1, 2, 3)
 SELECT count(*) FROM users WHERE name LIKE 'jinzhu%'
 ```
 
-### .6.4 更新
+### 7.4. 更新
 
-#### .6.4.1 更新所有字段
+#### 7.4.1. 更新所有字段
 
 `Save()` **默认会更新该对象的所有字段**，即使你没有赋值。
 
-```sql
+```go
 db.First(&user)
 
 user.Name = "七米"
@@ -1075,13 +1075,13 @@ db.Save(&user)
 ////  UPDATE `users` SET `created_at` = '2020-02-16 12:52:20', `updated_at` = '2020-02-16 12:54:55', `deleted_at` = NULL, `name` = '七米', `age` = 99, `active` = true  WHERE `users`.`deleted_at` IS NULL AND `users`.`id` = 1
 ```
 
-#### .6.4.2 更新修改字段
+#### 7.4.2. 更新修改字段
 
 如果你只希望更新指定字段，可以使用 `Update` 或者 `Updates` 
 
 > 警告：**当使用 struct 更新时，GORM 只会更新那些非零值的字段**
 
-```sql
+```go
 // 更新单个属性，如果它有变化
 db.Model(&user).Update("name", "hello")
 //// UPDATE users SET name='hello', updated_at='2013-11-17 21:34:10' WHERE id=111;
@@ -1103,13 +1103,13 @@ db.Model(&user).Updates(User{Name: "hello", Age: 18})
 db.Model(&user).Updates(User{Name: "", Age: 0, Active: false})
 ```
 
-#### .6.4.3 更新/忽略选定字段
+#### 7.4.3. 更新/忽略选定字段
 
 如果你想更新或忽略某些字段，你可以使用 Select，Omit
 
 > Omit [əˈmɪt] vt. 省略；遗漏；删除；疏忽
 
-```sql
+```go
 db.Model(&user).Select("name").Updates(map[string]interface{}{"name": "hello", "age": 18, "active": false})
 //// UPDATE users SET name='hello', updated_at='2013-11-17 21:34:10' WHERE id=111;
 
@@ -1117,11 +1117,11 @@ db.Model(&user).Omit("name").Updates(map[string]interface{}{"name": "hello", "ag
 //// UPDATE users SET age=18, active=false, updated_at='2013-11-17 21:34:10' WHERE id=111;
 ```
 
-#### .6.4.4 无 Hooks 更新
+#### 7.4.4. 无 Hooks 更新
 
 上面的更新操作会自动运行 model 的 `BeforeUpdate`, `AfterUpdate` 方法，更新 `UpdatedAt` 时间戳, 在更新时保存其 `Associations`, 如果你不想调用这些方法，你可以使用 `UpdateColumn`， `UpdateColumns`
 
-```sql
+```go
 // 更新单个属性，类似于 `Update`
 db.Model(&user).UpdateColumn("name", "hello")
 //// UPDATE users SET name='hello' WHERE id = 111;
@@ -1131,11 +1131,11 @@ db.Model(&user).UpdateColumns(User{Name: "hello", Age: 18})
 //// UPDATE users SET name='hello', age=18 WHERE id = 111;
 ```
 
-#### .6.4.5 批量更新
+#### 7.4.5. 批量更新
 
 **批量更新时 Hooks（钩子函数）不会运行。**
 
-```sql
+```go
 db.Table("users").Where("id IN (?)", []int{10, 11}).Updates(map[string]interface{}{"name": "hello", "age": 18})
 //// UPDATE users SET name='hello', age=18 WHERE id IN (10, 11);
 
@@ -1147,11 +1147,11 @@ db.Model(User{}).Updates(User{Name: "hello", Age: 18})
 db.Model(User{}).Updates(User{Name: "hello", Age: 18}).RowsAffected
 ```
 
-#### .6.4.6 使用 SQL 表达式更新
+#### 7.4.6. 使用 SQL 表达式更新
 
 先查询表中的第一条数据保存至 user 变量。
 
-```sql
+```go
 var user User
 db.First(&user)
 db.Model(&user).Update("age", gorm.Expr("age * ? + ?", 2, 100))
@@ -1167,11 +1167,11 @@ db.Model(&user).Where("age > 10").UpdateColumn("age", gorm.Expr("age - ?", 1))
 //// UPDATE "users" SET "age" = age - 1 WHERE "id" = '1' AND quantity > 10;
 ```
 
-#### .6.4.7 修改 Hooks 中的值
+#### 7.4.7. 修改 Hooks 中的值
 
 如果你想修改 `BeforeUpdate`, `BeforeSave` 等 Hooks 中更新的值，你可以使用 `scope.SetColumn`, 例如：
 
-```sql
+```go
 func (user *User) BeforeSave(scope *gorm.Scope) (err error) {
   if pw, err := bcrypt.GenerateFromPassword(user.Password, 0); err == nil {
     scope.SetColumn("EncryptedPassword", pw)
@@ -1179,21 +1179,21 @@ func (user *User) BeforeSave(scope *gorm.Scope) (err error) {
 }
 ```
 
-#### .6.4.8 其它更新选项
+#### 7.4.8. 其它更新选项
 
-```sql
+```go
 // 为 update SQL 添加其它的 SQL
 db.Model(&user).Set("gorm:update_option", "OPTION (OPTIMIZE FOR UNKNOWN)").Update("name", "hello")
 //// UPDATE users SET name='hello', updated_at = '2013-11-17 21:34:10' WHERE id=111 OPTION (OPTIMIZE FOR UNKNOWN);
 ```
 
-### .6.5 删除
+### 7.5. 删除
 
-#### .6.5.1 删除记录
+#### 7.5.1. 删除记录
 
 警告: **删除记录时，请确保主键字段有值，GORM 会通过主键去删除记录，如果主键为空，GORM 会删除该 model 的所有记录。**
 
-```sql
+```go
 // 删除现有记录
 db.Delete(&email)
 //// DELETE from emails where id=10;
@@ -1203,11 +1203,11 @@ db.Set("gorm:delete_option", "OPTION (OPTIMIZE FOR UNKNOWN)").Delete(&email)
 //// DELETE from emails where id=10 OPTION (OPTIMIZE FOR UNKNOWN);
 ```
 
-#### .6.5.2 批量删除
+#### 7.5.2. 批量删除
 
 删除全部匹配的记录
 
-```sql
+```go
 db.Where("email LIKE ?", "%jinzhu%").Delete(Email{})
 //// DELETE from emails where email LIKE "%jinzhu%";
 
@@ -1215,11 +1215,11 @@ db.Delete(Email{}, "email LIKE ?", "%jinzhu%")
 //// DELETE from emails where email LIKE "%jinzhu%";
 ```
 
-#### .6.5.3 软删除
+#### 7.5.3. 软删除
 
 **如果一个 model 有 `DeletedAt` 字段，他将自动获得软删除的功能！** 当调用 Delete 方法时， 记录不会真正的从数据库中被删除， 只会将 `DeletedAt` 字段的值会被设置为当前时间。
 
-```sql
+```go
 db.Delete(&user)
 //// UPDATE users SET deleted_at="2013-10-29 10:23" WHERE id = 111;
 
@@ -1236,15 +1236,15 @@ db.Unscoped().Where("age = 20").Find(&users)
 //// SELECT * FROM users WHERE age = 20;
 ```
 
-#### .6.5.4 物理删除
+#### 7.5.4. 物理删除
 
-```sql
+```go
 // Unscoped 方法可以物理删除记录
 db.Unscoped().Delete(&order)
 //// DELETE FROM orders WHERE id=10;
 ```
 
-## 其他参考：
+## 8. 其他参考：
 
 * [阮一峰：ORM 实例教程](http://www.ruanyifeng.com/blog/2019/02/orm-tutorial.html)
 * [GORM 中文文档](https://gorm.io/zh_CN/docs/)
