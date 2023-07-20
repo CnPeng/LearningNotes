@@ -2,7 +2,41 @@
 
 [原文链接：AndroidStudio 常用插件来提高开发效率的必备](https://juejin.cn/post/7218001191702134841?#heading-8)
 
-## 1.1. Statistic 代码统计工具
+## 1.1. AndroidStudio 中的 ChatGTP
+
+[ChatGTP 中文助手在这里](https://link.juejin.cn/?target=https%3A%2F%2Fchatgptmirror.com%3Fshare%3DNOLQ82)
+
+![](pics/20230504111338671_1831298078.png)
+
+然后打开AndroidStudio中的项目
+
+![6a40c94d44a6448abac274c6f114f740~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0](pics/20230504111406344_141431389.awebp)
+
+然后点开 AndroidStudio 工具栏中的 help
+
+![](pics/20230504111443848_478817287.png)
+
+然后在搜索框中输入 Choose Boot Java Runtime for the IDE 打开配置窗口如下：
+
+
+![](pics/20230504111501483_860917300.png)
+
+我这里选择的默认的环境，然后重启AndroidStudio
+
+![](pics/20230504111531882_1839731261.png)
+
+然后选择一个组织加入，当然你可以创建一个组织
+
+![](pics/20230504111602331_893754121.png)
+
+然后使用它来自动生成代码
+
+
+![](pics/20230504111620486_1824884529.png)
+
+
+
+## 1.2. Statistic 代码统计工具
 
 款代码统计工具，可以用来统计当前项目中代码的行数和大小。
 
@@ -14,7 +48,7 @@
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/037a2d5891ae45ad87c088f759a81066~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.2. Translation 一款翻译插件
+## 1.3. Translation 一款翻译插件
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1e76941913694916b253c98029287d44~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
@@ -22,13 +56,40 @@
 
 ![image.png](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/037c38ba524c47819fb88175e5862469~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.3. Markdown
+## 1.4. Markdown
 
-IDEA官方出品的一款Markdown插件，支持编辑Markdown文件并进行预览
+### 1.4.1. Markdown
+
+IDEA官方出品的一款Markdown插件，支持编辑 Markdown 文件并进行预览
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/5e2f0c9daf8648caae3487d9c9e74882~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.4. Key Promoter X 快捷键提示
+### 1.4.2. 解决 Markdown 不能预览的问题
+
+[原文链接：Android studio markdown不能预览的解决办法](https://blog.csdn.net/qq_36317441/article/details/124451578)
+
+#### 1.4.2.1. 现象
+
+Android studio 是 BumbleBee 版本中出现一个日志，如下所示：Not Support JCEF: Your environment does not support JCEF, cannot use Markdown。
+
+看到这个报错，我也比较奇怪，我已经装了 Markdown 和 Markdown Editor 两个插件，为啥还是不能预览 markdown 呢。
+
+![](pics/20230504111122198_2091427521.png)
+
+#### 1.4.2.2. 解决
+
+双击 shift 按钮，在弹窗中选中 Actions ，然后在输入框中输入 Choose Boot Java Runtime for the IDE ，回车后就会弹出一个新的弹窗。
+
+在这个弹窗中点击下拉列表，选中一个和你的 Android studio 匹配的版本下载下来然后安装，重启 AS 就可以了。
+
+![](pics/20230504111216577_610011351.png)
+
+重启后就会看到如下图的 Markdown Editor ，点击后就可以预览 markdown 文件了。
+
+![](pics/20230504111226671_373845479.png)
+
+
+## 1.5. Key Promoter X 快捷键提示
 
 Key Promoter X 是一款帮助你快速学习快捷键的插件，当你在AndroidStudio中用鼠标点击某些功能时，它会自动提示你使用该功能的快捷键
 
@@ -36,7 +97,7 @@ Key Promoter X 是一款帮助你快速学习快捷键的插件，当你在Andro
 
 ![androidstudio快捷键提醒.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/9404f4afa9ad405899753e10b92ba02c~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.5. Restful Fast Request
+## 1.6. Restful Fast Request
 
 是IDEA版本的Postman，它是一个功能强大的Restful API工具包插件，在AndroidStudio中也可以根据已有的方法快速生成接口调试用例
 
@@ -44,7 +105,7 @@ Key Promoter X 是一款帮助你快速学习快捷键的插件，当你在Andro
 
 ![howToUse_en.gif](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ef194bf1b8a4e83a76a38ac32054fc9~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.6. PlantUML Integration
+## 1.7. PlantUML Integration
 
 PlantUML是一款开源的UML图绘制工具，支持通过文本来生成图形,安装如下：
 
@@ -58,13 +119,13 @@ PlantUML是一款开源的UML图绘制工具，支持通过文本来生成图形
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c58aa627f9764c3688a69ce2f00dfdfa~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.7. Sequence Diagram 根据代码生时时序图
+## 1.8. Sequence Diagram 根据代码生时时序图
 
 根据代码生成时序图的插件，还支持在时序图上直接导航到对应代码以及导出为图片或PlantUML文件。
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4be6021874bc4a66934d4613c032ebed~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.8. String Manipulation 用来处理字符串
+## 1.9. String Manipulation 用来处理字符串
 
 业处理字符串的插件，支持各种格式代码命名方式的切换、支持各种语言的转义和反转义、支持字符加密、支持多个字符的排序、对齐、过滤等等。
 
@@ -74,13 +135,13 @@ PlantUML是一款开源的UML图绘制工具，支持通过文本来生成图形
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/1183d0995ee740328d13595a3be9308b~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.9. Rainbow Brackets 彩虹括号
+## 1.10. Rainbow Brackets 彩虹括号
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/86d77452e67640c3bd1803e9a85f7770~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?) 安装好后，重新启动 AndroiStudio 打开项目
 
 ![image.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f22857b577414bc6bc5a8d63c59649da~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.10. Android Wifi 连接手机进行调试
+## 1.11. Android Wifi 连接手机进行调试
 
 * * *
 
@@ -88,7 +149,7 @@ PlantUML是一款开源的UML图绘制工具，支持通过文本来生成图形
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/4270f751f3de408ab04df7b24036b679~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.11. CodeGlance Pro
+## 1.12. CodeGlance Pro
 
 代码视图页面生成浏览目录
 
@@ -96,7 +157,7 @@ PlantUML是一款开源的UML图绘制工具，支持通过文本来生成图形
 
 ![image.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/ed4ad50a997348499d3c9bde8b3c60c8~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp?)
 
-## 1.12. SonarLint 代码 review 插件
+## 1.13. SonarLint 代码 review 插件
 
 Sonar是一个用于代码质量管理的开源平台，用于管理源代码的质量 通过插件形式，可以支持包括java,C#,C/C++,PL/SQL,Cobol,JavaScrip,Groovy等等二十几种编程语言的代码质量管理与检测
 

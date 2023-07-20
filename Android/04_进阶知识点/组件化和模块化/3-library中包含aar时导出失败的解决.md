@@ -8,7 +8,7 @@
 
 本文主要讨论的是 `module` 库中依赖了其他 `aar` 文件，然后我们将该 `module` 库再导出为 `aar` 时报错的问题。
 
-## 3.1 问题现象
+## 1. 3.1 问题现象
 
 我们创建了一个 `library` , 在其中引用了 `aar` 文件。我们最终想把该 `library` 导出为一个 `aar` 文件供其他项目使用。
 
@@ -27,7 +27,7 @@
 
 ![](pics/3-3-aar中不能包含aar.png)
 
-## 3.2 问题原因
+## 2. 3.2 问题原因
 
 前面一张图中具体的错误信息为：
 
@@ -37,7 +37,9 @@
 
 重点是其中的 `Direct local .aar file dependencies are not supported when building an AAR.` ，意思是，直接依赖的 `aar` 文件不能再打入 `aar` 文件中。
 
-## 3.3 解决方案
+## 3. 3.3 解决方案
+
+### 3.1. 旧版本AS中的方案
 
 解决方式是以 `module` 的形式依赖 `aar` 文件，具体步骤如下：
 
@@ -73,7 +75,41 @@
 
 ![](pics/3-12-生成aar成功.png)
 
-## 3.4 在项目中引用导出的 aar
+### 3.2. Android Studio Flamingo | 2022.2.1 Patch 2 
+
+> 2023-07-04 基于 Android Studio Flamingo | 2022.2.1 Patch 2 版本。
+
+#### 3.2.1. 新建 module
+
+在 Android Studio Flamingo | 2022.2.1 Patch 2 中，新建 Module 时已经没有上一小节中的方式了，所以，我们需要按照如下方式操作：
+
+在菜单栏中一次选择 `File`-`New`-`New Module`：
+
+![](_v_images/20230704204514712_399340591.png)
+
+#### 3.2.2. 删除module中的全部内容
+
+等待 module 创建完成之后，删除该 module 目录下的全部内容，仅保留 module 目录名。
+
+
+#### 3.2.3. 拷贝aar并编辑gradle文件
+
+然后将 aar 文件拷贝到 module 目录下，并创建一个新的 `build.gradle` 文件。
+
+将如下内容编辑到新建的 `build.gradle` 文件中，如下：
+
+```groovy
+configurations.maybeCreate("default")
+artifacts.add("default", file('依赖包的名称.aar'))
+```
+
+以 小米推送的 aar 为例，编辑完成之后的情况如下：
+
+![](_v_images/20230704205400622_830916062.png)
+
+
+
+## 4. 3.4 在项目中引用导出的 aar
 
 将生成的 `aar` 文件导入到我们的项目中，并在 `gradle` 中添加依赖：
 

@@ -17,25 +17,25 @@
 * [Part3-高级篇-笔记](ios开发_小波说雨燕_Part3-高级篇.md)
 * [Part4-上架篇-笔记](ios开发_小波说雨燕_Part4-上架篇.md)
 
-# [③中级篇](http://xiaoboswift.com/course/42)
+# 1. [③中级篇](http://xiaoboswift.com/course/42)
 
-## 一、面向对象编程——OOP
+## 1.1. 一、面向对象编程——OOP
 
 本章节内容依旧基于上一章节的示例。
 
-### 1、面向对象的概念
+### 1.1.1. 1、面向对象的概念
 
-### 2、类、对象和实例
+### 1.1.2. 2、类、对象和实例
 
 `Class (类) ` 在其他语言中是主流地位，但在 Swift 中不是。除了系统裤架已经很成熟的各种累以外，Swift 推荐使用 `结构体（struct）`。
 
 `结构体（struct）`能实现 `类（class）` 全部功能的同时，可以更加模块化，默认实现初始化方法并且无需内存管理。
 
-### 3、FansArea模型重构 (Refactor）
+### 1.1.3. 3、FansArea模型重构 (Refactor）
 
 将原先的多个基本类型数组转换成一个对象化数组。
 
-#### (1)、新建一个 `Area.swift` 的文件
+#### 1.1.3.1. (1)、新建一个 `Area.swift` 的文件
 
 新建 swift 文件：
 
@@ -45,7 +45,7 @@
 
 ![](pics/141-新建Area结构体.png)
 
-#### (2)、借助 `playground` 将原有的数组打印成对象模式
+#### 1.1.3.2. (2)、借助 `playground` 将原有的数组打印成对象模式
 
 ![](pics/142-新建playground.png)
 
@@ -90,7 +90,7 @@ Area(areaName:"临沂市地方镇",imgName:"xining",isVisted:false) ,
 Area(areaName:"济南市历下区",imgName:"xining",isVisted:false) 
 ```
 
-#### (3)、修改相关代码
+#### 1.1.3.3. (3)、修改相关代码
 
 * `AreaTableViewController.swift`
 
@@ -262,18 +262,18 @@ class AreaDetailViewController: UIViewController {
 }
 ```
 
-## 二、导航条美化和详情页增强
+## 1.2. 二、导航条美化和详情页增强
 
 本章内容基于上一章进行修改。
 
-### 1、重新设计详情页
+### 1.2.1. 1、重新设计详情页
 
-#### （1）、删除之前的内容
+#### 1.2.1.1. （1）、删除之前的内容
 
 删除之前章节中创建的  `AreaDetailViewController.swift` 、stroyborad 中的 `AreaDetailViewController` 其对应的 转场。
 
 
-#### (2)、新建 TableViewController 及其转场
+#### 1.2.1.2. (2)、新建 TableViewController 及其转场
 
 然后在 storyboard 中新建一个 TableViewController , 然后将其与单元格通过转场链接， 转场的 id 仍然用 `showAreaDetail `。
 
@@ -285,7 +285,7 @@ class AreaDetailViewController: UIViewController {
 
 ![](pics/144-为转场添加id.png)
 
-#### (3)、 设置原型单元格
+#### 1.2.1.3. (3)、 设置原型单元格
 
 为新增的 `Table View Controller` 中的 `Table View Cell` 设置 Identifier 为 `DetailCell`:
 
@@ -295,7 +295,7 @@ class AreaDetailViewController: UIViewController {
 
 ![](pics/146-设置单元格行高.png)
 
-#### (4)、在单元格中添加 ImageView
+#### 1.2.1.4. (4)、在单元格中添加 ImageView
 
 注意：ImageView 和 单元格（DetailCell）是平级的
 
@@ -312,11 +312,11 @@ class AreaDetailViewController: UIViewController {
 
 ![](pics/149-关联swift文件中的controller.png)
 
-#### (6)、将 ImageView 与 ViewController 中的变量关联
+#### 1.2.1.5. (6)、将 ImageView 与 ViewController 中的变量关联
 
 ![](pics/150-将ImageView与变量关联.png)
 
-### 2、图像填充模式
+### 1.2.2. 2、图像填充模式
 
 UIImageView 继承自 UIView，它是一个图片容器。
 
@@ -328,9 +328,9 @@ UIImageView 的 `属性栏` 中，有 `填充模式 (Content Mode) ` 选项，�
 
 ![](pics/162-图片平铺并裁剪.png)
 
-### 3、定制原型单元格和控制器
+### 1.2.3. 3、定制原型单元格和控制器
 
-#### (1)、新增两个Label并组合为UIStackView
+#### 1.2.3.1. (1)、新增两个Label并组合为UIStackView
 
 新增两个Label并组合为UIStackView:
 
@@ -344,7 +344,7 @@ UIImageView 的 `属性栏` 中，有 `填充模式 (Content Mode) ` 选项，�
 
 ![](pics/153-修改边距为0.png)
 
-#### (2)、Content Hugging Priority
+#### 1.2.3.2. (2)、Content Hugging Priority
 
 当我们通过上一节添加完约束信息之后，会看到下面的状态
 
@@ -356,7 +356,7 @@ UIImageView 的 `属性栏` 中，有 `填充模式 (Content Mode) ` 选项，�
 
 调整完之后，错误消失了，并且字段 Label 的尺寸也变小了。
 
-#### (3)、将字段 Label 的宽度设置为值 Label 宽度的一半
+#### 1.2.3.3. (3)、将字段 Label 的宽度设置为值 Label 宽度的一半
 
 先将两者调整为等宽：
 
@@ -367,7 +367,7 @@ UIImageView 的 `属性栏` 中，有 `填充模式 (Content Mode) ` 选项，�
 ![](pics/157-调整字段的宽度为值的一半.png)
 
 
-#### (4)、设置单元格的控制器
+#### 1.2.3.4. (4)、设置单元格的控制器
 
 新建单元格的控制器:
 
@@ -382,15 +382,15 @@ UIImageView 的 `属性栏` 中，有 `填充模式 (Content Mode) ` 选项，�
 ![](pics/160-将Label与控制器关联.png)
 
 
-### 4、更新详情页
+### 1.2.4. 4、更新详情页
 
-#### (1）、新建area对象
+#### 1.2.4.1. (1）、新建area对象
 
 新建area对象：
 
 ![](pics/161-新建area对象.png)
 
-#### (2）、修改组函数和行函数的返回值
+#### 1.2.4.2. (2）、修改组函数和行函数的返回值
 
 ```swift
 class DetailTableViewController: UITableViewController {
@@ -410,7 +410,7 @@ class DetailTableViewController: UITableViewController {
 }    
 ```
 
-#### (3）、创建单元格并填充数据
+#### 1.2.4.3. (3）、创建单元格并填充数据
 
 ```swift
 class DetailTableViewController: UITableViewController {
@@ -445,7 +445,7 @@ class DetailTableViewController: UITableViewController {
 }    
 ```
 
-#### (4）、修改转场传值
+#### 1.2.4.4. (4）、修改转场传值
 
 修改 `AreaTableViewController.swift` 中的核心代码：
 
@@ -613,9 +613,9 @@ class AreaTableViewController:UITableViewController {
 }
 ```
 
-### 5、美化列表外观和导航条
+### 1.2.5. 5、美化列表外观和导航条
 
-#### (1）、更改详情页背景及详情页单元格背景等
+#### 1.2.5.1. (1）、更改详情页背景及详情页单元格背景等
 
 以下内容在 `DetailTableViewController.swift` 中修改。 
 
@@ -635,7 +635,7 @@ tableView.separatorColor=UIColor(white: 0.48, alpha: 1)
 cell.backgroundColor=UIColor.clear
 ```
 
-#### (2）、使用代码对导航条进行改进
+#### 1.2.5.2. (2）、使用代码对导航条进行改进
 
 可以使用 Appearance API 来批量定制大多数 iOS 的 UI  组件的外观。
 
@@ -669,7 +669,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ![](pics/164-修改导航条字体和颜色.png)
 
-#### (3）、使用 storyboard 修改导航条
+#### 1.2.5.3. (3）、使用 storyboard 修改导航条
 
 先注释掉上一步中的代码内容，然后依次按照如下步骤执行:
 
@@ -690,7 +690,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ![](pics/168-修改子视图中导航文本的字体颜色.png)
 
 
-#### (4）、更改详情页返回按钮中的标题
+#### 1.2.5.4. (4）、更改详情页返回按钮中的标题
 
 ```swift
 class AreaTableViewController:UITableViewController {
@@ -724,15 +724,15 @@ class DetailTableViewController: UITableViewController {
  TODO 注意: 由于前一小节中设置标题的字体和颜色未生效，所以，此处依旧显示的是黑色的标题。
 
 
-### 6、隐藏导航条和更改状态条样式
+### 1.2.6. 6、隐藏导航条和更改状态条样式
 
-#### (1）、上下滑动页面时时隐藏导航条
+#### 1.2.6.1. (1）、上下滑动页面时时隐藏导航条
 
 ![](pics/170-滑动时隐藏导航条.png)
 
 ![](pics/171-显示或隐藏导航条的效果.png)
 
-#### (2）、修改状态栏字体颜色
+#### 1.2.6.2. (2）、修改状态栏字体颜色
 
 ![](pics/172-修改状态栏字体颜色.png)
 
@@ -742,14 +742,14 @@ class DetailTableViewController: UITableViewController {
 
 TODO 注意: 上面这几种方式并未能向我们预期的一样文本变成白色，而是依旧保持黑色。暂时不确定是哪里出错了。
 
-## 三、自适应单元格和动态字体
+## 1.3. 三、自适应单元格和动态字体
 
 
 本章代码基于上一章内容继续。
 
-### 1、单元格动态行高问题
+### 1.3.1. 1、单元格动态行高问题
 
-#### (1）、自适应单元格介绍
+#### 1.3.1.1. (1）、自适应单元格介绍
 
 UITableView 在 iOS 8 之后新增 “自适应单元格” 属性，可以根据内容动态调整单元格高度。而且，“自适应单元格” 支持 “动态字体” ，从而可以实现自定义字体尺寸。
 
@@ -769,7 +769,7 @@ tableView.rowHeight = UITableView.automaticDimension
 ```
 
 
-#### (2）、修改地区数组中的地区名称
+#### 1.3.1.2. (2）、修改地区数组中的地区名称
 
 修改地区数组中的地区名称为比较长的地名，这样更接近实际项目中的情况。
 
@@ -801,23 +801,23 @@ class AreaTableViewController:UITableViewController {
 
 如上图，文本比较长的条目末尾显示了省略号，然而实际应用中我们可能想让他们能够完全显示。
 
-### 2、启用自适应及添加约束
+### 1.3.2. 2、启用自适应及添加约束
 
-#### (1）、修改代码
+#### 1.3.2.1. (1）、修改代码
 
 在 `DetailTableViewController.swift` 的 `viewDidLoad()` 函数中添加代码：
 
 ![](pics/176-自适应单元格行高的代码.png)
 
-#### (2）、添加约束
+#### 1.3.2.2. (2）、添加约束
 
 **使用单元格自适应时，必须确保响应的标签设置了顶距和底距**，所以，我们现在需要对 stack view 设置相对其容器视图的顶距和底距（我们设置为0）。
 
 ![](pics/177-为自适应单元格设置边距.png)
 
-### 3、标签行数自适应
+### 1.3.3. 3、标签行数自适应
 
-#### (1）、设置标签行数为0
+#### 1.3.3.1. (1）、设置标签行数为0
 
 设置标签行数为0表示自动适应行数：
 
@@ -831,7 +831,7 @@ class AreaTableViewController:UITableViewController {
 
 **注意: 调整外部列表自适应是要注意，ImageView 不能设置约束, 否则界面会错乱**
 
-#### (2）、调整列表的单元格自适应
+#### 1.3.3.2. (2）、调整列表的单元格自适应
 
 ![](pics/180-为列表单元格添加约束.png)
 
@@ -844,7 +844,7 @@ class AreaTableViewController:UITableViewController {
 TODO 如上图所示，我们在做列表单元格自适应时，多行文本显示无异常，但是当文本只有一行时，左侧的图片显示不全，这个暂时不知道怎么解决啊。
 
 
-### 4、动态字体
+### 1.3.4. 4、动态字体
 
 用户在手机的 `设置——辅助功能——显示与文本大小——更大字体` 处开启动态字体支持，如下图。
 
@@ -859,7 +859,7 @@ TODO 如上图所示，我们在做列表单元格自适应时，多行文本显
 ![](pics/186-大字体支持.png)
 
 
-### 5、动态字体下的图像显示 BUG
+### 1.3.5. 5、动态字体下的图像显示 BUG
 
 在前一节的运行效果中，我们会发现，列表中的图片并为居中，而且，如果我们将字体调的很小，还可能会出现前面那种图片显示不全的问题，下面就通过为 ImageView 添加约束来解决这个问题。
 
@@ -876,28 +876,28 @@ TODO 如上图所示，我们在做列表单元格自适应时，多行文本显
 TODO  如上图，当字体较大时，省份和乡镇 Label 之间的间距很小甚至会重叠，暂时还不知道怎么解决。
 
 
-## 四、动画特效和反向转场
+## 1.4. 四、动画特效和反向转场
 
 本章内容依旧基于上一章的代码效果。
 
-### 1、什么是动画
+### 1.4.1. 1、什么是动画
 
 iOS 系统中，创建动画时需要使用 `UIView.animate(,)` 函数
 
-### 2、添加评价视图
+### 1.4.2. 2、添加评价视图
 
 最终实现效果：
 
 * 在详情页的图片右上方添加一个评价按钮
 * 点击评价按钮后，弹出一个新的页面，显示好中差评三个按钮（动画出现）
 
-#### (1）、下载图标资源并添加到 assets 目录中
+#### 1.4.2.1. (1）、下载图标资源并添加到 assets 目录中
 
 [点击下载视频中的图片资源](http://ese3a8b8c4d6ab.pri.qiqiuyun.net/coursematerial-42/20170330112250-jkuuptoevf48s0sg?attname=emoticons.zip&e=1585211147&token=ExRD5wolmUnwwITVeSEXDQXizfxTRp7vnaMKJbO-:rR-OQQWOipMs2hpAcIIjaRePRmY=)
 
 ![](pics/190-添加评价相关的图片资源.png)
 
-#### (2）、添加图片按钮
+#### 1.4.2.2. (2）、添加图片按钮
 
 如果我们直接向详情页图片上方拖拽一个  Button 时，是无法添加的。
 
@@ -935,7 +935,7 @@ iOS 系统中，创建动画时需要使用 `UIView.animate(,)` 函数
 
 ![](pics/198-详情页Button的运行效果.png)
 
-#### (3）、添加点击按钮时要出现的新视图
+#### 1.4.2.3. (3）、添加点击按钮时要出现的新视图
 
 点击评价按钮时，弹出一个模态视图让用户评价，操作要点如下
 
@@ -988,9 +988,9 @@ iOS 系统中，创建动画时需要使用 `UIView.animate(,)` 函数
 ![](pics/212-关闭按钮设置好之后的效果.png)
 
 
-### 3、添加转场及返回
+### 1.4.3. 3、添加转场及返回
 
-#### (1）、建立模态转场
+#### 1.4.3.1. (1）、建立模态转场
 
 模态转场即从下向上展示一个弹窗，关闭时从上向下消失。
 
@@ -1004,7 +1004,7 @@ iOS 系统中，创建动画时需要使用 `UIView.animate(,)` 函数
 
 ![](pics/215-模态转场效果.png)
 
-#### (2）、为评价视图定义出口——反向转场
+#### 1.4.3.2. (2）、为评价视图定义出口——反向转场
 
 模态展现的视图系统不提供返回按钮。所以需要我们手动定义一个 `反向转场 ( unwind segue )`，用于让模态视图退场（ dismiss ）。
 
@@ -1028,9 +1028,9 @@ iOS 系统中，创建动画时需要使用 `UIView.animate(,)` 函数
 
 添加上述的反向转场后，我们在评价页面点击 返回按钮即可关闭评价页面。
 
-### 4、可视化特效
+### 1.4.4. 4、可视化特效
 
-#### (1）、添加评价 ViewController
+#### 1.4.4.1. (1）、添加评价 ViewController
 
 操作步骤如下:
 
@@ -1048,7 +1048,7 @@ iOS 系统中，创建动画时需要使用 `UIView.animate(,)` 函数
 
 ![](pics/221-将ImageView与ViewController关联.png)
 
-#### (2）、背景虚化特效
+#### 1.4.4.2. (2）、背景虚化特效
 
 使用 `UIVisualEffectView` 对一个视图应用可视化特效。配合 `UIBlurEffect` 类可以实现背景虚化特效。
 
@@ -1079,11 +1079,11 @@ class ReviewViewController: UIViewController {
 ![](pics/222-虚化的显示效果.png)
 
 
-### 5、让视图动起来
+### 1.4.5. 5、让视图动起来
 
 使用 `UIView.animate` 给3个评价按钮的堆叠视图添加一个从无到有的 “放大” 动画
 
-#### (1）、动画步骤
+#### 1.4.5.1. (1）、动画步骤
 
 先确定首帧（不可见状态）和尾帧（完全可见状态）。中间的过渡需要使用 `transform` 函数集实现，包括 缩放、旋转和移动视图。
 
@@ -1092,7 +1092,7 @@ class ReviewViewController: UIViewController {
 设置一个视图对象的 transform 属性设置为变换后的值。
 
 
-#### (2）、设置堆叠视图动画
+#### 1.4.5.2. (2）、设置堆叠视图动画
 
 将堆叠视图与控制器关联: 
 
@@ -1108,13 +1108,13 @@ class ReviewViewController: UIViewController {
 
 执行现有代码就可以看到三个评价按钮从无到有的渐变过程。(即缩放动画)
 
-#### (3）、Spring animation
+#### 1.4.5.3. (3）、Spring animation
 
 Spring animation 是从 iOS 7 开始添加的一种动画效果。即 震荡效果，或者叫回弹效果。
 
 ![](pics/226-震荡效果.png)
 
-#### (4）、冉冉升起动画（位移动画）
+#### 1.4.5.4. (4）、冉冉升起动画（位移动画）
 
 使用 `CGAffineTransform(translationX: , y : )` 可以改变视图位置。
 
@@ -1160,7 +1160,7 @@ class ReviewViewController: UIViewController {
 上述代码中，使用了 `anim1.concatenating(anim2 )` 将两个动画组合在一起，从而实现了初始时不可见，然后逐渐弹跳变大并可见的效果。 
 
 
-### 6、反向转场和传值
+### 1.4.6. 6、反向转场和传值
 
 当用户点击了评价按钮中的一项之后，将结果回传给详情页面，并更新评价图标。
 
@@ -1171,7 +1171,7 @@ class ReviewViewController: UIViewController {
 * 点击关闭按钮时，通过转场参数 UIStoryboardSegue 对象获取源控制器，返回评价。
 * 更新响应页面的评价按钮图标
 
-#### (1）、修改 `Areas` 类 
+#### 1.4.6.1. (1）、修改 `Areas` 类 
 
 ```swift
 struct Area {
@@ -1191,7 +1191,7 @@ struct Area {
 }
 ```
 
-#### (2）、把评价按钮项与控制器关联
+#### 1.4.6.2. (2）、把评价按钮项与控制器关联
 
 ![](pics/227-将评价按钮与控制器关联.png)
 
@@ -1199,19 +1199,19 @@ struct Area {
 
 ![](pics/229-查看已关联的控件.png)
 
-#### (3）、区分评价按钮 (定义 Tag )
+#### 1.4.6.3. (3）、区分评价按钮 (定义 Tag )
 
 为了在触发点击事件时区分是哪个按钮触发的，需要给 View  设置 Tag , 可以分别设置为 100、101、102。（ CnPeng 这个应该可以理解为 Android 中的 viewId）
 
 ![](pics/230-为View添加Tag.png)
 
-#### (4）、定义反向转场 id
+#### 1.4.6.4. (4）、定义反向转场 id
 
 将反向转场的 identifier 命名为 `unwindToDetailView`，以便在代码中使用
 
 ![](pics/231-为反向转场添加id.png)
 
-#### (5）、区分被点击的按钮并执行反向转场
+#### 1.4.6.5. (5）、区分被点击的按钮并执行反向转场
 
 在 stroryboard 界面中可以通过下图的方式快速进入
 
@@ -1221,23 +1221,23 @@ struct Area {
 
 ![](pics/233-区分被点击按钮并执行反向转场.png)
 
-#### (6）、将详情页面的评价按钮与controller关联
+#### 1.4.6.6. (6）、将详情页面的评价按钮与controller关联
 
 将详情页面的评价按钮与 controller 关联，目的是为了更新其中的图片。
 
 ![](pics/234-将详情页面的评价按钮与controller关联.png)
 
 
-#### (7）、在 close 方法中获取被点击的按钮并更新图片
+#### 1.4.6.7. (7）、在 close 方法中获取被点击的按钮并更新图片
 
 ![](pics/235-在close中获取被点击的评价按钮.png)
 
 运行上述代码，即可实现在评价页面点击某一项之后，图片随即在详情页面更新。
 
 
-## 五、使用地图
+## 1.5. 五、使用地图
 
-### 1、启用 MapKit 并添加互动   
+### 1.5.1. 1、启用 MapKit 并添加互动   
 
 iOS 中的 MapKit 框架提供地图的显示、导航、地点标注，增加图层等。
 
@@ -1252,7 +1252,7 @@ iOS 中的 MapKit 框架提供地图的显示、导航、地点标注，增加�
 
 本章将在上一章完成版基础上，点地址，打开地图并做标注 
 
-#### (1）、启用 MapKit 
+#### 1.5.1.1. (1）、启用 MapKit 
 
 默认的 Xcode 工程中是没有绑定 MapKit 框架的，需要手动打开。
 
@@ -1262,7 +1262,7 @@ iOS 中的 MapKit 框架提供地图的显示、导航、地点标注，增加�
 
 ![](pics/237-添加地图之后的样子.png)
 
-#### (2）、添加地图按钮
+#### 1.5.1.2. (2）、添加地图按钮
 
 在详情页评价按钮下方添加一个  “地图” 按钮，可以打开地图场景来显示地点。
 
@@ -1277,7 +1277,7 @@ iOS 中的 MapKit 框架提供地图的显示、导航、地点标注，增加�
 ![](pics/240-添加约束.png)
 
 
-#### (3）、添加地图视图
+#### 1.5.1.3. (3）、添加地图视图
 
 拖一个空视图控制器到 storyboard 上，
 
@@ -1295,7 +1295,7 @@ iOS 中的 MapKit 框架提供地图的显示、导航、地点标注，增加�
 
 ![](pics/245-添加完约束之后的效果.png)
 
-#### (4）、建立转场
+#### 1.5.1.4. (4）、建立转场
 
 按住 Ctrl, 将详情页面的地图按钮拖向新建立的地图视图控制器，从而创建一个 show 转场。
 
@@ -1311,9 +1311,9 @@ iOS 中的 MapKit 框架提供地图的显示、导航、地点标注，增加�
 
 MapView 提供多种选项，可以实现缩放、滑动定制化。可以将地址从标准显示模式切换到卫星或者两者混合模式。还可以启用 “用户位置” 功能。
 
-### 2、地址与坐标间的相互转换
+### 1.5.2. 2、地址与坐标间的相互转换
 
-#### (1）、如何定位地点
+#### 1.5.2.1. (1）、如何定位地点
 
 定位地点时需要使用包含经纬度的地理坐标。
 
@@ -1325,7 +1325,7 @@ MapKit 中的 `Geocoder` 类可以用于经纬度与实际地址的转换，转�
 
 通过解析返回的地标对象 （即 `CLPlackmark` 类）, 就可以获得地址的坐标。
 
-#### (2）、测试地址与坐标的转换
+#### 1.5.2.2. (2）、测试地址与坐标的转换
 
 新建一个名称为 Map 的 playground 文件，在其中测试转换
 
@@ -1360,7 +1360,7 @@ coder.geocodeAddressString("山东省济南市历下区齐鲁软件园") { (plac
  ![](pics/249-地址转换为坐标.png)
 
 
-### 3、添加地图标注
+### 1.5.3. 3、添加地图标注
 
 常见的标注是一个弹框，左侧可以附加一张图片。
 
@@ -1373,7 +1373,7 @@ MapKit 默认以上2个对象，无需自己创建。
  
 
 
-#### (1）、添加地图控制器
+#### 1.5.3.1. (1）、添加地图控制器
 
 步骤如下：
 
@@ -1387,14 +1387,14 @@ MapKit 默认以上2个对象，无需自己创建。
 
 ![](pics/252-将地图与控制器绑定.png)
 
-#### (2）、将地图界面的视图元素与控制器关联
+#### 1.5.3.2. (2）、将地图界面的视图元素与控制器关联
 
 按住 Ctrl 将 storyboard 中的 MapView  拖向 `MapViewController.swift` 中，为它们建立关联。然后在创建一个局部变量 `var area:Area!`
 
 ![](pics/253-将view与地图控制器绑定.png)
 
 
-#### (3）、添加标注代码
+#### 1.5.3.3. (3）、添加标注代码
 
 ```swift
 class MapViewController: UIViewController {
@@ -1430,7 +1430,7 @@ class MapViewController: UIViewController {
 }    
 ```
 
-#### (4）、从详情页传递数据到地图页
+#### 1.5.3.4. (4）、从详情页传递数据到地图页
 
 在详情页控制器执行转场前（`prepare`）加入如下代码：
 
@@ -1459,7 +1459,7 @@ class DetailTableViewController: UITableViewController {
 ![](pics/254-地图标注展现.png)
 
 
-#### (5）、添加标注图片
+#### 1.5.3.5. (5）、添加标注图片
 
 前面拖，标注视图可以定制。定制时需要遵从 `MKMapViewDelegate` 协议，这个协议可以更新地图中的相关信息。
 
@@ -1517,7 +1517,7 @@ class MapViewController: UIViewController,MKMapViewDelegate {
 
 ![](pics/256-自定义标注的显示效果.png)
 
-#### (6）、自定义图钉颜色
+#### 1.5.3.6. (6）、自定义图钉颜色
 
 iOS 9 开始支持更改图钉颜色，使用 `pinTintColor` 属性实现。
 
@@ -1525,7 +1525,7 @@ iOS 9 开始支持更改图钉颜色，使用 `pinTintColor` 属性实现。
 av?.pinTintColor = UIColor.green
 ``` 
 
-### 4、地图功能定制
+### 1.5.4. 4、地图功能定制
 
 MKMapView 类还有很多功能可以定制，比如：
 
@@ -1584,7 +1584,7 @@ class MapViewController: UIViewController,MKMapViewDelegate {
 更多深入的功能比如：驾车、公交、地铁、步行、骑行、打的、火车、飞机、轮渡等路线信息，就需要借助 `MKDirection` 类实现。
 
 
-## 六、静态 TableView、相册和代码约束
+## 1.6. 六、静态 TableView、相册和代码约束
 
 截至目前，APP 只是用来显示列表，无法让用户手动添加，本章新加一个页面用来收集信息，并可从相册挑选图片。
 
@@ -1596,9 +1596,9 @@ class MapViewController: UIViewController,MKMapViewDelegate {
 
 本章内容基于上一章完成的工程。
 
-### 1、静态Table View
+### 1.6.1. 1、静态Table View
 
-#### (1）、创建静态单元格
+#### 1.6.1.1. (1）、创建静态单元格
 
 从组件库拖一个 TableViewController,然后把 Content 属性修改为 `Static Cells` (默认三个空单元格)。
 
@@ -1616,7 +1616,7 @@ class MapViewController: UIViewController,MKMapViewDelegate {
 第四行：地区 Label 和 文本框
 第五行：我来过 Label 和 是/否 按钮
 
-#### (2）、自定义第一行的单元格
+#### 1.6.1.2. (2）、自定义第一行的单元格
 
 [点击下载本节视频中的图片资源](http://ese3a8b8c4d6ab.pri.qiqiuyun.net/coursematerial-42/20170330112338-e7oc3n9f0c0s048k?attname=photoicons.zip&e=1587382995&token=ExRD5wolmUnwwITVeSEXDQXizfxTRp7vnaMKJbO-:BjB7XeALQ3mjYuHGcMu57el7Cfg=)
 
@@ -1640,7 +1640,7 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 
 ![](pics/263-设置图片及其填充模式.png)
 
-#### (3）、自定义第二行单元格
+#### 1.6.1.3. (3）、自定义第二行单元格
 
 注意: 原视频中要求设置行高 72 ，然而在 iPhone 11 Pro Max 预览图中，如果设置为 72，Label 和 TextField 会有部分重叠。所以，需要设置行高为 80
 
@@ -1661,13 +1661,13 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 ![](pics/267-ResetToSuggestedConstraints.png)
 
 
-#### (4）、自定义第三行和第四行单元格
+#### 1.6.1.4. (4）、自定义第三行和第四行单元格
 
 具体内容参照第二行单元格
 
 ![](pics/268-自定义第三和第四行单元格.png)
 
-#### (5）、自定义第五行单元格
+#### 1.6.1.5. (5）、自定义第五行单元格
 
 新增一个 Label , 设置 title 为 “我来过”
 
@@ -1679,7 +1679,7 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 
  ![](pics/269-自定义第五行的单元格.png)
  
-#### (6）、将新建的TableViewController嵌入到导航控制器中
+#### 1.6.1.6. (6）、将新建的TableViewController嵌入到导航控制器中
 
 将新建的TableViewController嵌入到导航控制器中：
 
@@ -1689,9 +1689,9 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 
 ![](pics/271-修改标题.png)
  
-### 2、添加转场
+### 1.6.2. 2、添加转场
 
-#### (1）、添加新场景的入口
+#### 1.6.2.1. (1）、添加新场景的入口
 
 要进入添加页面，可以在地名列表视图的导航条添加一个 +  按钮。
 
@@ -1699,7 +1699,7 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 
 ![](pics/272-添加barButtonItem并设置为Add.png)
 
-#### (2）、建立转场
+#### 1.6.2.2. (2）、建立转场
 
 >present modally 即 模态化转场，从下向上弹出，没有返回按钮
 
@@ -1712,7 +1712,7 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 ![](pics/274-为转场设置id.png)
 
 
-#### (3）、提供模态转场的出口（即返回按钮）
+#### 1.6.2.3. (3）、提供模态转场的出口（即返回按钮）
 
 由于模态转场不提供默认的返回按钮，所以我们需要手动提供交互出口。
 
@@ -1737,11 +1737,11 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 ![](pics/277-新增界面效果图)
 
 
-### 3、调用系统相册
+### 1.6.3. 3、调用系统相册
 
 用户点击新增界面的图片区域时，需要调起系统相册让用户选择图片，这就需要用到 `UIImagePickerController`
 
-#### (1）、为新增界面关联控制器
+#### 1.6.3.1. (1）、为新增界面关联控制器
 
 首先，为新增界面增加视图控制器，继承自 `UITableViewController`, 命名为 `AddAreaController.swift`, 并与 View 绑定:
 
@@ -1753,7 +1753,7 @@ Cell : 行高 250 ，背景色为亮灰色（Light Gray）
 
 静态 Table View 中不需要处理数据源相关的代码，所以，我们可以删除 `AddAreaController.swift` 中默认实现的 `numberOfSections`  和 `tableView` 方法。
 
-#### (2）、实现单元格选择事件（打开相册）
+#### 1.6.3.2. (2）、实现单元格选择事件（打开相册）
 
 ```swift
 import UIKit
@@ -1800,13 +1800,13 @@ class AddAreaController: UITableViewController {
 
 ![](pics/282-添加申请权限时的说明文档-方式2.png)
 
-#### (3）、将 ImageView 与控制器关联
+#### 1.6.3.3. (3）、将 ImageView 与控制器关联
 
 按住 Ctrl 键，拖到 UIImageView 到 `AddAreaTableViewController.swift`，设置 `outlet` 为 `coverImageView`
 
 ![](pics/283-将控件与控制器关联.png)
 
-#### (4）、获取并显示相册中被选择的图片
+#### 1.6.3.4. (4）、获取并显示相册中被选择的图片
 
 想要获取相册中被选中的图片，需要实现两个协议：`UIImagePickerControllerDelegate
 ` 和 `UINavigationControllerDelegate`。（相册中带有导航，所以需要实现 `UINavigationControllerDelegate `）
@@ -1880,15 +1880,15 @@ UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
 ![](pics/285-选择并展示被选中的图片的效果.png)
 
-### 4、代码约束(NSLayoutConstraints)
+### 1.6.4. 4、代码约束(NSLayoutConstraints)
 
 在上一节的运行效果中，界面有点丑，所以我们还需要对约束进行调整，下面就将使用代码来调整约束信息。
 
-#### (1）、代码约束和storyboard约束的对照关系
+#### 1.6.4.1. (1）、代码约束和storyboard约束的对照关系
 
 ![](pics/286-代码约束和storyboard约束的对照关系.png)
 
-#### (2）、代码添加约束
+#### 1.6.4.2. (2）、代码添加约束
 
 核心代码：
 
@@ -1966,6 +1966,6 @@ UINavigationControllerDelegate {
 
 ![](pics/287-代码约束后的效果.png)
 
-#### (3）、作业
+#### 1.6.4.3. (3）、作业
 
 在导航条右侧增加一个 “保存” 按钮，并在点击后判断各文本框字段是否都输入完成，如果有未输入完成的提示用户。（视频中未实现，我也没有实现😢）

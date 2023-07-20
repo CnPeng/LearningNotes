@@ -150,11 +150,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-    
+
     @IBAction func onHelloBtnClick(_ sender: UIButton) {
         // 在控制台中显示内容，print 同 Android 中的 Log
         print(" HelloWorld 按钮被点击了")
-        
+
         // 点击之后显示一个 Alert 弹窗
         // 声明一个弹窗 ( preferredStyle:.actionSheet 表示从底部弹出的弹窗)
         let alert=UIAlertController(title: "提示", message: "HelloWorld 按钮被点击了", preferredStyle: .alert)
@@ -1368,19 +1368,19 @@ rowShareAction.backgroundColor=UIColor(red: 245/255, green: 105/255, blue: 10/25
 ![](pics/124-修改自定义侧滑菜单项的背景色.png)
 
 
-## 2.9. 九、导航、场景和转场
+## 2.9. 导航、场景和转场
 
 > 本章内容依旧基于前一章中的示例。
 
-### 2.9.1. 1、导航相关术语介绍
+### 2.9.1. 导航相关术语介绍
 
-#### 2.9.1.1. (1)、导航相关的术语
+#### 2.9.1.1. 导航相关的术语
 
 * `导航栈（Stack）`: 把一个视图叠在另一个智商，加上返回按钮，这种层次结构就叫导航栈
 * `场景`：每一个页面都可以理解为一个场景
 * `转场`：两个场景之间的过渡，通常有两种：Push (压入)、Modal （模态）。Push 通常是用在页面之间的切换，Modal 则用于显示弹窗。
 
-####（2）、将 AreaTableViewController 添加到 NavigationController 中
+#### 2.9.1.2. 将 AreaTableViewController 添加到 NavigationController 中
 
 将现有的Controller添加到NavigationController：
 
