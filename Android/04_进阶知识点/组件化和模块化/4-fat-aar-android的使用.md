@@ -25,9 +25,10 @@
 ## 4.3 补充
  
  下面这段内容摘自  [《fat-aar-android》](https://github.com/kezong/fat-aar-android/blob/master/README_CN.md) 的文档, 该示例详细说明了引用不同形式三方库方式。
- 
-```
+
+```groovy
 dependencies {
+    // 存放在 libs 目录下的 jar 报
     implementation fileTree(dir: 'libs', include: '*.jar')
     // java dependency——java 依赖项
     embed project(':lib-java')

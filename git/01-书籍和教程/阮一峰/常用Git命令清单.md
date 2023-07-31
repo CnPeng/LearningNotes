@@ -89,7 +89,7 @@ $ git commit -v
 
 ### 1.4.2. 改写最近一次提交
 
-```
+```git
 # 使用一次新的commit，替代上一次提交
 # 如果代码没有任何新变化，则用来改写上一次commit的提交信息
 $ git commit --amend -m [message]

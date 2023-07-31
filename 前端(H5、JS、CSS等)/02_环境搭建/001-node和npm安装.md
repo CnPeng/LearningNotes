@@ -11,6 +11,17 @@
 >Node.js® is an open-source, cross-platform JavaScript runtime environment.
 >Node.js 是一个开源的、跨平台的 js 运行时环境。
 
+安装完成之后，会有如下提示信息（以 node v18.16.0 为例）：
+
+```
+This package has installed:
+	•	Node.js v18.16.0 to /usr/local/bin/node
+	•	npm v9.5.1 to /usr/local/bin/npm
+Make sure that /usr/local/bin is in your $PATH.
+```
+
+部分项目需要使用旧版本的 node , 可以在 [https://nodejs.org/zh-cn/download/releases](https://nodejs.org/zh-cn/download/releases) 中根据需要进行下载。
+
 
 ## 1.2. npm
 
