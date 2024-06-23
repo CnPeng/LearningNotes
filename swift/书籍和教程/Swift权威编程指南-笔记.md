@@ -1,5 +1,6 @@
 
 ## 一、起步
+
 * Xcode主界面：
 
 ![](https://images.gitee.com/uploads/images/2019/0111/090049_8387477f_930142.png "屏幕截图.png")
@@ -8493,7 +8494,7 @@ class TodoList : NSObject {
 
 下面定义的 save() 方法中：先将 Array 转为 NSArray ，然后调用 NSArray 的 `write()` 函数将数组内容写出到指定目录中。`write()` 返回 布尔值表示保存成功或者失败。
 
-```
+```swift
 class TodoList : NSObject {
     fileprivate var items:[String] = []
     
@@ -8533,7 +8534,7 @@ class TodoList : NSObject {
 
 然后重写了 init() 函数，在该函数中执行加载本地文件的操作。也就是在初始化 TodoList 类的时候执行加载操作。
 
-```
+```swift
 class TodoList : NSObject {
     ...
     //重写初始化函数，在初始化函数中加载本地数据

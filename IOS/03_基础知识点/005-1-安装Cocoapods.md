@@ -474,3 +474,93 @@ kinglydeMacBook-Pro:repos kingly$
 ```
 
 注意：podfile 文件中一定要指定 master 源，因为现在默认是 trunk 源.
+
+## 1.5. 附：常用 pod 命令
+
+原文：[Cocoapods 常用命令大全](https://juejin.cn/post/7031192380384477197)
+
+### 1.5.1. 包管理命令
+
+命令 | 含义
+---|---
+`pod init`  | 初始化pod, 并创建 Podfile
+`pod install`  |  Podfile内全部的库初始化或更新并重新安装
+`pod install --verbose --no-repo-update` | 只安装新增库, 不更新已经安装的库
+`pod update {podName}`  |  更新指定第三方
+`pod update {podName}  --verbose --no-repo-update`  | 更新指定第三方,其他库忽略
+`pod repo update` |  更新本地cocoapods库文件
+`pod outdated`  | 查看哪些库有更新版本
+
+### 1.5.2. 安装和升级命令
+
+命令 | 含义
+---|---
+`sudo gem install cocoapods` | 安装cocoapods
+`sudo gem install cocoapods --pre`  | 安装测试版
+`sudo gem cleanup` |  删除老版本的程序包
+`sudo gem update` | 升级所有程序包
+`sudo gem update --system`  |  升级 gem
+`sudo gem sources -a https://ruby.taobao.org/` |   添加源
+`sudo gem sources -r https://rubygems.org/` |  删除源
+`gem sources -l`  | 查看当前的源
+`pod setup` |  设置
+
+### 1.5.3. Podfile 命令
+
+命令 | 含义
+---|---
+`platform :ios, '9.0'`  |  指定最低支持版本
+`use_frameworks!`  | 声明项目要使用frameworks(swift和混编项目必须打开)
+`pod '{PodName}'` |  添加pod库
+
+#### 1.5.3.1. 指定依赖库的版本
+
+> 以 [AFNetworking](https://github.com/AFNetworking) 网络请求库为例
+
+命令 | 含义
+---|---
+`pod 'AFNetworking'` |  当前最新版本
+`pod 'AFNetworking', '= 3.0.0'`  |  3.0.0 版本
+`pod 'AFNetworking', '> 3.0.0'`   |  任何高于 3.0.0 的版本
+`pod 'AFNetworking', '>= 3.0.0'`  |  任何不低于 3.0.0 的版本
+`pod 'AFNetworking', '< 3.0.0'`   |  小于 3.0.0 的版本
+`pod 'AFNetworking', '<= 3.0.0'`  |  不高于 3.0.0 的版本
+`pod 'AFNetworking', '~> 3.1.0'`  |  3.1.0 版本 到 3.2.0 版本，不包括3.2.0. <br>该命令基于the last component，<br>也可以在版本要求中指定 >= 3.1.0 和 < 3.2.0
+
+
+#### 1.5.3.2. 依赖子模块
+
+> 以 [AFNetworking](https://github.com/AFNetworking) 网络请求库为例
+
+命令 | 含义
+---|---
+`pod 'AFNetworking/Reachability'` |  安装pod库的单个子模块
+`pod 'AFNetworking', :subspecs => ['Reachability', 'NSURLSession']` | 安装pod库的多个子模块
+
+#### 1.5.3.3. 指定库的来源
+
+> 以 [AFNetworking](https://github.com/AFNetworking) 网络请求库为例
+
+命令 | 含义
+---|---
+`pod 'AFNetworking', :source => 'https://github.com/CocoaPods/Specs.git'`  | 远端依赖
+`pod 'AFNetworking', :path => '~/Documents/AFNetworking'`  | 本地依赖
+`pod 'AFNetworking', :git => 'https://github.com/gowallaAFNetworking.git'` | git 仓库依赖
+`pod 'AFNetworking', :git => 'https://github.com/AFNetworking/AFNetworking.git', :branch => 'dev'` | 分支依赖
+`pod 'AFNetworking', :git => 'https://github.com/AFNetworking/AFNetworking.git', :tag => '0.7.0'` | tag 依赖
+`pod 'AFNetworking', :git => 'https://github.com/AFNetworking/AFNetworking.git', :commit => '082f8319af'` | commit 依赖
+`pod 'AFNetworking', :podspec => 'https://example.com/AFNetworking.podspec'` | 
+
+#### 1.5.3.4. 其他
+
+> 以 [AFNetworking](https://github.com/AFNetworking) 网络请求库为例
+
+命令 | 含义
+---|---
+`pod 'AFNetworking', :configurations => ['Debug', 'Beta']`  |  安装Debug和Beta版本
+`pod 'AFNetworking', :configuration => 'Debug'` |  安装Debug版本依赖
+`pod 'AFNetworking', :modular_headers => true`  |  控制在每个Pod中是否使用模块头, true-是，false-否
+
+
+更多 `pod` 命令 可通过 `--help` 获取
+

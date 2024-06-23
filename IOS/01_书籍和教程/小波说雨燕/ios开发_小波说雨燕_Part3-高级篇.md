@@ -21,7 +21,7 @@
 
 ### 1.1.1. 1、什么是 Core Data
 
-#### 1.1.1.1. (1）、数据的保存
+#### 1.1.1.1. 数据的保存
 
 把数据保存到硬盘称为数据持久化（Persistence），iOS中持久化有如下几种方式：
 
@@ -33,7 +33,7 @@
  
 SQLite 是一种轻型数据库，占内存小、速度快，非常实用移动设备、嵌入式设备实用。 
  
-#### 1.1.1.2. (2）、Core Data 介绍
+#### 1.1.1.2. Core Data 介绍
 
 Core Data 是 iOS/macOS 平台的官方**数据库框架**，封装了 SQLite 的基础操作，增加了面向对象的特性，增加了比如同 TableView 互动等高级特性。
 
@@ -49,20 +49,20 @@ iOS 其他核心库还有：Core Location、Core Graphics、Core Animation
 >这就相当于 CoreData 完成了 Model 层的大量工作，例如 Model 层的表示和持久化，有效的减少了开发的工作量，使 Model 层的设计更加面向对象。
 
 
-#### 1.1.1.3. (3）、Core Data 组件
+#### 1.1.1.3. Core Data 组件
 
 ![](pics/288-coredata组件.png)
 
 ### 1.1.2. 2、启用 CoreData
 
-#### 1.1.2.1. (1）、方式一：新建项目时启用
+#### 1.1.2.1. 方式一：新建项目时启用
 
 ![](pics/289-新建项目时启用coredata.png)
 
 这种方式启用之后，就会在 `AppDelegate.swift`中生成默认代码。
 
 
-#### 1.1.2.2. (2）、方式二：现有项目启用 CoreData
+#### 1.1.2.2. 方式二：现有项目启用 CoreData
 
 先使用方式一新建一个项目，然后将 `AppDelegate.swift` 中的模板代码拷贝到我们现有的项目中，不要忘了导包——`import CoreData`
 
@@ -145,7 +145,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 启用 CoreData 后，可以实现可视化建模（即可视化构建对象）
 
-#### 1.1.3.1. (1）、新建CoreData模型文件
+#### 1.1.3.1. 新建CoreData模型文件
 
 `New File` > `Core Data`  > `Data Model`  命名为 `FansArea`
 
@@ -155,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 ![](pics/292-CoreDataModel的可视化界面.png)
 
-#### 1.1.3.2. (2）、对象与实体的映射
+#### 1.1.3.2. 对象与实体的映射
 
 即对象（Object）与 数据库的实体（Entity）的对应
 
@@ -174,7 +174,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ![](pics/295-调整属性.png)
 
 
-#### 1.1.3.3. (3）、创建托管对象
+#### 1.1.3.3. 创建托管对象
 
 启用 Core Data 后，必须把对象置于 Core Data 框架中托管。
 
@@ -182,7 +182,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
  ![](pics/296-构建对象托管MO.png)
 
-#### 1.1.3.4. (4）、更新模型
+#### 1.1.3.4. 更新模型
 
 接下来要做的事情是，将所有使用 Area 类的地方都替换成 AreaMO。
 
@@ -214,7 +214,7 @@ class AreaTableViewController:UITableViewController {
 ### 1.1.4. 4、保存数据
 
 
-#### 1.1.4.1. (1）、保存数据的步骤
+#### 1.1.4.1. 保存数据的步骤
 
 iOS 10 中大幅简化 Core Data 用户，保存数据只需要两步即可：
 
@@ -222,15 +222,15 @@ iOS 10 中大幅简化 Core Data 用户，保存数据只需要两步即可：
 * 保存数据
 
 
-#### 1.1.4.2. (2）、将控件与 ViewController 关联
+#### 1.1.4.2. 将控件与 ViewController 关联
 
-##### 1.1.4.2.1. 1）、添加保存按钮
+##### 1.1.4.2.1. 添加保存按钮
 
 在 “新增页面” 添加一个 `bar button item` 到导航条，`System Item` 选 `save`:
 
 ![](pics/299-添加保存按钮.png)
 
-##### 1.1.4.2.2. 2）、控件与视图控制器关联
+##### 1.1.4.2.2. 控件与视图控制器关联
 
 将 “新增页面” 中的按钮控件与视图控制器代码做 Action 关联，将文本输入框与文本做 IBOutlet 关联：
 
@@ -246,7 +246,7 @@ iOS 10 中大幅简化 Core Data 用户，保存数据只需要两步即可：
  
  ![](pics/304-关联否按钮.png)
  
-##### 1.1.4.2.3. 3）、新增变量
+##### 1.1.4.2.3. 新增变量
  
  在 `AreaAddController.swift` 中新增一个 AreaMO 变量 和 是否到访过的变量:
  
@@ -255,7 +255,7 @@ var area:AreaMO!
 var isVisited=false
 ```
 
-##### 1.1.4.2.4. 4）、添加Tag并实现事件
+##### 1.1.4.2.4. 添加Tag并实现事件
 
 为 “是” “否” 按钮添加 Tag，分别为 8801、8802：
 
@@ -273,11 +273,11 @@ var isVisited=false
     }
 ```
 
-##### 1.1.4.2.5. 5）、为新增界面的反向转场设置id
+##### 1.1.4.2.5. 为新增界面的反向转场设置id
 
 ![](pics/306-为新增界面的反向转场设置id.png)
 
-#### 1.1.4.3. (3）、保存数据
+#### 1.1.4.3. 保存数据
 
 在 `AreaAddController.swift` 中保存数据，先导包 `import CoreData`，然后编辑 `saveTap()` 方法的内容：
 
@@ -317,7 +317,7 @@ var isVisited=false
 
 ### 1.1.5. 5、取回数据
  
-#### 1.1.5.1. (1）、获取并展示全部数据
+#### 1.1.5.1. 获取并展示全部数据
 
 在 `AreaTableViewCotroller.swift` 中自定义一个取回全部数据的方法：`fetchAllData ( )`，然后在 `viewDidAppear()` 中调用该函数：
 
@@ -347,9 +347,9 @@ override func viewDidAppear(_ animated: Bool) {
 
 ![](pics/309-获取CoreData中的全部数据.png)
 
-#### 1.1.5.2. (2）、更高效的获取数据
+#### 1.1.5.2. 更高效的获取数据
 
-##### 1.1.5.2.1. 1)、NSFetchedResultsController
+##### 1.1.5.2.1. NSFetchedResultsController
 
 在上一小节中，我们每次都是更新全部的 tableView 视图中的数据，这样对性能不好。理想的效果是：仅更新新增或删除的一行。
 
@@ -369,7 +369,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 }    
 ```
 
-##### 1.1.5.2.2. 2)、添加初始化代码
+##### 1.1.5.2.2. 添加初始化代码
 
 先注释掉 `viewDidAppear ()` 中的加载数据和刷新界面的代码内容：
 
@@ -435,7 +435,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 此时运行程序，我们会发现，仅会展示已经添加的数据，对于新增的数据则不展示。因为我们还没有实现 `NSFetchedResultsControllerDelegate ` 的代理方法。
 
-#### 1.1.5.3. (3）、代理方法详解
+#### 1.1.5.3. 代理方法详解
 
 当数据内容发生变化时，`NSFetchedResultsControllerDelegate` 协议的一下方法会被调用：
 
@@ -490,7 +490,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 基于上一小节的代码，我们从右向左滑动条目时，点击删除按钮，可以删除条目。但是，当我们重启 APP 后会发现，这些数据又显示出来了。这是因为我们仅是从内存中删除了数据，并没有从 CoreData 中把数据删除。而且，我们更改评价之后，也没有进行保存。
 
-#### 1.1.6.1. (1）、更新数据
+#### 1.1.6.1. 更新数据
 
 以更新评价为例:
 
@@ -500,7 +500,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 编辑完上述两处代码之后，我们更新某个地点的评价之后首页会同步到详情页面，然后当我们重启 APP 后，依旧可以展示我们上次同步的结果。
 
-#### 1.1.6.2. (2）、删除数据
+#### 1.1.6.2. 删除数据
 
 核心代码：
 
@@ -537,7 +537,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 ![](pics/313-添加搜索条到TableView的关键代码.png)
 
-#### 1.2.1.1. (1）、为列表页添加搜索条
+#### 1.2.1.1. 为列表页添加搜索条
 
 先在 `AreaTableViewController.swift` 中定义一个变量 ` var sc:UISearchController!`，然后在 `viewDidLoad ()` 中添加代码，示例如下: 
 
@@ -570,7 +570,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 ![](pics/314-搜索条显示了.png)
 
-#### 1.2.1.2. (2）、搜索条消失了
+#### 1.2.1.2. 搜索条消失了
 
 点击搜索条，展示动画之后，搜索条可能被顶到状态栏智商，且不可见。
 
@@ -603,7 +603,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 对于我们当前这个 APP ，可以加上按地区名称匹配的规则。
 
-#### 1.2.2.1. (1）、定制筛选器
+#### 1.2.2.1. 定制筛选器
 
 首先在 `AreaTableViewController.swift` 中定制一个空数组，用来保存搜索结果，然后添加筛器选方法：
 
@@ -634,7 +634,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 }    
 ```
 
-#### 1.2.2.2. (2）、更新搜索结果：
+#### 1.2.2.2. 更新搜索结果：
 
 在更新和显示搜索结果时，需要提供 `UISearchResultsUpdating` 协议的实现，然后在其 `updateSearchResults()` 方法中进行操作。 
 
@@ -655,7 +655,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 此时，虽然我们调用了 ` tableView.reloadData()`, 但是当我们输入内容执行搜索时，并不会显示搜索到的内容，而是依旧显示全部内容。
 
-#### 1.2.2.3. (3）、搜索与列表互动
+#### 1.2.2.3. 搜索与列表互动
 
 我们此处要解除的就是如果将搜索到的结果显示在列表中。
 
@@ -663,7 +663,7 @@ class AreaTableViewController:UITableViewController,NSFetchedResultsControllerDe
 
 以下内容都是在  `AreaTableViewController.swift` 中编辑的。
 
-##### 1.2.2.3.1. 1）、首先更新单元格的函数
+##### 1.2.2.3.1. 首先更新单元格的函数
 
 ```swift
  //列中的行数
@@ -674,7 +674,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 }
 ```
 
-##### 1.2.2.3.2. 2）、然后更新单元格的数据源
+##### 1.2.2.3.2. 然后更新单元格的数据源
 
 ```swift
  // MARK: - table view data source
@@ -706,7 +706,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
     }
 ```
 
-##### 1.2.2.3.3. 3）、然后设置搜索时单元格不可编辑：
+##### 1.2.2.3.3. 然后设置搜索时单元格不可编辑：
 
 ```swift
  override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -714,7 +714,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
         return !sc.isActive
     }
 ```
-##### 1.2.2.3.4. 4）、用户点击搜索结果的单元格时，修改转场传递的值
+##### 1.2.2.3.4. 用户点击搜索结果的单元格时，修改转场传递的值
 
 ```swift
 // MARK: - Navigation
@@ -730,7 +730,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
     }
 ```
 
-##### 1.2.2.3.5. 5）、去除搜索关键字中的空格
+##### 1.2.2.3.5. 去除搜索关键字中的空格
 
 ```swift
 // UISearchResultsUpdating 要求的实现
@@ -747,7 +747,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 
 ### 1.2.3. 3、定制搜索条外观
 
-#### 1.2.3.1. (1）、搜索条背景不要变暗
+#### 1.2.3.1. 搜索条背景不要变暗
 
 核心代码是在 `viewDidLoad()` 中加入 `sc.dimsBackgroundDuringPresentation=false` , 但该方法在 IOS 12 中已经被标记为过期，根据该方法的注释描述可以使用 iOS 9 中加入的 `sc.obscuresBackgroundDuringPresentation=false` 替代。
 
@@ -765,7 +765,7 @@ override func tableView(_ tableView: UITableView, numberOfRowsInSection section:
 
 此时，我们再执行搜索，当我们点击搜索到的条目时，就可以直接跳转到条目详情页面了。
 
-#### 1.2.3.2. (2）、其他可定制的外观选项
+#### 1.2.3.2. 其他可定制的外观选项
 
 属性|含义
 ---|---
@@ -788,7 +788,7 @@ searchBarStyle | 搜索条的主题样式。默认为 `.Prominent` (突出)，�
 
 `UIPageViewController` 可以轻松的在其管理的各 View  之间滑动切换。可以用来创建引导页，可以在图书类 APP 中做文章页面切换，可以在天气预报 APP 中做城市切换等。
 
-#### 1.3.1.1. (1）、UIPageViewController 的配置项
+#### 1.3.1.1. UIPageViewController 的配置项
 
 配置项|说明
 ---|---
@@ -798,7 +798,7 @@ searchBarStyle | 搜索条的主题样式。默认为 `.Prominent` (突出)，�
 页间距 | 仅适用于滑动样式
 
 
-#### 1.3.1.2. (2）、将要实现的引导页效果
+#### 1.3.1.2. 将要实现的引导页效果
 
 ![](pics/324-将要实现的引导页的效果.png)
 
@@ -807,7 +807,7 @@ searchBarStyle | 搜索条的主题样式。默认为 `.Prominent` (突出)，�
 
 [点击下载视频中的图片资源](http://ese3a8b8c4d6ab.pri.qiqiuyun.net/coursematerial-43/20170330112549-n5929waf1a844ks8?attname=guide-img.zip&e=1587612347&token=ExRD5wolmUnwwITVeSEXDQXizfxTRp7vnaMKJbO-:aMUngtxuxlqlS4vr6DOjIQJZP8c=)
 
-#### 1.3.2.1. (1）、添加翻页控制器
+#### 1.3.2.1. 添加翻页控制器
 
 添加 PageViewController 控件：
 
@@ -817,13 +817,13 @@ searchBarStyle | 搜索条的主题样式。默认为 `.Prominent` (突出)，�
 
 ![](pics/326-设置id.png)
 
-#### 1.3.2.2. (2）、理解翻页控制器
+#### 1.3.2.2. 理解翻页控制器
 
 翻页控制器与导航控制器类似，都只是一个容器。其作用是管理视图、控制视图间的切换。
 
 容器中的每页的视图内容都由自己的页面控制器管理。
 
-#### 1.3.2.3. (3）、创建视图内容
+#### 1.3.2.3. 创建视图内容
 
 添加图片资源：
 
@@ -853,7 +853,7 @@ searchBarStyle | 搜索条的主题样式。默认为 `.Prominent` (突出)，�
 
 ![](pics/333-为内容视图控制器设置id.png)
 
-#### 1.3.2.4. (4）、添加视图控制器类
+#### 1.3.2.4. 添加视图控制器类
 
 新建一个视图控制器类，命名为 `ContentViewController` 继承自 UIViewController。
 
@@ -890,7 +890,7 @@ class ContentViewController: UIViewController {
 }
 ```
 
-#### 1.3.2.5. (5）、完善 viewDidLoad 方法
+#### 1.3.2.5. 完善 viewDidLoad 方法
 
 在该方法中初始化标签的文本以及图片内容：
 
@@ -908,7 +908,7 @@ override func viewDidLoad() {
 
 ![](pics/338-子页面提供方式及跳转方式.png)
 
-#### 1.3.3.1. (1）、为翻页控制器提供数据源
+#### 1.3.3.1. 为翻页控制器提供数据源
 
 新建 ViewPageController 实现类，命名为 GuideViewController：
 
@@ -963,7 +963,7 @@ class GuideViewController: UIPageViewController,UIPageViewControllerDataSource {
 }
 ```
 
-#### 1.3.3.2. (2）、实现 UIPageViewControllerDataSource 要求的两个方法
+#### 1.3.3.2. 实现 UIPageViewControllerDataSource 要求的两个方法
 
 ```swift
 import UIKit
@@ -1008,7 +1008,7 @@ class GuideViewController: UIPageViewController,UIPageViewControllerDataSource {
 }
 ```
 
-#### 1.3.3.3. (3）、完善 viewDidLoad 方法
+#### 1.3.3.3. 完善 viewDidLoad 方法
 
 在 viewDidLoad 中指定数据源为本身，并初始化第一个页面：
 
@@ -1027,7 +1027,7 @@ class GuideViewController: UIPageViewController,UIPageViewControllerDataSource {
     }
 ```
 
-#### 1.3.3.4. (4）、控制显示引导页的时机
+#### 1.3.3.4. 控制显示引导页的时机
 
 引导页要在列表页之前显示，所以，我们在列表页控制器类的 `viewDidAppear()` 中加入：
 
@@ -1064,7 +1064,7 @@ presentationCount | 要显示的总页数
 presentationIndex | 起始页的索引
 
 
-#### 1.3.4.1. (1）、显示页码
+#### 1.3.4.1. 显示页码
 
 在 `GuideViewController.swift` 中添加如下代码：
 
@@ -1085,7 +1085,7 @@ presentationIndex | 起始页的索引
 
 ![](pics/343-显示页码.png)
 
-#### 1.3.4.2. (2）、定制页码
+#### 1.3.4.2. 定制页码
 
 添加默认页码指示器虽然很方便，但是位置和颜色等都无法定制。所以，把之前的代码注释掉，然后用 `UIPageController` 来实现可定制的页码。
 
@@ -1117,7 +1117,7 @@ class ContentViewController: UIViewController {
 
 ![](pics/346-定制页码.png)
 
-#### 1.3.4.3. (3）、在最后一个引导页添加按钮
+#### 1.3.4.3. 在最后一个引导页添加按钮
 
 在最后一个引导页添加按钮，用户点击之后展示列表页。
 
@@ -1145,7 +1145,7 @@ class ContentViewController: UIViewController {
 
 ![](pics/350-增加进入按钮.png)
 
-#### 1.3.4.4. (4）、在指定页面显示按钮
+#### 1.3.4.4. 在指定页面显示按钮
 
 在 ContentViewController 的 `viewDidLoad ()` 方法中做控制：
 
@@ -1166,13 +1166,13 @@ Core Data 用来保存较大的数据，而 UserDefaults 可以把一些小的�
 引导页只是在 App 第一次运行时显示，使用 UserDefaults 保存是否显示过的参数，以便下次启动 App 时检查。
 
 
-#### 1.3.5.1. (1）、UserDefaults 简介
+#### 1.3.5.1. UserDefaults 简介
 
 ![](pics/352-UserDefaults简介.png)
 
 ![](pics/353-UserDefaults存取方法.png)
 
-#### 1.3.5.2. (2）、保存引导页的启动参数
+#### 1.3.5.2. 保存引导页的启动参数
 
 在 `ContentViewController.swift` 内我们定义的 `btnDoneTap( )` 方法中增加存储内容：
 
@@ -1187,7 +1187,7 @@ Core Data 用来保存较大的数据，而 UserDefaults 可以把一些小的�
     }
 ```
 
-#### 1.3.5.3. (3）、获取是否显示过引导页的参数
+#### 1.3.5.3. 获取是否显示过引导页的参数
 
 在 `AreaTableViewController.swift` 的 `viewDidAppear ( )` 方法内，展示引导页之前先检查是否显示过引导页的参数:
 
@@ -1232,7 +1232,7 @@ tab bar (即 选项卡) 的设计比较普遍，位于屏幕底部，它把 App 
 
 ![](pics/354-该App的模块划分.png)
 
-#### 1.4.1.1. (1）、添加 Tab Bar 控制器
+#### 1.4.1.1. 添加 Tab Bar 控制器
 
 打开 `Main.storyboard` 选中导航控制器，即屏幕的初始化控制器，然后依次点击 `菜单 > Editor > Embed in > Tab Bar Controller `： 
 
@@ -1242,7 +1242,7 @@ TabBar添加后的样子:
 
 ![](pics/356-TabBar添加后的样子.png)
 
-#### 1.4.1.2. (2）、定制子选项卡属性
+#### 1.4.1.2. 定制子选项卡属性
 
 ![](pics/357-定制子选项卡属性.png)
 
@@ -1250,7 +1250,7 @@ TabBar添加后的样子:
 
 ![](pics/358-定制的子选项卡效果.png)
 
-#### 1.4.1.3. (3）、选项卡的显示时机
+#### 1.4.1.3. 选项卡的显示时机
 
 到目前，我们添加了选项卡之后，在首页会有显示，但是，进入到列表条目详情之后依旧会显示——实际上，我们只需要再首页显示选项卡。
 
@@ -1286,11 +1286,11 @@ IOS 提供导航栏浏览时（Push） 隐藏选项卡的方法，具体如下�
 添加 “发现” 和 “关于” 两个选项卡。
 
 
-#### 1.4.2.1. (1）、新增导航控制器
+#### 1.4.2.1. 新增导航控制器
 
 ![](pics/360-新增导航控制器并设置标题.png)
 
-#### 1.4.2.2. (2）、将新增的控制器集成到选项卡中
+#### 1.4.2.2. 将新增的控制器集成到选项卡中
 
 ![](pics/361-将导航控制器添加到选项卡.png)
 
@@ -1306,7 +1306,7 @@ IOS 提供导航栏浏览时（Push） 隐藏选项卡的方法，具体如下�
 
 ![](pics/364-添加发现页后的效果.png)
 
-#### 1.4.2.3. (3）、添加 “关于” Tab 页
+#### 1.4.2.3. 添加 “关于” Tab 页
 
 步骤同上一小节。最后设置该页面的 System Item 为 More。
 
@@ -1315,7 +1315,7 @@ IOS 提供导航栏浏览时（Push） 隐藏选项卡的方法，具体如下�
 
 ### 1.4.3. 3、定制 Tab 外观
 
-#### 1.4.3.1. (1）、定制颜色
+#### 1.4.3.1. 定制颜色
 
 定制 Tab 外观时，同定制导航栏一样，也是使用 Appearance API。
 
@@ -1338,7 +1338,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 }
 ```
 
-#### 1.4.3.2. (2）、定制图标
+#### 1.4.3.2. 定制图标
 
 ![](pics/366-导入图标资源.png)
 
@@ -1348,7 +1348,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 ![](pics/368-定制图标后的运行效果.png)
 
-#### 1.4.3.3. (3）、更改选项卡被选中时的背景
+#### 1.4.3.3. 更改选项卡被选中时的背景
 
 在上一小节中，我们看到选项卡选中时默认变成蓝色的，实际上我们也可以指定图标的背景图片。
 
@@ -1383,7 +1383,7 @@ Storyboard 引用就是把 storyboard 拆分成多个功能模块，然后做引
 ![](pics/370-storyboard切割及引用.png)
 
 
-#### 1.4.4.1. (1）、分割步骤
+#### 1.4.4.1. 分割步骤
 
 比如分割 “关于” 选项页，在 storyboard 中选中相关的视图，然后依次点击 `菜单 > Editor > refactor to storyboard`
 
@@ -1395,7 +1395,7 @@ Storyboard 引用就是把 storyboard 拆分成多个功能模块，然后做引
 
 除此之后，还有另一种分割方案，具体参考下一节。
 
-#### 1.4.4.2. (2）、将引导页拆为storyboard
+#### 1.4.4.2. 将引导页拆为storyboard
 
 ![](pics/374-新建storyboard.png)
 
@@ -1462,7 +1462,7 @@ SFSafariViewController | iOS 9 中推出的控制器，相对于全功能的 Saf
 
 ### 1.5.1. 1、“关于页面”的设计
 
-#### 1.5.1.1. (1）、调整列表布局
+#### 1.5.1.1. 调整列表布局
 
 在 `about.storyboard` 中添加一个 ImageView 到列表的  headerView 中，高度为 85，图标设置为之前导入的 `swift.png`，Content Mode 为 `Aspect Fit` 
 
@@ -1474,15 +1474,15 @@ SFSafariViewController | iOS 9 中推出的控制器，相对于全功能的 Saf
 
 ![378-设置单元格样式及id.png](pics/378-设置单元格样式及id.png)
 
-#### 1.5.1.2. (2）、自定义列表类
+#### 1.5.1.2. 自定义列表类
 
-##### 1.5.1.2.1. 1）、新建控制器类并关联
+##### 1.5.1.2.1. 新建控制器类并关联
 
 新建 UITableViewController, 命名为 `AboutTableViewController`，然后将其与 `about.storyboard` 进行关联.
 
 ![](pics/379-将about的storyboard与控制器类关联.png)
 
-##### 1.5.1.2.2. 2）、在 `AboutTableViewController ` 中定义数据源
+##### 1.5.1.2.2. 在 `AboutTableViewController ` 中定义数据源
 
 ```swift
 import UIKit
@@ -1495,7 +1495,7 @@ class AboutTableViewController: UITableViewController {
 }    
 ```
 
-##### 1.5.1.2.3. 3）、控制片段数和片段中的行数
+##### 1.5.1.2.3. 控制片段数和片段中的行数
 
 ```swift
  override func numberOfSections(in tableView: UITableView) -> Int {
@@ -1508,14 +1508,14 @@ class AboutTableViewController: UITableViewController {
     }
     
 ```    
-##### 1.5.1.2.4. 4）、设置片段标题
+##### 1.5.1.2.4. 设置片段标题
 
 ```swfit
  override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitle[section]
     }
 ```
-##### 1.5.1.2.5. 5）、填充单元格内容
+##### 1.5.1.2.5. 填充单元格内容
 
 ```swift
 override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -1528,7 +1528,7 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
     }
 ```
 
-##### 1.5.1.2.6. 6）、修改页面标题
+##### 1.5.1.2.6. 修改页面标题
 
 ![](pics/380-双击修改标题.png)
 
@@ -1536,7 +1536,7 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
 
 ![](pics/381-关于页面定植后的运行效果.png)
 
-##### 1.5.1.2.7. 7）、去除多余空行
+##### 1.5.1.2.7. 去除多余空行
 
 方案1 : 使用空白View，并设置其高度为 0
 
@@ -1595,7 +1595,7 @@ UIApplication.shared.open(url)
 
 UIWebView 通过 `loadRequest` 方法既可以打开远端网址，也可以打开 App 内部的静态 HTML  文件。
 
-#### 1.5.3.1. (1）、建立新 VC
+#### 1.5.3.1. 建立新 VC
 
 拖一个新的视图控制器到 `about.storyboard`  :
 
@@ -1623,7 +1623,7 @@ UIWebView 通过 `loadRequest` 方法既可以打开远端网址，也可以打�
 ![](pics/391-为转场设置id.png)
 
 
-#### 1.5.3.2. (2）、定制控制器类并关联
+#### 1.5.3.2. 定制控制器类并关联
 
 新建视图控制器类：
 
@@ -1637,7 +1637,7 @@ UIWebView 通过 `loadRequest` 方法既可以打开远端网址，也可以打�
 
 ![](pics/394-将控件与控制器类关联.png)
 
-#### 1.5.3.3. (3）、在控制器类中编辑加载网页的代码
+#### 1.5.3.3. 在控制器类中编辑加载网页的代码
 
 ```swift
 import UIKit
@@ -1657,7 +1657,7 @@ class WebViewController: UIViewController {
 }
 ```
 
-#### 1.5.3.4. (4）、更新单元格点击事件
+#### 1.5.3.4. 更新单元格点击事件
 
 在 `AboutTableViewController.swift` 的 `tableView(_:didSelectRowAt)` 方法中做修改：
 
@@ -1711,7 +1711,7 @@ Temporary exceptions can be configured via your app‘s Info.plist file.
 
 WKWebView 比 UIWebView 速度更快，内存占用更少，是 UIWebView 的替代者。
 
-#### 1.5.4.1. (1）、使用 WKWebView 加载页面——代码方式
+#### 1.5.4.1. 使用 WKWebView 加载页面——代码方式
 
 使用 WKWebView 时首先需要导包 `import WebKit`, 完整代码如下:
 
@@ -1756,7 +1756,7 @@ code or linked in from a library (ensure the class is part of the correct target
 
 ![](pics/398-storyboard中加载webkitview报错.png)
 
-#### 1.5.4.2. (3）、导航栏遮挡的 BUG 
+#### 1.5.4.2. 导航栏遮挡的 BUG 
 
 使用 WKWebView 加载页面时，如果页面有导航，该导航可能会被 App 的导航条遮盖。如下图：
 
@@ -1782,7 +1782,7 @@ wkWebView2.autoresizingMask = [.flexibleHeight]
 
 ### 1.5.5. 5、使用 SFSafariViewController
 
-#### 1.5.5.1. (1）、简介
+#### 1.5.5.1. 简介
 
 SFSafariViewController 具有跟 Safari 一样的特性，比如自动填充和阅读器。
 
@@ -1797,7 +1797,7 @@ let sfVC = SFSafariViewController(url:url)
 present(sfVc, animated:true, completion:nil)
 ```
 
-#### 1.5.5.2. (2）、使用
+#### 1.5.5.2. 使用
 
 修改 `AboutTableViewController.swift` 中的代码。
 
@@ -1842,7 +1842,7 @@ class AboutTableViewController: UITableViewController {
 
 ### 1.6.1. 1、LeanCloud 云存储
 
-#### 1.6.1.1. (1）、简介
+#### 1.6.1.1. 简介
 
 LeanCloud云存储组件:
 
@@ -1860,7 +1860,7 @@ LeanCloud云存储组件:
 
 ![](pics/408-云存储支持的数据类型.png)
 
-#### 1.6.1.2. (2）、注册 leancloud 并创建应用
+#### 1.6.1.2. 注册 leancloud 并创建应用
 
 [点击进入 leancloud 注册页面](https://leancloud.cn/dashboard/login.html#/signup)
 
@@ -1887,7 +1887,7 @@ LeanCloud 创建项目完成时的样子：
 LeanCloud 中以 “应用” 为单位来区分存储、消息、分析和组件等内容。
 
 
-#### 1.6.1.3. (3）、项目中集成 LeanCloud
+#### 1.6.1.3. 项目中集成 LeanCloud
 
 LeanCloud SDK 手动安装配置比较繁琐且容易出错，所以，我们使用 `CocoaPods` 来实现。
 
@@ -1895,7 +1895,7 @@ CocoaPods 是 IOS 开发过程中经常使用的第三方配置工具。（类�
 
 [点击查看官方的 《Swift SDK 安装指南》](https://leancloud.cn/docs/start.html)
 
-##### 1.6.1.3.1. 1)、安装 CocoaPods
+##### 1.6.1.3.1. 安装 CocoaPods
 
 如果之前电脑上没有安装 CocoaPods , 需要先进项安装。
 
@@ -1934,7 +1934,7 @@ gem sources -l
 
 >CnPeng 2020-04-26 此处必须要替换，不替换的话，后面安装会失败。
 
-##### 1.6.1.3.2. 2)、为工程配置 cocoapods 
+##### 1.6.1.3.2. 为工程配置 cocoapods 
 
 
 打开工程（即项目），然后 `New File` > `iOS` > `Other`  > `Empty` ，必须命名为 `Podfile` ，保存到工程根目录。
@@ -1969,7 +1969,7 @@ pod install
 
 ![](pics/421-打开工程后的目录结构.png)
 
-##### 1.6.1.3.3. 3)、桥接头文件
+##### 1.6.1.3.3. 桥接头文件
 
 必须设置桥接才能在 Swift 中使用 OC 编写的代码。
 
@@ -1990,7 +1990,7 @@ pod install
 #import <AVOSCloud/AVOSCloud.h>
 ```
 
-##### 1.6.1.3.4. 4)、添加授权代码
+##### 1.6.1.3.4. 添加授权代码
 
 先打开 LeanCloud 的控制台，查看 App 的 ID  和 KEY 信息。如下图:
 
@@ -2015,7 +2015,7 @@ pod install
 
 我们要实现的效果：在新增区域页面中，将数据保存到本地数据库的同时，上传数据到 LeanCloud
 
-#### 1.6.2.1. (1）、模型
+#### 1.6.2.1. 模型
 
 LeanCloud 无需事先定义 class 结构，使用 AVObject 的 setObject 方法自动处理。
 
@@ -2032,7 +2032,7 @@ image | AVFile（存储音视频、图片等二进制文件）
 
 
 
-#### 1.6.2.2. (2）、保存方法
+#### 1.6.2.2. 保存方法
 
 保存数据到云端时，主要依靠如下两个方法：
 
@@ -2116,7 +2116,7 @@ query.findObjects (...)
 接下来我们要做的是，将取回的云端数据展示在 “发现” 页面中。步骤如下:
 
 
-#### 1.6.3.1. (1）、新建发现页面对应的视图控制器类并关联
+#### 1.6.3.1. 新建发现页面对应的视图控制器类并关联
 
 ![](pics/430-新建发现页面的视图控制器类.png)
 
@@ -2125,7 +2125,7 @@ query.findObjects (...)
 ![](pics/432-设置发现页单元格的id.png)
 
 
-#### 1.6.3.2. (2）、取回数据
+#### 1.6.3.2. 取回数据
 
 在 `DiscoverTableViewController.swift` 中定义一个变量用来存储取回的数据，并定义取回数据的方法，然后在 `viewDidLoad ()` 方法中调用，如下:
 
@@ -2158,7 +2158,7 @@ class DiscoverTableViewController: UITableViewController {
 }    
 ```
 
-#### 1.6.3.3. (3）、更新初始化单元格相关的方法
+#### 1.6.3.3. 更新初始化单元格相关的方法
 
 然后在 `DiscoverTableViewController.swift` 中修改用于显示单元格的方法：
 
@@ -2213,7 +2213,7 @@ class DiscoverTableViewController: UITableViewController {
 
 ![](pics/433-展示存储在云端的数据.png)
 
-#### 1.6.3.4. (4）、解决运行缓慢的问题
+#### 1.6.3.4. 解决运行缓慢的问题
 
 iOS 中 UI 的更新时在高优先级的 "主线程" 中进行的。而网络等耗时操作则通常放在后台线程（Background）中。
 
@@ -2255,11 +2255,11 @@ OperationQueue.main.addOperation {
 
 ### 1.6.4. 4、性能提升
 
-#### 1.6.4.1. (1）、性能提升要点
+#### 1.6.4.1. 性能提升要点
 
 ![](pics/434-性能提升的要点.png)
 
-#### 1.6.4.2. (2）、用代码实现菊花进度条
+#### 1.6.4.2. 用代码实现菊花进度条
 
 用代码实现菊花进度条时，需要使用 `UIActivityIndicatorView`
 
@@ -2276,7 +2276,7 @@ spinner.startAnimating()
 self.spinner.stopAnimating()
 ```
 
-#### 1.6.4.3. (3）、拖拽版菊花进度条
+#### 1.6.4.3. 拖拽版菊花进度条
 
 也可以利用 Xcode 的 Extra Views 特性，打开 `discover.storyboard` 从组件库中拖一个进度指示器到 Exit 按钮左边。 如下图:
 
@@ -2328,7 +2328,7 @@ self.spinner.stopAnimating()
 ```
 
 
-#### 1.6.4.4. (4）、延迟加载图片
+#### 1.6.4.4. 延迟加载图片
 
 文字加载比图片加载快，所以，先显示文字，加载图片时，先给定一个占位图，然后异步加载图片，图片加载完成后主线程更新界面。
 
@@ -2364,9 +2364,9 @@ override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexP
 > 注意，上述方式取出来的图片时方形的。
 
 
-#### 1.6.4.5. (5）、数据缓存
+#### 1.6.4.5. 数据缓存
 
-##### 1.6.4.5.1. 1)、缓存策略介绍
+##### 1.6.4.5.1. 缓存策略介绍
 
 LeanCloud 有查询缓存（默认关闭）、获取数据缓存（默认开启）。
 
@@ -2387,7 +2387,7 @@ cacheElseNetwork | 缓存优先，无缓存则查询网络数据 | 1
 networkElseCache | 网络优先，网络不通则查询缓存数据 | 1
 cacheThenNetwork | 先查缓存，再查网络 | 2 
 
-##### 1.6.4.5.2. 2)、从缓存中获取数据
+##### 1.6.4.5.2. 从缓存中获取数据
 
 修改 `DiscoverTableViewController.swift` 中我们自定义的查询数据的 `getObjectsFromCloud()` 方法:
 
@@ -2429,7 +2429,7 @@ cacheThenNetwork | 先查缓存，再查网络 | 2
 TableView 本山自带下拉刷新功能
 
 
-#### 1.6.5.1. (1）、增加下拉刷新
+#### 1.6.5.1. 增加下拉刷新
 
 在 `DiscoverTableViewController` 的  `viewDidLoad()` 方法中增加如下代码:
 
@@ -2440,7 +2440,7 @@ refreshControl = UIRefreshControl()
 refreshControl?.addTarget(self, action: #selector(), for: .valueChanged)
 ```
 
-#### 1.6.5.2. (2）、修改加载数据的方法
+#### 1.6.5.2. 修改加载数据的方法
 
 修改从云端数据的方法，增加 Bool 变量，如下:
 
@@ -2487,7 +2487,7 @@ func refreshData()  {
 }
 ```
 
-#### 1.6.5.3. (3）、调用刷新方法
+#### 1.6.5.3. 调用刷新方法
 
 修改  `DiscoverTableViewController.swift`  的  `viewDidLoad()` 方法:
 
@@ -2559,7 +2559,7 @@ func getObjectsFromCloud(needUpdate:Bool = false){
 
 此时再运行 App, 下拉刷新获取到数据之后即可关闭菊花进度条。
 
-#### 1.6.5.4. (4）、结果排序
+#### 1.6.5.4. 结果排序
 
 AVQuery 类内建排序机制（order）
 

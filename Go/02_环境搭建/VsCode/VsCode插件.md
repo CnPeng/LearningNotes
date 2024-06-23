@@ -6,3 +6,7 @@ Thunder Client | 在 VsCode 中测试 Http 请求，类似于 PostMan , <br>不�
 GitHub Copilot | 基于 AI 的代码自动生成工具，<br>写一行注释就可以自动生成一段代码 | [官网](https://copilot.github.com/)、[参考1](https://mp.weixin.qq.com/s/3-gQxQpiKG6jje79UQUBBQ)
 Snipped | 截图插件，不借助三方工具实现截图，使用简单 | [插件地址](https://marketplace.visualstudio.com/items?itemName=JeffersonLicet.snipped&ssr=true#overview)
 Blockman | 高亮代码作用域（高亮代码块） | 
+
+
+* [MarkDown中编写流程图](https://mermaid.js.org/syntax/sequenceDiagram.html#grouping-box%0A%0A)，需要配合下面两个插件使用：
+ ![](pics/20240424170220508_2079070722.png)

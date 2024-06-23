@@ -1576,3 +1576,229 @@ const router = createRouter({
 
 另外，如果你使用的是 Node.js 服务器，你可以通过在服务器端使用路由器来匹配传入的 URL，如果没有匹配到路由，则用 404 来响应，从而实现回退。查看 [Vue 服务器端渲染文档](https://v3.cn.vuejs.org/guide/ssr/introduction.html#what-is-server-side-rendering-ssr)了解更多信息。
 
+
+## 1.13. 补充：跳转及参数传递和解析的汇总
+
+> CnPeng : 基于文档中的前述内容及实际项目进行汇总。
+
+项目中使用 `vue-router` 对路径进行管理。
+
+`setup(){}` 和 `props(){}`  是组合式 API 的标识，`setup()` 函数中的第一个参数是 `props`。
+
+`data(){}` 和 `method(){}` 是响应式（选项式）API 的标识。
+
+
+
+### 1.13.1. path参数的传递和解析
+
+> 参考：《Vue3教程/022-VueRouter基础.md》
+
+假设声明的路由如下：
+
+```vue
+[
+  {
+    // 案件详情
+    path: '/lawsuitQuery/detail/:lawsuitId',
+    name: 'LawsuitDetail',
+    component: () => import('@/views/lawsuitQuery/LawsuitDetail.vue'),
+    meta: {
+      keepAlive: false,
+      desc: '案件详情'
+    },
+    props: true,
+  },
+]
+```
+
+#### 1.13.1.1. path 参数传递
+
+##### 1.13.1.1.1. 组合式API
+
+```vue
+setup(){
+    // 必须声明一个常量。如果直接在 onSearch 方法中调用 useRouter().push() 无法进行跳转
+    const router = useRouter()
+    // 执行查询操作
+    const onSearch = () => {
+        // 其他内容省略
+        // 携带query参数跳转到列表界面
+        router.push({name: `LawsuitQueryList`, params: {nameLike: fieldValue.value}})
+        // 也可以用这种方式跳转，但不推荐。因为可能会牵涉到字符编码问题
+        // router.push({path: `/lawsuitQuery/detail/${fieldValue.value}`})
+    }
+}
+```
+
+##### 1.13.1.1.2. 响应式API
+
+```vue
+ methods: {
+    onView() {
+        this.$router.push({name: `LawsuitQueryList`, params: {nameLike: fieldValue.value}})
+        // 也可以用这种方式跳转，但不推荐。因为可能会牵涉到字符编码问题
+        // this.$router.push({path: `/lawsuitQuery/detail/${fieldValue.value}`})
+    },
+  }
+```
+
+#### 1.13.1.2. path 参数解析
+
+假设路径中指定的参数为 `id`
+
+##### 1.13.1.2.1. 响应式 API 中
+
+```vue
+<!-- 获取 route 中数据的方式1 -->
+<script>
+export default {
+    mounted() {
+        // $route 表示当前活跃的路由对象
+        console.log(this.$route.params.nameLike)
+        console.log(this.$route)
+    }
+}
+</script>
+```
+
+##### 1.13.1.2.2. 组合式 API 中
+
+```vue
+<!-- 获取 route 中数据的方式2 -->
+<script>
+import { useRoute } from 'vue-router'
+
+  setup(){
+
+    // 这里的 useRoute 是一个方法，所以需要在后面加上括号，表示执行方法。
+    console.log(useRoute().params.nameLike
+
+  }
+</script>
+```
+
+在定义路由时，如果开启了组件传参模式（`props:true`）,  那么在组合式 API 中 `route.params` 将被设置为组件的 `props`。
+
+此时，我们只需要在 `props` 中声明要接收的参数及其类型即可，示例如下：
+
+```vue
+<script>
+import {defineComponent, onActivated, onMounted, ref} from 'vue';
+import {useRoute, useRouter} from "vue-router";
+import {getLawsuitList} from "@/api/lawsuitQuery";
+
+export default defineComponent(
+    {
+      name: "LawsuitQueryList",
+      components: {
+        LawsuitListItem,
+      },
+      mixins: [keepAliveMixin],
+      props: {
+        // 1、定义要接收的路径参数
+        nameLike: {
+          type: String,
+          required: true,
+        },
+      },
+
+      setup(props) {
+        const router = useRouter()
+
+        /**
+         * 查询数据
+         */
+        const getList = async (append = false) => {
+          // 如果不在 props 中声明，也可以用这种最基础的办法。
+          // console.log("【params】", useRoute().params.nameLike)
+          const params = {
+            current,
+            pageSize,
+            // 2、使用路径参数
+            name_like: props.nameLike
+          };
+          getLawsuitList(params).then(res => {
+              // 内容省略
+            }
+          )
+        }
+
+
+        return {
+            // 内容省略
+        }
+      },
+    }
+)
+</script>
+```
+
+
+### 1.13.2. query 参数的传递和解析
+
+
+> 参考：《Vue3教程/022-VueRouter基础.md》
+
+假设声明的路由如下：
+
+```vue
+[
+ {
+    // 案件查询列表
+    path: "/lawsuitQuery/list",
+    name: "LawsuitQueryList",
+    component: () => import("@/views/lawsuitQuery/LawsuitQueryList.vue"),
+    meta: {
+      keepAlive: false,
+      desc: '案件查询列表'
+    },
+    // LawsuitQueryList 内使用组合式API时，指定需要解析到 props 中的 query 参数
+    props: route => ({nameLike: route.query.nameLike}),
+  }
+]
+```
+
+#### 1.13.2.1. query 参数传递
+
+##### 1.13.2.1.1. 组合式API
+
+```vue
+setup(){
+    // 必须声明一个常量。如果直接在 onSearch 方法中调用 useRouter().push() 无法进行跳转
+    const router = useRouter()
+    // 执行查询操作
+    const onSearch = () => {
+        // 其他内容省略
+        // 携带query参数跳转到列表界面
+        router.push({name: `LawsuitQueryList`, query: {nameLike: fieldValue.value}})
+    }
+}
+```
+
+##### 1.13.2.1.2. 响应式API
+
+```vue
+ methods: {
+    onView() {
+        this.$router.push({name: `LawsuitQueryList`, query: {nameLike: fieldValue.value}})
+    },
+  }
+```
+
+
+#### 1.13.2.2. query 参数解析
+
+##### 1.13.2.2.1. 响应式 API 
+
+与 path 参数的解析基本一致，只是将 `params` 改为 `query` 即可——`this.$route.query.id`
+
+##### 1.13.2.2.2. 组合式API
+
+与 path 参数的解析基本一致，只是将 `params` 改为 `query` 即可——`useRoute().query.id`
+
+但使用组件传参时，定义路由时的 `props`  值不在是单纯的 `true`，而是一个函数，在该函数中指定需要解析的参数：
+
+
+![](_v_images/20231129115518231_426623054.png)
+
+

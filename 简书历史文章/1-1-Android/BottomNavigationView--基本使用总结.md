@@ -1,4 +1,4 @@
-##1、BottomNavigationView 是什么？
+## 1. BottomNavigationView 是什么？
 BottomNavigationView 是安卓官方提供的底部导航栏，能够方便的实现下图中的底部导航效果。
 
 ![Paste_Image.png](http://upload-images.jianshu.io/upload_images/2551993-fd80b60ee3cbf3fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -8,8 +8,9 @@ BottomNavigationView 是安卓官方提供的底部导航栏，能够方便的�
 当导航标签少于3个的时候，也可以使用，不会报错，但实际项目中一般不会有少于三个的；如果导航标签超过5个，在使用BottomNavigationView 时在运行期会报错，错误信息如下：
 ` java.lang.IllegalArgumentException: Maximum number of items supported by BottomNavigationView is 5. Limit can be checked with BottomNavigationView#getMaxItemCount()`。意思是说，最多不能超过 5 个条目！
 
-##2、BottomNavigationView的使用前提及相关属性
-####（1）、使用前提
+## 2. BottomNavigationView的使用前提及相关属性
+
+### 2.1. 使用前提
 BottomNavigationView是放置在design包中的，所以，使用前需要先引入` com.android.support:design:25.1.0 `包，引入方式有两种，一种是直接从当前module的 gradle 文件中编辑，一种是从Project Structure 界面的 dependences 选项卡中导入。导入方式，参考下图：
 
 ![直接从当前Module的gradle文件中编辑.png](http://upload-images.jianshu.io/upload_images/2551993-67511447e22e0d85.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -17,29 +18,37 @@ BottomNavigationView是放置在design包中的，所以，使用前需要先引
 
 ![从Project Structure 界面的 dependences 选项卡中导入.png](http://upload-images.jianshu.io/upload_images/2551993-ba9709880ae424e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-####（2）主要属性及方法
+### 2.2. 主要属性及方法
+
 * android:background  
 >整个BottomNavigationView 的背景色，设置背景色之后，切换选项时依旧会有水波纹效果（设置背景色也是为了将底部导航和上方的内容进行分割区分）
+
 *  app:itemBackground
 >条目的背景色。设置之后在切换选项时将无法看到水波纹效果
+
 * app:itemIconTint
 >条目图标的颜色。可以是单一颜色，也可以是颜色selector。通常建议设置selector，当未选中时指定一种颜色，选中时再指定另一种颜色。该selector 定义在 res -- color 目录下。（未设置该属性时，默认未选中状态为深灰色，选中状态时的颜色为当前主题的 colorPrimary 颜色）
+
 * itemTextColor
 >条目文本的颜色。可以是单一颜色，也可以是颜色selector。通常建议设置selector，当未选中时指定一种颜色，选中时再指定另一种颜色。该selector 定义在 res -- color 目录下。未设置该属性时，默认未选中状态为深灰色，选中状态时的颜色为当前主题的 colorPrimary 颜色）
+
 * app:menu
 >当前BottomNavigationView 所引用的menu 菜单。
+
 * setOnNavigationItemSelectedListener（）
 >设置导航条目被选中时的监听器
+
 * getMenu( ) 
 >获取当前BottomNavigationView 中所引用的 menu 菜单对象
 
-##3、详细示例代码：
+## 3. 3、详细示例代码：
+
 最终实现效果：
 ![BottomNavigationView.gif](http://upload-images.jianshu.io/upload_images/2551993-896cdbad990dca88.gif?imageMogr2/auto-orient/strip)
 
-* BottomNavigationViewActivity.java
+### 3.1. BottomNavigationViewActivity.java
 
-```
+```java
 /**
  * 作者：CnPeng
  * <p>
@@ -71,8 +80,7 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
         bnv_001.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(
-                    @NonNull
-                            MenuItem item) {
+                    @NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.item1:
                         tv_whichItemSelected.setText(item.getTitle());
@@ -103,9 +111,10 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
     }
 }
 ```
-* activity_bottom_navigation.xml
 
-```
+### 3.2. activity_bottom_navigation.xml
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -121,9 +130,9 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
     itemBackground  item的背景  ,设置之后将无法看到默认的水波纹效果
     itemIconTint    item图标的颜色，可以是固定值，可以是 颜色selector(定义在 res —— color 目录)
     itemTextColor   item文字的颜色，可以是固定值，可以是 颜色selector
-    
+
     如果不设置itemIconTint和 itemTextColor的时候，当某一个item被选中，选中时图标和文字的颜色是 当前主题的 colorPrimary 颜色
-  
+
     background    整个底部导航的背景色，设置之后，在切换被选中的item时依旧具有水波纹效果。（设置background 也是为了能够明显的区分底部导航和上方的具体内容）
     -->
     <android.support.design.widget.BottomNavigationView
@@ -139,9 +148,10 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
 
 </RelativeLayout>
 ```
-* menu_bottom_navigation.xml
 
-```
+### 3.3. menu_bottom_navigation.xml
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -164,15 +174,17 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
 </menu>
 ```
 
-* selector_bnv.xml
-```
+### 3.4. selector_bnv.xml
+
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:color="#f4b733" android:state_checked="true"></item>
     <item android:color="#666565"></item>
 </selector>
 ```
-## 4、总结
+
+## 4. 4、总结
 
 * （1）BottomNavigationView 整体实现比较简单，但是扩展性不强。比如，想在某个条目的右上角加上小红点，这就行不通了。。。
 
@@ -183,5 +195,6 @@ public class BottomNavigationViewActivity extends AppCompatActivity {
 
 ![Paste_Image.png](http://upload-images.jianshu.io/upload_images/2551993-70631e268a1a86dd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
+
 参考：
-http://codpoe.me/2016/10/27/bottom_navigation_view/
+[BottomNavigationView](http://codpoe.me/2016/10/27/bottom_navigation_view/)
