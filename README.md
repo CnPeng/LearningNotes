@@ -1,6 +1,6 @@
 # LearningNotes
 
-最近更新日期：<font color="#ff0000">2022-11-14</font>
+最近更新日期：<font color="#ff0000">2024-06-23</font>
 
 本项目在 [Gitee](https://gitee.com/CnPeng_1/LearningNotes) 和 [Github](https://github.com/CnPeng/LearningNotes) 同步更新。
 
@@ -19,7 +19,7 @@ LearningNotes 是我的个人综合性学习笔记，主要是为了完善自己
 
 ### 2.1 个人介绍
 
-CnPeng，不知名 Android 程序员，会一点儿 Golang，懂一点 iOS，还略微了解一点微信小程序。
+CnPeng，不知名 Android 程序员，会一点儿 Golang，懂一点 iOS，还略微了解一点前端和微信小程序。
 
 ### 2.2 联系方式
 
