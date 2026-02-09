@@ -2144,7 +2144,7 @@ public static void loadImage(ImageView view, String url, Drawable error) {
 
 当 `imageUrl` 和 `error` 同时被 ImageView 调用，并且 `imageUrl` 的类型为 String ，`error` 的类型为 `Drawable` 时，就会触发我们上面通过 `@BindingAdapter` 绑定的 `loadImage(,,)` 方法。
 
-##### 6.1.3.3.  `requireAll` 标记
+##### 6.1.3.3. `requireAll` 标记
 
 如果我们希望在部分属性被调用时就触发 `loadImage(,,)` , 我们可以给在 `@BindingAdapter` 中增加 `requireAll` 标记，并将其值设置为 `false`, 示例如下：
 
@@ -2891,6 +2891,201 @@ public static void setListeners(
 
 每一个双向绑定的属性都需要有一个对应的事件属性，事件属性的名称通常是 被绑定属性的名称 + 后缀 `AttrChanged `.
 而 DataBinding 库会使用这个事件属性去创建一个使用 `@BindableAdapter` 注解的事件监听方法. 实际应用中，这个监听器方法中会包含一些重要的逻辑，这些逻辑中也包含单向绑定的监听逻辑。具体示例可以参考  [TextViewBindingAdapter](https://android.googlesource.com/platform/frameworks/data-binding/+/3b920788e90bb0abe615a5d5c899915f0014444b/extensions/baseAdapters/src/main/java/android/databinding/adapters/TextViewBindingAdapter.java#344) 中 `text` 属性的变化监听——`setTextWatcher()`
+
+
+#### 8.1.3. 双向绑定示例
+
+##### 8.1.3.1. 示例代码
+
+###### 8.1.3.1.1. 绑定适配器
+
+```java
+package cn.linyi.police.util.components.icontitleinput;
+
+import android.text.Editable;
+import android.text.TextWatcher;
+
+import androidx.databinding.BindingAdapter;
+import androidx.databinding.BindingMethod;
+import androidx.databinding.BindingMethods;
+import androidx.databinding.InverseBindingAdapter;
+import androidx.databinding.InverseBindingListener;
+
+import cn.linyi.police.util.components.input.CpInputBindingAdapter;
+import cn.linyi.police.util.util.CpLog;
+
+/**
+ * CpIconTitleInput 的 DataBindingAdapter
+ * <p>
+ * 自定义View中双向数据绑定实现要点：
+ * <li>1、在 setXxx 方法上使用 @BindingAdapter ("xxx") 注解。xxx 表示对外暴露的属性名称。使用时通过 app:xxx 方式使用
+ * <li>2、在 getXxx 方法上使用 @InverseBindingAdapter (attribute = "value",event = "textAttrChanged") 注解，其中：
+ *      <ul>
+ *          <li> attribute = "value" 指定关联的属性名称，要与 setXxx 方法上注解中的属性名称一致。
+ *          <li> event = "textAttrChanged" 指定 InverseBindingListener 的对象名称，
+ *              <ul>
+ *                  <li> 当属性值发生变化时，会触发该监听器内容的 onChange 方法.
+ *                  <li> onChange 方法内部会调用此处的 getXxx 方法。
+ *                  <li> event 的值可以自定义，但必须与第3步绑定监听器时在 BindingAdapter 中声明的 InverseBindingListener 的属性名一致。
+ *              </ul>
+ *      </ul>
+ * <li>3、绑定监听器，以监听数据变化。为了实现双向数据绑定，必须指定 InverseBindingListener , 并在数据变化时触发其 onChange()
+ *      <ul>
+ *          <li>需要在 @BindingAdapter 中指定 InverseBindingListener 对应的属性名称，
+ *          <li>指定属性名之后，其值不需要我们手动传递。当某个页面使用了DataBinding, 并引用了该自定义view时，生成页面的绑定类的时候会自动生成 InverseBindingListener。
+ *      </ul>
+ * <p>
+ * <p>
+ * 双向绑定使用示例——布局文件：
+ * <pre>{@code
+ * <cn.components.icontitleinput.CpIconTitleInput
+ *                     android:id="@+id/name"
+ *                     android:layout_width="match_parent"
+ *                     android:layout_height="wrap_content"
+ *                     app:required="@{true}"
+ *                     app:title="@{`事件名称`}"
+ *                     app:value ="@={vm.name}"
+ *                     app:layout_constraintLeft_toLeftOf="parent"
+ *                     app:layout_constraintRight_toRightOf="parent"
+ *                     app:layout_constraintTop_toTopOf="parent" />
+ * }</pre>
+ * <p>
+ * 双向数据绑定使用示例——Vm:
+ * <pre>{@code android
+ * public class XianChangAddVm extends AndroidViewModel {
+ *     public XianChangAddVm (@NonNull Application application) {
+ *         super(application);
+ *     }
+ *
+ *     // 因为使用了双向数据绑定，所以当 CpIconTitleInput 中的 value 文本变化后，会自动更新到此处。
+ *     public String name = "张三";
+ *
+ *     public void init () {
+ *     }
+ *
+ *
+ *     public void onSubmitClick (Context pCtx) {
+ *         // 此处拿到的 name 值是最新的编辑结果。
+ *         CpLog.d("提交时的信息:",name);
+ *     }
+ * }
+ * } </pre>*
+ */
+
+@BindingMethods ({
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "required", method = "setRequired"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "enabled", method = "setEnabled"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "title", method = "setTitle"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "titleMaxWidth", method = "setTitleMaxWidth"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "hint", method = "setHint"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "valueGravity", method = "setValueGravity"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "valueColor", method = "setValueColor"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "inputType", method = "setInputType"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "showDivider", method = "setShowDivider"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "dividerMarginTop", method = "setDividerMarginTop"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "dividerMarginBottom", method = "setDividerMarginBottom"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "dividerMarginStart", method = "setDividerMarginStart"),
+        @BindingMethod (type = CpIconTitleInput.class, attribute = "dividerMarginEnd", method = "setDividerMarginEnd"),
+})
+public class CpIconTitleInputBindingAdapter {
+    @BindingAdapter (value = {"beforeTextChanged", "onTextChanged", "afterTextChanged", "valueAttrChanged"}, requireAll = false)
+    public static void setListener2 (CpIconTitleInput view,
+                                     final CpInputBindingAdapter.BeforeTextChanged pBeforeTextChanged,
+                                     final CpInputBindingAdapter.OnTextChanged pOnTextChanged,
+                                     final CpInputBindingAdapter.AfterTextChanged pAfterTextChanged,
+                                     final InverseBindingListener valueAttrChanged
+    ) {
+        if (pBeforeTextChanged == null && pOnTextChanged == null && pAfterTextChanged == null && valueAttrChanged == null) {
+            return;
+        }
+
+        TextWatcher watcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+                if (null != pBeforeTextChanged) {
+                    pBeforeTextChanged.beforeTextChanged(s, start, count, after);
+                }
+            }
+
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (null != pOnTextChanged) {
+                    pOnTextChanged.onTextChanged(s, start, before, count);
+                }
+                if (valueAttrChanged != null) {
+                    valueAttrChanged.onChange();
+                }
+            }
+
+            @Override
+            public void afterTextChanged (Editable s) {
+                if (null != pAfterTextChanged) {
+                    pAfterTextChanged.afterTextChanged(s);
+                }
+            }
+        };
+        view.addTextChangedListener(watcher);
+    }
+
+    @BindingAdapter ("value")
+    public static void setValue (CpIconTitleInput view, String newValue) {
+        if (view.getValue().toString().equals(newValue)) {
+            return;
+        }
+        view.setValue(newValue);
+    }
+
+    @InverseBindingAdapter (attribute = "value",event = "valueAttrChanged")
+    public static String getValue (CpIconTitleInput view) {
+        return view.getValue().toString();
+    }
+}
+```
+
+###### 8.1.3.1.2. 布局引用
+
+```xml
+<cn.components.icontitleinput.CpIconTitleInput
+    android:id="@+id/name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:required="@{true}"
+    app:title="@{`事件名称`}"
+    app:value ="@={vm.name}"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+```
+
+##### 8.1.3.2. ViewModel 中获取数据
+
+```java
+public class XianChangAddVm extends AndroidViewModel {
+    public XianChangAddVm (@NonNull Application application) {
+        super(application);
+    }
+
+    public String name = "张三";
+
+    public void init () {
+    }
+
+
+    public void onSubmitClick (Context pCtx) {
+        // TODO: 提交信息
+        CpLog.d("提交时的信息:",name);
+    }
+}
+```
+
+
+##### 8.1.3.3. 代码解析
+
+![](pics/20240903152016092_264903696.png)
+
+![](pics/20240903152340560_502818441.png)
+
+![](pics/20240903152741927_521386942.png)
 
 ### 8.2. 转换器 
 

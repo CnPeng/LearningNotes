@@ -44,57 +44,84 @@
 
 ## 1.3. 别名示例
 
-### 1.3.1. 示例1
+### 1.3.1. 示例
 
 ```sh
 [alias]
+	clso = config --list --show-origin
+
 	s = status
+
+	df = diff
+	d = diff
+
+	al = add .
 	a = !git add . && git status
 	au = !git add -u . && git status
 	aa = !git add . && git add -u . && git status
-	c = commit
-	cm = commit -m
-	ca = commit --amend # careful
+
+	c = commit   # 提交
+	cm = commit -m # 提交并编写描述
+
 	ac = !git add . && git commit
 	acm = !git add . && git commit -m
-	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
-	ll = log --stat --abbrev-commit
-	lg = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-	llg = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
-	d = diff
-	master = checkout master
-	spull = svn rebase
-	spush = svn dcommit
-	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
-```
+	camend = commit --amend -m # 直接在终端中修改最后一次提交信息。后面需要跟上修改后的提交信息。
+	camend2 = commit --amend  # 进入 vim 修改最后一次提交信息
+	amne = !git add . && git commit --amend --no-edit  # 将当前修改内容追加到前次提交记录中
 
-### 1.3.2. 示例2
-
-```sh
-[alias]
-	s = status
+	br = branch
+	brd = branch -D   # 删除分支
+	
 	ck = checkout
 	ckb = checkout -b
-	br = branch
-	ps = push
-	psom = push origin master
+	ckd = checkout dev
+     	dev = checkout dev
+	ckm = checkout master
+	master = checkout master
+	ckma = checkout main
+	main = checkout main
+	ckn = checkout next
+	next = checkout next 
+
 	pl = pull
+	plo = pull origin 
 	plom = pull origin master
+	ploma = pull origin main
+	plod = pull origin dev
+	plon = pull origin next
+
+	ps = push
+	pso = push origin 
+	psom = push origin master
+	psoma = push origin main
+	psod = push origin dev
+	pson = push origin next
+
 	mg = merge
-	a = add .
-	cm = commit -m
-	acm = !git add . && git commit -m
-	df = diff
+	mgm = merge master
+	mgma = merge main
+	mgn = merge next
+	
 	rmt = remote
 	rmtv = remote -v
-	cmamne = commit --amend --no-edit
-	cmam = commit --amend
-	lg = log
+
+	cgl = config --global -l 
+	rmch = rm --cached 
+	rsth = reset --hard
+	cp = cherry-pick
+
+	alias = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\\t => \\2/' | sort
+	
+	lg = log 
 	lg1 = log -1
 	lg2 = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	cgl = config --global -l
-	rmch = rm --cached
-	rsth = reset --hard
+	l = log --graph --all --pretty=format:'%C(yellow)%h%C(cyan)%d%Creset %s %C(white)- %an, %ar%Creset'
+	ll = log --stat --abbrev-commit
+	lg3 = log --color --graph --pretty=format:'%C(bold white)%h%Creset -%C(bold green)%d%Creset %s %C(bold green)(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	lg4 = log --color --graph --pretty=format:'%C(bold white)%H %d%Creset%n%s%n%+b%C(bold blue)%an <%ae>%Creset %C(bold green)%cr (%ci)' --abbrev-commit
+
+	spull = svn rebase
+	spush = svn dcommit
 ```
 
 ### 1.3.3. 命令解析

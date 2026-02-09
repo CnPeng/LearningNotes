@@ -6,8 +6,8 @@
 此外，文中DEMO是基于 AndroidStudio 3.2 Beta 5 版本构建的。gradle 中     compileSdkVersion 28 ，   targetSdkVersion 28
 
 
-## 一、Chip相关组件的作用及如何导包
-### 1、Chip相关组件的作用
+## 1. 一、Chip相关组件的作用及如何导包
+### 1.1. 1、Chip相关组件的作用
 
 ![](https://upload-images.jianshu.io/upload_images/2551993-c8bf14b79a41a3e0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
@@ -19,9 +19,9 @@
 
 现在谷歌为我们提供了 Chip、ChipGroup、ChipDrawable ，有了这三者， 我们实现这种界面就更加方便了！
 
-### 2、引入material兼容包
+### 1.2. 2、引入material兼容包
 使用Chip时需要先引入兼容包，可分为两种情况， 一种是新建项目；一种是在现有的项目中引入 Chip.
-#### （1）、新建的项目
+#### 1.2.1. （1）、新建的项目
 * 引入兼容包
 ```
 implementation 'com.google.android.material:material:1.0.0-rc01'
@@ -38,7 +38,7 @@ implementation 'com.google.android.material:material:1.0.0-rc01'
 </style>
 ```
 
-#### （2）、现有的项目
+#### 1.2.2. （2）、现有的项目
 * 先移除 module 的 build.gradle 中的 
 ` implementation 'com.android.support:xxx'` , 
 * 在module 的 build.gradle 中增加 ` implementation 'com.google.android.material:material:1.0.0-rc01'`,
@@ -62,19 +62,20 @@ buildscript {
 >* [support-library和 androix-library的对应关系——https://developer.android.com/topic/libraries/support-library/refactor](https://developer.android.com/topic/libraries/support-library/refactor)
 
 
-## 二、Chip的分类及其特性
+## 2. 二、Chip的分类及其特性
 
-### 1、Chip的分类
+### 2.1. 1、Chip的分类
 >**注意：以下类别中，特点描述都是基于只设置  text 和 style 不设置其他属性时总结的**
 
 根据Chip使用的 style ，可以将其分为以下四类：
-#### （1）、Action chip
+
+#### 2.1.1. （Action chip
 
 * 使用 `style="@style/Widget.MaterialComponents.Chip.Action"` 
 * 不设置style时，默认使用上述style
 * 默认前后图标都不展示，点击后没有选中状态
 
-```
+```xml
     <com.google.android.material.chip.Chip
         style="@style/Widget.MaterialComponents.Chip.Action"
         android:layout_width="wrap_content"
@@ -89,22 +90,27 @@ buildscript {
         android:text="这是一个单一的chip" />
 ```
 
-#### （2）、Filter Chip
+#### 2.1.2. Filter Chip
+
 * 使用 `style="@style/Widget.MaterialComponents.Chip.Filter"`
 * 初始状态下， 不展示前后图标
 * 点击之后会展示前面的选中图标，并且具有选中状态
 * 通常应用在 ChipGroup 中
-```
+
+```xml
 <com.google.android.material.chip.Chip
         style="@style/Widget.MaterialComponents.Chip.Filter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FilterChip01" />
 ```
-#### (3)、Entry Chip
+
+#### 2.1.3.  Entry Chip
+
 * 使用`style="@style/Widget.MaterialComponents.Chip.Entry"`
 * 默认在末尾展示删除按钮；点击后前面展示选中图标，有选中状态
 * 通常可以作为 chipDrawable 使用，比如在填选邮件收件人时可以使用
+
 ```
     <com.google.android.material.chip.Chip
         style="@style/Widget.MaterialComponents.Chip.Entry"
@@ -113,7 +119,9 @@ buildscript {
         android:layout_marginTop="10dp"
         android:text="EntryChip " />
 ```
-#### (4)、Choice Chip
+
+#### 2.1.4. Choice Chip
+
 * 默认不展示前后的图标，但点击后有选中状态
 * 通常用在 ChipGroup 中 , 通过 ChipGroup  的 `singleSelection=true/false` 属性可以实现单选或多选
 
@@ -126,10 +134,11 @@ buildscript {
         android:text="ChoiceChip" />
 ```
 
-### 2、各种Chip的默认效果图
+### 2.2. 2、各种Chip的默认效果图
+
 ![](https://upload-images.jianshu.io/upload_images/2551993-8588119e175bbbf2.gif?imageMogr2/auto-orient/strip)
 
-## 三、Chip的属性
+## 3. 三、Chip的属性
 
 ###1、Chip 的属性
 类别|属性名称|具体作用
@@ -167,17 +176,20 @@ Paddings	| app:closeIconEndPadding|关闭按钮的右边距
 
 
 
-### 2、Chip 属性间的关系图
+### 3.1. 2、Chip 属性间的关系图
 ![](https://upload-images.jianshu.io/upload_images/2551993-7b4cba4929e08d7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-上图来自于：[ChipDrawable文档 https://developer.android.com/reference/com/google/android/material/chip/ChipDrawable?hl=zh-cn](https://developer.android.com/reference/com/google/android/material/chip/ChipDrawable?hl=zh-cn)
+上图来自于：[ChipDrawable文档](https://developer.android.com/reference/com/google/android/material/chip/ChipDrawable?hl=zh-cn)
 
 
-## 四、Chip的监听
-### （1）、setOnClickListener
+## 4. 四、Chip的监听
+
+### 4.1. （1）、setOnClickListener
+
 点击事件的监听。
 
 * Kotlin版示例代码：
-```
+
+```kotlin
 //使用了 kotlinx , 所以不需要 fingViewById。
 chip_normal1.setOnClickListener {
       Toast.makeText(mActivity, "Chip被点击了", Toast.LENGTH_SHORT).show()
@@ -194,7 +206,7 @@ chip_normal.setOnClickListener(new OnClickListener(){
 });
 ```
 
-### （2）、setOnCheckedChangeListener
+### 4.2. （2）、setOnCheckedChangeListener
 选中状态的监听。
 
 >注意：
@@ -202,7 +214,8 @@ chip_normal.setOnClickListener(new OnClickListener(){
 >* 未设置 checkable 属性时，如果应用了 filter/entry/choice 的style , 该监听可生效，因为这三种style 中 checkable 的值为true。而 ation 的 style 中 checkable 是默认关闭的
 
 * Kotlin版代码
-```
+
+```kotlin
 chip_filter.setOnCheckedChangeListener { buttonView, isChecked ->
     var hintStr = ""
     if (isChecked) {
@@ -213,8 +226,10 @@ chip_filter.setOnCheckedChangeListener { buttonView, isChecked ->
     Toast.makeText(mActivity, hintStr, Toast.LENGTH_SHORT).show()
  }
 ```
+
 * java版代码
-```
+
+```java
 Chip chip = (Chip) findViewById(R.id.chip_filter);
 
 chip.setOnCheckedChangeListener(new setOnCheckedChangeListener() {
@@ -231,11 +246,15 @@ chip.setOnCheckedChangeListener(new setOnCheckedChangeListener() {
 });
 ```
 
-### （3）、setOnCloseIconClickListener
+### 4.3. （3）、setOnCloseIconClickListener
+
 关闭按钮被点击的监听
-#### 1)、示例代码
+
+#### 4.3.1. 1)、示例代码
+
 * Kotlin版代码
-```
+
+```kotlin
 //关闭按钮的点击监听——closeIcon 没有id，所以必须需要构造匿名监听
 chip_entry.setOnCloseIconClickListener {
     Toast.makeText(mActivity, "ClostIcon被点击了", Toast.LENGTH_SHORT).show()
@@ -243,7 +262,8 @@ chip_entry.setOnCloseIconClickListener {
 ```
 
 * java 版代码
-```
+
+```java
 Chip chip = (Chip) findViewById(R.id.chip_entry);
 
 chip.setOnCloseIconClickListener(new OnClickListener() {
@@ -253,7 +273,9 @@ chip.setOnCloseIconClickListener(new OnClickListener() {
     }
 });
 ```
-#### 2）、注意事项
+
+#### 4.3.2. 2）、注意事项
+
 假设我们让Chip所在的界面 实现了 onClickListener ，那么，为chip 设置点击监听时就可以直接调用 `chip.setOnClickListener(this)`。但是，如果此时也需要监听 CloseIcon 的点击事件，我们必须单独为 CloseIcon 构造一个匿名监听——因为：
 
 **CloseIcon 是直接通过画笔画出来的，没有id。在处理点击事件时，Chip的源码中实际是监听了触摸事件，根据触摸的位置判断 CloseIcon是否被点击了。**相关源码如下：
@@ -278,7 +300,9 @@ chip.setOnCloseIconClickListener(new OnClickListener() {
         }
     }
 ```
+
 * Chip 中 CloseIcon 点击事件的源码
+
 ```
     public boolean onTouchEvent(MotionEvent event) {
         boolean handled = false;
@@ -313,16 +337,20 @@ chip.setOnCloseIconClickListener(new OnClickListener() {
     }
 ```
 
-## 五、ChipGroup 
+## 5. 五、ChipGroup 
+
 与 RadioGroup 类似，ChipGroup 是用来管理多个Chip的 ，可以控制多个 chip 的布局方式以及事件。
 
-###1、ChipGroup的特点
+### 5.1. 1、ChipGroup的特点
+
 使用 ChipGroup 可以方便的实现 流式布局效果。其特点如下：
+
 * **默认情况下， ChipGroup 中的 chip 会横向排列，当超过一行时会执行换行操作。**
 * **如果我们不想让 Chip 换行，那么为 ChipGroup 设置 app:singleLine=true，如果 Chip 会超过一行，则在外层包裹 HorizontalScrollView**
 * 只有当其中包裹的 Chip 是 checkable=true 时，才具有选中效果
 
-###2、ChipGroup的属性
+### 5.2. 2、ChipGroup的属性
+
 属性名称|作用|示例
 ---|---|---
 app:checkedChip|初始选中的chip |             app:checkedChip="@id/chipInGroup2_1"
@@ -333,16 +361,19 @@ app:singleLine| 是否开启单行模式 |app:singleLine="true"
 app:singleSelection|是否开启单选模式|app:singleSelection="true"
 
 >注意：
+>
 >* 如果 singLine=false, app:chipSpacing 会同时控制Chips间的水平和垂直的间距
 >* 如果 singLine=true, app:chipSpacing 控制的是Chips之间的水平间距
 >* 如果设置了 chipSpacing ，也设置了 chipSpacingHorizontal / chipSpacingVertical 则 chipSpacing 的值会被覆盖
 
-### 3、ChipGroup的基本使用示例
+### 5.3. 3、ChipGroup的基本使用示例
 
-#### (1)、效果图
+#### 5.3.1. (1)、效果图
+
 ![](https://upload-images.jianshu.io/upload_images/2551993-6bb1f9ea464118c5.gif?imageMogr2/auto-orient/strip)
 
-####（2）、示例代码
+#### 5.3.2. （2）、示例代码
+
 ```
 <TextView
         android:layout_width="wrap_content"
@@ -434,9 +465,12 @@ app:singleSelection|是否开启单选模式|app:singleSelection="true"
     </HorizontalScrollView>
 ```
 
-### 4、事件监听
-#### (1)、setOnCheckedChangeListener
+### 5.4. 4、事件监听
+
+#### 5.4.1. (1)、setOnCheckedChangeListener
+
 选中监听。
+
 **注意：只有 singleSelction=true 时，该监听才有效。**
 
 * Kotlin版代码
@@ -535,11 +569,12 @@ private fun initChipGroupCheckedListener() {
 ```
 
 
-## 六、ChipDrawable
+## 6. 六、ChipDrawable
 
 继承自 Drawable。
 
-### 1、xml 中定义ChipDrawable
+### 6.1. 1、xml 中定义ChipDrawable
+
 >注意事项：
 >* **必须在 res 目录下新建 xml 文件夹，在 xml 文件夹下创建 .xml 文件**，其他文件夹下创建会报错
 >* xml 中以 <chip> 开头
@@ -547,6 +582,7 @@ private fun initChipGroupCheckedListener() {
 >* **xml 中定义的<chip> 默认是 Entry 样式的**，我们也可以根据需要更换成 filter/Action/Choice 
 
 * res/xml/standalone_chip.xml
+
 ```
 <chip
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -572,9 +608,10 @@ bt_applyChip.setOnClickListener { view ->
 ```
 
 ---
-## 七、补充：
 
-###1、关于 textApperence
+## 7. 七、补充：
+
+### 7.1. 1、关于 textApperence
 
 **android:textAppearance**  设置文字外观。如“ `?android:attr/textAppearanceLargeInverse`  
 ”这里引用的是系统自带的一个外观，？表示系统是否有这种外观，否，则使用默认的外观。可设置的值如下：
@@ -587,11 +624,13 @@ bt_applyChip.setOnClickListener { view ->
 * textAppearanceSmall
 * textAppearanceSmallInverse
 
-### 2、MotionSpec
+### 7.2. 2、MotionSpec
+
 https://developer.android.com/reference/com/google/android/material/animation/MotionSpec?hl=zh-cn
 
 
-## 八、 参考：
+## 8. 八、 参考：
+
 官方：
 https://developer.android.com/reference/com/google/android/material/chip/Chip?hl=zh-cn
 

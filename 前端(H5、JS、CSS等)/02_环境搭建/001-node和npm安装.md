@@ -11,7 +11,33 @@
 >Node.js® is an open-source, cross-platform JavaScript runtime environment.
 >Node.js 是一个开源的、跨平台的 js 运行时环境。
 
-安装完成之后，会有如下提示信息（以 node v18.16.0 为例）：
+在 [下载页面](https://nodejs.org/en/download) 下载并安装自己需要的版本即可：
+
+![](pics/20250707111845351_1575676694.png)
+
+如果使用 nvm + npm 方式，则如上图所示，依次执行各条命令即可完成安装。
+
+```bash
+# Download and install nvm:
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+# in lieu of restarting the shell
+\. "$HOME/.nvm/nvm.sh"
+
+# Download and install Node.js:
+nvm install 22
+
+# Verify the Node.js version:
+node -v # Should print "v22.17.0".
+nvm current # Should print "v22.17.0".
+
+# Verify npm version:
+npm -v # Should print "10.9.2".
+
+```
+
+
+如果是初次安装，可能会有如下提示信息（以 node v18.16.0 为例），该信息提示我们需要确保 `/usr/local/bin` 目录已经配置了环境变量：
 
 ```
 This package has installed:
