@@ -1,6 +1,6 @@
 # LearningNotes
 
-最近更新日期：<font color="#ff0000">2024-06-23</font>
+最近更新日期：<font color="#ff0000">2026-06-25</font>
 
 本项目在 [Gitee](https://gitee.com/CnPeng_1/LearningNotes) 和 [Github](https://github.com/CnPeng/LearningNotes) 同步更新。
 
